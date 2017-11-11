@@ -3,6 +3,11 @@
                     xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
