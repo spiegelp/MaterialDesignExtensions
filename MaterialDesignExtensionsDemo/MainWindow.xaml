@@ -4,19 +4,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MaterialDesignExtensionsDemo"
+        xmlns:controls="clr-namespace:MaterialDesignExtensionsDemo.Controls"
+        xmlns:viewModel="clr-namespace:MaterialDesignExtensionsDemo.ViewModel"
         mc:Ignorable="d"
-        Title="Material Design Extensions - Demo" Height="700" Width="900">
+        Title="Material Design Extensions - Demo" Height="700" Width="1100" WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource MaterialDesignBackground}" Foreground="{DynamicResource MaterialDesignBody}"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type local:OversizedNumberSpinnerViewModel}">
-            <local:OversizedNumberSpinnerControl />
+        <DataTemplate DataType="{x:Type viewModel:OversizedNumberSpinnerViewModel}">
+            <controls:OversizedNumberSpinnerControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:StepperViewModel}">
+            <controls:StepperControl />
         </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="100*" />
         </Grid.ColumnDefinitions>
-        <Border BorderThickness="0,0,1,0" BorderBrush="{DynamicResource MaterialDesignDivider}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="56" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Grid.ColumnSpan="2" Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TextBlock Text="Material Design Extensions" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
+                       Margin="16,0" VerticalAlignment="Center" />
+        </Border>
+        <Border Grid.Row="1" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource MaterialDesignDivider}">
             <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                 <ItemsControl x:Name="navigationItemsControl" ItemsSource="{Binding Path=NavigationItems, Mode=OneTime}"
                               HorizontalAlignment="Stretch" VerticalAlignment="Top">
@@ -27,7 +42,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border HorizontalAlignment="Stretch" Height="48" Cursor="Hand">
+                            <Border HorizontalAlignment="Stretch" Height="48" Cursor="Hand" Padding="0" Margin="0">
                                 <Border.Style>
                                     <Style TargetType="{x:Type Border}">
                                         <Style.Triggers>
@@ -35,22 +50,30 @@
                                                 <Setter Property="Background" Value="Transparent" />
                                             </Trigger>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="Yellow" />
+                                                <Setter Property="Background" Value="{DynamicResource MaterialDesignDivider}" />
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>
                                 </Border.Style>
-                                <Button Command="{x:Static local:MainWindow.NavigationItemSelectedCommand}" CommandParameter="{Binding}">
+                                <Button Command="{x:Static local:MainWindow.NavigationItemSelectedCommand}" CommandParameter="{Binding}"
+                                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
+                                        Padding="0" Margin="0">
                                     <Button.Template>
                                         <ControlTemplate TargetType="{x:Type Button}">
-                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                            </Border>
                                         </ControlTemplate>
                                     </Button.Template>
                                     <Button.Content>
-                                        <TextBlock FontSize="14" FontWeight="Bold" Text="{Binding Label}" HorizontalAlignment="Stretch" Margin="32,0,4,0" VerticalAlignment="Center">
+                                        <TextBlock FontSize="14" FontWeight="Bold" Text="{Binding Label}"
+                                                   HorizontalAlignment="Stretch" Margin="48,0,4,0" VerticalAlignment="Center">
                                             <TextBlock.Style>
                                                 <Style TargetType="{x:Type TextBlock}">
                                                     <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSelected}" Value="False">
+                                                            <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+                                                        </DataTrigger>
                                                         <DataTrigger Binding="{Binding IsSelected}" Value="True">
                                                             <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
                                                         </DataTrigger>
@@ -66,6 +89,6 @@
                 </ItemsControl>
             </ScrollViewer>
         </Border>
-        <ContentControl x:Name="contentControl" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></ContentControl>
+        <ContentControl x:Name="contentControl" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></ContentControl>
     </Grid>
 </Window>

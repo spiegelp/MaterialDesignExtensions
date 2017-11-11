@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaterialDesignExtensionsDemo
+namespace MaterialDesignExtensionsDemo.ViewModel
 {
     public class ViewModel : INotifyPropertyChanged
     {

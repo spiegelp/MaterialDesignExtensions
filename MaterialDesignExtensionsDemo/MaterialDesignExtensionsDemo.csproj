@@ -60,11 +60,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="OversizedNumberSpinnerControl.xaml.cs">
+    <Compile Include="Controls\OversizedNumberSpinnerControl.xaml.cs">
       <DependentUpon>OversizedNumberSpinnerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OversizedNumberSpinnerViewModel.cs" />
-    <Compile Include="ViewModel.cs" />
+    <Compile Include="Controls\StepperControl.xaml.cs">
+      <DependentUpon>StepperControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\OversizedNumberSpinnerViewModel.cs" />
+    <Compile Include="ViewModel\StepperViewModel.cs" />
+    <Compile Include="ViewModel\ViewModel.cs" />
+    <Page Include="Controls\StepperControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -77,7 +85,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="OversizedNumberSpinnerControl.xaml">
+    <Page Include="Controls\OversizedNumberSpinnerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

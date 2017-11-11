@@ -5,6 +5,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/OversizedNumberSpinnerTemplate.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/StepperTemplates.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

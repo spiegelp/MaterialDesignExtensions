@@ -70,9 +70,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\StepperTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\StepperController.cs" />
     <Compile Include="Controls\OversizedNumberSpinner.cs" />
+    <Compile Include="Controls\StepButtonBar.cs" />
+    <Compile Include="Controls\Stepper.cs" />
+    <Compile Include="Converters\BooleanOrConverter.cs" />
+    <Compile Include="Model\Step.cs" />
+    <Compile Include="Model\StepperStepViewModel.cs" />
+    <Compile Include="Model\StepTitleHeader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using MaterialDesignExtensionsDemo.ViewModel;
+
 namespace MaterialDesignExtensionsDemo
 {
     public partial class MainWindow : Window
@@ -33,7 +35,8 @@ namespace MaterialDesignExtensionsDemo
         {
             m_navigationItems = new List<NavigationItem>()
             {
-                new NavigationItem() { Label = "Oversized Number Spinner", Action = () => new OversizedNumberSpinnerViewModel() }
+                new NavigationItem() { Label = "Oversized Number Spinner", Action = () => new OversizedNumberSpinnerViewModel() },
+                new NavigationItem() { Label = "Stepper", Action = () => new StepperViewModel() }
             };
 
             InitializeComponent();

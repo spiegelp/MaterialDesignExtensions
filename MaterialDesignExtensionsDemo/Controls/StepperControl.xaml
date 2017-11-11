@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="MaterialDesignExtensionsDemo.Controls.StepperControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
+             xmlns:viewModel="clr-namespace:MaterialDesignExtensionsDemo.ViewModel"
+             xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModel:StepperTutorialOneViewModel}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Steppers are handy to break a big task into smaller parts. These are so called steps. It displays the progress of the full task as a numbered sequence of steps." TextWrapping="WrapWithOverflow" />
+                <controls:StepButtonBar Continue="CONTINUE" Cancel="CANCEL" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:StepperTutorialTwoViewModel}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="There a two layouts for a Stepper, namely horizontal and vertical. It can be set by using the Layout property." TextWrapping="WrapWithOverflow" />
+                <TextBlock Margin="0,16,0,0" Text="Additionally the Stepper will be in linear mode by setting the IsLinear property to true. This means that the user can only edit the steps in their fixed order. A non-linear Stepper allows the user to edit the steps in any order." TextWrapping="WrapWithOverflow" />
+                <TextBlock Margin="0,16,0,0" Text="The basic navigation inside a stepper will be accomplished by using simple back and continue buttons. They allow the user to browse through the steps in their order. Just use the StepButtonBar like this tutorial to avoid the nasty reimplementation on your own. The user may also switch the steps of a non-linear Stepper by clicking on the headers. " TextWrapping="WrapWithOverflow" />
+                <controls:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:StepperTutorialThreeViewModel}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="The Stepper uses the steps out of its Steps property. This property expects a collection of IStep objects. The Step class already implements this basic interface for a step." TextWrapping="WrapWithOverflow" />
+                <TextBlock Margin="0,16,0,0" Text="A step consists out of a header and a content. Consider to define one view model class per step content and a DataTemplate for it (just the everyday MVVM magic). The header may contain arbitrary content. If you like the header of this tutorial, just use the StepTitleHeader class." TextWrapping="WrapWithOverflow" />
+                <controls:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:StepperTutorialFourViewModel}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Each time the user switches to another step, an optional validation phase for the until now active step will be started by the Stepper. The Validate() method of the step will be called first. Afterwards the StepValidation event will be raised followed by the call of the StepValidationCommand command." TextWrapping="WrapWithOverflow" />
+                <TextBlock Margin="0,16,0,0" Text="The different validation handlers may set the HasValidationErrors property of the step to indicate input errors. If the BlockNavigationOnValidationErrors property of the Stepper is true, the Stepper blocks the navigation as long as the active step has invalid data." TextWrapping="WrapWithOverflow" />
+                <controls:StepButtonBar Back="BACK" Continue="FINISH" Cancel="CANCEL" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="100*" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="4,4,4,16" Orientation="Horizontal">
+            <TextBlock Margin="0,0,8,0" Text="Layout" VerticalAlignment="Center" />
+            <ComboBox Height="25" HorizontalAlignment="Left" ItemsSource="{Binding Path=Layouts, Mode=OneTime}" SelectedItem="{Binding Path=Layout, Mode=TwoWay}" VerticalAlignment="Center" Width="120" />
+            <TextBlock Margin="48,0,8,0" Text="Is linear" VerticalAlignment="Center" />
+            <CheckBox IsChecked="{Binding Path=IsLinear, Mode=TwoWay}" VerticalAlignment="Center" />
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+            <controls:Stepper HorizontalAlignment="Stretch" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}" Steps="{Binding Path=Steps, Mode=OneTime}" VerticalAlignment="Stretch" />
+        </ScrollViewer>
+    </Grid>
+</UserControl>

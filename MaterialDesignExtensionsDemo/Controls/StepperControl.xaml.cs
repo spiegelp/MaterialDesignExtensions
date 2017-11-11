@@ -13,11 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MaterialDesignExtensionsDemo
+namespace MaterialDesignExtensionsDemo.Controls
 {
-    public partial class OversizedNumberSpinnerControl : UserControl
+    public partial class StepperControl : UserControl
     {
-        public OversizedNumberSpinnerControl()
+        public StepperControl()
         {
             InitializeComponent();
         }
