@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+
+    <ResourceDictionary.MergedDictionaries>
+        <!-- theme from MaterialDesignInXAML -->
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+        
+        <!-- additional resources -->
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="MaterialDesignStepperInactiveStep" Color="#61000000" po:Freeze="True" /> <!-- 38% black -->
+            <SolidColorBrush x:Key="MaterialDesignStepperActiveStep" Color="#DD000000" po:Freeze="True" /> <!-- 87% black -->
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>
