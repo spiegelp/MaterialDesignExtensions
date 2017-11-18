@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MaterialDesignExtensions</id>
+    <version>1.0.0</version>
+    <title>Material Design Extensions</title>
+    <authors>Philipp Spiegel</authors>
+    <owners>Philipp Spiegel</owners>
+    <licenseUrl>https://github.com/spiegelp/MaterialDesignExtensions/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/spiegelp/MaterialDesignExtensions</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/icon/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Material Design Extensions is based on Material Design in XAML Toolkit to provide additional controls and features for WPF apps. The controls might not be specified in the Material Design specification or would crash the scope of Material Design in XAML Toolkit.</description>
+    <releaseNotes>https://github.com/spiegelp/MaterialDesignExtensions/blob/master/ReleaseNotes.md</releaseNotes>
+    <copyright>Copyright (c) 2017 Spiegel Philipp</copyright>
+    <tags>Material Design UI WPF XAML</tags>
+    <dependencies>
+      <dependency id="MaterialDesignThemes" version="2.3.1.953" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin/Release/MaterialDesignExtensions.dll" target="lib\net45" />
+    <file src="bin/Release/MaterialDesignExtensions.xml" target="lib\net45" />
+  </files>
+</package>
