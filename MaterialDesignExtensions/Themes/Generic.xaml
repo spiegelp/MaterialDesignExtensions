@@ -4,6 +4,7 @@
     xmlns:local="clr-namespace:MaterialDesignExtensions">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/GridViewTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/OversizedNumberSpinnerTemplate.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/StepperTemplates.xaml" />
     </ResourceDictionary.MergedDictionaries>

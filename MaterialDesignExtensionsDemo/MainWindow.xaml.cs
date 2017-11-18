@@ -36,6 +36,7 @@ namespace MaterialDesignExtensionsDemo
             m_navigationItems = new List<NavigationItem>()
             {
                 new NavigationItem() { Label = "Oversized Number Spinner", Action = () => new OversizedNumberSpinnerViewModel() },
+                new NavigationItem() { Label = "Grid view", Action = () => new GridViewViewModel() },
                 new NavigationItem() { Label = "Stepper", Action = () => new StepperViewModel() }
             };
 

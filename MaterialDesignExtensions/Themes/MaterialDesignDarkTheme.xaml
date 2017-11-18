@@ -6,6 +6,9 @@
         <!-- theme from MaterialDesignInXAML -->
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
 
+        <!-- own themes -->
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/Generic.xaml" />
+
         <!-- additional resources -->
         <ResourceDictionary>
             <SolidColorBrush x:Key="MaterialDesignStepperInactiveStep" Color="#61FFFFFF" po:Freeze="True" /> <!-- 38% white -->
