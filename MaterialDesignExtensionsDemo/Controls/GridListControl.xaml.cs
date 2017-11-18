@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 
 namespace MaterialDesignExtensionsDemo.Controls
 {
-    public partial class GridViewControl : UserControl
+    public partial class GridListControl : UserControl
     {
-        public GridViewControl()
+        public GridListControl()
         {
             InitializeComponent();
         }

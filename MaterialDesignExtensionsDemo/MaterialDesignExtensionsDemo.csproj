@@ -60,8 +60,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\GridViewControl.xaml.cs">
-      <DependentUpon>GridViewControl.xaml</DependentUpon>
+    <Compile Include="Controls\GridListControl.xaml.cs">
+      <DependentUpon>GridListControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\OversizedNumberSpinnerControl.xaml.cs">
       <DependentUpon>OversizedNumberSpinnerControl.xaml</DependentUpon>
@@ -69,11 +69,11 @@
     <Compile Include="Controls\StepperControl.xaml.cs">
       <DependentUpon>StepperControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\GridViewViewModel.cs" />
+    <Compile Include="ViewModel\GridListViewModel.cs" />
     <Compile Include="ViewModel\OversizedNumberSpinnerViewModel.cs" />
     <Compile Include="ViewModel\StepperViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
-    <Page Include="Controls\GridViewControl.xaml">
+    <Page Include="Controls\GridListControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

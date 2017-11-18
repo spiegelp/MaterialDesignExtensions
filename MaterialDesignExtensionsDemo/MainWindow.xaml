@@ -14,8 +14,8 @@
         <DataTemplate DataType="{x:Type viewModel:OversizedNumberSpinnerViewModel}">
             <controls:OversizedNumberSpinnerControl />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:GridViewViewModel}">
-            <controls:GridViewControl />
+        <DataTemplate DataType="{x:Type viewModel:GridListViewModel}">
+            <controls:GridListControl />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:StepperViewModel}">
             <controls:StepperControl />
