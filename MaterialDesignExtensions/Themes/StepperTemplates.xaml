@@ -4,12 +4,13 @@
                     xmlns:convertersLib="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
                     xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
-                    xmlns:model="clr-namespace:MaterialDesignExtensions.Model">
+                    xmlns:model="clr-namespace:MaterialDesignExtensions.Model"
+                    xmlns:templateSelectors="clr-namespace:MaterialDesignExtensions.TemplateSelectors">
 
     <converters:BooleanOrConverter x:Key="booleanOrConverter" />
     <convertersLib:NullableToVisibilityConverter x:Key="nullableToVisibilityConverter" />
 
-    <controls:HorizontalStepperHeaderTemplateSelector x:Key="horizontalStepperHeaderTemplateSelector" />
+    <templateSelectors:HorizontalStepperHeaderTemplateSelector x:Key="horizontalStepperHeaderTemplateSelector" />
 
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
