@@ -1,6 +1,12 @@
 # MaterialDesignExtensions
 Material Design Extensions is based on [Material Design in XAML Toolkit](https://github.com/ButchersBoy/MaterialDesignInXamlToolkit) to provide additional controls and features for WPF apps. The controls might not be specified in the [Material Design specification](https://material.io/guidelines/material-design/introduction.html) or would crash the scope of [Material Design in XAML Toolkit](https://github.com/ButchersBoy/MaterialDesignInXamlToolkit).
 
+# Nuget
+
+[![NuGet Status](http://img.shields.io/nuget/v/MaterialDesignExtensions.svg?style=flat&label=MaterialDesignExtensions)](https://www.nuget.org/packages/MaterialDesignExtensions/)
+
+Install NuGet package. `PM> Install-Package MaterialDesignExtensions`
+
 # Controls
 Material Design Extensions features the following controls:
 
