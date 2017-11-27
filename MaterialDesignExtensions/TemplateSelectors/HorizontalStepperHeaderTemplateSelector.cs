@@ -12,7 +12,7 @@ namespace MaterialDesignExtensions.TemplateSelectors
 {
     internal class HorizontalStepperHeaderTemplateSelector : DataTemplateSelector
     {
-        public HorizontalStepperHeaderTemplateSelector() { }
+        public HorizontalStepperHeaderTemplateSelector() : base() { }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {

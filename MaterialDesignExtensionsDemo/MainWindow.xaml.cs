@@ -37,7 +37,8 @@ namespace MaterialDesignExtensionsDemo
             {
                 new NavigationItem() { Label = "Oversized Number Spinner", Action = () => new OversizedNumberSpinnerViewModel() },
                 new NavigationItem() { Label = "Grid list", Action = () => new GridListViewModel() },
-                new NavigationItem() { Label = "Stepper", Action = () => new StepperViewModel() }
+                new NavigationItem() { Label = "Stepper", Action = () => new StepperViewModel() },
+                new NavigationItem() { Label = "Open directory", Action = () => new OpenDirectoryControlViewModel() }
             };
 
             InitializeComponent();

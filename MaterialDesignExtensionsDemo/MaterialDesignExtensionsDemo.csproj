@@ -63,6 +63,9 @@
     <Compile Include="Controls\GridListControl.xaml.cs">
       <DependentUpon>GridListControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OpenDirectoryControlControl.xaml.cs">
+      <DependentUpon>OpenDirectoryControlControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OversizedNumberSpinnerControl.xaml.cs">
       <DependentUpon>OversizedNumberSpinnerControl.xaml</DependentUpon>
     </Compile>
@@ -70,10 +73,15 @@
       <DependentUpon>StepperControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\GridListViewModel.cs" />
+    <Compile Include="ViewModel\OpenDirectoryControlViewModel.cs" />
     <Compile Include="ViewModel\OversizedNumberSpinnerViewModel.cs" />
     <Compile Include="ViewModel\StepperViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Page Include="Controls\GridListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OpenDirectoryControlControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

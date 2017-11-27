@@ -73,6 +73,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\FileSystemControlTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\OversizedNumberSpinnerTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,11 +87,28 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\FileSystemController.cs" />
     <Compile Include="Controllers\StepperController.cs" />
+    <Compile Include="Controls\FileSystemControl.cs" />
+    <Compile Include="Controls\OpenDirectoryControl.cs" />
     <Compile Include="Controls\OversizedNumberSpinner.cs" />
     <Compile Include="Controls\StepButtonBar.cs" />
     <Compile Include="Controls\Stepper.cs" />
     <Compile Include="Converters\BooleanOrConverter.cs" />
+    <Compile Include="Converters\DateTimeAgoConverter.cs" />
+    <Compile Include="Converters\UpperCaseConverter.cs" />
+    <Compile Include="Localization\Strings.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SpecialDirectory.cs" />
+    <Compile Include="Model\SpecialDrive.cs" />
     <Compile Include="Model\Step.cs" />
     <Compile Include="Model\StepperStepViewModel.cs" />
     <Compile Include="Model\StepTitleHeader.cs" />
@@ -104,6 +125,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TemplateSelectors\FileSystemEntryInfoTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\HorizontalStepperHeaderTemplateSelector.cs" />
+    <EmbeddedResource Include="Localization\Strings.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
