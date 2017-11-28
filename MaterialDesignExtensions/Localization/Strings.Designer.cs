@@ -61,6 +61,15 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Access to directory &apos;{0}&apos; denied ähnelt.
+        /// </summary>
+        public static string AccessToDirectoryXDenied {
+            get {
+                return ResourceManager.GetString("AccessToDirectoryXDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cancel ähnelt.
         /// </summary>
         public static string Cancel {
@@ -79,11 +88,29 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Directory &apos;{0}&apos; not found ähnelt.
+        /// </summary>
+        public static string DirectoryXNotFound {
+            get {
+                return ResourceManager.GetString("DirectoryXNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Drives ähnelt.
         /// </summary>
         public static string Drives {
             get {
                 return ResourceManager.GetString("Drives", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Empty directory ähnelt.
+        /// </summary>
+        public static string EmptyDirectory {
+            get {
+                return ResourceManager.GetString("EmptyDirectory", resourceCulture);
             }
         }
         

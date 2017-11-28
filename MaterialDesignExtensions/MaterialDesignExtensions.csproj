@@ -96,6 +96,7 @@
     <Compile Include="Controls\Stepper.cs" />
     <Compile Include="Converters\BooleanOrConverter.cs" />
     <Compile Include="Converters\DateTimeAgoConverter.cs" />
+    <Compile Include="Converters\EmptyEnumerableVisibilityConverter.cs" />
     <Compile Include="Converters\UpperCaseConverter.cs" />
     <Compile Include="Localization\Strings.de.Designer.cs">
       <AutoGen>True</AutoGen>

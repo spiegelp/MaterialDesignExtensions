@@ -20,6 +20,8 @@ namespace MaterialDesignExtensions.Controllers
         private List<DirectoryInfo> m_currentDirectoryPathParts;
         private List<DirectoryInfo> m_directories;
         private List<FileInfo> m_files;
+        private bool m_showHiddenFilesAndDirectories;
+        private bool m_showSystemFilesAndDirectories;
 
         public DirectoryInfo CurrentDirectory
         {
@@ -63,37 +65,6 @@ namespace MaterialDesignExtensions.Controllers
                 m_directories = value;
 
                 OnPropertyChanged(nameof(Directories));
-            }
-        }
-
-        public List<FileInfo> Files
-        {
-            get
-            {
-                return m_files;
-            }
-
-            set
-            {
-                m_files = value;
-
-                OnPropertyChanged(nameof(Files));
-            }
-        }
-
-        public List<SpecialDirectory> SpecialDirectories
-        {
-            get
-            {
-                return new List<SpecialDirectory>()
-                {
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)), Icon = PackIconKind.Account },
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)), Icon = PackIconKind.FileDocument },
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)), Icon = PackIconKind.FileImage },
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic)), Icon = PackIconKind.FileMusic },
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)), Icon = PackIconKind.FileVideo },
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)), Icon = PackIconKind.Monitor }
-                };
             }
         }
 
@@ -147,12 +118,75 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        public List<FileInfo> Files
+        {
+            get
+            {
+                return m_files;
+            }
+
+            set
+            {
+                m_files = value;
+
+                OnPropertyChanged(nameof(Files));
+            }
+        }
+
+        public List<SpecialDirectory> SpecialDirectories
+        {
+            get
+            {
+                return new List<SpecialDirectory>()
+                {
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)), Icon = PackIconKind.Account },
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)), Icon = PackIconKind.FileDocument },
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)), Icon = PackIconKind.FileImage },
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic)), Icon = PackIconKind.FileMusic },
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)), Icon = PackIconKind.FileVideo },
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)), Icon = PackIconKind.Monitor }
+                };
+            }
+        }
+
+        public bool ShowHiddenFilesAndDirectories
+        {
+            get
+            {
+                return m_showHiddenFilesAndDirectories;
+            }
+
+            set
+            {
+                m_showHiddenFilesAndDirectories = value;
+
+                OnPropertyChanged(nameof(ShowHiddenFilesAndDirectories));
+            }
+        }
+
+        public bool ShowSystemFilesAndDirectories
+        {
+            get
+            {
+                return m_showSystemFilesAndDirectories;
+            }
+
+            set
+            {
+                m_showSystemFilesAndDirectories = value;
+
+                OnPropertyChanged(nameof(ShowSystemFilesAndDirectories));
+            }
+        }
+
         public FileSystemController()
         {
             m_currentDirectory = null;
             m_currentDirectoryPathParts = null;
             m_directories = null;
             m_files = null;
+            m_showHiddenFilesAndDirectories = false;
+            m_showSystemFilesAndDirectories = false;
         }
 
         public void SelectDirectory(string directory)
@@ -162,11 +196,36 @@ namespace MaterialDesignExtensions.Controllers
 
         public void SelectDirectory(DirectoryInfo directory)
         {
+            bool ShowFileSystemInfo(FileSystemInfo fileSystemInfo) => (ShowHiddenFilesAndDirectories || !fileSystemInfo.Attributes.HasFlag(FileAttributes.Hidden))
+                                                                            && (ShowSystemFilesAndDirectories || !fileSystemInfo.Attributes.HasFlag(FileAttributes.System));
+
             if (directory != null && !string.IsNullOrWhiteSpace(directory.FullName))
             {
-                CurrentDirectory = directory;
-                Directories = CurrentDirectory.GetDirectories().ToList();
-                Files = CurrentDirectory.GetFiles().ToList();
+                if (!directory.Exists)
+                {
+                    throw new FileNotFoundException(string.Format(Localization.Strings.DirectoryXNotFound, directory.Name));
+                }
+
+                try
+                {
+                    // try to access the directory before assigning it as a kind of access control check
+                    //     if the user is not allowed to access the directory, the controller does not change the current directory
+                    List<DirectoryInfo> directories = directory.GetDirectories()
+                        .Where(directoryInfo => ShowFileSystemInfo(directoryInfo))
+                        .ToList();
+
+                    List<FileInfo> files = directory.GetFiles()
+                        .Where(fileInfo => ShowFileSystemInfo(fileInfo))
+                        .ToList();
+
+                    CurrentDirectory = directory;
+                    Directories = directories;
+                    Files = files;
+                }
+                catch (UnauthorizedAccessException exc)
+                {
+                    throw new UnauthorizedAccessException(string.Format(Localization.Strings.AccessToDirectoryXDenied, directory.Name), exc);
+                }
             }
             else
             {
@@ -205,6 +264,20 @@ namespace MaterialDesignExtensions.Controllers
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public void SetShowHiddenFilesAndDirectories(bool showHiddenFilesAndDirectories)
+        {
+            ShowHiddenFilesAndDirectories = showHiddenFilesAndDirectories;
+
+            SelectDirectory(m_currentDirectory);
+        }
+
+        public void SetShowSystemFilesAndDirectories(bool showSystemFilesAndDirectories)
+        {
+            ShowSystemFilesAndDirectories = showSystemFilesAndDirectories;
+
+            SelectDirectory(m_currentDirectory);
         }
     }
 }

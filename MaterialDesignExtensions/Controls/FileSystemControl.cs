@@ -9,6 +9,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+using MaterialDesignThemes.Wpf;
+
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
@@ -19,6 +21,7 @@ namespace MaterialDesignExtensions.Controls
         protected const string DrawerHostName = "drawerHost";
         protected const string PathPartsItemsControlName = "pathPartsItemsControl";
         protected const string DirectoryItemsListBoxName = "directoryItemsListBox";
+        protected const string EmptyDirectoryTextBlockName = "emptyDirectoryTextBlock";
 
         public static RoutedCommand OpenSpecialDirectoriesDrawerCommand = new RoutedCommand();
         public static RoutedCommand SelectDirectoryItemCommand = new RoutedCommand();
@@ -87,10 +90,68 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        public static readonly DependencyProperty ShowHiddenFilesAndDirectoriesProperty = DependencyProperty.Register(
+                nameof(ShowHiddenFilesAndDirectories),
+                typeof(bool),
+                typeof(FileSystemControl),
+                new PropertyMetadata(false, ShowHiddenFilesAndDirectoriesChangedHandler));
+
+        public bool ShowHiddenFilesAndDirectories
+        {
+            get
+            {
+                return (bool)GetValue(ShowHiddenFilesAndDirectoriesProperty);
+            }
+
+            set
+            {
+                SetValue(ShowHiddenFilesAndDirectoriesProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty ShowSystemFilesAndDirectoriesProperty = DependencyProperty.Register(
+                nameof(ShowSystemFilesAndDirectories),
+                typeof(bool),
+                typeof(FileSystemControl),
+                new PropertyMetadata(false, ShowSystemFilesAndDirectoriesChangedHandler));
+
+        public bool ShowSystemFilesAndDirectories
+        {
+            get
+            {
+                return (bool)GetValue(ShowSystemFilesAndDirectoriesProperty);
+            }
+
+            set
+            {
+                SetValue(ShowSystemFilesAndDirectoriesProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty SnackbarMessageQueueProperty = DependencyProperty.Register(
+                nameof(SnackbarMessageQueue),
+                typeof(ISnackbarMessageQueue),
+                typeof(FileSystemControl),
+                new PropertyMetadata(new SnackbarMessageQueue(TimeSpan.FromSeconds(5))));
+
+        public ISnackbarMessageQueue SnackbarMessageQueue
+        {
+            get
+            {
+                return (ISnackbarMessageQueue)GetValue(SnackbarMessageQueueProperty);
+            }
+
+            protected set
+            {
+                SetValue(SnackbarMessageQueueProperty, value);
+            }
+        }
+
         protected FileSystemController m_controller;
 
         protected ItemsControl m_pathPartsItemsControl;
         protected ListBox m_directoryItemsListBox;
+        protected TextBlock m_emptyDirectoryTextBlock;
 
         static FileSystemControl()
         {
@@ -124,23 +185,27 @@ namespace MaterialDesignExtensions.Controls
 
             m_directoryItemsListBox = Template.FindName(DirectoryItemsListBoxName, this) as ListBox;
             m_directoryItemsListBox.ItemsSource = m_controller.Directories;
+
+            m_emptyDirectoryTextBlock = Template.FindName(EmptyDirectoryTextBlockName, this) as TextBlock;
+
+            UpdateListVisibility();
         }
 
         protected virtual void LoadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged += ControllerPropertyChangedHandler;
-            m_directoryItemsListBox.SelectionChanged += DirectoryitemsListBoxSelectionChangedHandler;
+            m_directoryItemsListBox.SelectionChanged += DirectoryItemsListBoxSelectionChangedHandler;
         }
 
         protected virtual void UnloadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged -= ControllerPropertyChangedHandler;
-            m_directoryItemsListBox.SelectionChanged -= DirectoryitemsListBoxSelectionChangedHandler;
+            m_directoryItemsListBox.SelectionChanged -= DirectoryItemsListBoxSelectionChangedHandler;
         }
 
         protected void OpenSpecialDirectoriesDrawerCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            MaterialDesignThemes.Wpf.DrawerHost drawerHost = ((MaterialDesignThemes.Wpf.DrawerHost)Template.FindName(DrawerHostName, this));
+            DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
             drawerHost.IsTopDrawerOpen = true;
         }
 
@@ -161,7 +226,7 @@ namespace MaterialDesignExtensions.Controls
                     m_controller.SelectDirectory(specialDrive.Info.RootDirectory);
                 }
 
-                MaterialDesignThemes.Wpf.DrawerHost drawerHost = ((MaterialDesignThemes.Wpf.DrawerHost)Template.FindName(DrawerHostName, this));
+                DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
 
                 if (drawerHost.IsTopDrawerOpen)
                 {
@@ -174,7 +239,7 @@ namespace MaterialDesignExtensions.Controls
         {
             FileSystemInfoToShow = args.Parameter as FileSystemInfo;
 
-            MaterialDesignThemes.Wpf.DrawerHost drawerHost = ((MaterialDesignThemes.Wpf.DrawerHost)Template.FindName(DrawerHostName, this));
+            DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
             drawerHost.IsLeftDrawerOpen = true;
         }
 
@@ -191,7 +256,25 @@ namespace MaterialDesignExtensions.Controls
 
         protected virtual void CurrentDirectoryChangedHandler(string newCurrentDirectory)
         {
-            m_controller.SelectDirectory(newCurrentDirectory);
+            try
+            {
+                m_controller.SelectDirectory(newCurrentDirectory);
+            }
+            catch (Exception exc)
+                when (exc is UnauthorizedAccessException || exc is FileNotFoundException)
+            {
+                SnackbarMessageQueue.Enqueue(exc.Message);
+            }
+        }
+
+        protected static void ShowHiddenFilesAndDirectoriesChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            (obj as FileSystemControl)?.m_controller.SetShowHiddenFilesAndDirectories((bool)args.NewValue);
+        }
+
+        protected static void ShowSystemFilesAndDirectoriesChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            (obj as FileSystemControl)?.m_controller.SetShowSystemFilesAndDirectories((bool)args.NewValue);
         }
 
         protected void ControllerPropertyChangedHandler(object sender, PropertyChangedEventArgs args)
@@ -206,19 +289,29 @@ namespace MaterialDesignExtensions.Controls
                 {
                     m_directoryItemsListBox.ItemsSource = m_controller.Directories;
 
-                    if (m_controller.Directories != null && m_controller.Directories.Count > 0)
+                    if (m_controller.Directories != null && m_controller.Directories.Any())
                     {
                         m_directoryItemsListBox.ScrollIntoView(m_controller.Directories[0]);
                     }
+
+                    UpdateListVisibility();
                 }
                 else if (args.PropertyName == nameof(FileSystemController.CurrentDirectoryPathParts))
                 {
                     m_pathPartsItemsControl.ItemsSource = m_controller.CurrentDirectoryPathParts;
                 }
+                else if (args.PropertyName == nameof(FileSystemController.ShowHiddenFilesAndDirectories))
+                {
+                    ShowHiddenFilesAndDirectories = m_controller.ShowHiddenFilesAndDirectories;
+                }
+                else if (args.PropertyName == nameof(FileSystemController.ShowSystemFilesAndDirectories))
+                {
+                    ShowSystemFilesAndDirectories = m_controller.ShowSystemFilesAndDirectories;
+                }
             }
         }
 
-        protected void DirectoryitemsListBoxSelectionChangedHandler(object sender, SelectionChangedEventArgs args)
+        protected void DirectoryItemsListBoxSelectionChangedHandler(object sender, SelectionChangedEventArgs args)
         {
             if (sender == m_directoryItemsListBox)
             {
@@ -226,9 +319,23 @@ namespace MaterialDesignExtensions.Controls
                 {
                     if (m_directoryItemsListBox.SelectedItem is DirectoryInfo directoryInfo)
                     {
-                        m_controller.SelectDirectory(directoryInfo);
+                        CurrentDirectory = directoryInfo.FullName;
                     }
                 }
+            }
+        }
+
+        protected void UpdateListVisibility()
+        {
+            if (m_controller.Directories != null && m_controller.Directories.Any())
+            {
+                m_directoryItemsListBox.Visibility = Visibility.Visible;
+                m_emptyDirectoryTextBlock.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                m_directoryItemsListBox.Visibility = Visibility.Collapsed;
+                m_emptyDirectoryTextBlock.Visibility = Visibility.Visible;
             }
         }
     }

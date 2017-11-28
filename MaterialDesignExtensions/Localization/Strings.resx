@@ -117,14 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccessToDirectoryXDenied" xml:space="preserve">
+    <value>Access to directory '{0}' denied</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="Created" xml:space="preserve">
     <value>Created</value>
   </data>
+  <data name="DirectoryXNotFound" xml:space="preserve">
+    <value>Directory '{0}' not found</value>
+  </data>
   <data name="Drives" xml:space="preserve">
     <value>Drives</value>
+  </data>
+  <data name="EmptyDirectory" xml:space="preserve">
+    <value>Empty directory</value>
   </data>
   <data name="FileSize" xml:space="preserve">
     <value>File size</value>
