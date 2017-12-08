@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -20,7 +21,7 @@ namespace MaterialDesignExtensions.Controls
     {
         protected const string DrawerHostName = "drawerHost";
         protected const string PathPartsItemsControlName = "pathPartsItemsControl";
-        protected const string DirectoryItemsListBoxName = "directoryItemsListBox";
+        protected const string FileSystemEntryItemsListBoxName = "fileSystemEntryItemsListBox";
         protected const string EmptyDirectoryTextBlockName = "emptyDirectoryTextBlock";
 
         public static RoutedCommand OpenSpecialDirectoriesDrawerCommand = new RoutedCommand();
@@ -150,7 +151,7 @@ namespace MaterialDesignExtensions.Controls
         protected FileSystemController m_controller;
 
         protected ItemsControl m_pathPartsItemsControl;
-        protected ListBox m_directoryItemsListBox;
+        protected ListBox m_fileSystemEntryItemsListBox;
         protected TextBlock m_emptyDirectoryTextBlock;
 
         static FileSystemControl()
@@ -170,7 +171,7 @@ namespace MaterialDesignExtensions.Controls
             CommandBindings.Add(new CommandBinding(CancelCommand, CancelCommandHandler));
 
             m_pathPartsItemsControl = null;
-            m_directoryItemsListBox = null;
+            m_fileSystemEntryItemsListBox = null;
 
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
@@ -183,8 +184,8 @@ namespace MaterialDesignExtensions.Controls
             m_pathPartsItemsControl = Template.FindName(PathPartsItemsControlName, this) as ItemsControl;
             m_pathPartsItemsControl.ItemsSource = m_controller.CurrentDirectoryPathParts;
 
-            m_directoryItemsListBox = Template.FindName(DirectoryItemsListBoxName, this) as ListBox;
-            m_directoryItemsListBox.ItemsSource = m_controller.Directories;
+            m_fileSystemEntryItemsListBox = Template.FindName(FileSystemEntryItemsListBoxName, this) as ListBox;
+            m_fileSystemEntryItemsListBox.ItemsSource = GetFileSystemEntryItems();
 
             m_emptyDirectoryTextBlock = Template.FindName(EmptyDirectoryTextBlockName, this) as TextBlock;
 
@@ -194,13 +195,13 @@ namespace MaterialDesignExtensions.Controls
         protected virtual void LoadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged += ControllerPropertyChangedHandler;
-            m_directoryItemsListBox.SelectionChanged += DirectoryItemsListBoxSelectionChangedHandler;
+            m_fileSystemEntryItemsListBox.SelectionChanged += FileSystemEntryItemsListBoxSelectionChangedHandler;
         }
 
         protected virtual void UnloadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged -= ControllerPropertyChangedHandler;
-            m_directoryItemsListBox.SelectionChanged -= DirectoryItemsListBoxSelectionChangedHandler;
+            m_fileSystemEntryItemsListBox.SelectionChanged -= FileSystemEntryItemsListBoxSelectionChangedHandler;
         }
 
         protected void OpenSpecialDirectoriesDrawerCommandHandler(object sender, ExecutedRoutedEventArgs args)
@@ -215,15 +216,15 @@ namespace MaterialDesignExtensions.Controls
             {
                 if (args.Parameter is DirectoryInfo directoryInfo)
                 {
-                    m_controller.SelectDirectory(directoryInfo);
+                    CurrentDirectory = directoryInfo.FullName;
                 }
                 else if (args.Parameter is SpecialDirectory specialDirectory)
                 {
-                    m_controller.SelectDirectory(specialDirectory.Info);
+                    CurrentDirectory = specialDirectory.Info.FullName;
                 }
                 else if (args.Parameter is SpecialDrive specialDrive)
                 {
-                    m_controller.SelectDirectory(specialDrive.Info.RootDirectory);
+                    CurrentDirectory = specialDrive.Info.RootDirectory.FullName;
                 }
 
                 DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
@@ -277,24 +278,13 @@ namespace MaterialDesignExtensions.Controls
             (obj as FileSystemControl)?.m_controller.SetShowSystemFilesAndDirectories((bool)args.NewValue);
         }
 
-        protected void ControllerPropertyChangedHandler(object sender, PropertyChangedEventArgs args)
+        protected virtual void ControllerPropertyChangedHandler(object sender, PropertyChangedEventArgs args)
         {
             if (sender == m_controller)
             {
                 if (args.PropertyName == nameof(FileSystemController.CurrentDirectory))
                 {
                     CurrentDirectory = m_controller.CurrentDirectory.FullName;
-                }
-                else if (args.PropertyName == nameof(FileSystemController.Directories))
-                {
-                    m_directoryItemsListBox.ItemsSource = m_controller.Directories;
-
-                    if (m_controller.Directories != null && m_controller.Directories.Any())
-                    {
-                        m_directoryItemsListBox.ScrollIntoView(m_controller.Directories[0]);
-                    }
-
-                    UpdateListVisibility();
                 }
                 else if (args.PropertyName == nameof(FileSystemController.CurrentDirectoryPathParts))
                 {
@@ -311,13 +301,13 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        protected void DirectoryItemsListBoxSelectionChangedHandler(object sender, SelectionChangedEventArgs args)
+        protected virtual void FileSystemEntryItemsListBoxSelectionChangedHandler(object sender, SelectionChangedEventArgs args)
         {
-            if (sender == m_directoryItemsListBox)
+            if (sender == m_fileSystemEntryItemsListBox)
             {
-                if (m_directoryItemsListBox.SelectedItem != null)
+                if (m_fileSystemEntryItemsListBox.SelectedItem != null)
                 {
-                    if (m_directoryItemsListBox.SelectedItem is DirectoryInfo directoryInfo)
+                    if (m_fileSystemEntryItemsListBox.SelectedItem is DirectoryInfo directoryInfo)
                     {
                         CurrentDirectory = directoryInfo.FullName;
                     }
@@ -325,16 +315,20 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        protected abstract IEnumerable GetFileSystemEntryItems();
+
         protected void UpdateListVisibility()
         {
-            if (m_controller.Directories != null && m_controller.Directories.Any())
+            if (m_fileSystemEntryItemsListBox != null
+                && m_fileSystemEntryItemsListBox.ItemsSource != null
+                && m_fileSystemEntryItemsListBox.ItemsSource.GetEnumerator().MoveNext())
             {
-                m_directoryItemsListBox.Visibility = Visibility.Visible;
+                m_fileSystemEntryItemsListBox.Visibility = Visibility.Visible;
                 m_emptyDirectoryTextBlock.Visibility = Visibility.Collapsed;
             }
             else
             {
-                m_directoryItemsListBox.Visibility = Visibility.Collapsed;
+                m_fileSystemEntryItemsListBox.Visibility = Visibility.Collapsed;
                 m_emptyDirectoryTextBlock.Visibility = Visibility.Visible;
             }
         }

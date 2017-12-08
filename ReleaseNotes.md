@@ -8,3 +8,4 @@
 ### vX.X.X (upcoming)
 #### Features
 * `OpenDirectoryControl` to select a directory
+* `OpenFileControl` to select a file for opening

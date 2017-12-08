@@ -23,6 +23,9 @@
         <DataTemplate DataType="{x:Type viewModel:OpenDirectoryControlViewModel}">
             <controls:OpenDirectoryControlControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:OpenFileControlViewModel}">
+            <controls:OpenFileControlControl />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>

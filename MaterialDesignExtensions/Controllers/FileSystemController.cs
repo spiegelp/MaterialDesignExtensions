@@ -17,6 +17,7 @@ namespace MaterialDesignExtensions.Controllers
         public event PropertyChangedEventHandler PropertyChanged;
 
         private DirectoryInfo m_currentDirectory;
+        private FileInfo m_currentFile;
         private List<DirectoryInfo> m_currentDirectoryPathParts;
         private List<DirectoryInfo> m_directories;
         private List<FileInfo> m_files;
@@ -35,6 +36,21 @@ namespace MaterialDesignExtensions.Controllers
                 m_currentDirectory = value;
 
                 OnPropertyChanged(nameof(CurrentDirectory));
+            }
+        }
+
+        public FileInfo CurrentFile
+        {
+            get
+            {
+                return m_currentFile;
+            }
+
+            set
+            {
+                m_currentFile = value;
+
+                OnPropertyChanged(nameof(CurrentFile));
             }
         }
 
@@ -65,6 +81,26 @@ namespace MaterialDesignExtensions.Controllers
                 m_directories = value;
 
                 OnPropertyChanged(nameof(Directories));
+            }
+        }
+
+        public List<FileSystemInfo> DirectoriesAndFiles
+        {
+            get
+            {
+                List<FileSystemInfo> directoriesAndFiles = new List<FileSystemInfo>();
+
+                if (m_directories != null)
+                {
+                    directoriesAndFiles.AddRange(m_directories);
+                }
+
+                if (m_files != null)
+                {
+                    directoriesAndFiles.AddRange(m_files);
+                }
+
+                return directoriesAndFiles;
             }
         }
 
@@ -139,12 +175,18 @@ namespace MaterialDesignExtensions.Controllers
             {
                 return new List<SpecialDirectory>()
                 {
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)), Icon = PackIconKind.Account },
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)), Icon = PackIconKind.FileDocument },
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)), Icon = PackIconKind.FileImage },
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic)), Icon = PackIconKind.FileMusic },
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)), Icon = PackIconKind.FileVideo },
-                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)), Icon = PackIconKind.Monitor }
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)),
+                        Icon = PackIconKind.Account },
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)),
+                        Label = Localization.Strings.Documents, Icon = PackIconKind.FileDocument },
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)),
+                        Label = Localization.Strings.Pictures, Icon = PackIconKind.FileImage },
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic)),
+                        Label = Localization.Strings.Music, Icon = PackIconKind.FileMusic },
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)),
+                        Label = Localization.Strings.Videos, Icon = PackIconKind.FileVideo },
+                    new SpecialDirectory() { Info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)),
+                        Label = Localization.Strings.Desktop, Icon = PackIconKind.Monitor }
                 };
             }
         }
@@ -182,6 +224,7 @@ namespace MaterialDesignExtensions.Controllers
         public FileSystemController()
         {
             m_currentDirectory = null;
+            m_currentFile = null;
             m_currentDirectoryPathParts = null;
             m_directories = null;
             m_files = null;
@@ -221,6 +264,8 @@ namespace MaterialDesignExtensions.Controllers
                     CurrentDirectory = directory;
                     Directories = directories;
                     Files = files;
+
+                    OnPropertyChanged(nameof(DirectoriesAndFiles));
                 }
                 catch (UnauthorizedAccessException exc)
                 {
@@ -232,9 +277,28 @@ namespace MaterialDesignExtensions.Controllers
                 CurrentDirectory = null;
                 Directories = null;
                 Files = null;
+
+                OnPropertyChanged(nameof(DirectoriesAndFiles));
             }
 
             UpdateCurrentDirectoryPathParts();
+        }
+
+        public void SelectFile(String file)
+        {
+            if (!string.IsNullOrWhiteSpace(file))
+            {
+                SelectFile(new FileInfo(file));
+            }
+            else
+            {
+                CurrentFile = null;
+            }
+        }
+
+        public void SelectFile(FileInfo file)
+        {
+            CurrentFile = file;
         }
 
         private void UpdateCurrentDirectoryPathParts()

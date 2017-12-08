@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MaterialDesignExtensionsDemo.ViewModel
 {
-    public class OpenDirectoryControlViewModel : FileSystemControlViewModel
+    public class OpenFileControlViewModel : FileSystemControlViewModel
     {
-        public OpenDirectoryControlViewModel() : base() { }
+        public OpenFileControlViewModel() : base() { }
     }
 }
