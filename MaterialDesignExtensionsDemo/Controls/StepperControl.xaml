@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
              xmlns:viewModel="clr-namespace:MaterialDesignExtensionsDemo.ViewModel"
              xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+             xmlns:model="clr-namespace:MaterialDesignExtensions.Model;assembly=MaterialDesignExtensions"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
     <UserControl.Resources>
@@ -50,7 +51,43 @@
             <CheckBox IsChecked="{Binding Path=IsLinear, Mode=TwoWay}" VerticalAlignment="Center" />
         </StackPanel>
         <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
-            <controls:Stepper HorizontalAlignment="Stretch" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}" Steps="{Binding Path=Steps, Mode=OneTime}" VerticalAlignment="Stretch" />
+            <controls:Stepper IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}" Steps="{Binding Path=Steps, Mode=OneTime}"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <!-- example for defining the Stepper in XAML -->
+            <!--<controls:Stepper IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <model:Step>
+                    <model:Step.Header>
+                        <model:StepTitleHeader FirstLevelTitle="What is a Stepper?" />
+                    </model:Step.Header>
+                    <model:Step.Content>
+                        <viewModel:StepperTutorialOneViewModel />
+                    </model:Step.Content>
+                </model:Step>
+                <model:Step>
+                    <model:Step.Header>
+                        <model:StepTitleHeader FirstLevelTitle="Layout and navigation" />
+                    </model:Step.Header>
+                    <model:Step.Content>
+                        <viewModel:StepperTutorialTwoViewModel />
+                    </model:Step.Content>
+                </model:Step>
+                <model:Step>
+                    <model:Step.Header>
+                        <model:StepTitleHeader FirstLevelTitle="Steps" SecondLevelTitle="Header and content" />
+                    </model:Step.Header>
+                    <model:Step.Content>
+                        <viewModel:StepperTutorialThreeViewModel />
+                    </model:Step.Content>
+                </model:Step>
+                <model:Step>
+                    <model:Step.Header>
+                        <model:StepTitleHeader FirstLevelTitle="Validation" />
+                    </model:Step.Header>
+                    <model:Step.Content>
+                        <viewModel:StepperTutorialFourViewModel />
+                    </model:Step.Content>
+                </model:Step>
+            </controls:Stepper>-->
         </ScrollViewer>
     </Grid>
 </UserControl>

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -180,16 +183,16 @@ namespace MaterialDesignExtensions.Controls
         }
 
         public static readonly DependencyProperty StepsProperty = DependencyProperty.Register(
-                nameof(Steps), typeof(IList<IStep>), typeof(Stepper), new PropertyMetadata(null, StepsChangedHandler));
+                nameof(Steps), typeof(IList), typeof(Stepper), new PropertyMetadata(new ObservableCollection<IStep>(), StepsChangedHandler));
 
         /// <summary>
         /// Gets or sets the steps which will be shown inside this <see cref="Stepper"/>.
         /// </summary>
-        public IEnumerable<IStep> Steps
+        public IList Steps
         {
             get
             {
-                return (IList<IStep>)GetValue(StepsProperty);
+                return (IList)GetValue(StepsProperty);
             }
 
             set
@@ -253,6 +256,14 @@ namespace MaterialDesignExtensions.Controls
         {
             m_controller.PropertyChanged += PropertyChangedHandler;
 
+            if (Steps is ObservableCollection<IStep> steps)
+            {
+                steps.CollectionChanged -= StepsCollectionChanged;
+                steps.CollectionChanged += StepsCollectionChanged;
+            }
+
+            InitSteps(Steps);
+
             // there is no event raised if the Content of a ContentControl changes
             //     therefore trigger the animation in code
             PlayHorizontalContentAnimation();
@@ -261,6 +272,11 @@ namespace MaterialDesignExtensions.Controls
         private void UnloadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged -= PropertyChangedHandler;
+
+            if (Steps is ObservableCollection<IStep> steps)
+            {
+                steps.CollectionChanged -= StepsCollectionChanged;
+            }
         }
 
         private bool ValidateActiveStep()
@@ -293,8 +309,45 @@ namespace MaterialDesignExtensions.Controls
 
         private static void StepsChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            Stepper stepper = (Stepper)obj;
-            stepper.Controller.InitSteps(args.NewValue as IEnumerable<IStep>);
+            (obj as Stepper)?.StepsChangedHandler(args.OldValue, args.NewValue);
+        }
+
+        private void StepsChangedHandler(object oldValue, object newValue)
+        {
+            if (oldValue is ObservableCollection<IStep> oldSteps)
+            {
+                oldSteps.CollectionChanged -= StepsCollectionChanged;
+            }
+
+            if (newValue is ObservableCollection<IStep> newSteps)
+            {
+                newSteps.CollectionChanged += StepsCollectionChanged;
+            }
+
+            InitSteps(newValue as IList);
+        }
+
+        private void StepsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            InitSteps(Steps);
+        }
+
+        private void InitSteps(IList values)
+        {
+            IList<IStep> steps = new List<IStep>();
+
+            if (values != null)
+            {
+                foreach (object item in values)
+                {
+                    if (item is IStep step)
+                    {
+                        steps.Add(step);
+                    }
+                }
+            }
+
+            m_controller.InitSteps(steps);
         }
 
         private void BackHandler(object sender, ExecutedRoutedEventArgs args)
