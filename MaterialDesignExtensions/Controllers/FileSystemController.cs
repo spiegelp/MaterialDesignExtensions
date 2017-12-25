@@ -33,9 +33,12 @@ namespace MaterialDesignExtensions.Controllers
 
             set
             {
-                m_currentDirectory = value;
+                if (!AreObjectsEqual(m_currentDirectory, value))
+                {
+                    m_currentDirectory = value;
 
-                OnPropertyChanged(nameof(CurrentDirectory));
+                    OnPropertyChanged(nameof(CurrentDirectory));
+                }
             }
         }
 
@@ -48,9 +51,12 @@ namespace MaterialDesignExtensions.Controllers
 
             set
             {
-                m_currentFile = value;
+                if (!AreObjectsEqual(m_currentFile, value))
+                {
+                    m_currentFile = value;
 
-                OnPropertyChanged(nameof(CurrentFile));
+                    OnPropertyChanged(nameof(CurrentFile));
+                }
             }
         }
 
@@ -63,9 +69,12 @@ namespace MaterialDesignExtensions.Controllers
 
             set
             {
-                m_currentDirectoryPathParts = value;
+                if (!AreObjectsEqual(m_currentDirectoryPathParts, value))
+                {
+                    m_currentDirectoryPathParts = value;
 
-                OnPropertyChanged(nameof(CurrentDirectoryPathParts));
+                    OnPropertyChanged(nameof(CurrentDirectoryPathParts));
+                }
             }
         }
 
@@ -78,9 +87,12 @@ namespace MaterialDesignExtensions.Controllers
 
             set
             {
-                m_directories = value;
+                if (!AreObjectsEqual(m_directories, value))
+                {
+                    m_directories = value;
 
-                OnPropertyChanged(nameof(Directories));
+                    OnPropertyChanged(nameof(Directories));
+                }
             }
         }
 
@@ -163,9 +175,12 @@ namespace MaterialDesignExtensions.Controllers
 
             set
             {
-                m_files = value;
+                if (!AreObjectsEqual(m_files, value))
+                {
+                    m_files = value;
 
-                OnPropertyChanged(nameof(Files));
+                    OnPropertyChanged(nameof(Files));
+                }
             }
         }
 
@@ -200,9 +215,12 @@ namespace MaterialDesignExtensions.Controllers
 
             set
             {
-                m_showHiddenFilesAndDirectories = value;
+                if (!m_showHiddenFilesAndDirectories != value)
+                {
+                    m_showHiddenFilesAndDirectories = value;
 
-                OnPropertyChanged(nameof(ShowHiddenFilesAndDirectories));
+                    OnPropertyChanged(nameof(ShowHiddenFilesAndDirectories));
+                }
             }
         }
 
@@ -215,9 +233,12 @@ namespace MaterialDesignExtensions.Controllers
 
             set
             {
-                m_showSystemFilesAndDirectories = value;
+                if (m_showSystemFilesAndDirectories != value)
+                {
+                    m_showSystemFilesAndDirectories = value;
 
-                OnPropertyChanged(nameof(ShowSystemFilesAndDirectories));
+                    OnPropertyChanged(nameof(ShowSystemFilesAndDirectories));
+                }
             }
         }
 
@@ -322,14 +343,6 @@ namespace MaterialDesignExtensions.Controllers
             CurrentDirectoryPathParts = currentDirectoryPathParts;
         }
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null && !string.IsNullOrWhiteSpace(propertyName))
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
         public void SetShowHiddenFilesAndDirectories(bool showHiddenFilesAndDirectories)
         {
             ShowHiddenFilesAndDirectories = showHiddenFilesAndDirectories;
@@ -342,6 +355,29 @@ namespace MaterialDesignExtensions.Controllers
             ShowSystemFilesAndDirectories = showSystemFilesAndDirectories;
 
             SelectDirectory(m_currentDirectory);
+        }
+
+        private bool AreObjectsEqual(object o1, object o2)
+        {
+            if (o1 == o2)
+            {
+                return true;
+            }
+
+            if (o1 != null)
+            {
+                return o1.Equals(o2);
+            }
+
+            return false;
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null && !string.IsNullOrWhiteSpace(propertyName))
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

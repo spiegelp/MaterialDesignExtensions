@@ -165,6 +165,12 @@
   <data name="Pictures" xml:space="preserve">
     <value>Pictures</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveFile" xml:space="preserve">
+    <value>Save file</value>
+  </data>
   <data name="Select" xml:space="preserve">
     <value>Select</value>
   </data>

@@ -39,7 +39,8 @@ namespace MaterialDesignExtensionsDemo
                 new NavigationItem() { Label = "Grid list", Action = () => new GridListViewModel() },
                 new NavigationItem() { Label = "Stepper", Action = () => new StepperViewModel() },
                 new NavigationItem() { Label = "Open directory", Action = () => new OpenDirectoryControlViewModel() },
-                new NavigationItem() { Label = "Open file", Action = () => new OpenFileControlViewModel() }
+                new NavigationItem() { Label = "Open file", Action = () => new OpenFileControlViewModel() },
+                new NavigationItem() { Label = "Save file", Action = () => new SaveFileControlViewModel() }
             };
 
             InitializeComponent();

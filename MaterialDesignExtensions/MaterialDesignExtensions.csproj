@@ -90,10 +90,12 @@
     <Compile Include="Controllers\BitmapImageHelper.cs" />
     <Compile Include="Controllers\FileSystemController.cs" />
     <Compile Include="Controllers\StepperController.cs" />
+    <Compile Include="Controls\BaseFileControl.cs" />
     <Compile Include="Controls\FileSystemControl.cs" />
     <Compile Include="Controls\OpenDirectoryControl.cs" />
     <Compile Include="Controls\OpenFileControl.cs" />
     <Compile Include="Controls\OversizedNumberSpinner.cs" />
+    <Compile Include="Controls\SaveFileControl.cs" />
     <Compile Include="Controls\StepButtonBar.cs" />
     <Compile Include="Controls\Stepper.cs" />
     <Compile Include="Converters\AsyncImageTask.cs" />

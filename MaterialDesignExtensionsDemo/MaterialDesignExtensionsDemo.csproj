@@ -75,11 +75,15 @@
     <Compile Include="Controls\StepperControl.xaml.cs">
       <DependentUpon>StepperControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SaveFileControlControl.xaml.cs">
+      <DependentUpon>SaveFileControlControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\FileSystemControlViewModel.cs" />
     <Compile Include="ViewModel\GridListViewModel.cs" />
     <Compile Include="ViewModel\OpenDirectoryControlViewModel.cs" />
     <Compile Include="ViewModel\OpenFileControlViewModel.cs" />
     <Compile Include="ViewModel\OversizedNumberSpinnerViewModel.cs" />
+    <Compile Include="ViewModel\SaveFileControlViewModel.cs" />
     <Compile Include="ViewModel\StepperViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Page Include="Controls\GridListControl.xaml">
@@ -111,6 +115,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Controls\OversizedNumberSpinnerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SaveFileControlControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
