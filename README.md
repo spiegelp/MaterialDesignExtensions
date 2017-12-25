@@ -19,7 +19,7 @@ Material Design Extensions features the following controls:
 | Grid list | Templates for ListBox to render as a grid list ([specification](https://material.io/guidelines/components/grid-lists.html)) | Done |
 | Open directory | Custom OpenDirectoryControl control | Done |
 | Open file | Custom OpenFileControl control | Done |
-| Save file | Custom SaveFileControl control | Planned |
+| Save file | Custom SaveFileControl control | Done |
 
 # License
 Material Design Extensions is licensed under the [MIT](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/LICENSE) license.
