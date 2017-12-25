@@ -14,6 +14,9 @@ using MaterialDesignExtensions.Controllers;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// The base control with common logic for <see cref="OpenFileControl" /> and <see cref="SaveFileControl" />.
+    /// </summary>
     public abstract class BaseFileControl : FileSystemControl
     {
         public static RoutedCommand SelectFileCommand = new RoutedCommand();
@@ -21,6 +24,9 @@ namespace MaterialDesignExtensions.Controls
         public static readonly RoutedEvent FileSelectedEvent = EventManager.RegisterRoutedEvent(
             nameof(FileSelected), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(BaseFileControl));
 
+        /// <summary>
+        /// An event raised by selecting a file.
+        /// </summary>
         public event RoutedEventHandler FileSelected
         {
             add
@@ -40,6 +46,9 @@ namespace MaterialDesignExtensions.Controls
                 typeof(BaseFileControl),
                 new PropertyMetadata(null, CurrentFileChangedHandler));
 
+        /// <summary>
+        /// The current file of the control.
+        /// </summary>
         public string CurrentFile
         {
             get
@@ -110,10 +119,19 @@ namespace MaterialDesignExtensions.Controls
         }
     }
 
+    /// <summary>
+    /// The arguments for the <see cref="BaseFileControl.FileSelected" /> event.
+    /// </summary>
     public class FileSelectedEventArgs : RoutedEventArgs
     {
+        /// <summary>
+        /// The selected file as <see cref="FileInfo" />
+        /// </summary>
         public FileInfo FileInfo { get; }
 
+        /// <summary>
+        /// The selected file as full filename string.
+        /// </summary>
         public string File
         {
             get
@@ -122,6 +140,12 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="FileSelectedEventArgs" />.
+        /// </summary>
+        /// <param name="routedEvent"></param>
+        /// <param name="source">The source object</param>
+        /// <param name="fileInfo">The selected file</param>
         public FileSelectedEventArgs(RoutedEvent routedEvent, object source, FileInfo fileInfo)
             : base(routedEvent, source)
         {

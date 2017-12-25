@@ -12,6 +12,9 @@ using MaterialDesignExtensions.Controllers;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// A control for selecting a file to save data into.
+    /// </summary>
     public class SaveFileControl : BaseFileControl
     {
         public static readonly DependencyProperty FilenameProperty = DependencyProperty.Register(
@@ -20,6 +23,9 @@ namespace MaterialDesignExtensions.Controls
                 typeof(SaveFileControl),
                 new PropertyMetadata(null, FilenameChangedHandler));
 
+        /// <summary>
+        /// The name of the file itself without the full path.
+        /// </summary>
         public string Filename
         {
             get
@@ -38,6 +44,9 @@ namespace MaterialDesignExtensions.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SaveFileControl), new FrameworkPropertyMetadata(typeof(SaveFileControl)));
         }
 
+        /// <summary>
+        /// Creates a new <see cref="SaveFileControl" />.
+        /// </summary>
         public SaveFileControl() : base() { }
 
         protected override void CurrentFileChangedHandler(string newCurrentFile)

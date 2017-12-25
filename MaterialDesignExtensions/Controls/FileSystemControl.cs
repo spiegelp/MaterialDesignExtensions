@@ -17,6 +17,9 @@ using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// The base control with common logic for <see cref="OpenDirectoryControl" />, <see cref="OpenFileControl" /> and <see cref="SaveFileControl" />.
+    /// </summary>
     public abstract class FileSystemControl : Control
     {
         protected const string DrawerHostName = "drawerHost";
@@ -32,6 +35,9 @@ namespace MaterialDesignExtensions.Controls
         public static readonly RoutedEvent CancelEvent = EventManager.RegisterRoutedEvent(
             nameof(Cancel), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FileSystemControl));
 
+        /// <summary>
+        /// An event raised by canceling the operation.
+        /// </summary>
         public event RoutedEventHandler Cancel
         {
             add
@@ -51,6 +57,9 @@ namespace MaterialDesignExtensions.Controls
                 typeof(FileSystemControl),
                 new PropertyMetadata(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), CurrentDirectoryChangedHandler));
 
+        /// <summary>
+        /// The current directory of the control.
+        /// </summary>
         public string CurrentDirectory
         {
             get
@@ -70,6 +79,9 @@ namespace MaterialDesignExtensions.Controls
                 typeof(FileSystemControl),
                 new PropertyMetadata(null));
 
+        /// <summary>
+        /// The currently selected directory or file to display additional information about it.
+        /// </summary>
         public FileSystemInfo FileSystemInfoToShow
         {
             get
@@ -83,6 +95,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The underlying controller for file system logic. This property is intended for internal use
+        /// </summary>
         public FileSystemController Controller
         {
             get
@@ -97,6 +112,9 @@ namespace MaterialDesignExtensions.Controls
                 typeof(FileSystemControl),
                 new PropertyMetadata(false, ShowHiddenFilesAndDirectoriesChangedHandler));
 
+        /// <summary>
+        /// Shows or hides hidden directories and files.
+        /// </summary>
         public bool ShowHiddenFilesAndDirectories
         {
             get
@@ -116,6 +134,9 @@ namespace MaterialDesignExtensions.Controls
                 typeof(FileSystemControl),
                 new PropertyMetadata(false, ShowSystemFilesAndDirectoriesChangedHandler));
 
+        /// <summary>
+        /// Shows or hides protected directories and files of the system.
+        /// </summary>
         public bool ShowSystemFilesAndDirectories
         {
             get
@@ -135,6 +156,9 @@ namespace MaterialDesignExtensions.Controls
                 typeof(FileSystemControl),
                 new PropertyMetadata(new SnackbarMessageQueue(TimeSpan.FromSeconds(5))));
 
+        /// <summary>
+        /// The message queue for the Snackbar. This property is intended for internal use.
+        /// </summary>
         public ISnackbarMessageQueue SnackbarMessageQueue
         {
             get
@@ -315,8 +339,15 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Gets the entries of the current directory. Depending of the implementing sub class, it will contain either only directories or direcoties and files.
+        /// </summary>
+        /// <returns></returns>
         protected abstract IEnumerable GetFileSystemEntryItems();
 
+        /// <summary>
+        /// Shows the list of the current directory or hides it if it is empty. A message will be show instead of an empty list.
+        /// </summary>
         protected void UpdateListVisibility()
         {
             if (m_fileSystemEntryItemsListBox != null
