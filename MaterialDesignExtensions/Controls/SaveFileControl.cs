@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 using MaterialDesignExtensions.Controllers;
 
@@ -48,6 +49,14 @@ namespace MaterialDesignExtensions.Controls
         /// Creates a new <see cref="SaveFileControl" />.
         /// </summary>
         public SaveFileControl() : base() { }
+
+        protected override void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            if (m_controller.CurrentFile != null)
+            {
+                base.SelectFileCommandHandler(sender, args);
+            }
+        }
 
         protected override void CurrentFileChangedHandler(string newCurrentFile)
         {

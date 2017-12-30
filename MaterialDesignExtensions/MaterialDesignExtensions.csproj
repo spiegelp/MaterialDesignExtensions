@@ -57,6 +57,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\FileSystemDialogTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,11 +95,16 @@
     <Compile Include="Controllers\FileSystemController.cs" />
     <Compile Include="Controllers\StepperController.cs" />
     <Compile Include="Controls\BaseFileControl.cs" />
+    <Compile Include="Controls\BaseFileDialog.cs" />
     <Compile Include="Controls\FileSystemControl.cs" />
+    <Compile Include="Controls\FileSystemDialog.cs" />
     <Compile Include="Controls\OpenDirectoryControl.cs" />
+    <Compile Include="Controls\OpenDirectoryDialog.cs" />
     <Compile Include="Controls\OpenFileControl.cs" />
+    <Compile Include="Controls\OpenFileDialog.cs" />
     <Compile Include="Controls\OversizedNumberSpinner.cs" />
     <Compile Include="Controls\SaveFileControl.cs" />
+    <Compile Include="Controls\SaveFileDialog.cs" />
     <Compile Include="Controls\StepButtonBar.cs" />
     <Compile Include="Controls\Stepper.cs" />
     <Compile Include="Converters\AsyncImageTask.cs" />

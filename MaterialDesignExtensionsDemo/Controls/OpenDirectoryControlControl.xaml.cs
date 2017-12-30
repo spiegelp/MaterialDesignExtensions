@@ -38,7 +38,7 @@ namespace MaterialDesignExtensionsDemo.Controls
         {
             if (DataContext is OpenDirectoryControlViewModel viewModel)
             {
-                viewModel.SelectedAction = "Cancel selected directory";
+                viewModel.SelectedAction = "Cancel open directory";
             }
         }
     }

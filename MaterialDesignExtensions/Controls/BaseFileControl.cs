@@ -68,7 +68,7 @@ namespace MaterialDesignExtensions.Controls
             CommandBindings.Add(new CommandBinding(SelectFileCommand, SelectFileCommandHandler));
         }
 
-        private void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        protected virtual void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
             FileSelectedEventArgs eventArgs = new FileSelectedEventArgs(FileSelectedEvent, this, m_controller.CurrentFile);
             RaiseEvent(eventArgs);
@@ -127,7 +127,7 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// The selected file as <see cref="FileInfo" />
         /// </summary>
-        public FileInfo FileInfo { get; }
+        public FileInfo FileInfo { get; private set; }
 
         /// <summary>
         /// The selected file as full filename string.

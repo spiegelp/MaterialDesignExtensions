@@ -38,7 +38,7 @@ namespace MaterialDesignExtensionsDemo.Controls
         {
             if (DataContext is OpenFileControlViewModel viewModel)
             {
-                viewModel.SelectedAction = "Cancel selected file";
+                viewModel.SelectedAction = "Cancel open file";
             }
         }
     }

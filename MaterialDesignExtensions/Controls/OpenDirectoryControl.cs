@@ -93,7 +93,7 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// The selected directory as <see cref="DirectoryInfo" />
         /// </summary>
-        public DirectoryInfo DirectoryInfo { get; }
+        public DirectoryInfo DirectoryInfo { get; private set; }
 
         /// <summary>
         /// The selected directory as full filename string.

@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="MaterialDesignExtensionsDemo.Controls.FileSystemDialogControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="100*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="8,16">
+            <Button Content="OPEN DIRECTORY DIALOG" Margin="8,0" Click="OpenDirectoryDialogButtonClickHandler" />
+            <Button Content="OPEN FILE DIALOG" Margin="8,0" Click="OpenFileDialogButtonClickHandler" />
+            <Button Content="SAVE FILE DIALOG" Margin="8,0" Click="SaveFileDialogButtonClickHandler" />
+        </StackPanel>
+        <TextBlock Grid.Row="1" Text="{Binding Path=SelectedAction, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16" />
+    </Grid>
+</UserControl>

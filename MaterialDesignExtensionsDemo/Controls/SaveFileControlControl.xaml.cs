@@ -38,7 +38,7 @@ namespace MaterialDesignExtensionsDemo.Controls
         {
             if (DataContext is SaveFileControlViewModel viewModel)
             {
-                viewModel.SelectedAction = "Cancel selected file";
+                viewModel.SelectedAction = "Cancel save file";
             }
         }
     }

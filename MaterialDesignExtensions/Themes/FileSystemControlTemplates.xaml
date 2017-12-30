@@ -470,7 +470,7 @@
                                        FontSize="14" FontWeight="Medium"
                                        Margin="16" HorizontalAlignment="Center" VerticalAlignment="Top" />
                             <TextBox Grid.Row="3" HorizontalAlignment="Stretch" Margin="16"
-                                     Text="{Binding Path=Filename, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                     Text="{Binding Path=Filename, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <Border Grid.Row="4" MinHeight="52" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource MaterialDesignDivider}" SnapsToDevicePixels="True">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                     <Button Style="{DynamicResource MaterialDesignFlatButton}"
