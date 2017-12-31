@@ -38,7 +38,7 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// Shows a new <see cref="OpenFileDialog" />.
         /// </summary>
-        /// <param name="dialogHost">The name of the <see cref="DialogHost" /></param>
+        /// <param name="dialogHostName">The name of the <see cref="DialogHost" /></param>
         /// <param name="width">The width of the dialog (optional)</param>
         /// <param name="height">The heigth of the dialog (optional)</param>
         /// <param name="currentDirectory">The current directory to show (optional)</param>
