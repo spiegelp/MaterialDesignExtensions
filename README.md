@@ -14,12 +14,12 @@ Material Design Extensions features the following controls:
 
 | Control | Details | Status |
 | --- | --- | --- |
-| Stepper | Custom Stepper control ([specification](https://material.io/guidelines/components/steppers.html)) | Done |
-| Oversized number spinner | Custom OversizedNumberSpinner control | Done |
-| Grid list | Templates for ListBox to render as a grid list ([specification](https://material.io/guidelines/components/grid-lists.html)) | Done |
-| Open directory | Custom OpenDirectoryControl control | Done |
-| Open file | Custom OpenFileControl control | Done |
-| Save file | Custom SaveFileControl control | Done |
+| Stepper | Custom `Stepper` control ([specification](https://material.io/guidelines/components/steppers.html)) | Done |
+| Oversized number spinner | Custom `OversizedNumberSpinner` control | Done |
+| Grid list | Templates for `ListBox` to render as a grid list ([specification](https://material.io/guidelines/components/grid-lists.html)) | Done |
+| Open directory | Custom `OpenDirectoryControl` and `OpenDirectoryDialog` control | Done |
+| Open file | Custom `OpenFileControl` and `OpenFileDialog` control | Done |
+| Save file | Custom `SaveFileControl` and `SaveFileDialog` control | Done |
 
 # License
 Material Design Extensions is licensed under the [MIT](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/LICENSE) license.
