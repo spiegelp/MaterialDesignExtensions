@@ -10,6 +10,9 @@ using MaterialDesignThemes.Wpf;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// A dialog for selecting a directory.
+    /// </summary>
     public class OpenDirectoryDialog : FileSystemDialog
     {
         private static readonly string OpenDirectoryControlName = "openDirectoryControl";
@@ -62,6 +65,18 @@ namespace MaterialDesignExtensions.Controls
             DialogHost.CloseDialogCommand.Execute(new OpenDirectoryDialogResult(false, (args as DirectorySelectedEventArgs)?.DirectoryInfo), GetDialogHost());
         }
 
+        /// <summary>
+        /// Shows a new <see cref="OpenDirectoryDialog" />.
+        /// </summary>
+        /// <param name="dialogHostName">The name of the <see cref="DialogHost" /></param>
+        /// <param name="width">The width of the dialog (optional)</param>
+        /// <param name="height">The heigth of the dialog (optional)</param>
+        /// <param name="currentDirectory">The current directory to show (optional)</param>
+        /// <param name="showHiddenFilesAndDirectories">Show or hide hidden files in the dialog (optional)</param>
+        /// <param name="showSystemFilesAndDirectories">Show or hide system files in the dialog (optional)</param>
+        /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
+        /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
+        /// <returns></returns>
         public static async Task<OpenDirectoryDialogResult> ShowDialogAsync(string dialogHostName, double? width = null, double? height = null,
             string currentDirectory = null,
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
@@ -72,6 +87,18 @@ namespace MaterialDesignExtensions.Controls
             return await DialogHost.Show(dialog, dialogHostName, openedHandler, closingHandler) as OpenDirectoryDialogResult;
         }
 
+        /// <summary>
+        /// Shows a new <see cref="OpenDirectoryDialog" />.
+        /// </summary>
+        /// <param name="dialogHost">The <see cref="DialogHost" /></param>
+        /// <param name="width">The width of the dialog (optional)</param>
+        /// <param name="height">The heigth of the dialog (optional)</param>
+        /// <param name="currentDirectory">The current directory to show (optional)</param>
+        /// <param name="showHiddenFilesAndDirectories">Show or hide hidden files in the dialog (optional)</param>
+        /// <param name="showSystemFilesAndDirectories">Show or hide system files in the dialog (optional)</param>
+        /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
+        /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
+        /// <returns></returns>
         public static async Task<OpenDirectoryDialogResult> ShowDialogAsync(DialogHost dialogHost, double? width = null, double? height = null,
             string currentDirectory = null,
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
@@ -93,6 +120,9 @@ namespace MaterialDesignExtensions.Controls
         }
     }
 
+    /// <summary>
+    /// The dialog result for <see cref="OpenDirectoryDialog" />.
+    /// </summary>
     public class OpenDirectoryDialogResult : FileSystemDialogResult
     {
         /// <summary>
@@ -111,6 +141,11 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="OpenDirectoryDialogResult" />.
+        /// </summary>
+        /// <param name="canceled">True if the dialog was canceled</param>
+        /// <param name="directoryInfo">The selected directory</param>
         public OpenDirectoryDialogResult(bool canceled, DirectoryInfo directoryInfo)
             : base(canceled)
         {

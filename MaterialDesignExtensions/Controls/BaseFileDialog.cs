@@ -10,6 +10,9 @@ using MaterialDesignThemes.Wpf;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// The base dialog with common logic for <see cref="OpenFileDialog" /> and <see cref="SaveFileDialog" />.
+    /// </summary>
     public abstract class BaseFileDialog : FileSystemDialog
     {
         protected static readonly string FileControlName = "fileControl";
@@ -76,6 +79,9 @@ namespace MaterialDesignExtensions.Controls
         protected abstract void OpenDirectoryControlFileSelectedHandler(object sender, RoutedEventArgs args);
     }
 
+    /// <summary>
+    /// The base class for the dialog result of <see cref="OpenFileDialog" /> and <see cref="SaveFileDialog" />.
+    /// </summary>
     public abstract class FileDialogResult : FileSystemDialogResult
     {
         /// <summary>

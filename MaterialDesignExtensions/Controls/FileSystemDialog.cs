@@ -11,6 +11,9 @@ using MaterialDesignThemes.Wpf;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// The base class with common logic for <see cref="OpenDirectoryDialog" />, <see cref="OpenFileDialog" /> and <see cref="SaveFileDialog" />.
+    /// </summary>
     public abstract class FileSystemDialog : Control
     {
         public static readonly DependencyProperty CurrentDirectoryProperty = DependencyProperty.Register(
@@ -122,8 +125,14 @@ namespace MaterialDesignExtensions.Controls
         }
     }
 
+    /// <summary>
+    /// Base class for the result of a dialog.
+    /// </summary>
     public abstract class FileSystemDialogResult
     {
+        /// <summary>
+        /// true, if the dialog was canceled
+        /// </summary>
         public bool Canceled { get; protected set; }
 
         public FileSystemDialogResult(bool canceled)

@@ -10,6 +10,9 @@ using MaterialDesignThemes.Wpf;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// A dialog for selecting a file to save data into.
+    /// </summary>
     public class SaveFileDialog : BaseFileDialog
     {
         public static readonly DependencyProperty FilenameProperty = DependencyProperty.Register(
@@ -40,7 +43,7 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// Creates a new <see cref="SaveFileDialog" />
+        /// Creates a new <see cref="SaveFileDialog" />.
         /// </summary>
         public SaveFileDialog() : base() { }
 
@@ -54,6 +57,19 @@ namespace MaterialDesignExtensions.Controls
             DialogHost.CloseDialogCommand.Execute(new SaveFileDialogResult(false, (args as FileSelectedEventArgs)?.FileInfo), GetDialogHost());
         }
 
+        /// <summary>
+        /// Shows a new <see cref="SaveFileDialog" />.
+        /// </summary>
+        /// <param name="dialogHost">The name of the <see cref="DialogHost" /></param>
+        /// <param name="width">The width of the dialog (optional)</param>
+        /// <param name="height">The heigth of the dialog (optional)</param>
+        /// <param name="currentDirectory">The current directory to show (optional)</param>
+        /// <param name="filename">The name of the file without the full path (optional)</param>
+        /// <param name="showHiddenFilesAndDirectories">Show or hide hidden files in the dialog (optional)</param>
+        /// <param name="showSystemFilesAndDirectories">Show or hide system files in the dialog (optional)</param>
+        /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
+        /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
+        /// <returns></returns>
         public static async Task<SaveFileDialogResult> ShowDialogAsync(string dialogHostName, double? width = null, double? height = null,
             string currentDirectory = null, string filename = null,
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
@@ -64,6 +80,19 @@ namespace MaterialDesignExtensions.Controls
             return await DialogHost.Show(dialog, dialogHostName, openedHandler, closingHandler) as SaveFileDialogResult;
         }
 
+        /// <summary>
+        /// Shows a new <see cref="SaveFileDialog" />.
+        /// </summary>
+        /// <param name="dialogHost">The <see cref="DialogHost" /></param>
+        /// <param name="width">The width of the dialog (optional)</param>
+        /// <param name="height">The heigth of the dialog (optional)</param>
+        /// <param name="currentDirectory">The current directory to show (optional)</param>
+        /// <param name="filename">The name of the file without the full path (optional)</param>
+        /// <param name="showHiddenFilesAndDirectories">Show or hide hidden files in the dialog (optional)</param>
+        /// <param name="showSystemFilesAndDirectories">Show or hide system files in the dialog (optional)</param>
+        /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
+        /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
+        /// <returns></returns>
         public static async Task<SaveFileDialogResult> ShowDialogAsync(DialogHost dialogHost, double? width = null, double? height = null,
             string currentDirectory = null, string filename = null,
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
@@ -86,8 +115,16 @@ namespace MaterialDesignExtensions.Controls
         }
     }
 
+    /// <summary>
+    /// The dialog result for <see cref="SaveFileDialog" />.
+    /// </summary>
     public class SaveFileDialogResult : FileDialogResult
     {
+        /// <summary>
+        /// Creates a new <see cref="SaveFileDialogResult" />.
+        /// </summary>
+        /// <param name="canceled">True if the dialog was canceled</param>
+        /// <param name="fileInfo">The selected file</param>
         public SaveFileDialogResult(bool canceled, FileInfo fileInfo) : base(canceled, fileInfo) { }
     }
 }

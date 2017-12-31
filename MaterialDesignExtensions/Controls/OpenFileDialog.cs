@@ -10,6 +10,9 @@ using MaterialDesignThemes.Wpf;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// A dialog for selecting a file to open.
+    /// </summary>
     public class OpenFileDialog : BaseFileDialog
     {
         static OpenFileDialog()
@@ -18,7 +21,7 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// Creates a new <see cref="OpenFileDialog" />
+        /// Creates a new <see cref="OpenFileDialog" />.
         /// </summary>
         public OpenFileDialog() : base() { }
 
@@ -32,6 +35,18 @@ namespace MaterialDesignExtensions.Controls
             DialogHost.CloseDialogCommand.Execute(new OpenFileDialogResult(false, (args as FileSelectedEventArgs)?.FileInfo), GetDialogHost());
         }
 
+        /// <summary>
+        /// Shows a new <see cref="OpenFileDialog" />.
+        /// </summary>
+        /// <param name="dialogHost">The name of the <see cref="DialogHost" /></param>
+        /// <param name="width">The width of the dialog (optional)</param>
+        /// <param name="height">The heigth of the dialog (optional)</param>
+        /// <param name="currentDirectory">The current directory to show (optional)</param>
+        /// <param name="showHiddenFilesAndDirectories">Show or hide hidden files in the dialog (optional)</param>
+        /// <param name="showSystemFilesAndDirectories">Show or hide system files in the dialog (optional)</param>
+        /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
+        /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
+        /// <returns></returns>
         public static async Task<OpenFileDialogResult> ShowDialogAsync(string dialogHostName, double? width = null, double? height = null,
             string currentDirectory = null,
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
@@ -42,6 +57,18 @@ namespace MaterialDesignExtensions.Controls
             return await DialogHost.Show(dialog, dialogHostName, openedHandler, closingHandler) as OpenFileDialogResult;
         }
 
+        /// <summary>
+        /// Shows a new <see cref="OpenFileDialog" />.
+        /// </summary>
+        /// <param name="dialogHost">The <see cref="DialogHost" /></param>
+        /// <param name="width">The width of the dialog (optional)</param>
+        /// <param name="height">The heigth of the dialog (optional)</param>
+        /// <param name="currentDirectory">The current directory to show (optional)</param>
+        /// <param name="showHiddenFilesAndDirectories">Show or hide hidden files in the dialog (optional)</param>
+        /// <param name="showSystemFilesAndDirectories">Show or hide system files in the dialog (optional)</param>
+        /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
+        /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
+        /// <returns></returns>
         public static async Task<OpenFileDialogResult> ShowDialogAsync(DialogHost dialogHost, double? width = null, double? height = null,
             string currentDirectory = null,
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
@@ -63,8 +90,16 @@ namespace MaterialDesignExtensions.Controls
         }
     }
 
+    /// <summary>
+    /// The dialog result for <see cref="OpenFileDialog" />.
+    /// </summary>
     public class OpenFileDialogResult : FileDialogResult
     {
+        /// <summary>
+        /// Creates a new <see cref="OpenFileDialogResult" />.
+        /// </summary>
+        /// <param name="canceled">True if the dialog was canceled</param>
+        /// <param name="fileInfo">The selected file</param>
         public OpenFileDialogResult(bool canceled, FileInfo fileInfo) : base(canceled, fileInfo) { }
     }
 }
