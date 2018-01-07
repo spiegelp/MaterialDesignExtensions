@@ -11,3 +11,6 @@
 * `OpenDirectoryControl` and `OpenDirectoryDialog` to select a directory
 * `OpenFileControl` and `OpenFileDialog` to select a file for opening
 * `SaveFileControl` and `SaveFileDialog` to select a file for saving data into
+### v1.1.1
+#### Fixes
+* Pack localized resources into NuGet package
