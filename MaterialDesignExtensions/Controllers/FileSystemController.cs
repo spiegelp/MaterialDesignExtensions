@@ -12,8 +12,14 @@ using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controllers
 {
+    /// <summary>
+    /// Controller behind the <see cref="Controls.OpenDirectoryControl" />, <see cref="Controls.OpenFileControl" /> and <see cref="Controls.SaveFileControl" />.
+    /// </summary>
     public class FileSystemController : INotifyPropertyChanged
     {
+        /// <summary>
+        /// The property changed event.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         private DirectoryInfo m_currentDirectory;
@@ -24,6 +30,9 @@ namespace MaterialDesignExtensions.Controllers
         private bool m_showHiddenFilesAndDirectories;
         private bool m_showSystemFilesAndDirectories;
 
+        /// <summary>
+        /// The current directory shown in the control.
+        /// </summary>
         public DirectoryInfo CurrentDirectory
         {
             get
@@ -42,6 +51,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// The selected file of the control.
+        /// </summary>
         public FileInfo CurrentFile
         {
             get
@@ -60,6 +72,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// The list of sub directories to <see cref="CurrentDirectory" />.
+        /// </summary>
         public List<DirectoryInfo> CurrentDirectoryPathParts
         {
             get
@@ -78,6 +93,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// The directories inside <see cref="CurrentDirectory" />.
+        /// </summary>
         public List<DirectoryInfo> Directories
         {
             get
@@ -96,6 +114,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// The directories and files inside <see cref="CurrentDirectory" />.
+        /// </summary>
         public List<FileSystemInfo> DirectoriesAndFiles
         {
             get
@@ -116,6 +137,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// The system's drives.
+        /// </summary>
         public List<SpecialDrive> Drives
         {
             get
@@ -166,6 +190,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// The files inside <see cref="CurrentDirectory" />.
+        /// </summary>
         public List<FileInfo> Files
         {
             get
@@ -184,6 +211,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// The special directories (e.g. music directory) of the user.
+        /// </summary>
         public List<SpecialDirectory> SpecialDirectories
         {
             get
@@ -206,6 +236,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// Specifies whether hidden files and directories will be shown or not.
+        /// </summary>
         public bool ShowHiddenFilesAndDirectories
         {
             get
@@ -224,6 +257,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// Specifies whether protected system files and directories will be shown or not.
+        /// </summary>
         public bool ShowSystemFilesAndDirectories
         {
             get
@@ -242,6 +278,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="FileSystemController" />.
+        /// </summary>
         public FileSystemController()
         {
             m_currentDirectory = null;
@@ -253,11 +292,19 @@ namespace MaterialDesignExtensions.Controllers
             m_showSystemFilesAndDirectories = false;
         }
 
+        /// <summary>
+        /// Selects a new current directory.
+        /// </summary>
+        /// <param name="directory"></param>
         public void SelectDirectory(string directory)
         {
             SelectDirectory(new DirectoryInfo(directory));
         }
 
+        /// <summary>
+        /// Selects a new current directory.
+        /// </summary>
+        /// <param name="directory"></param>
         public void SelectDirectory(DirectoryInfo directory)
         {
             bool ShowFileSystemInfo(FileSystemInfo fileSystemInfo) => (ShowHiddenFilesAndDirectories || !fileSystemInfo.Attributes.HasFlag(FileAttributes.Hidden))
@@ -305,6 +352,10 @@ namespace MaterialDesignExtensions.Controllers
             UpdateCurrentDirectoryPathParts();
         }
 
+        /// <summary>
+        /// Selects a file.
+        /// </summary>
+        /// <param name="file"></param>
         public void SelectFile(String file)
         {
             if (!string.IsNullOrWhiteSpace(file))
@@ -317,6 +368,10 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// Selects a file.
+        /// </summary>
+        /// <param name="file"></param>
         public void SelectFile(FileInfo file)
         {
             CurrentFile = file;
@@ -343,6 +398,10 @@ namespace MaterialDesignExtensions.Controllers
             CurrentDirectoryPathParts = currentDirectoryPathParts;
         }
 
+        /// <summary>
+        /// Setter intended for internal use.
+        /// </summary>
+        /// <param name="showHiddenFilesAndDirectories"></param>
         public void SetShowHiddenFilesAndDirectories(bool showHiddenFilesAndDirectories)
         {
             ShowHiddenFilesAndDirectories = showHiddenFilesAndDirectories;
@@ -350,6 +409,10 @@ namespace MaterialDesignExtensions.Controllers
             SelectDirectory(m_currentDirectory);
         }
 
+        /// <summary>
+        /// Setter intended for internal use.
+        /// </summary>
+        /// <param name="showSystemFilesAndDirectories"></param>
         public void SetShowSystemFilesAndDirectories(bool showSystemFilesAndDirectories)
         {
             ShowSystemFilesAndDirectories = showSystemFilesAndDirectories;

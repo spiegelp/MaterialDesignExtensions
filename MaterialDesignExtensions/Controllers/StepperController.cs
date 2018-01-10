@@ -15,6 +15,9 @@ namespace MaterialDesignExtensions.Controllers
     /// </summary>
     public class StepperController : INotifyPropertyChanged
     {
+        /// <summary>
+        /// The property changed event.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         private StepperStepViewModel[] _stepViewModels;
@@ -59,7 +62,7 @@ namespace MaterialDesignExtensions.Controllers
         }
 
         /// <summary>
-        /// Internal getter for the binding in the XAML of the <see cref="Stepper"/>.
+        /// Internal getter for the binding in the XAML of the <see cref="Controls.Stepper"/>.
         /// It is considered for internal use only.
         /// </summary>
         public ObservableCollection<StepperStepViewModel> InternalSteps
@@ -111,7 +114,7 @@ namespace MaterialDesignExtensions.Controllers
         }
 
         /// <summary>
-        /// Gets all the steps of the <see cref="Stepper"/>.
+        /// Gets all the steps of the <see cref="Controls.Stepper"/>.
         /// </summary>
         public IStep[] Steps
         {
@@ -126,6 +129,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="StepperController" />.
+        /// </summary>
         public StepperController()
         {
             _stepViewModels = null;
@@ -133,7 +139,7 @@ namespace MaterialDesignExtensions.Controllers
         }
 
         /// <summary>
-        /// Initialises the steps which will be shown inside the <see cref="Stepper"/>.
+        /// Initialises the steps which will be shown inside the <see cref="Controls.Stepper"/>.
         /// </summary>
         /// <param name="steps"></param>
         public void InitSteps(IEnumerable<IStep> steps)
@@ -142,7 +148,7 @@ namespace MaterialDesignExtensions.Controllers
         }
 
         /// <summary>
-        /// Initialises the steps which will be shown inside the <see cref="Stepper"/>.
+        /// Initialises the steps which will be shown inside the <see cref="Controls.Stepper"/>.
         /// Throws an <see cref="ArgumentNullException"/> if any of the steps is null.
         /// </summary>
         /// <param name="steps"></param>
@@ -262,7 +268,7 @@ namespace MaterialDesignExtensions.Controllers
 
         /// <summary>
         /// Goes to the specified <see cref="IStep"/>.
-        /// Throws an <see cref="ArgumentNullException"/> if step is null or step is not inside the <see cref="Stepper"/>.
+        /// Throws an <see cref="ArgumentNullException"/> if step is null or step is not inside the <see cref="Controls.Stepper"/>.
         /// </summary>
         /// <param name="step"></param>
         public void GotoStep(IStep step)

@@ -8,11 +8,21 @@ using System.Windows.Media.Imaging;
 
 namespace MaterialDesignExtensions.Controllers
 {
+    /// <summary>
+    /// Helper class to load images.
+    /// </summary>
     public abstract class BitmapImageHelper
     {
         private BitmapImageHelper() { }
 
-        public static BitmapImage LoadImage(string imageFilename, int targetWidth=40, int targetHeight = 40)
+        /// <summary>
+        /// Loads the image from the file with the specified width and height keeping its ratio.
+        /// </summary>
+        /// <param name="imageFilename"></param>
+        /// <param name="targetWidth"></param>
+        /// <param name="targetHeight"></param>
+        /// <returns></returns>
+        public static BitmapImage LoadImage(string imageFilename, int targetWidth = 40, int targetHeight = 40)
         {
             try
             {

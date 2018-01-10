@@ -49,7 +49,7 @@
             <ComboBox Height="25" HorizontalAlignment="Left" ItemsSource="{Binding Path=Layouts, Mode=OneTime}" SelectedItem="{Binding Path=Layout, Mode=TwoWay}" VerticalAlignment="Center" Width="120" />
             <TextBlock Margin="48,0,8,0" Text="Is linear" VerticalAlignment="Center" />
             <CheckBox IsChecked="{Binding Path=IsLinear, Mode=TwoWay}" VerticalAlignment="Center" />
-            <!-- bind to readonly Stepper.ActiveStep property -->
+            <!-- bind to read-only Stepper.ActiveStep property -->
             <TextBlock Text="Active step: " Margin="48,0,0,0" VerticalAlignment="Center" />
             <TextBlock Text="{Binding Path=ActiveStep.Header.FirstLevelTitle, ElementName=stepper}" VerticalAlignment="Center" />
         </StackPanel>
