@@ -29,6 +29,22 @@ namespace MaterialDesignExtensions.Controls
         public static RoutedCommand ContinueCommand = new RoutedCommand();
         public static RoutedCommand StepSelectedCommand = new RoutedCommand();
 
+        public static readonly RoutedEvent ActiveStepChangedEvent = EventManager.RegisterRoutedEvent(
+            nameof(ActiveStepChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Stepper));
+
+        public event RoutedEventHandler ActiveStepChanged
+        {
+            add
+            {
+                AddHandler(ActiveStepChangedEvent, value);
+            }
+
+            remove
+            {
+                RemoveHandler(ActiveStepChangedEvent, value);
+            }
+        }
+
         public static readonly RoutedEvent BackNavigationEvent = EventManager.RegisterRoutedEvent(
             nameof(BackNavigation), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Stepper));
 
@@ -123,6 +139,40 @@ namespace MaterialDesignExtensions.Controls
                 RemoveHandler(StepValidationEvent, value);
             }
         }
+        
+        public static readonly DependencyPropertyKey ActiveStepPropertyKey = DependencyProperty.RegisterReadOnly(
+                nameof(ActiveStep), typeof(IStep), typeof(Stepper), new PropertyMetadata(null, null));
+
+        public static readonly DependencyProperty ActiveStepProperty = ActiveStepPropertyKey.DependencyProperty;
+
+        public IStep ActiveStep
+        {
+            get
+            {
+                return (IStep)GetValue(ActiveStepProperty);
+            }
+
+            private set
+            {
+                SetValue(ActiveStepPropertyKey, value);
+            }
+        }
+
+        public static readonly DependencyProperty ActiveStepChangedCommandProperty = DependencyProperty.Register(
+            nameof(ActiveStepChangedCommand), typeof(ICommand), typeof(Stepper), new PropertyMetadata(null, null));
+
+        public ICommand ActiveStepChangedCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(ActiveStepChangedCommandProperty);
+            }
+
+            set
+            {
+                SetValue(ActiveStepChangedCommandProperty, value);
+            }
+        }
 
         public static readonly DependencyProperty BlockNavigationOnValidationErrorsProperty = DependencyProperty.Register(
                 nameof(BlockNavigationOnValidationErrors), typeof(bool), typeof(Stepper), new PropertyMetadata(false));
@@ -202,7 +252,7 @@ namespace MaterialDesignExtensions.Controls
         }
 
         public static readonly DependencyProperty StepValidationCommandProperty = DependencyProperty.Register(
-            nameof(StepValidationCommand), typeof(ICommand), typeof(Stepper), new PropertyMetadata(null));
+            nameof(StepValidationCommand), typeof(ICommand), typeof(Stepper), new PropertyMetadata(null, null));
 
         /// <summary>
         /// A command called by starting the validation of an <see cref="IStep"/>.
@@ -425,12 +475,30 @@ namespace MaterialDesignExtensions.Controls
 
         private void PropertyChangedHandler(object sender, PropertyChangedEventArgs args)
         {
-            if (sender == m_controller && args.PropertyName == nameof(m_controller.ActiveStepContent)
-                    && m_controller.ActiveStepContent != null && Layout == StepperLayout.Horizontal)
+            if (sender == m_controller)
             {
-                // there is no event raised if the Content of a ContentControl changes
-                //     therefore trigger the animation in code
-                PlayHorizontalContentAnimation();
+                if (args.PropertyName == nameof(m_controller.ActiveStep))
+                {
+                    // set the property
+                    ActiveStep = m_controller.ActiveStep;
+
+                    // raise the event and call the command
+                    ActiveStepChangedEventArgs eventArgs = new ActiveStepChangedEventArgs(StepValidationEvent, this, ActiveStep);
+                    RaiseEvent(eventArgs);
+
+                    if (ActiveStepChangedCommand != null && ActiveStepChangedCommand.CanExecute(ActiveStep))
+                    {
+                        ActiveStepChangedCommand.Execute(ActiveStep);
+                    }
+                }
+                else if (args.PropertyName == nameof(m_controller.ActiveStepContent)
+                    && m_controller.ActiveStepContent != null
+                    && Layout == StepperLayout.Horizontal)
+                {
+                    // there is no event raised if the Content of a ContentControl changes
+                    //     therefore trigger the animation in code
+                    PlayHorizontalContentAnimation();
+                }
             }
         }
 
@@ -458,6 +526,17 @@ namespace MaterialDesignExtensions.Controls
     {
         Horizontal,
         Vertical
+    }
+
+    public class ActiveStepChangedEventArgs : RoutedEventArgs
+    {
+        public IStep Step { get; }
+
+        public ActiveStepChangedEventArgs(RoutedEvent routedEvent, object source, IStep step)
+            : base(routedEvent, source)
+        {
+            Step = step;
+        }
     }
 
     /// <summary>
