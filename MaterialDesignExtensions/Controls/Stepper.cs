@@ -24,9 +24,24 @@ namespace MaterialDesignExtensions.Controls
     [ContentProperty(nameof(Steps))]
     public class Stepper : Control
     {
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
         public static RoutedCommand BackCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
         public static RoutedCommand CancelCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
         public static RoutedCommand ContinueCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
         public static RoutedCommand StepSelectedCommand = new RoutedCommand();
 
         /// <summary>
@@ -211,6 +226,28 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// A command called by navigating to the previous <see cref="IStep" /> in a linear order.
+        /// </summary>
+        public static readonly DependencyProperty BackNavigationCommandProperty = DependencyProperty.Register(
+            nameof(BackNavigationCommand), typeof(ICommand), typeof(Stepper), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// A command called by navigating to the previous <see cref="IStep" /> in a linear order.
+        /// </summary>
+        public ICommand BackNavigationCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(BackNavigationCommandProperty);
+            }
+
+            set
+            {
+                SetValue(BackNavigationCommandProperty, value);
+            }
+        }
+
+        /// <summary>
         /// Specifies whether validation errors will block the navigation or not.
         /// </summary>
         public static readonly DependencyProperty BlockNavigationOnValidationErrorsProperty = DependencyProperty.Register(
@@ -229,6 +266,50 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(BlockNavigationOnValidationErrorsProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// A command called by cancelling the process.
+        /// </summary>
+        public static readonly DependencyProperty CancelNavigationCommandProperty = DependencyProperty.Register(
+            nameof(CancelNavigationCommand), typeof(ICommand), typeof(Stepper), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// A command called by cancelling the process.
+        /// </summary>
+        public ICommand CancelNavigationCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(CancelNavigationCommandProperty);
+            }
+
+            set
+            {
+                SetValue(CancelNavigationCommandProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// A command called by navigating to the next <see cref="IStep" /> in a linear order.
+        /// </summary>
+        public static readonly DependencyProperty ContinueNavigationCommandProperty = DependencyProperty.Register(
+            nameof(ContinueNavigationCommand), typeof(ICommand), typeof(Stepper), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// A command called by navigating to the next <see cref="IStep" /> in a linear order.
+        /// </summary>
+        public ICommand ContinueNavigationCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(ContinueNavigationCommandProperty);
+            }
+
+            set
+            {
+                SetValue(ContinueNavigationCommandProperty, value);
             }
         }
 
@@ -297,6 +378,28 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(StepsProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// A command called by navigating to an arbitrary <see cref="IStep" /> in a non-linear <see cref="Stepper" />.
+        /// </summary>
+        public static readonly DependencyProperty StepNavigationCommandProperty = DependencyProperty.Register(
+            nameof(StepNavigationCommand), typeof(ICommand), typeof(Stepper), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// A command called by navigating to an arbitrary <see cref="IStep" /> in a non-linear <see cref="Stepper" />.
+        /// </summary>
+        public ICommand StepNavigationCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(StepNavigationCommandProperty);
+            }
+
+            set
+            {
+                SetValue(StepNavigationCommandProperty, value);
             }
         }
 
@@ -467,6 +570,11 @@ namespace MaterialDesignExtensions.Controls
             StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(BackNavigationEvent, this, m_controller.ActiveStep, m_controller.PreviousStep, false);
             RaiseEvent(navigationArgs);
 
+            if (BackNavigationCommand != null && BackNavigationCommand.CanExecute(navigationArgs))
+            {
+                BackNavigationCommand.Execute(navigationArgs);
+            }
+
             if (!navigationArgs.Cancel)
             {
                 m_controller.Back();
@@ -482,6 +590,11 @@ namespace MaterialDesignExtensions.Controls
 
             StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(CancelNavigationEvent, this, m_controller.ActiveStep, null, false);
             RaiseEvent(navigationArgs);
+
+            if (CancelNavigationCommand != null && CancelNavigationCommand.CanExecute(navigationArgs))
+            {
+                CancelNavigationCommand.Execute(navigationArgs);
+            }
         }
 
         private void ContinueHandler(object sender, ExecutedRoutedEventArgs args)
@@ -495,6 +608,11 @@ namespace MaterialDesignExtensions.Controls
 
             StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(ContinueNavigationEvent, this, m_controller.ActiveStep, m_controller.NextStep, false);
             RaiseEvent(navigationArgs);
+
+            if (ContinueNavigationCommand != null && ContinueNavigationCommand.CanExecute(navigationArgs))
+            {
+                ContinueNavigationCommand.Execute(navigationArgs);
+            }
 
             if (!navigationArgs.Cancel)
             {
@@ -520,6 +638,10 @@ namespace MaterialDesignExtensions.Controls
 
                 StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(StepNavigationEvent, this, m_controller.ActiveStep, ((StepperStepViewModel)args.Parameter).Step, false);
                 RaiseEvent(navigationArgs);
+
+                if (StepNavigationCommand != null && StepNavigationCommand.CanExecute(navigationArgs)) {
+                    StepNavigationCommand.Execute(navigationArgs);
+                }
 
                 if (!navigationArgs.Cancel)
                 {
