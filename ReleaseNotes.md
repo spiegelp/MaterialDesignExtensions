@@ -15,5 +15,16 @@
 #### Fixes
 * Pack localized resources into NuGet package
 ### vx.x.x (upcoming release)
+#### Features
+* New `AppBar` control with basic behavior defined in the [Material Design specification](https://material.io/guidelines/layout/structure.html#structure-app-bar)
+* Extensions for the `Stepper` API
+  * Read-only `ActiveStep` property
+  * Event `ActiveStepChangedEvent`
+  * Command properties for navigation callbacks
+    * `ActiveStepChangedCommand`
+	* `BackNavigationCommand`
+	* `CancelNavigationCommand`
+	* `ContinueNavigationCommand`
+	* `StepNavigationCommand`
 #### Fixes
 * Initialize `Stepper.Steps` in the constructor

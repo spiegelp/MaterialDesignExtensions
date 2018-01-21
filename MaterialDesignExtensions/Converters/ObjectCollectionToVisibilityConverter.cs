@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Data;
+
+namespace MaterialDesignExtensions.Converters
+{
+    public class ObjectCollectionToVisibilityConverter : IValueConverter
+    {
+        public Visibility EmptyValue { get; set; }
+
+        public ObjectCollectionToVisibilityConverter()
+        {
+            EmptyValue = Visibility.Collapsed;
+        }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null
+                    && ((value is ICollection && ((ICollection)value).Count > 0)
+                        || (value is Collection<object> && ((Collection<object>)value).Count > 0)))
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return EmptyValue;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Binding.DoNothing;
+        }
+    }
+}

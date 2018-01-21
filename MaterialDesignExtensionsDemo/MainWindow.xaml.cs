@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,7 @@ namespace MaterialDesignExtensionsDemo
         {
             m_navigationItems = new List<NavigationItem>()
             {
+                new NavigationItem() { Label = "App bar", Action = () => new AppBarViewModel() },
                 new NavigationItem() { Label = "Oversized Number Spinner", Action = () => new OversizedNumberSpinnerViewModel() },
                 new NavigationItem() { Label = "Grid list", Action = () => new GridListViewModel() },
                 new NavigationItem() { Label = "Stepper", Action = () => new StepperViewModel() },
@@ -72,6 +74,11 @@ namespace MaterialDesignExtensionsDemo
             {
                 contentControl.Content = null;
             }
+        }
+
+        private void GoToGitHubButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            Process.Start("https://github.com/spiegelp/MaterialDesignExtensions");
         }
     }
 }

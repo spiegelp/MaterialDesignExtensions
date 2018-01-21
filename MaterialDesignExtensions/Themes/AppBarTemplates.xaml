@@ -1,0 +1,172 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:convertersLib="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+                    xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
+                    xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters">
+
+    <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" FalseValue="Collapsed" />
+    <converters:NotNullToVisibilityConverter x:Key="notNullToVisibilityConverter" NullValue="Collapsed" />
+    <converters:ObjectCollectionToVisibilityConverter x:Key="objectCollectionToVisibilityConverter" EmptyValue="Collapsed" />
+
+    <Style x:Key="MaterialDesignAppBar" TargetType="{x:Type controls:AppBar}">
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Type" Value="Default" />
+        <Setter Property="OpaqueMode" Value="Opaque" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:AppBar}">
+                    <Grid TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="100*" />
+                        </Grid.RowDefinitions>
+                        <Grid.Style>
+                            <Style TargetType="{x:Type Grid}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=OpaqueMode, RelativeSource={RelativeSource TemplatedParent}}" Value="Opaque">
+                                        <Setter Property="Background" Value="{Binding Path=Background, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        <Setter Property="Effect" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpfLib:ShadowAssist.ShadowDepth), Converter={x:Static convertersLib:ShadowConverter.Instance}}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=OpaqueMode, RelativeSource={RelativeSource TemplatedParent}}" Value="Transparent">
+                                        <Setter Property="Background" Value="Transparent" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="Default">
+                                            <Setter Property="Height" Value="64" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="Prominent">
+                                            <Setter Property="Height" Value="64" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="Dense">
+                                            <Setter Property="Height" Value="48" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="DenseProminent">
+                                            <Setter Property="Height" Value="48" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- toggle button for the navigation drawer -->
+                                <ToggleButton Grid.Column="0" IsChecked="{Binding Path=IsNavigationDrawerOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                              Margin="18,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                              Style="{DynamicResource MaterialDesignHamburgerToggleButton}"
+                                              Visibility="{TemplateBinding ShowNavigationDrawerButton, Converter={StaticResource boolToVisibilityConverter}}">
+                                </ToggleButton>
+
+                                <!-- app icon -->
+                                <ContentControl Grid.Column="0" Height="28" Margin="18,0,0,0" Content="{Binding Path=AppIcon, RelativeSource={RelativeSource TemplatedParent}}"
+                                                VerticalAlignment="Center" Width="28" Visibility="{TemplateBinding AppIcon, Converter={StaticResource notNullToVisibilityConverter}}">
+                                    <ContentControl.Resources>
+                                        <DataTemplate DataType="{x:Type BitmapImage}">
+                                            <Image Source="{Binding}" Height="28" Width="28" VerticalAlignment="Center" />
+                                        </DataTemplate>
+                                    </ContentControl.Resources>
+                                </ContentControl>
+
+                                <!-- title -->
+                                <ContentControl Grid.Column="1" Content="{TemplateBinding Title}" Margin="0,0,16,0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                                TextBlock.FontSize="20">
+                                    <ContentControl.Resources>
+                                        <DataTemplate DataType="{x:Type system:String}">
+                                            <TextBlock FontSize="20" SnapsToDevicePixels="True" Text="{Binding}" />
+                                        </DataTemplate>
+                                    </ContentControl.Resources>
+                                    <ContentControl.Style>
+                                        <Style TargetType="{x:Type ContentControl}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=ShowTitleInProminentArea, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=ShowTitleInProminentArea, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+
+                                <!-- toolbar buttons -->
+                                <ItemsControl Grid.Column="3" x:Name="PartHostActionButtons" HorizontalAlignment="Right" Margin="0,0,12,0" VerticalAlignment="Stretch"
+                                              ItemsSource="{TemplateBinding Children}"
+                                              Visibility="{TemplateBinding Children, Converter={StaticResource objectCollectionToVisibilityConverter}}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" IsItemsHost="True" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="80,0,16,0" Text="{TemplateBinding Title}" VerticalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=ShowTitleInProminentArea, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=ShowTitleInProminentArea, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=ShowShadow, RelativeSource={RelativeSource Self}}" Value="True">
+                <Setter Property="wpfLib:ShadowAssist.ShadowDepth" Value="Depth2" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="Default">
+                <Setter Property="Height" Value="{x:Static controls:AppBar.DefaultHeight}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="Prominent">
+                <Setter Property="Height" Value="{x:Static controls:AppBar.ProminentHeight}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="Dense">
+                <Setter Property="Height" Value="{x:Static controls:AppBar.DenseHeight}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="DenseProminent">
+                <Setter Property="Height" Value="{x:Static controls:AppBar.DenseProminentHeight}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="MaterialDesignAppBarDense" TargetType="{x:Type controls:AppBar}" BasedOn="{StaticResource MaterialDesignAppBar}">
+        <Setter Property="Type" Value="Dense" />
+    </Style>
+
+    <Style x:Key="MaterialDesignAppBarProminent" TargetType="{x:Type controls:AppBar}" BasedOn="{StaticResource MaterialDesignAppBar}">
+        <Setter Property="Type" Value="Prominent" />
+    </Style>
+    
+    <Style x:Key="MaterialDesignAppBarDenseProminent" TargetType="{x:Type controls:AppBar}" BasedOn="{StaticResource MaterialDesignAppBar}">
+        <Setter Property="Type" Value="DenseProminent" />
+    </Style>
+
+    <Style TargetType="{x:Type controls:AppBar}" BasedOn="{StaticResource MaterialDesignAppBar}" />
+
+</ResourceDictionary>

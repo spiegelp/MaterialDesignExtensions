@@ -60,6 +60,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\AppBarControl.xaml.cs">
+      <DependentUpon>AppBarControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FileSystemDialogControl.xaml.cs">
       <DependentUpon>FileSystemDialogControl.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,7 @@
     <Compile Include="Controls\SaveFileControlControl.xaml.cs">
       <DependentUpon>SaveFileControlControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AppBarViewModel.cs" />
     <Compile Include="ViewModel\FileSystemControlViewModel.cs" />
     <Compile Include="ViewModel\FileSystemDialogViewModel.cs" />
     <Compile Include="ViewModel\GridListViewModel.cs" />
@@ -90,6 +94,10 @@
     <Compile Include="ViewModel\SaveFileControlViewModel.cs" />
     <Compile Include="ViewModel\StepperViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
+    <Page Include="Controls\AppBarControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\FileSystemDialogControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -57,6 +57,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\AppBarTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\FileSystemDialogTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +98,7 @@
     <Compile Include="Controllers\BitmapImageHelper.cs" />
     <Compile Include="Controllers\FileSystemController.cs" />
     <Compile Include="Controllers\StepperController.cs" />
+    <Compile Include="Controls\AppBar.cs" />
     <Compile Include="Controls\BaseFileControl.cs" />
     <Compile Include="Controls\BaseFileDialog.cs" />
     <Compile Include="Controls\FileSystemControl.cs" />
@@ -109,11 +114,14 @@
     <Compile Include="Controls\Stepper.cs" />
     <Compile Include="Converters\AsyncImageTask.cs" />
     <Compile Include="Converters\BooleanOrConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeAgoConverter.cs" />
     <Compile Include="Converters\EmptyEnumerableVisibilityConverter.cs" />
     <Compile Include="Converters\FileSizeConverter.cs" />
     <Compile Include="Converters\FileSystemInfoIconConverter.cs" />
     <Compile Include="Converters\NotNullBooleanConverter.cs" />
+    <Compile Include="Converters\NotNullToVisibilityConverter.cs" />
+    <Compile Include="Converters\ObjectCollectionToVisibilityConverter.cs" />
     <Compile Include="Converters\UpperCaseConverter.cs" />
     <Compile Include="Localization\Strings.de.Designer.cs">
       <AutoGen>True</AutoGen>

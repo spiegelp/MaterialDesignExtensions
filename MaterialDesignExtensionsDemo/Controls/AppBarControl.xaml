@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="MaterialDesignExtensionsDemo.Controls.AppBarControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
+             xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
+    <UserControl.Resources>
+        <Viewbox x:Key="materialDesignExtensionsIcon" Stretch="Uniform" x:Shared="False">
+            <Canvas Width="135.46666" Height="135.46667">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+                <Canvas.Resources/>
+                <Canvas>
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="-161.53332"/>
+                    </Canvas.RenderTransform>
+                    <Rectangle Canvas.Left="5.2916665" Canvas.Top="167.35416" Width="124.35417" Height="124.35418" StrokeThickness="5.08370417" Stroke="{DynamicResource SecondaryAccentBrush}" StrokeMiterLimit="4" Opacity="1"/>
+                    <Ellipse Canvas.Left="10" Width="114.9" Canvas.Top="172.1" Height="114.7" StrokeThickness="5.19894171" Stroke="{DynamicResource SecondaryAccentBrush}" StrokeMiterLimit="4" Opacity="1"/>
+                    <Path StrokeThickness="5.0270834" Stroke="{DynamicResource SecondaryAccentBrush}" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
+                        <Path.Data>
+                            <PathGeometry Figures="M 23.8125 257.31249 H 111.125 L 67.733333 178.20207 Z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Canvas>
+        </Viewbox>
+    </UserControl.Resources>
+    <Grid>
+        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="16" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical" MinWidth="250" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <TextBlock Text="Default app bar" Margin="0,0,0,8" />
+                <controls:AppBar Type="Default" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" />
+                <TextBlock Text="Prominent app bar" Margin="0,32,0,8" />
+                <controls:AppBar Type="Prominent" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <TextBlock Text="Prominent app bar with title in prominent area" Margin="0,32,0,8" />
+                <controls:AppBar Type="Prominent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <TextBlock Text="Dense app bar" Margin="0,32,0,8" />
+                <controls:AppBar Type="Dense" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" />
+                <TextBlock Text="Dense prominent app bar" Margin="0,32,0,8" />
+                <controls:AppBar Type="DenseProminent" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <TextBlock Text="Dense prominent app bar with title in prominent area" Margin="0,32,0,8" />
+                <controls:AppBar Type="DenseProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
