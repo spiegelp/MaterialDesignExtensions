@@ -363,7 +363,7 @@ namespace MaterialDesignExtensions.Controls
         /// Gets or sets the steps which will be shown inside this <see cref="Stepper" />.
         /// </summary>
         public static readonly DependencyProperty StepsProperty = DependencyProperty.Register(
-                nameof(Steps), typeof(IList), typeof(Stepper), new PropertyMetadata(new ObservableCollection<IStep>(), StepsChangedHandler));
+                nameof(Steps), typeof(IList), typeof(Stepper), new PropertyMetadata(null, StepsChangedHandler));
 
         /// <summary>
         /// Gets or sets the steps which will be shown inside this <see cref="Stepper" />.
@@ -450,6 +450,8 @@ namespace MaterialDesignExtensions.Controls
             : base()
         {
             m_controller = new StepperController();
+
+            Steps = new ObservableCollection<IStep>();
 
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;

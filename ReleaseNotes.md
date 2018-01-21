@@ -14,3 +14,6 @@
 ### v1.1.1
 #### Fixes
 * Pack localized resources into NuGet package
+### vx.x.x (upcoming release)
+#### Fixes
+* Initialize `Stepper.Steps` in the constructor
