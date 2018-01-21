@@ -14,7 +14,7 @@
 ### v1.1.1
 #### Fixes
 * Pack localized resources into NuGet package
-### vx.x.x (upcoming release)
+### v1.2.0
 #### Features
 * New `AppBar` control with basic behavior defined in the [Material Design specification](https://material.io/guidelines/layout/structure.html#structure-app-bar)
 * Extensions for the `Stepper` API

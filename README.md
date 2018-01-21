@@ -20,6 +20,7 @@ Material Design Extensions features the following controls:
 | Open directory | Custom `OpenDirectoryControl` and `OpenDirectoryDialog` control | Done |
 | Open file | Custom `OpenFileControl` and `OpenFileDialog` control | Done |
 | Save file | Custom `SaveFileControl` and `SaveFileDialog` control | Done |
+| App bar | Custom `AppBar` control ([specification](https://material.io/guidelines/layout/structure.html#structure-app-bar)) | Done |
 
 # License
 Material Design Extensions is licensed under the [MIT](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/LICENSE) license.
