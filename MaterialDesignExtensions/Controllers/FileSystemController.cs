@@ -24,6 +24,7 @@ namespace MaterialDesignExtensions.Controllers
 
         private DirectoryInfo m_currentDirectory;
         private FileInfo m_currentFile;
+        private string m_currentFileFullName;
         private List<DirectoryInfo> m_currentDirectoryPathParts;
         private List<DirectoryInfo> m_directories;
         private List<FileInfo> m_files;
@@ -52,6 +53,27 @@ namespace MaterialDesignExtensions.Controllers
         }
 
         /// <summary>
+        /// The list of sub directories to <see cref="CurrentDirectory" />.
+        /// </summary>
+        public List<DirectoryInfo> CurrentDirectoryPathParts
+        {
+            get
+            {
+                return m_currentDirectoryPathParts;
+            }
+
+            set
+            {
+                if (!AreObjectsEqual(m_currentDirectoryPathParts, value))
+                {
+                    m_currentDirectoryPathParts = value;
+
+                    OnPropertyChanged(nameof(CurrentDirectoryPathParts));
+                }
+            }
+        }
+
+        /// <summary>
         /// The selected file of the control.
         /// </summary>
         public FileInfo CurrentFile
@@ -73,22 +95,22 @@ namespace MaterialDesignExtensions.Controllers
         }
 
         /// <summary>
-        /// The list of sub directories to <see cref="CurrentDirectory" />.
+        /// The full filename (full path and name) of the selected file of the control.
         /// </summary>
-        public List<DirectoryInfo> CurrentDirectoryPathParts
+        public string CurrentFileFullName
         {
             get
             {
-                return m_currentDirectoryPathParts;
+                return m_currentFileFullName;
             }
 
             set
             {
-                if (!AreObjectsEqual(m_currentDirectoryPathParts, value))
+                if (!AreObjectsEqual(m_currentFileFullName, value))
                 {
-                    m_currentDirectoryPathParts = value;
+                    m_currentFileFullName = value;
 
-                    OnPropertyChanged(nameof(CurrentDirectoryPathParts));
+                    OnPropertyChanged(nameof(CurrentFileFullName));
                 }
             }
         }
@@ -285,6 +307,7 @@ namespace MaterialDesignExtensions.Controllers
         {
             m_currentDirectory = null;
             m_currentFile = null;
+            m_currentFileFullName = null;
             m_currentDirectoryPathParts = null;
             m_directories = null;
             m_files = null;
@@ -358,9 +381,11 @@ namespace MaterialDesignExtensions.Controllers
         /// <param name="file"></param>
         public void SelectFile(String file)
         {
+            CurrentFileFullName = file;
+
             if (!string.IsNullOrWhiteSpace(file))
             {
-                SelectFile(new FileInfo(file));
+                CurrentFile = new FileInfo(file);
             }
             else
             {
@@ -375,6 +400,11 @@ namespace MaterialDesignExtensions.Controllers
         public void SelectFile(FileInfo file)
         {
             CurrentFile = file;
+
+            if (!AreObjectsEqual(m_currentFile, file?.FullName))
+            {
+                CurrentFileFullName = file?.FullName;
+            }
         }
 
         private void UpdateCurrentDirectoryPathParts()

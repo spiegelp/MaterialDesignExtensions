@@ -77,11 +77,13 @@ namespace MaterialDesignExtensions.Controls
         {
             if (sender == m_controller)
             {
-                if (args.PropertyName == nameof(FileSystemController.CurrentFile))
+                // use a string for the filename, because FileInfo.FullName trims dots at the end
+                //     this bevahior has negative side effects (you cannot enter a dot) for the binding (update on property change) of the text box
+                if (args.PropertyName == nameof(FileSystemController.CurrentFileFullName))
                 {
-                    if (m_controller.CurrentFile != null)
+                    if (m_controller.CurrentFileFullName != null)
                     {
-                        string fullName = m_controller.CurrentFile.FullName.Replace("/", @"\");
+                        string fullName = m_controller.CurrentFileFullName.Replace("/", @"\");
                         int index = fullName.LastIndexOf(@"\");
 
                         if (index > -1)

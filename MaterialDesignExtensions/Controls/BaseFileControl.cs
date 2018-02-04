@@ -70,7 +70,7 @@ namespace MaterialDesignExtensions.Controls
 
         protected virtual void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            FileSelectedEventArgs eventArgs = new FileSelectedEventArgs(FileSelectedEvent, this, m_controller.CurrentFile);
+            FileSelectedEventArgs eventArgs = new FileSelectedEventArgs(FileSelectedEvent, this, m_controller.CurrentFileFullName);
             RaiseEvent(eventArgs);
         }
 
@@ -97,11 +97,11 @@ namespace MaterialDesignExtensions.Controls
 
                     UpdateListVisibility();
                 }
-                else if (args.PropertyName == nameof(FileSystemController.CurrentFile))
+                else if (args.PropertyName == nameof(FileSystemController.CurrentFileFullName))
                 {
-                    if (m_controller.CurrentFile != null)
+                    if (m_controller.CurrentFileFullName != null)
                     {
-                        CurrentFile = m_controller.CurrentFile.FullName;
+                        CurrentFile = m_controller.CurrentFileFullName;
                     }
                     else
                     {
@@ -132,13 +132,7 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// The selected file as full filename string.
         /// </summary>
-        public string File
-        {
-            get
-            {
-                return FileInfo?.FullName;
-            }
-        }
+        public string File { get; private set; }
 
         /// <summary>
         /// Creates a new <see cref="FileSelectedEventArgs" />.
@@ -150,6 +144,24 @@ namespace MaterialDesignExtensions.Controls
             : base(routedEvent, source)
         {
             FileInfo = fileInfo;
+            File = fileInfo?.FullName;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="FileSelectedEventArgs" />.
+        /// </summary>
+        /// <param name="routedEvent"></param>
+        /// <param name="source">The source object</param>
+        /// <param name="file">The full filename of the selected file</param>
+        public FileSelectedEventArgs(RoutedEvent routedEvent, object source, string file)
+            : base(routedEvent, source)
+        {
+            File = file;
+
+            if (!string.IsNullOrWhiteSpace(file))
+            {
+                FileInfo = new FileInfo(file);
+            }
         }
     }
 }
