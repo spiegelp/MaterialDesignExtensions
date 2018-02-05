@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Input;
 
 using MaterialDesignExtensions.Controllers;
+using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
 {
@@ -65,11 +66,11 @@ namespace MaterialDesignExtensions.Controls
             {
                 if (args.PropertyName == nameof(FileSystemController.Directories))
                 {
-                    m_fileSystemEntryItemsListBox.ItemsSource = m_controller.Directories;
+                    m_fileSystemEntryItemsControl.ItemsSource = GetFileSystemEntryItems();
 
                     if (m_controller.Directories != null && m_controller.Directories.Any())
                     {
-                        m_fileSystemEntryItemsListBox.ScrollIntoView(m_controller.Directories[0]);
+                        m_fileSystemEntryItemsScrollViewer.ScrollToTop();
                     }
 
                     UpdateListVisibility();
@@ -81,7 +82,13 @@ namespace MaterialDesignExtensions.Controls
 
         protected override IEnumerable GetFileSystemEntryItems()
         {
-            return m_controller.Directories;
+            return m_controller.Directories
+                .Select(directory =>
+                {
+                    bool isSelected = directory.FullName == m_controller.CurrentDirectory?.FullName;
+
+                    return new DirectoryInfoItem() { IsSelected = isSelected, Value = directory };
+                });
         }
     }
 

@@ -105,29 +105,26 @@ namespace MaterialDesignExtensions.Controls
             base.ControllerPropertyChangedHandler(sender, args);
         }
 
-        protected override void FileSystemEntryItemsListBoxSelectionChangedHandler(object sender, SelectionChangedEventArgs args)
+        protected override void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            if (sender == m_fileSystemEntryItemsListBox)
+            if (args.Parameter != null)
             {
-                if (m_fileSystemEntryItemsListBox.SelectedItem != null)
+                if (args.Parameter is DirectoryInfo directoryInfo)
                 {
-                    if (m_fileSystemEntryItemsListBox.SelectedItem is DirectoryInfo directoryInfo)
-                    {
-                        CurrentDirectory = directoryInfo.FullName;
+                    CurrentDirectory = directoryInfo.FullName;
 
-                        if (Filename != null && CurrentDirectory != null)
-                        {
-                            CurrentFile = BuildFullFilename(Filename);
-                        }
-                        else
-                        {
-                            CurrentFile = null;
-                        }
-                    }
-                    else if (m_fileSystemEntryItemsListBox.SelectedItem is FileInfo fileInfo)
+                    if (Filename != null && CurrentDirectory != null)
                     {
-                        CurrentFile = fileInfo.FullName;
+                        CurrentFile = BuildFullFilename(Filename);
                     }
+                    else
+                    {
+                        CurrentFile = null;
+                    }
+                }
+                else if (args.Parameter is FileInfo fileInfo)
+                {
+                    CurrentFile = fileInfo.FullName;
                 }
             }
         }

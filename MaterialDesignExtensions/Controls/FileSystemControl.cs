@@ -24,11 +24,13 @@ namespace MaterialDesignExtensions.Controls
     {
         protected const string DrawerHostName = "drawerHost";
         protected const string PathPartsItemsControlName = "pathPartsItemsControl";
-        protected const string FileSystemEntryItemsListBoxName = "fileSystemEntryItemsListBox";
+        protected const string FileSystemEntryItemsScrollViewerName = "fileSystemEntryItemsScrollViewer";
+        protected const string FileSystemEntryItemsControlName = "fileSystemEntryItemsControl";
         protected const string EmptyDirectoryTextBlockName = "emptyDirectoryTextBlock";
 
         public static RoutedCommand OpenSpecialDirectoriesDrawerCommand = new RoutedCommand();
         public static RoutedCommand SelectDirectoryItemCommand = new RoutedCommand();
+        public static RoutedCommand SelectFileSystemEntryCommand = new RoutedCommand();
         public static RoutedCommand ShowInfoCommand = new RoutedCommand();
         public static RoutedCommand CancelCommand = new RoutedCommand();
 
@@ -96,7 +98,7 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// The underlying controller for file system logic. This property is intended for internal use
+        /// The underlying controller for file system logic. This property is intended for internal use only.
         /// </summary>
         public FileSystemController Controller
         {
@@ -175,7 +177,9 @@ namespace MaterialDesignExtensions.Controls
         protected FileSystemController m_controller;
 
         protected ItemsControl m_pathPartsItemsControl;
-        protected ListBox m_fileSystemEntryItemsListBox;
+        protected ScrollViewer m_fileSystemEntryItemsScrollViewer;
+        // use an ItemsControl instead of a ListBox, because the ListBox raises several selection changed events without an explicit user input
+        protected ItemsControl m_fileSystemEntryItemsControl;
         protected TextBlock m_emptyDirectoryTextBlock;
 
         static FileSystemControl()
@@ -191,11 +195,13 @@ namespace MaterialDesignExtensions.Controls
 
             CommandBindings.Add(new CommandBinding(OpenSpecialDirectoriesDrawerCommand, OpenSpecialDirectoriesDrawerCommandHandler));
             CommandBindings.Add(new CommandBinding(SelectDirectoryItemCommand, SelectDirectoryItemCommandHandler));
+            CommandBindings.Add(new CommandBinding(SelectFileSystemEntryCommand, SelectFileSystemEntryCommandHandler));
             CommandBindings.Add(new CommandBinding(ShowInfoCommand, ShowInfoCommandHandler));
             CommandBindings.Add(new CommandBinding(CancelCommand, CancelCommandHandler));
 
             m_pathPartsItemsControl = null;
-            m_fileSystemEntryItemsListBox = null;
+            m_fileSystemEntryItemsScrollViewer = null;
+            m_fileSystemEntryItemsControl = null;
 
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
@@ -208,8 +214,10 @@ namespace MaterialDesignExtensions.Controls
             m_pathPartsItemsControl = Template.FindName(PathPartsItemsControlName, this) as ItemsControl;
             m_pathPartsItemsControl.ItemsSource = m_controller.CurrentDirectoryPathParts;
 
-            m_fileSystemEntryItemsListBox = Template.FindName(FileSystemEntryItemsListBoxName, this) as ListBox;
-            m_fileSystemEntryItemsListBox.ItemsSource = GetFileSystemEntryItems();
+            m_fileSystemEntryItemsScrollViewer = Template.FindName(FileSystemEntryItemsScrollViewerName, this) as ScrollViewer;
+
+            m_fileSystemEntryItemsControl = Template.FindName(FileSystemEntryItemsControlName, this) as ItemsControl;
+            m_fileSystemEntryItemsControl.ItemsSource = GetFileSystemEntryItems();
 
             m_emptyDirectoryTextBlock = Template.FindName(EmptyDirectoryTextBlockName, this) as TextBlock;
 
@@ -219,13 +227,11 @@ namespace MaterialDesignExtensions.Controls
         protected virtual void LoadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged += ControllerPropertyChangedHandler;
-            m_fileSystemEntryItemsListBox.SelectionChanged += FileSystemEntryItemsListBoxSelectionChangedHandler;
         }
 
         protected virtual void UnloadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged -= ControllerPropertyChangedHandler;
-            m_fileSystemEntryItemsListBox.SelectionChanged -= FileSystemEntryItemsListBoxSelectionChangedHandler;
         }
 
         protected void OpenSpecialDirectoriesDrawerCommandHandler(object sender, ExecutedRoutedEventArgs args)
@@ -256,6 +262,17 @@ namespace MaterialDesignExtensions.Controls
                 if (drawerHost.IsTopDrawerOpen)
                 {
                     drawerHost.IsTopDrawerOpen = false;
+                }
+            }
+        }
+
+        protected virtual void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            if (args.Parameter != null)
+            {
+                if (args.Parameter is DirectoryInfo directoryInfo)
+                {
+                    CurrentDirectory = directoryInfo.FullName;
                 }
             }
         }
@@ -309,6 +326,8 @@ namespace MaterialDesignExtensions.Controls
                 if (args.PropertyName == nameof(FileSystemController.CurrentDirectory))
                 {
                     CurrentDirectory = m_controller.CurrentDirectory.FullName;
+
+                    UpdateSelection();
                 }
                 else if (args.PropertyName == nameof(FileSystemController.CurrentDirectoryPathParts))
                 {
@@ -325,15 +344,21 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        protected virtual void FileSystemEntryItemsListBoxSelectionChangedHandler(object sender, SelectionChangedEventArgs args)
+        protected void UpdateSelection()
         {
-            if (sender == m_fileSystemEntryItemsListBox)
+            IEnumerable items = m_fileSystemEntryItemsControl?.ItemsSource;
+
+            if (items != null)
             {
-                if (m_fileSystemEntryItemsListBox.SelectedItem != null)
+                foreach (object item in items)
                 {
-                    if (m_fileSystemEntryItemsListBox.SelectedItem is DirectoryInfo directoryInfo)
+                    if (item is DirectoryInfoItem directoryInfoItem)
                     {
-                        CurrentDirectory = directoryInfo.FullName;
+                        directoryInfoItem.IsSelected = directoryInfoItem.Value.FullName == m_controller.CurrentDirectory?.FullName;
+                    }
+                    else if (item is FileInfoItem fileInfoItem)
+                    {
+                        fileInfoItem.IsSelected = fileInfoItem.Value.FullName == m_controller.CurrentFileFullName;
                     }
                 }
             }
@@ -350,16 +375,16 @@ namespace MaterialDesignExtensions.Controls
         /// </summary>
         protected void UpdateListVisibility()
         {
-            if (m_fileSystemEntryItemsListBox != null
-                && m_fileSystemEntryItemsListBox.ItemsSource != null
-                && m_fileSystemEntryItemsListBox.ItemsSource.GetEnumerator().MoveNext())
+            if (m_fileSystemEntryItemsControl != null
+                && m_fileSystemEntryItemsControl.ItemsSource != null
+                && m_fileSystemEntryItemsControl.ItemsSource.GetEnumerator().MoveNext())
             {
-                m_fileSystemEntryItemsListBox.Visibility = Visibility.Visible;
+                m_fileSystemEntryItemsControl.Visibility = Visibility.Visible;
                 m_emptyDirectoryTextBlock.Visibility = Visibility.Collapsed;
             }
             else
             {
-                m_fileSystemEntryItemsListBox.Visibility = Visibility.Collapsed;
+                m_fileSystemEntryItemsControl.Visibility = Visibility.Collapsed;
                 m_emptyDirectoryTextBlock.Visibility = Visibility.Visible;
             }
         }

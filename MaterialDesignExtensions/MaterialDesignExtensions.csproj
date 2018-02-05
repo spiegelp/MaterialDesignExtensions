@@ -133,6 +133,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\DirectoryInfoItem.cs" />
+    <Compile Include="Model\FileInfoItem.cs" />
+    <Compile Include="Model\FileSystemEntryItem.cs" />
     <Compile Include="Model\SpecialDirectory.cs" />
     <Compile Include="Model\SpecialDrive.cs" />
     <Compile Include="Model\Step.cs" />

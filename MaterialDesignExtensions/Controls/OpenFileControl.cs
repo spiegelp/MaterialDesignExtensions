@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MaterialDesignExtensions.Controls
 {
@@ -31,21 +32,18 @@ namespace MaterialDesignExtensions.Controls
             m_controller.SelectFile(newCurrentFile);
         }
 
-        protected override void FileSystemEntryItemsListBoxSelectionChangedHandler(object sender, SelectionChangedEventArgs args)
+        protected override void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            if (sender == m_fileSystemEntryItemsListBox)
+            if (args.Parameter != null)
             {
-                if (m_fileSystemEntryItemsListBox.SelectedItem != null)
+                if (args.Parameter is DirectoryInfo directoryInfo)
                 {
-                    if (m_fileSystemEntryItemsListBox.SelectedItem is DirectoryInfo directoryInfo)
-                    {
-                        CurrentDirectory = directoryInfo.FullName;
-                        CurrentFile = null;
-                    }
-                    else if (m_fileSystemEntryItemsListBox.SelectedItem is FileInfo fileInfo)
-                    {
-                        CurrentFile = fileInfo.FullName;
-                    }
+                    CurrentDirectory = directoryInfo.FullName;
+                    CurrentFile = null;
+                }
+                else if (args.Parameter is FileInfo fileInfo)
+                {
+                    CurrentFile = fileInfo.FullName;
                 }
             }
         }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
+using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.TemplateSelectors
 {
@@ -17,11 +18,11 @@ namespace MaterialDesignExtensions.TemplateSelectors
         {
             if (container is FrameworkElement element && item != null)
             {
-                if (item is DirectoryInfo)
+                if (item is DirectoryInfoItem)
                 {
                     return element.FindResource("directoryInfoItemTemplate") as DataTemplate;
                 }
-                else if (item is FileInfo)
+                else if (item is FileInfoItem)
                 {
                     return element.FindResource("fileInfoItemTemplate") as DataTemplate;
                 }

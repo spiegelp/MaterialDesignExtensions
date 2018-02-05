@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 using MaterialDesignExtensions.Controllers;
+using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
 {
@@ -88,11 +89,11 @@ namespace MaterialDesignExtensions.Controls
                 if (args.PropertyName == nameof(FileSystemController.DirectoriesAndFiles))
                 {
                     List<FileSystemInfo> items = m_controller.DirectoriesAndFiles;
-                    m_fileSystemEntryItemsListBox.ItemsSource = items;
+                    m_fileSystemEntryItemsControl.ItemsSource = GetFileSystemEntryItems(items);
 
                     if (items != null && items.Any())
                     {
-                        m_fileSystemEntryItemsListBox.ScrollIntoView(items[0]);
+                        m_fileSystemEntryItemsScrollViewer.ScrollToTop();
                     }
 
                     UpdateListVisibility();
@@ -107,6 +108,8 @@ namespace MaterialDesignExtensions.Controls
                     {
                         CurrentFile = null;
                     }
+
+                    UpdateSelection();
                 }
             }
 
@@ -115,7 +118,30 @@ namespace MaterialDesignExtensions.Controls
 
         protected override IEnumerable GetFileSystemEntryItems()
         {
-            return m_controller.DirectoriesAndFiles;
+            return GetFileSystemEntryItems(m_controller.DirectoriesAndFiles);
+        }
+
+        protected IEnumerable GetFileSystemEntryItems(List<FileSystemInfo> directoriesAndFiles)
+        {
+            ArrayList items = new ArrayList(directoriesAndFiles.Count);
+
+            foreach (FileSystemInfo item in directoriesAndFiles)
+            {
+                if (item is DirectoryInfo directoryInfo)
+                {
+                    bool isSelected = directoryInfo.FullName == m_controller.CurrentDirectory?.FullName;
+
+                    items.Add(new DirectoryInfoItem() { IsSelected = isSelected, Value = directoryInfo });
+                }
+                else if (item is FileInfo fileInfo)
+                {
+                    bool isSelected = fileInfo.FullName == m_controller.CurrentFileFullName;
+
+                    items.Add(new FileInfoItem() { IsSelected = isSelected, Value = fileInfo });
+                }
+            }
+
+            return items;
         }
     }
 
