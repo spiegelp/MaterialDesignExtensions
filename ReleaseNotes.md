@@ -28,3 +28,8 @@
 	* `StepNavigationCommand`
 #### Fixes
 * Initialize `Stepper.Steps` in the constructor
+### v.X.X.X (upcoming release)
+#### Fixes
+* Type dots into `SaveFileControls` text field
+* Use `ItemsControl` instead of `ListBox` inside the file system controls
+  * `ListBox.SelectionChanged` was raised several times without any explicit user input
