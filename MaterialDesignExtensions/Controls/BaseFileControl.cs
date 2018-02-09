@@ -63,6 +63,28 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        public static readonly DependencyProperty GroupFoldersAndFilesProperty = DependencyProperty.Register(
+            nameof(GroupFoldersAndFiles),
+            typeof(bool),
+            typeof(BaseFileControl),
+            new PropertyMetadata(true));
+
+        /// <summary>
+        /// Shows folders and files as a group with a header.
+        /// </summary>
+        public bool GroupFoldersAndFiles
+        {
+            get
+            {
+                return (bool)GetValue(GroupFoldersAndFilesProperty);
+            }
+
+            set
+            {
+                SetValue(GroupFoldersAndFilesProperty, value);
+            }
+        }
+
         public BaseFileControl()
             : base()
         {
@@ -123,18 +145,49 @@ namespace MaterialDesignExtensions.Controls
 
         protected IEnumerable GetFileSystemEntryItems(List<FileSystemInfo> directoriesAndFiles)
         {
-            ArrayList items = new ArrayList(directoriesAndFiles.Count);
-
-            foreach (FileSystemInfo item in directoriesAndFiles)
+            if (directoriesAndFiles == null || !directoriesAndFiles.Any())
             {
+                return new ArrayList(0);
+            }
+
+            int numberOfItems = directoriesAndFiles.Count;
+
+            if (GroupFoldersAndFiles)
+            {
+                numberOfItems = numberOfItems + 2;
+            }
+
+            ArrayList items = new ArrayList(numberOfItems);
+
+            for (int i = 0; i < directoriesAndFiles.Count; i++)
+            {
+                FileSystemInfo item = directoriesAndFiles[i];
+
                 if (item is DirectoryInfo directoryInfo)
                 {
+                    if (GroupFoldersAndFiles && i == 0)
+                    {
+                        items.Add(new FileSystemEntriesGroupHeader() { Header = Localization.Strings.Folders, ShowSeparator = false });
+                    }
+
                     bool isSelected = directoryInfo.FullName == m_controller.CurrentDirectory?.FullName;
 
                     items.Add(new DirectoryInfoItem() { IsSelected = isSelected, Value = directoryInfo });
                 }
                 else if (item is FileInfo fileInfo)
                 {
+                    if (GroupFoldersAndFiles)
+                    {
+                        if (i == 0)
+                        {
+                            items.Add(new FileSystemEntriesGroupHeader() { Header = Localization.Strings.Files, ShowSeparator = false });
+                        }
+                        else if (directoriesAndFiles[i - 1] is DirectoryInfo)
+                        {
+                            items.Add(new FileSystemEntriesGroupHeader() { Header = Localization.Strings.Files, ShowSeparator = true });
+                        }
+                    }
+
                     bool isSelected = fileInfo.FullName == m_controller.CurrentFileFullName;
 
                     items.Add(new FileInfoItem() { IsSelected = isSelected, Value = fileInfo });

@@ -61,7 +61,7 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Access to directory &apos;{0}&apos; denied ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Access to folder &apos;{0}&apos; denied ähnelt.
         /// </summary>
         public static string AccessToDirectoryXDenied {
             get {
@@ -106,7 +106,7 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Directory &apos;{0}&apos; not found ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Folder &apos;{0}&apos; not found ähnelt.
         /// </summary>
         public static string DirectoryXNotFound {
             get {
@@ -133,11 +133,20 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Empty directory ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Empty folder ähnelt.
         /// </summary>
         public static string EmptyDirectory {
             get {
                 return ResourceManager.GetString("EmptyDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Files ähnelt.
+        /// </summary>
+        public static string Files {
+            get {
+                return ResourceManager.GetString("Files", resourceCulture);
             }
         }
         
@@ -147,6 +156,15 @@ namespace MaterialDesignExtensions.Localization {
         public static string FileSize {
             get {
                 return ResourceManager.GetString("FileSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Folders ähnelt.
+        /// </summary>
+        public static string Folders {
+            get {
+                return ResourceManager.GetString("Folders", resourceCulture);
             }
         }
         
@@ -241,7 +259,7 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Select directory ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Select folder ähnelt.
         /// </summary>
         public static string SelectDirectory {
             get {

@@ -384,6 +384,27 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="fileSystemEntriesGroupHeaderTemplate">
+        <Border Margin="72,16,0,16" HorizontalAlignment="Stretch" BorderBrush="{DynamicResource MaterialDesignDivider}" SnapsToDevicePixels="True">
+            <TextBlock FontSize="14" FontWeight="Medium" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                       Text="{Binding Path=Header, Mode=OneTime}" />
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=ShowSeparator}" Value="False">
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Padding" Value="0" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ShowSeparator}" Value="True">
+                            <Setter Property="BorderThickness" Value="0,1,0,0" />
+                            <Setter Property="Padding" Value="0,16,0,0" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+    </DataTemplate>
+
     <DataTemplate x:Key="fileSystemEntryItemPackIconTemplate">
         <Grid Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Ellipse Fill="{DynamicResource MaterialDesignDivider}" Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center" />

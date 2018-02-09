@@ -26,6 +26,10 @@ namespace MaterialDesignExtensions.TemplateSelectors
                 {
                     return element.FindResource("fileInfoItemTemplate") as DataTemplate;
                 }
+                else if (item is FileSystemEntriesGroupHeader)
+                {
+                    return element.FindResource("fileSystemEntriesGroupHeaderTemplate") as DataTemplate;
+                }
             }
 
             return null;

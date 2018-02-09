@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccessToDirectoryXDenied" xml:space="preserve">
-    <value>Access to directory '{0}' denied</value>
+    <value>Access to folder '{0}' denied</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -133,7 +133,7 @@
     <value>Desktop</value>
   </data>
   <data name="DirectoryXNotFound" xml:space="preserve">
-    <value>Directory '{0}' not found</value>
+    <value>Folder '{0}' not found</value>
   </data>
   <data name="Documents" xml:space="preserve">
     <value>Documents</value>
@@ -142,10 +142,16 @@
     <value>Drives</value>
   </data>
   <data name="EmptyDirectory" xml:space="preserve">
-    <value>Empty directory</value>
+    <value>Empty folder</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Files</value>
   </data>
   <data name="FileSize" xml:space="preserve">
     <value>File size</value>
+  </data>
+  <data name="Folders" xml:space="preserve">
+    <value>Folders</value>
   </data>
   <data name="LastAccess" xml:space="preserve">
     <value>Last access</value>
@@ -178,7 +184,7 @@
     <value>Select</value>
   </data>
   <data name="SelectDirectory" xml:space="preserve">
-    <value>Select directory</value>
+    <value>Select folder</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>User</value>
