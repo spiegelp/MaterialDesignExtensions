@@ -46,61 +46,75 @@
         <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
     </Style>
 
+    <DataTemplate x:Key="specialDriveItemTemplate">
+        <Grid x:Name="specialDriveItemGrid" HorizontalAlignment="Stretch">
+            <Border Background="{Binding Path=Foreground, Converter={StaticResource brushRoundConverter}, ElementName=specialDriveItemButton}"
+                                            HorizontalAlignment="Stretch">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=specialDriveItemGrid}" Value="True">
+                                <Setter Property="Opacity" Value="0.1" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=specialDriveItemGrid}" Value="False">
+                                <Setter Property="Opacity" Value="0" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+            <Button x:Name="specialDriveItemButton" Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                                                Command="{x:Static controls:FileSystemControl.SelectDirectoryItemCommand}" CommandParameter="{Binding}"
+                                                HorizontalContentAlignment="Left">
+                <DockPanel>
+                    <wpfLib:PackIcon DockPanel.Dock="Left" Kind="{Binding Path=Icon, Mode=OneTime}" Height="24" Width="24" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding Path=Label, Mode=OneTime}" VerticalAlignment="Center" Margin="16,0,0,0" />
+                </DockPanel>
+            </Button>
+        </Grid>
+    </DataTemplate>
+    
     <DataTemplate x:Key="specialDrivesOfControllerTemplate" DataType="{x:Type controllers:FileSystemController}">
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <StackPanel Orientation="Vertical" MinWidth="200" Margin="16">
-                    <TextBlock FontSize="14" FontWeight="Medium" Foreground="{DynamicResource MaterialDesignBodyLight}"
-                               Text="{x:Static localization:Strings.User}" Margin="0,0,0,16" />
-                    <ItemsControl ItemsSource="{Binding Path=SpecialDirectories, Mode=OneTime}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical" IsItemsHost="True" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border HorizontalAlignment="Stretch">
-                                    <Button Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                                            Command="{x:Static controls:FileSystemControl.SelectDirectoryItemCommand}" CommandParameter="{Binding}"
-                                            HorizontalContentAlignment="Left">
-                                        <DockPanel>
-                                            <wpfLib:PackIcon DockPanel.Dock="Left" Kind="{Binding Path=Icon, Mode=OneTime}" Height="24" Width="24" VerticalAlignment="Center" />
-                                            <TextBlock Text="{Binding Path=Label, Mode=OneTime}" VerticalAlignment="Center" Margin="16,0,0,0" />
-                                        </DockPanel>
-                                    </Button>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" MinWidth="200" Margin="16">
-                    <TextBlock FontSize="14" FontWeight="Medium" Foreground="{DynamicResource MaterialDesignBodyLight}"
-                               Text="{x:Static localization:Strings.Drives}" Margin="0,0,0,16" />
-                    <ItemsControl ItemsSource="{Binding Path=Drives, Mode=OneTime}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical" IsItemsHost="True" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border HorizontalAlignment="Stretch">
-                                    <Button Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                                            Command="{x:Static controls:FileSystemControl.SelectDirectoryItemCommand}" CommandParameter="{Binding}"
-                                            HorizontalAlignment="Left">
-                                        <DockPanel>
-                                            <wpfLib:PackIcon DockPanel.Dock="Left" Kind="{Binding Path=Icon}" Height="24" Width="24" VerticalAlignment="Center" />
-                                            <TextBlock Text="{Binding Path=Label, Mode=OneTime}" VerticalAlignment="Center" Margin="16,0,0,0" />
-                                        </DockPanel>
-                                    </Button>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </WrapPanel>
-        </ScrollViewer>
+        <DockPanel>
+            <ToggleButton DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="16,16,0,0"
+                          Foreground="{DynamicResource MaterialDesignBody}" Cursor="Hand"
+                          ToolTip="{x:Static localization:Strings.Close}"
+                          IsChecked="{Binding Path=IsTopDrawerOpen, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DrawerHost}}}">
+                <ToggleButton.Template>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Background="Transparent">
+                            <wpfLib:PackIcon Kind="ArrowLeft" Height="24" Width="24" />
+                        </Border>
+                    </ControlTemplate>
+                </ToggleButton.Template>
+            </ToggleButton>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" MinWidth="200" Margin="16">
+                        <TextBlock FontSize="14" FontWeight="Medium" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                   Text="{x:Static localization:Strings.User}" Margin="0,0,0,16" />
+                        <ItemsControl ItemsSource="{Binding Path=SpecialDirectories, Mode=OneTime}" ItemTemplate="{StaticResource specialDriveItemTemplate}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" IsItemsHost="True" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" MinWidth="200" Margin="16">
+                        <TextBlock FontSize="14" FontWeight="Medium" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                   Text="{x:Static localization:Strings.Drives}" Margin="0,0,0,16" />
+                        <ItemsControl ItemsSource="{Binding Path=Drives, Mode=OneTime}" ItemTemplate="{StaticResource specialDriveItemTemplate}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical" IsItemsHost="True" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </WrapPanel>
+            </ScrollViewer>
+        </DockPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="pathPartItemTemplate">

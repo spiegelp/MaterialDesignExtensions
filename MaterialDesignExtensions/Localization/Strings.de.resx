@@ -123,6 +123,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
   <data name="Created" xml:space="preserve">
     <value>Erstellt</value>
   </data>
