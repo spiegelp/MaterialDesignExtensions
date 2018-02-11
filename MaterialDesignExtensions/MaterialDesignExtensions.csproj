@@ -119,6 +119,7 @@
     <Compile Include="Converters\EmptyEnumerableVisibilityConverter.cs" />
     <Compile Include="Converters\FileSizeConverter.cs" />
     <Compile Include="Converters\FileSystemInfoIconConverter.cs" />
+    <Compile Include="Converters\FileSystemInfoPackIconColorConverter.cs" />
     <Compile Include="Converters\NotNullBooleanConverter.cs" />
     <Compile Include="Converters\NotNullToVisibilityConverter.cs" />
     <Compile Include="Converters\ObjectCollectionToVisibilityConverter.cs" />
