@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 using MaterialDesignThemes.Wpf;
 
@@ -50,6 +51,17 @@ namespace MaterialDesignExtensions.Controls
             remove
             {
                 RemoveHandler(CancelEvent, value);
+            }
+        }
+
+        /// <summary>
+        /// The underlying controller for file system logic. This property is intended for internal use only.
+        /// </summary>
+        public FileSystemController Controller
+        {
+            get
+            {
+                return m_controller;
             }
         }
 
@@ -98,13 +110,35 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// The underlying controller for file system logic. This property is intended for internal use only.
+        /// The ScrollViewer of the ItemsControls with the file system entries
         /// </summary>
-        public FileSystemController Controller
+        protected ScrollViewer ItemsScrollViewer
         {
             get
             {
-                return m_controller;
+                if (m_fileSystemEntryItemsScrollViewer == null)
+                {
+                    ScrollViewer FindItemsScrollViewer(ItemsControl itemsControl)
+                    {
+                        FrameworkElement control = itemsControl;
+
+                        while (control != null && !(control is ScrollViewer))
+                        {
+                            if (VisualTreeHelper.GetChildrenCount(control) == 0)
+                            {
+                                return null;
+                            }
+
+                            control = VisualTreeHelper.GetChild(control, 0) as FrameworkElement;
+                        }
+
+                        return control as ScrollViewer;
+                    };
+
+                    m_fileSystemEntryItemsScrollViewer = FindItemsScrollViewer(m_fileSystemEntryItemsControl);
+                }
+
+                return m_fileSystemEntryItemsScrollViewer;
             }
         }
 
@@ -177,9 +211,10 @@ namespace MaterialDesignExtensions.Controls
         protected FileSystemController m_controller;
 
         protected ItemsControl m_pathPartsItemsControl;
-        protected ScrollViewer m_fileSystemEntryItemsScrollViewer;
         // use an ItemsControl instead of a ListBox, because the ListBox raises several selection changed events without an explicit user input
         protected ItemsControl m_fileSystemEntryItemsControl;
+        // private to force the usage of the lazy getter, because it only works after applying the template
+        private ScrollViewer m_fileSystemEntryItemsScrollViewer;
         protected TextBlock m_emptyDirectoryTextBlock;
 
         static FileSystemControl()
@@ -213,8 +248,6 @@ namespace MaterialDesignExtensions.Controls
 
             m_pathPartsItemsControl = Template.FindName(PathPartsItemsControlName, this) as ItemsControl;
             m_pathPartsItemsControl.ItemsSource = m_controller.CurrentDirectoryPathParts;
-
-            m_fileSystemEntryItemsScrollViewer = Template.FindName(FileSystemEntryItemsScrollViewerName, this) as ScrollViewer;
 
             m_fileSystemEntryItemsControl = Template.FindName(FileSystemEntryItemsControlName, this) as ItemsControl;
             m_fileSystemEntryItemsControl.ItemsSource = GetFileSystemEntryItems();

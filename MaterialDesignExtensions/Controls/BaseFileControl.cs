@@ -115,7 +115,7 @@ namespace MaterialDesignExtensions.Controls
 
                     if (items != null && items.Any())
                     {
-                        m_fileSystemEntryItemsScrollViewer.ScrollToTop();
+                        ItemsScrollViewer.ScrollToTop();
                     }
 
                     UpdateListVisibility();

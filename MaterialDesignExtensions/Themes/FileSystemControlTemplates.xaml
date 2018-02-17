@@ -294,6 +294,33 @@
                         Content="{Binding Path=Image}" ContentTemplateSelector="{StaticResource fileSystemInfoIconTemplateSelector}" />
     </DataTemplate>
 
+    <Style x:Key="fileSystemEntriesItemsControlStyle" TargetType="{x:Type ItemsControl}">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                    <Border SnapsToDevicePixels="True">
+                        <ScrollViewer Focusable="False">
+                            <ItemsPresenter SnapsToDevicePixels="True" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="fileSystemEntryItemButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
@@ -549,18 +576,8 @@
                                     </ItemsControl.ItemsPanel>
                                 </ItemsControl>
                             </Border>
-                            <ScrollViewer x:Name="fileSystemEntryItemsScrollViewer" Grid.Row="2"
-                                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <ItemsControl x:Name="fileSystemEntryItemsControl" HorizontalAlignment="Stretch"
-                                              ItemTemplate="{StaticResource directoryInfoItemTemplate}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel IsItemsHost="True" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
-                            </ScrollViewer>
+                            <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
+                                          ItemTemplate="{StaticResource directoryInfoItemTemplate}" />
                             <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Text="{x:Static localization:Strings.EmptyDirectory}" TextWrapping="WrapWithOverflow"
                                        FontSize="14" FontWeight="Medium"
                                        Margin="16" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -626,18 +643,8 @@
                                     </ItemsControl.ItemsPanel>
                                 </ItemsControl>
                             </Border>
-                            <ScrollViewer x:Name="fileSystemEntryItemsScrollViewer" Grid.Row="2"
-                                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <ItemsControl x:Name="fileSystemEntryItemsControl" HorizontalAlignment="Stretch"
-                                              ItemTemplateSelector="{StaticResource fileSystemEntryItemTemplateSelector}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel IsItemsHost="True" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
-                            </ScrollViewer>
+                            <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
+                                          ItemTemplateSelector="{StaticResource fileSystemEntryItemTemplateSelector}" />
                             <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Text="{x:Static localization:Strings.EmptyDirectory}" TextWrapping="WrapWithOverflow"
                                        FontSize="14" FontWeight="Medium"
                                        Margin="16" HorizontalAlignment="Center" VerticalAlignment="Top" />
@@ -703,18 +710,8 @@
                                     </ItemsControl.ItemsPanel>
                                 </ItemsControl>
                             </Border>
-                            <ScrollViewer x:Name="fileSystemEntryItemsScrollViewer" Grid.Row="2"
-                                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <ItemsControl x:Name="fileSystemEntryItemsControl" HorizontalAlignment="Stretch"
-                                              ItemTemplateSelector="{StaticResource fileSystemEntryItemTemplateSelector}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel IsItemsHost="True" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
-                            </ScrollViewer>
+                            <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
+                                          ItemTemplateSelector="{StaticResource fileSystemEntryItemTemplateSelector}" />
                             <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Text="{x:Static localization:Strings.EmptyDirectory}" TextWrapping="WrapWithOverflow"
                                        FontSize="14" FontWeight="Medium"
                                        Margin="16" HorizontalAlignment="Center" VerticalAlignment="Top" />
