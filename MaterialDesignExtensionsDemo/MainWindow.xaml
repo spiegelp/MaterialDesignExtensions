@@ -83,8 +83,8 @@
                                                 </Style>
                                             </Border.Style>
                                             <Button Command="{x:Static local:MainWindow.NavigationItemSelectedCommand}" CommandParameter="{Binding}"
-                                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent"
-                                            Padding="0" Margin="0">
+                                                    HorizontalAlignment="Stretch" Height="48" Background="Transparent"
+                                                    Padding="0" Margin="0">
                                                 <Button.Template>
                                                     <ControlTemplate TargetType="{x:Type Button}">
                                                         <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
@@ -94,7 +94,7 @@
                                                 </Button.Template>
                                                 <Button.Content>
                                                     <TextBlock FontSize="14" FontWeight="Bold" Text="{Binding Label}"
-                                                       HorizontalAlignment="Stretch" Margin="48,0,4,0" VerticalAlignment="Center">
+                                                               HorizontalAlignment="Stretch" Margin="48,0,4,0" VerticalAlignment="Center">
                                                         <TextBlock.Style>
                                                             <Style TargetType="{x:Type TextBlock}">
                                                                 <Style.Triggers>
