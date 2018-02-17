@@ -22,6 +22,8 @@
     <converters:FileSystemInfoIconConverter ImageMode="AsyncImageTask" ImageTargetWidth="256" ImageTargetHeight="144" x:Key="fileSystemInfoIconConverterInfoImagePreview" />
     <converters:FileSizeConverter x:Key="fileSizeConverter" />
     <converters:NotNullBooleanConverter x:Key="notNullBooleanConverter" />
+    <converters:ObjectToTypeStringConverter x:Key="objectToTypeStringConverter" />
+    <converters:ObjectHasTypeConverter x:Key="objectHasTypeConverter" />
 
     <templateSelectors:FileSystemEntryInfoTemplateSelector x:Key="fileSystemEntryInfoTemplateSelector" />
     <templateSelectors:FileSystemEntryItemTemplateSelector x:Key="fileSystemEntryItemTemplateSelector" />
@@ -47,6 +49,21 @@
         <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
     </Style>
 
+    <Style x:Key="closeToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="ToolTip" Value="{x:Static localization:Strings.Close}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Background="Transparent">
+                        <wpfLib:PackIcon Kind="ArrowLeft" Height="24" Width="24" Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <DataTemplate x:Key="specialDriveItemTemplate">
         <Grid x:Name="specialDriveItemGrid" HorizontalAlignment="Stretch">
             <Border Background="{Binding Path=Foreground, Converter={StaticResource brushRoundConverter}, ElementName=specialDriveItemButton}"
@@ -77,18 +94,9 @@
     
     <DataTemplate x:Key="specialDrivesOfControllerTemplate" DataType="{x:Type controllers:FileSystemController}">
         <DockPanel>
-            <ToggleButton DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="16,16,0,0"
-                          Foreground="{DynamicResource MaterialDesignBody}" Cursor="Hand"
-                          ToolTip="{x:Static localization:Strings.Close}"
-                          IsChecked="{Binding Path=IsTopDrawerOpen, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DrawerHost}}}">
-                <ToggleButton.Template>
-                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                        <Border Background="Transparent">
-                            <wpfLib:PackIcon Kind="ArrowLeft" Height="24" Width="24" />
-                        </Border>
-                    </ControlTemplate>
-                </ToggleButton.Template>
-            </ToggleButton>
+            <ToggleButton DockPanel.Dock="Top" Style="{StaticResource closeToggleButtonStyle}"
+                          HorizontalAlignment="Left" Margin="16,16,0,0"
+                          IsChecked="{Binding Path=IsTopDrawerOpen, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DrawerHost}}}" />
             <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                 <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <StackPanel Orientation="Vertical" MinWidth="200" Margin="16">
@@ -140,8 +148,12 @@
                 <ContentControl Content="{Binding Converter={StaticResource fileSystemInfoIconConverterImageModeIcon}}"
                                 ContentTemplateSelector="{StaticResource fileSystemInfoIconTemplateSelector}" />
             </Border>
+            <ToggleButton Style="{StaticResource closeToggleButtonStyle}"
+                          Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
+                          HorizontalAlignment="Left" Margin="8,8,0,0"
+                          IsChecked="{Binding Path=IsLeftDrawerOpen, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DrawerHost}}}" />
             <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
-                <StackPanel Orientation="Vertical" Margin="16,0">
+                <StackPanel Orientation="Vertical" Margin="16,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <TextBlock Style="{StaticResource fileSystemEntryInfoNameStyle}"
                                Text="{Binding Path=Name}"
                                ToolTip="{Binding Path=Name}"
@@ -166,15 +178,83 @@
     <DataTemplate x:Key="fileInfoInfoTemplate">
         <Grid Width="256">
             <Grid.RowDefinitions>
-                <RowDefinition Height="144" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="104" />
                 <RowDefinition Height="100*" />
             </Grid.RowDefinitions>
-            <Border Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <ContentControl Content="{Binding Converter={StaticResource fileSystemInfoIconConverterInfoImagePreview}}"
+            <!-- alternative for stacking the bar and the image -->
+            <!--<StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Border x:Name="test" Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40"
+                        Tag="System.Windows.Media.Imaging.BitmapImage">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <DataTrigger Value="False">
+                                    <DataTrigger.Binding>
+                                        <MultiBinding Converter="{StaticResource objectHasTypeConverter}">
+                                            <Binding Path="Content.Image" ElementName="iconPreviewContentControl" />
+                                            <Binding Path="Tag" ElementName="test" />
+                                        </MultiBinding>
+                                    </DataTrigger.Binding>
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                                <DataTrigger Value="True">
+                                    <DataTrigger.Binding>
+                                        <MultiBinding Converter="{StaticResource objectHasTypeConverter}">
+                                            <Binding Path="Content.Image" ElementName="iconPreviewContentControl" />
+                                            <Binding Path="Tag" ElementName="test" />
+                                        </MultiBinding>
+                                    </DataTrigger.Binding>
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+                <Border Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <ContentControl x:Name="iconPreviewContentControl" Height="144"
+                                Content="{Binding Converter={StaticResource fileSystemInfoIconConverterInfoImagePreview}}"
+                                ContentTemplateSelector="{StaticResource fileSystemInfoIconTemplateSelector}" />
+                </Border>
+            </StackPanel>-->
+            <Border Grid.RowSpan="2" Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <ContentControl x:Name="iconPreviewContentControl"
+                                Content="{Binding Converter={StaticResource fileSystemInfoIconConverterInfoImagePreview}}"
                                 ContentTemplateSelector="{StaticResource fileSystemInfoIconTemplateSelector}" />
             </Border>
-            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
-                <StackPanel Orientation="Vertical" Margin="16,0">
+            <Border x:Name="closeButtonBar" Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Opacity="0.5" Tag="System.Windows.Media.Imaging.BitmapImage">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <DataTrigger Value="False">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource objectHasTypeConverter}">
+                                        <Binding Path="Content.Image" ElementName="iconPreviewContentControl" />
+                                        <Binding Path="Tag" ElementName="closeButtonBar" />
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource objectHasTypeConverter}">
+                                        <Binding Path="Content.Image" ElementName="iconPreviewContentControl" />
+                                        <Binding Path="Tag" ElementName="closeButtonBar" />
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+            <ToggleButton Style="{StaticResource closeToggleButtonStyle}"
+                          Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
+                          HorizontalAlignment="Left" Margin="8"
+                          IsChecked="{Binding Path=IsLeftDrawerOpen, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DrawerHost}}}" />
+            <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical" Margin="16,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <TextBlock Style="{StaticResource fileSystemEntryInfoNameStyle}"
                                Text="{Binding Path=Name}"
                                ToolTip="{Binding Path=Name}"

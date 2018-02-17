@@ -123,6 +123,8 @@
     <Compile Include="Converters\NotNullBooleanConverter.cs" />
     <Compile Include="Converters\NotNullToVisibilityConverter.cs" />
     <Compile Include="Converters\ObjectCollectionToVisibilityConverter.cs" />
+    <Compile Include="Converters\ObjectHasTypeConverter.cs" />
+    <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
     <Compile Include="Converters\UpperCaseConverter.cs" />
     <Compile Include="Localization\Strings.de.Designer.cs">
       <AutoGen>True</AutoGen>
