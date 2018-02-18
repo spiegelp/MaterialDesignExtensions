@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 using MaterialDesignExtensions.Controllers;
+using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
@@ -20,8 +21,13 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public abstract class BaseFileControl : FileSystemControl
     {
+        protected const string FileFiltersComboBoxName = "fileFiltersComboBox";
+
         public static RoutedCommand SelectFileCommand = new RoutedCommand();
 
+        /// <summary>
+        /// An event raised by selecting a file.
+        /// </summary>
         public static readonly RoutedEvent FileSelectedEvent = EventManager.RegisterRoutedEvent(
             nameof(FileSelected), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(BaseFileControl));
 
@@ -41,6 +47,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The current file of the control.
+        /// </summary>
         public static readonly DependencyProperty CurrentFileProperty = DependencyProperty.Register(
                 nameof(CurrentFile),
                 typeof(string),
@@ -63,6 +72,64 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The possible file filters to select from for applying to the files inside the current directory.
+        /// Strings according to the original .NET API will be converted automatically
+        /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter).
+        /// </summary>
+        public static readonly DependencyProperty FiltersProperty = DependencyProperty.Register(
+            nameof(Filters),
+            typeof(IList<FileFilter>),
+            typeof(BaseFileControl),
+            new PropertyMetadata(null, FiltersChangedHandler));
+
+        /// <summary>
+        /// The possible file filters to select from for applying to the files inside the current directory.
+        /// Strings according to the original .NET API will be converted automatically
+        /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter).
+        /// </summary>
+        [TypeConverter(typeof(FileFiltersTypeConverter))]
+        public IList<FileFilter> Filters
+        {
+            get
+            {
+                return (IList<FileFilter>)GetValue(FiltersProperty);
+            }
+
+            set
+            {
+                SetValue(FiltersProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The index of the file filter to apply to the files inside the current directory.
+        /// </summary>
+        public static readonly DependencyProperty FilterIndexProperty = DependencyProperty.Register(
+            nameof(FilterIndex),
+            typeof(int),
+            typeof(BaseFileControl),
+            new PropertyMetadata(-1, FiltersChangedHandler));
+
+        /// <summary>
+        /// The index of the file filter to apply to the files inside the current directory.
+        /// </summary>
+        public int FilterIndex
+        {
+            get
+            {
+                return (int)GetValue(FilterIndexProperty);
+            }
+
+            set
+            {
+                SetValue(FilterIndexProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Shows folders and files as a group with a header.
+        /// </summary>
         public static readonly DependencyProperty GroupFoldersAndFilesProperty = DependencyProperty.Register(
             nameof(GroupFoldersAndFiles),
             typeof(bool),
@@ -85,10 +152,24 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        protected ComboBox m_fileFiltersComboBox;
+
         public BaseFileControl()
             : base()
         {
+            m_fileFiltersComboBox = null;
+
             CommandBindings.Add(new CommandBinding(SelectFileCommand, SelectFileCommandHandler));
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            m_fileFiltersComboBox = Template.FindName(FileFiltersComboBoxName, this) as ComboBox;
+            m_fileFiltersComboBox.ItemsSource = Filters;
+
+            UpdateFileFiltersVisibility();
         }
 
         protected virtual void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
@@ -103,6 +184,40 @@ namespace MaterialDesignExtensions.Controls
         }
 
         protected abstract void CurrentFileChangedHandler(string newCurrentFile);
+
+        private static void FiltersChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            if (args.Property == FiltersProperty)
+            {
+                (obj as BaseFileControl)?.FileFiltersChangedHandler(args.NewValue as IList<FileFilter>);
+            }
+            else if (args.Property == FilterIndexProperty)
+            {
+                (obj as BaseFileControl)?.FileFiltersChangedHandler((int)args.NewValue);
+            }
+        }
+
+        private void FileFiltersChangedHandler(IList<FileFilter> newFilters)
+        {
+            FileFiltersChangedHandler(newFilters, FilterIndex);
+        }
+
+        private void FileFiltersChangedHandler(int newFilterIndex)
+        {
+            FileFiltersChangedHandler(Filters, newFilterIndex);
+        }
+
+        private void FileFiltersChangedHandler(IList<FileFilter> newFilters, int newFilterIndex)
+        {
+            FileFilter fileFilter = null;
+
+            if (newFilters != null && newFilterIndex >= 0 && newFilterIndex < newFilters.Count)
+            {
+                fileFilter = newFilters[FilterIndex];
+            }
+
+            m_controller.SetFileFilter(newFilters, fileFilter);
+        }
 
         protected override void ControllerPropertyChangedHandler(object sender, PropertyChangedEventArgs args)
         {
@@ -132,6 +247,30 @@ namespace MaterialDesignExtensions.Controls
                     }
 
                     UpdateSelection();
+                }
+                else if (args.PropertyName == nameof(FileSystemController.FileFilters))
+                {
+                    Filters = m_controller.FileFilters;
+                    m_fileFiltersComboBox.ItemsSource = m_controller.FileFilters;
+
+                    UpdateFileFiltersVisibility();
+                }
+                else if (args.PropertyName == nameof(FileSystemController.FileFilterToApply))
+                {
+                    int filterIndex = -1;
+
+                    if (m_controller.FileFilterToApply != null && m_controller.FileFilters != null)
+                    {
+                        for (int i = 0; i < m_controller.FileFilters.Count && filterIndex == -1; i++)
+                        {
+                            if (m_controller.FileFilters[i] == m_controller.FileFilterToApply)
+                            {
+                                filterIndex = i;
+                            }
+                        }
+                    }
+
+                    FilterIndex = filterIndex;
                 }
             }
 
@@ -195,6 +334,20 @@ namespace MaterialDesignExtensions.Controls
             }
 
             return items;
+        }
+
+        protected void UpdateFileFiltersVisibility()
+        {
+            if (m_fileFiltersComboBox != null
+                && m_fileFiltersComboBox.ItemsSource != null
+                && m_fileFiltersComboBox.ItemsSource.GetEnumerator().MoveNext())
+            {
+                m_fileFiltersComboBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                m_fileFiltersComboBox.Visibility = Visibility.Collapsed;
+            }
         }
     }
 

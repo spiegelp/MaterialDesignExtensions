@@ -25,7 +25,6 @@ namespace MaterialDesignExtensions.Controls
     {
         protected const string DrawerHostName = "drawerHost";
         protected const string PathPartsItemsControlName = "pathPartsItemsControl";
-        protected const string FileSystemEntryItemsScrollViewerName = "fileSystemEntryItemsScrollViewer";
         protected const string FileSystemEntryItemsControlName = "fileSystemEntryItemsControl";
         protected const string EmptyDirectoryTextBlockName = "emptyDirectoryTextBlock";
 

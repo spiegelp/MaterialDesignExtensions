@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BitmapImageHelper.cs" />
     <Compile Include="Controllers\FileSystemController.cs" />
+    <Compile Include="Controllers\FileFilterHelper.cs" />
     <Compile Include="Controllers\StepperController.cs" />
     <Compile Include="Controls\AppBar.cs" />
     <Compile Include="Controls\BaseFileControl.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeAgoConverter.cs" />
     <Compile Include="Converters\EmptyEnumerableVisibilityConverter.cs" />
+    <Compile Include="Converters\FileFiltersTypeConverter.cs" />
     <Compile Include="Converters\FileSizeConverter.cs" />
     <Compile Include="Converters\FileSystemInfoIconConverter.cs" />
     <Compile Include="Converters\FileSystemInfoPackIconColorConverter.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Model\FileInfoItem.cs" />
     <Compile Include="Model\FileSystemEntriesGroupHeader.cs" />
     <Compile Include="Model\FileSystemEntryItem.cs" />
+    <Compile Include="Model\FileFilter.cs" />
     <Compile Include="Model\SpecialDirectory.cs" />
     <Compile Include="Model\SpecialDrive.cs" />
     <Compile Include="Model\Step.cs" />

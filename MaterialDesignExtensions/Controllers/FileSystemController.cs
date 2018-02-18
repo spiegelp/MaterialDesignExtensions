@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using MaterialDesignThemes.Wpf;
@@ -30,6 +31,8 @@ namespace MaterialDesignExtensions.Controllers
         private List<FileInfo> m_files;
         private bool m_showHiddenFilesAndDirectories;
         private bool m_showSystemFilesAndDirectories;
+        private IList<FileFilter> m_fileFilters;
+        private FileFilter m_fileFilterToApply;
 
         /// <summary>
         /// The current directory shown in the control.
@@ -234,6 +237,48 @@ namespace MaterialDesignExtensions.Controllers
         }
 
         /// <summary>
+        /// The possible file filters to select from for applying to the files inside the current directory.
+        /// </summary>
+        public IList<FileFilter> FileFilters
+        {
+            get
+            {
+                return m_fileFilters;
+            }
+
+            set
+            {
+                if (m_fileFilters != value)
+                {
+                    m_fileFilters = value;
+
+                    OnPropertyChanged(nameof(FileFilters));
+                }
+            }
+        }
+
+        /// <summary>
+        /// The file filter to apply to the files inside the current directory.
+        /// </summary>
+        public FileFilter FileFilterToApply
+        {
+            get
+            {
+                return m_fileFilterToApply;
+            }
+
+            set
+            {
+                if (m_fileFilterToApply != value)
+                {
+                    m_fileFilterToApply = value;
+
+                    OnPropertyChanged(nameof(FileFilterToApply));
+                }
+            }
+        }
+
+        /// <summary>
         /// The special directories (e.g. music directory) of the user.
         /// </summary>
         public List<SpecialDirectory> SpecialDirectories
@@ -313,6 +358,8 @@ namespace MaterialDesignExtensions.Controllers
             m_files = null;
             m_showHiddenFilesAndDirectories = false;
             m_showSystemFilesAndDirectories = false;
+            m_fileFilters = null;
+            m_fileFilterToApply = null;
         }
 
         /// <summary>
@@ -330,8 +377,23 @@ namespace MaterialDesignExtensions.Controllers
         /// <param name="directory"></param>
         public void SelectDirectory(DirectoryInfo directory)
         {
-            bool ShowFileSystemInfo(FileSystemInfo fileSystemInfo) => (ShowHiddenFilesAndDirectories || !fileSystemInfo.Attributes.HasFlag(FileAttributes.Hidden))
-                                                                            && (ShowSystemFilesAndDirectories || !fileSystemInfo.Attributes.HasFlag(FileAttributes.System));
+            bool ShowFileSystemInfo(FileSystemInfo fileSystemInfo)
+            {
+                if ((ShowHiddenFilesAndDirectories || !fileSystemInfo.Attributes.HasFlag(FileAttributes.Hidden))
+                    && (ShowSystemFilesAndDirectories || !fileSystemInfo.Attributes.HasFlag(FileAttributes.System)))
+                {
+                    if (fileSystemInfo is FileInfo fileInfo && m_fileFilterToApply != null)
+                    {
+                        return m_fileFilterToApply.IsMatch(fileInfo.Name);
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            };
 
             if (directory != null && !string.IsNullOrWhiteSpace(directory.FullName))
             {
@@ -448,6 +510,39 @@ namespace MaterialDesignExtensions.Controllers
             ShowSystemFilesAndDirectories = showSystemFilesAndDirectories;
 
             SelectDirectory(m_currentDirectory);
+        }
+
+        /// <summary>
+        /// Sets a new file filter to apply to the files inside the current directory.
+        /// </summary>
+        /// <param name="fileFilters"></param>
+        /// <param name="fileFilterToApply"></param>
+        public void SetFileFilter(IList<FileFilter> fileFilters, FileFilter fileFilterToApply)
+        {
+            if (m_fileFilters != fileFilters)
+            {
+                FileFilters = fileFilters;
+            }
+
+            if (fileFilterToApply != null)
+            {
+                if (m_fileFilters != null && m_fileFilters.Any(fileFilter => fileFilter == fileFilterToApply))
+                {
+                    FileFilterToApply = fileFilterToApply;
+                }
+                else
+                {
+                    fileFilterToApply = null;
+                }
+
+                SelectDirectory(m_currentDirectory);
+            }
+            else
+            {
+                fileFilterToApply = null;
+
+                SelectDirectory(m_currentDirectory);
+            }
         }
 
         private bool AreObjectsEqual(object o1, object o2)

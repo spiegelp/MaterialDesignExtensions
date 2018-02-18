@@ -337,11 +337,26 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <wpfLib:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"    
-                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                Padding="{TemplateBinding Padding}" 
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   Padding="{TemplateBinding Padding}" 
+                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="fileFiltersComboBoxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="120" />
+        <Setter Property="Margin" Value="16" />
+        <Setter Property="SelectedIndex" Value="{Binding Path=FilterIndex, RelativeSource={RelativeSource AncestorType={x:Type controls:BaseFileControl}}}" />
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Label}" HorizontalAlignment="Left" />
+                </DataTemplate>
             </Setter.Value>
         </Setter>
     </Style>
@@ -552,10 +567,10 @@
                         </wpfLib:DrawerHost.LeftDrawerContent>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="100*" />
-                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <DockPanel Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                                        Height="64">
@@ -619,10 +634,11 @@
                         </wpfLib:DrawerHost.LeftDrawerContent>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="100*" />
-                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <DockPanel Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                                        Height="64">
@@ -648,7 +664,8 @@
                             <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Text="{x:Static localization:Strings.EmptyDirectory}" TextWrapping="WrapWithOverflow"
                                        FontSize="14" FontWeight="Medium"
                                        Margin="16" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                            <Border Grid.Row="3" MinHeight="52" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource MaterialDesignDivider}" SnapsToDevicePixels="True">
+                            <ComboBox x:Name="fileFiltersComboBox" Grid.Row="3" Style="{StaticResource fileFiltersComboBoxStyle}" />
+                            <Border Grid.Row="4" MinHeight="52" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource MaterialDesignDivider}" SnapsToDevicePixels="True">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                     <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                             Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
@@ -685,11 +702,11 @@
                         </wpfLib:DrawerHost.LeftDrawerContent>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="100*" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <DockPanel Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                                        Height="64">
@@ -715,8 +732,11 @@
                             <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Text="{x:Static localization:Strings.EmptyDirectory}" TextWrapping="WrapWithOverflow"
                                        FontSize="14" FontWeight="Medium"
                                        Margin="16" HorizontalAlignment="Center" VerticalAlignment="Top" />
-                            <TextBox Grid.Row="3" HorizontalAlignment="Stretch" Margin="16"
-                                     Text="{Binding Path=Filename, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <DockPanel Grid.Row="3" HorizontalAlignment="Stretch">
+                                <ComboBox x:Name="fileFiltersComboBox" DockPanel.Dock="Right" Style="{StaticResource fileFiltersComboBoxStyle}" Margin="0,16,16,16" />
+                                <TextBox HorizontalAlignment="Stretch" Margin="16"
+                                         Text="{Binding Path=Filename, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </DockPanel>
                             <Border Grid.Row="4" MinHeight="52" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource MaterialDesignDivider}" SnapsToDevicePixels="True">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                     <Button Style="{DynamicResource MaterialDesignFlatButton}"
