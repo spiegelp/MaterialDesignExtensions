@@ -8,6 +8,9 @@ using System.Windows;
 
 using MaterialDesignThemes.Wpf;
 
+using MaterialDesignExtensions.Converters;
+using MaterialDesignExtensions.Model;
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
@@ -52,9 +55,30 @@ namespace MaterialDesignExtensions.Controls
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
             DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
         {
-            OpenFileDialog dialog = InitDialog(width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            OpenFileDialog dialog = InitDialog(width, height, currentDirectory, null, -1, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
 
             return await DialogHost.Show(dialog, dialogHostName, openedHandler, closingHandler) as OpenFileDialogResult;
+        }
+
+        /// <summary>
+        /// Shows a new <see cref="OpenFileDialog" />.
+        /// </summary>
+        /// <param name="dialogHostName">The name of the <see cref="DialogHost" /></param>
+        /// <param name="args">The arguments for the dialog initialization</param>
+        /// <returns></returns>
+        public static async Task<OpenFileDialogResult> ShowDialogAsync(string dialogHostName, OpenFileDialogArguments args)
+        {
+            OpenFileDialog dialog = InitDialog(
+                args.Width,
+                args.Height,
+                args.CurrentDirectory,
+                args.Filters,
+                args.FilterIndex,
+                args.ShowHiddenFilesAndDirectories,
+                args.ShowSystemFilesAndDirectories
+            );
+
+            return await DialogHost.Show(dialog, dialogHostName, args.OpenedHandler, args.ClosingHandler) as OpenFileDialogResult;
         }
 
         /// <summary>
@@ -74,20 +98,55 @@ namespace MaterialDesignExtensions.Controls
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
             DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
         {
-            OpenFileDialog dialog = InitDialog(width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            OpenFileDialog dialog = InitDialog(width, height, currentDirectory, null, -1, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
 
             return await dialogHost.ShowDialog(dialog, openedHandler, closingHandler) as OpenFileDialogResult;
         }
 
+        /// <summary>
+        /// Shows a new <see cref="OpenFileDialog" />.
+        /// </summary>
+        /// <param name="dialogHost">The <see cref="DialogHost" /></param>
+        /// <param name="args">The arguments for the dialog initialization</param>
+        /// <returns></returns>
+        public static async Task<OpenFileDialogResult> ShowDialogAsync(DialogHost dialogHost, OpenFileDialogArguments args)
+        {
+            OpenFileDialog dialog = InitDialog(
+                args.Width,
+                args.Height,
+                args.CurrentDirectory,
+                args.Filters,
+                args.FilterIndex,
+                args.ShowHiddenFilesAndDirectories,
+                args.ShowSystemFilesAndDirectories
+            );
+
+            return await dialogHost.ShowDialog(dialog, args.OpenedHandler, args.ClosingHandler) as OpenFileDialogResult;
+        }
+
         private static OpenFileDialog InitDialog(double? width, double? height,
             string currentDirectory,
+            string filters, int filterIndex,
             bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<FileFilter>;
+            dialog.FilterIndex = filterIndex;
 
             return dialog;
         }
+    }
+
+    /// <summary>
+    /// Arguments to initialize an open file dialog.
+    /// </summary>
+    public class OpenFileDialogArguments : FileDialogArguments
+    {
+        /// <summary>
+        /// Creates a new <see cref="OpenFileDialogArguments" />.
+        /// </summary>
+        public OpenFileDialogArguments() : base() { }
     }
 
     /// <summary>

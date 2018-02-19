@@ -29,7 +29,13 @@ namespace MaterialDesignExtensionsDemo.Controls
 
         private async void OpenDirectoryDialogButtonClickHandler(object sender, RoutedEventArgs args)
         {
-            OpenDirectoryDialogResult result = await OpenDirectoryDialog.ShowDialogAsync(MainWindow.DialogHostName, 600, 400);
+            OpenDirectoryDialogArguments dialogArgs = new OpenDirectoryDialogArguments()
+            {
+                Width = 600,
+                Height = 400
+            };
+
+            OpenDirectoryDialogResult result = await OpenDirectoryDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
 
             if (DataContext is FileSystemDialogViewModel viewModel)
             {
@@ -46,7 +52,15 @@ namespace MaterialDesignExtensionsDemo.Controls
 
         private async void OpenFileDialogButtonClickHandler(object sender, RoutedEventArgs args)
         {
-            OpenFileDialogResult result = await OpenFileDialog.ShowDialogAsync(MainWindow.DialogHostName, 600, 400);
+            OpenFileDialogArguments dialogArgs = new OpenFileDialogArguments()
+            {
+                Width = 600,
+                Height = 400,
+                Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml",
+                FilterIndex = 0
+            };
+
+            OpenFileDialogResult result = await OpenFileDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
 
             if (DataContext is FileSystemDialogViewModel viewModel)
             {
@@ -63,7 +77,15 @@ namespace MaterialDesignExtensionsDemo.Controls
 
         private async void SaveFileDialogButtonClickHandler(object sender, RoutedEventArgs args)
         {
-            SaveFileDialogResult result = await SaveFileDialog.ShowDialogAsync(MainWindow.DialogHostName, 600, 400);
+            SaveFileDialogArguments dialogArgs = new SaveFileDialogArguments()
+            {
+                Width = 600,
+                Height = 400,
+                Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml",
+                FilterIndex = 0
+            };
+
+            SaveFileDialogResult result = await SaveFileDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
 
             if (DataContext is FileSystemDialogViewModel viewModel)
             {

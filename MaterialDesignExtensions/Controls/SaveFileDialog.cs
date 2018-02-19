@@ -8,6 +8,9 @@ using System.Windows;
 
 using MaterialDesignThemes.Wpf;
 
+using MaterialDesignExtensions.Converters;
+using MaterialDesignExtensions.Model;
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
@@ -75,9 +78,31 @@ namespace MaterialDesignExtensions.Controls
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
             DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
         {
-            SaveFileDialog dialog = InitDialog(width, height, filename, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
 
             return await DialogHost.Show(dialog, dialogHostName, openedHandler, closingHandler) as SaveFileDialogResult;
+        }
+
+        /// <summary>
+        /// Shows a new <see cref="SaveFileDialog" />.
+        /// </summary>
+        /// <param name="dialogHostName">The name of the <see cref="DialogHost" /></param>
+        /// <param name="args">The arguments for the dialog initialization</param>
+        /// <returns></returns>
+        public static async Task<SaveFileDialogResult> ShowDialogAsync(string dialogHostName, SaveFileDialogArguments args)
+        {
+            SaveFileDialog dialog = InitDialog(
+                args.Width,
+                args.Height,
+                args.CurrentDirectory,
+                args.Filename,
+                args.Filters,
+                args.FilterIndex,
+                args.ShowHiddenFilesAndDirectories,
+                args.ShowSystemFilesAndDirectories
+            );
+
+            return await DialogHost.Show(dialog, dialogHostName, args.OpenedHandler, args.ClosingHandler) as SaveFileDialogResult;
         }
 
         /// <summary>
@@ -98,21 +123,53 @@ namespace MaterialDesignExtensions.Controls
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
             DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
         {
-            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
 
             return await dialogHost.ShowDialog(dialog, openedHandler, closingHandler) as SaveFileDialogResult;
         }
 
+        /// <summary>
+        /// Shows a new <see cref="SaveFileDialog" />.
+        /// </summary>
+        /// <param name="dialogHost">The <see cref="DialogHost" /></param>
+        /// <param name="args">The arguments for the dialog initialization</param>
+        /// <returns></returns>
+        public static async Task<SaveFileDialogResult> ShowDialogAsync(DialogHost dialogHost, SaveFileDialogArguments args)
+        {
+            SaveFileDialog dialog = InitDialog(
+                args.Width,
+                args.Height,
+                args.CurrentDirectory,
+                args.Filename,
+                args.Filters,
+                args.FilterIndex,
+                args.ShowHiddenFilesAndDirectories,
+                args.ShowSystemFilesAndDirectories
+            );
+
+            return await dialogHost.ShowDialog(dialog, args.OpenedHandler, args.ClosingHandler) as SaveFileDialogResult;
+        }
+
         private static SaveFileDialog InitDialog(double? width, double? height,
             string currentDirectory, string filename,
+            string filters, int filterIndex,
             bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
         {
             SaveFileDialog dialog = new SaveFileDialog();
             InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
             dialog.Filename = filename;
+            dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<FileFilter>;
+            dialog.FilterIndex = filterIndex;
 
             return dialog;
         }
+    }
+
+    public class SaveFileDialogArguments : FileDialogArguments
+    {
+        public string Filename { get; set; }
+
+        public SaveFileDialogArguments() : base() { }
     }
 
     /// <summary>

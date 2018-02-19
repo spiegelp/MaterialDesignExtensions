@@ -90,6 +90,25 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// Shows a new <see cref="OpenDirectoryDialog" />.
         /// </summary>
+        /// <param name="dialogHostName">The name of the <see cref="DialogHost" /></param>
+        /// <param name="args">The arguments for the dialog initialization</param>
+        /// <returns></returns>
+        public static async Task<OpenDirectoryDialogResult> ShowDialogAsync(string dialogHostName, OpenDirectoryDialogArguments args)
+        {
+            OpenDirectoryDialog dialog = InitDialog(
+                args.Width,
+                args.Height,
+                args.CurrentDirectory,
+                args.ShowHiddenFilesAndDirectories,
+                args.ShowSystemFilesAndDirectories
+            );
+
+            return await DialogHost.Show(dialog, dialogHostName, args.OpenedHandler, args.ClosingHandler) as OpenDirectoryDialogResult;
+        }
+
+        /// <summary>
+        /// Shows a new <see cref="OpenDirectoryDialog" />.
+        /// </summary>
         /// <param name="dialogHost">The <see cref="DialogHost" /></param>
         /// <param name="width">The width of the dialog (optional)</param>
         /// <param name="height">The heigth of the dialog (optional)</param>
@@ -109,6 +128,25 @@ namespace MaterialDesignExtensions.Controls
             return await dialogHost.ShowDialog(dialog, openedHandler, closingHandler) as OpenDirectoryDialogResult;
         }
 
+        /// <summary>
+        /// Shows a new <see cref="OpenDirectoryDialog" />.
+        /// </summary>
+        /// <param name="dialogHost">The <see cref="DialogHost" /></param>
+        /// <param name="args">The arguments for the dialog initialization</param>
+        /// <returns></returns>
+        public static async Task<OpenDirectoryDialogResult> ShowDialogAsync(DialogHost dialogHost, OpenDirectoryDialogArguments args)
+        {
+            OpenDirectoryDialog dialog = InitDialog(
+                args.Width,
+                args.Height,
+                args.CurrentDirectory,
+                args.ShowHiddenFilesAndDirectories,
+                args.ShowSystemFilesAndDirectories
+            );
+
+            return await dialogHost.ShowDialog(dialog, args.OpenedHandler, args.ClosingHandler) as OpenDirectoryDialogResult;
+        }
+
         private static OpenDirectoryDialog InitDialog(double? width, double? height,
             string currentDirectory,
             bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
@@ -121,12 +159,23 @@ namespace MaterialDesignExtensions.Controls
     }
 
     /// <summary>
+    /// Arguments to initialize an open directory dialog.
+    /// </summary>
+    public class OpenDirectoryDialogArguments : FileSystemDialogArguments
+    {
+        /// <summary>
+        /// Creates a new <see cref="OpenDirectoryDialogArguments" />.
+        /// </summary>
+        public OpenDirectoryDialogArguments() : base() { }
+    }
+
+    /// <summary>
     /// The dialog result for <see cref="OpenDirectoryDialog" />.
     /// </summary>
     public class OpenDirectoryDialogResult : FileSystemDialogResult
     {
         /// <summary>
-        /// The selected directory as <see cref="DirectoryInfo" />
+        /// The selected directory as <see cref="DirectoryInfo" />.
         /// </summary>
         public DirectoryInfo DirectoryInfo { get; private set; }
 

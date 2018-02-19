@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,9 @@ using System.Threading.Tasks;
 using System.Windows;
 
 using MaterialDesignThemes.Wpf;
+
+using MaterialDesignExtensions.Converters;
+using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
 {
@@ -17,6 +21,9 @@ namespace MaterialDesignExtensions.Controls
     {
         protected static readonly string FileControlName = "fileControl";
 
+        /// <summary>
+        /// The current file of the dialog.
+        /// </summary>
         public static readonly DependencyProperty CurrentFileProperty = DependencyProperty.Register(
                 nameof(CurrentFile),
                 typeof(string),
@@ -39,6 +46,63 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+
+
+        /// <summary>
+        /// The possible file filters to select from for applying to the files inside the current directory.
+        /// Strings according to the original .NET API will be converted automatically
+        /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter).
+        /// </summary>
+        public static readonly DependencyProperty FiltersProperty = DependencyProperty.Register(
+            nameof(Filters),
+            typeof(IList<FileFilter>),
+            typeof(BaseFileDialog),
+            new PropertyMetadata(null));
+
+        /// <summary>
+        /// The possible file filters to select from for applying to the files inside the current directory.
+        /// Strings according to the original .NET API will be converted automatically
+        /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter).
+        /// </summary>
+        [TypeConverter(typeof(FileFiltersTypeConverter))]
+        public IList<FileFilter> Filters
+        {
+            get
+            {
+                return (IList<FileFilter>)GetValue(FiltersProperty);
+            }
+
+            set
+            {
+                SetValue(FiltersProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The index of the file filter to apply to the files inside the current directory.
+        /// </summary>
+        public static readonly DependencyProperty FilterIndexProperty = DependencyProperty.Register(
+            nameof(FilterIndex),
+            typeof(int),
+            typeof(BaseFileDialog),
+            new PropertyMetadata(-1));
+
+        /// <summary>
+        /// The index of the file filter to apply to the files inside the current directory.
+        /// </summary>
+        public int FilterIndex
+        {
+            get
+            {
+                return (int)GetValue(FilterIndexProperty);
+            }
+
+            set
+            {
+                SetValue(FilterIndexProperty, value);
+            }
+        }
+
         protected BaseFileControl m_fileControl;
 
         static BaseFileDialog()
@@ -46,6 +110,9 @@ namespace MaterialDesignExtensions.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(BaseFileDialog), new FrameworkPropertyMetadata(typeof(BaseFileDialog)));
         }
 
+        /// <summary>
+        /// Creates a new <see cref="BaseFileDialog" />.
+        /// </summary>
         public BaseFileDialog()
             : base()
         {
@@ -80,12 +147,40 @@ namespace MaterialDesignExtensions.Controls
     }
 
     /// <summary>
+    /// Arguments to initialize a file dialog.
+    /// </summary>
+    public abstract class FileDialogArguments : FileSystemDialogArguments
+    {
+        /// <summary>
+        /// The possible file filters to select from for applying to the files inside the current directory.
+        /// Strings according to the original .NET API will be converted automatically
+        /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter).
+        /// </summary>
+        public string Filters { get; set; }
+
+        /// <summary>
+        /// The index of the file filter to apply to the files inside the current directory.
+        /// </summary>
+        public int FilterIndex { get; set; }
+
+        /// <summary>
+        /// Creates a new <see cref="FileDialogArguments" />.
+        /// </summary>
+        public FileDialogArguments()
+            : base()
+        {
+            Filters = null;
+            FilterIndex = -1;
+        }
+    }
+
+    /// <summary>
     /// The base class for the dialog result of <see cref="OpenFileDialog" /> and <see cref="SaveFileDialog" />.
     /// </summary>
     public abstract class FileDialogResult : FileSystemDialogResult
     {
         /// <summary>
-        /// The selected file as <see cref="FileInfo" />
+        /// The selected file as <see cref="FileInfo" />.
         /// </summary>
         public FileInfo FileInfo { get; private set; }
 
@@ -100,6 +195,11 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="FileDialogResult" />.
+        /// </summary>
+        /// <param name="canceled">True if the dialog was canceled</param>
+        /// <param name="fileInfo">The selected file</param>
         public FileDialogResult(bool canceled, FileInfo fileInfo)
             : base(canceled)
         {

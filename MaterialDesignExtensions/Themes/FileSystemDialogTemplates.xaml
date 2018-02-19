@@ -31,6 +31,8 @@
                     <controls:OpenFileControl x:Name="fileControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                               CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               CurrentFile="{Binding Path=CurrentFile, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              Filters="{Binding Path=Filters, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              FilterIndex="{Binding Path=FilterIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 </ControlTemplate>
@@ -50,6 +52,8 @@
                                               CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               CurrentFile="{Binding Path=CurrentFile, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               Filename="{Binding Path=Filename, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              Filters="{Binding Path=Filters, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              FilterIndex="{Binding Path=FilterIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 </ControlTemplate>

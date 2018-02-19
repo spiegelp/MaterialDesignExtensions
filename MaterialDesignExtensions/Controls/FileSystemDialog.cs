@@ -16,6 +16,9 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public abstract class FileSystemDialog : Control
     {
+        /// <summary>
+        /// The current directory of the dialog.
+        /// </summary>
         public static readonly DependencyProperty CurrentDirectoryProperty = DependencyProperty.Register(
                 nameof(CurrentDirectory),
                 typeof(string),
@@ -38,6 +41,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Shows or hides hidden directories and files.
+        /// </summary>
         public static readonly DependencyProperty ShowHiddenFilesAndDirectoriesProperty = DependencyProperty.Register(
                 nameof(ShowHiddenFilesAndDirectories),
                 typeof(bool),
@@ -60,6 +66,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Shows or hides protected directories and files of the system.
+        /// </summary>
         public static readonly DependencyProperty ShowSystemFilesAndDirectoriesProperty = DependencyProperty.Register(
                 nameof(ShowSystemFilesAndDirectories),
                 typeof(bool),
@@ -87,6 +96,9 @@ namespace MaterialDesignExtensions.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FileSystemDialog), new FrameworkPropertyMetadata(typeof(FileSystemDialog)));
         }
 
+        /// <summary>
+        /// Creates a new <see cref="FileSystemDialog" />.
+        /// </summary>
         public FileSystemDialog() : base() { }
 
         protected DialogHost GetDialogHost()
@@ -126,6 +138,61 @@ namespace MaterialDesignExtensions.Controls
     }
 
     /// <summary>
+    /// Arguments to initialize a dialog.
+    /// </summary>
+    public abstract class FileSystemDialogArguments
+    {
+        /// <summary>
+        /// The fixed width of the dialog (nullable).
+        /// </summary>
+        public double? Width { get; set; }
+
+        /// <summary>
+        /// The fixed heigth of the dialog (nullable).
+        /// </summary>
+        public double? Height { get; set; }
+
+        /// <summary>
+        /// The current directory of the dialog.
+        /// </summary>
+        public string CurrentDirectory { get; set; }
+
+        /// <summary>
+        /// Shows or hides hidden directories and files.
+        /// </summary>
+        public bool ShowHiddenFilesAndDirectories { get; set; }
+
+        /// <summary>
+        /// Shows or hides protected directories and files of the system.
+        /// </summary>
+        public bool ShowSystemFilesAndDirectories { get; set; }
+
+        /// <summary>
+        /// Callback after openening the dialog.
+        /// </summary>
+        public DialogOpenedEventHandler OpenedHandler { get; set; }
+
+        /// <summary>
+        /// Callback after closing the dialog.
+        /// </summary>
+        public DialogClosingEventHandler ClosingHandler { get; set; }
+
+        /// <summary>
+        /// Creates a new <see cref="FileSystemDialogArguments" />.
+        /// </summary>
+        public FileSystemDialogArguments()
+        {
+            Width = null;
+            Height = null;
+            CurrentDirectory = null;
+            ShowHiddenFilesAndDirectories = false;
+            ShowSystemFilesAndDirectories = false;
+            OpenedHandler = null;
+            ClosingHandler = null;
+        }
+    }
+
+    /// <summary>
     /// Base class for the result of a dialog.
     /// </summary>
     public abstract class FileSystemDialogResult
@@ -135,6 +202,10 @@ namespace MaterialDesignExtensions.Controls
         /// </summary>
         public bool Canceled { get; protected set; }
 
+        /// <summary>
+        /// Creates a new <see cref="FileSystemDialogResult" />.
+        /// </summary>
+        /// <param name="canceled"></param>
         public FileSystemDialogResult(bool canceled)
         {
             Canceled = canceled;
