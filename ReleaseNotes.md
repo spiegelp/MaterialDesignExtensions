@@ -30,7 +30,7 @@
 * Initialize `Stepper.Steps` in the constructor
 ### vX.X.X (upcoming release)
 #### Features
-* File filtering for `OpenFileControl` and `SaveFileControl`
+* File filtering for `OpenFileControl`, `SaveFileControl`, `OpenFileDialog` and `SaveFileDialog`
 * Improved user interface for the file system controls
 #### Fixes
 * Type dots into `SaveFileControls` text field
