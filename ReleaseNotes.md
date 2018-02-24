@@ -28,13 +28,15 @@
 	* `StepNavigationCommand`
 #### Fixes
 * Initialize `Stepper.Steps` in the constructor
-### vX.X.X (upcoming release)
+### v2.0.0
 #### Features
 * File filtering for `OpenFileControl`, `SaveFileControl`, `OpenFileDialog` and `SaveFileDialog`
 * Improved user interface for the file system controls
 #### Fixes
-* Type dots into `SaveFileControls` text field
+* Type dots into `SaveFileControl`'s text field
 * Use `ItemsControl` instead of `ListBox` inside the file system controls
   * `ListBox.SelectionChanged` was raised several times without any explicit user input causing undesired behavior
+#### Obsolete
+* Old overloads of the show dialog methods are obsolete (in `OpenDirectoryControl` `OpenFileControl` and `SaveFileControl`)
 #### Breaking API
-* Modified or removed members in `FileSystemControl` and sub classes
+* Modified and removed members in `FileSystemControl` and sub classes
