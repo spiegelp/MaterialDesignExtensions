@@ -40,3 +40,6 @@
 * Old overloads of the show dialog methods are obsolete (in `OpenDirectoryControl` `OpenFileControl` and `SaveFileControl`)
 #### Breaking API
 * Modified and removed members in `FileSystemControl` and sub classes
+### vX.X.X (upcoming release)
+#### Fixes
+* Handle `null` in `FileFiltersTypeConverter`
