@@ -56,8 +56,7 @@ namespace MaterialDesignExtensionsDemo.Controls
             {
                 Width = 600,
                 Height = 400,
-                Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml",
-                FilterIndex = 0
+                Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml"
             };
 
             OpenFileDialogResult result = await OpenFileDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
@@ -81,8 +80,7 @@ namespace MaterialDesignExtensionsDemo.Controls
             {
                 Width = 600,
                 Height = 400,
-                Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml",
-                FilterIndex = 0
+                Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml"
             };
 
             SaveFileDialogResult result = await SaveFileDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);

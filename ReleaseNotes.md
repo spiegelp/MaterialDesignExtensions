@@ -37,9 +37,10 @@
 * Use `ItemsControl` instead of `ListBox` inside the file system controls
   * `ListBox.SelectionChanged` was raised several times without any explicit user input causing undesired behavior
 #### Obsolete
-* Old overloads of the show dialog methods are obsolete (in `OpenDirectoryControl` `OpenFileControl` and `SaveFileControl`)
+* Old overloads of the show dialog methods are obsolete (in `OpenDirectoryControl`, `OpenFileControl` and `SaveFileControl`)
 #### Breaking API
 * Modified and removed members in `FileSystemControl` and sub classes
 ### vX.X.X (upcoming release)
 #### Fixes
 * Handle `null` in `FileFiltersTypeConverter`
+* Consistent default value for `FileDialogArguments.FilterIndex`

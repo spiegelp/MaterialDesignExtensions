@@ -170,7 +170,7 @@ namespace MaterialDesignExtensions.Controls
             : base()
         {
             Filters = null;
-            FilterIndex = -1;
+            FilterIndex = 0;
         }
     }
 
