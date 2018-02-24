@@ -50,6 +50,7 @@ namespace MaterialDesignExtensions.Controls
         /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
         /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
         /// <returns></returns>
+        [Obsolete("Use the overloaded method with OpenFileDialogArguments instead")]
         public static async Task<OpenFileDialogResult> ShowDialogAsync(string dialogHostName, double? width = null, double? height = null,
             string currentDirectory = null,
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
@@ -93,6 +94,7 @@ namespace MaterialDesignExtensions.Controls
         /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
         /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
         /// <returns></returns>
+        [Obsolete("Use the overloaded method with OpenFileDialogArguments instead")]
         public static async Task<OpenFileDialogResult> ShowDialogAsync(DialogHost dialogHost, double? width = null, double? height = null,
             string currentDirectory = null,
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
