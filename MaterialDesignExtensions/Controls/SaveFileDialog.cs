@@ -158,7 +158,7 @@ namespace MaterialDesignExtensions.Controls
             SaveFileDialog dialog = new SaveFileDialog();
             InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
             dialog.Filename = filename;
-            dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<FileFilter>;
+            dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<IFileFilter>;
             dialog.FilterIndex = filterIndex;
 
             return dialog;

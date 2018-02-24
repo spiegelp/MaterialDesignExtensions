@@ -31,8 +31,8 @@ namespace MaterialDesignExtensions.Controllers
         private List<FileInfo> m_files;
         private bool m_showHiddenFilesAndDirectories;
         private bool m_showSystemFilesAndDirectories;
-        private IList<FileFilter> m_fileFilters;
-        private FileFilter m_fileFilterToApply;
+        private IList<IFileFilter> m_fileFilters;
+        private IFileFilter m_fileFilterToApply;
 
         /// <summary>
         /// The current directory shown in the control.
@@ -239,7 +239,7 @@ namespace MaterialDesignExtensions.Controllers
         /// <summary>
         /// The possible file filters to select from for applying to the files inside the current directory.
         /// </summary>
-        public IList<FileFilter> FileFilters
+        public IList<IFileFilter> FileFilters
         {
             get
             {
@@ -260,7 +260,7 @@ namespace MaterialDesignExtensions.Controllers
         /// <summary>
         /// The file filter to apply to the files inside the current directory.
         /// </summary>
-        public FileFilter FileFilterToApply
+        public IFileFilter FileFilterToApply
         {
             get
             {
@@ -384,7 +384,7 @@ namespace MaterialDesignExtensions.Controllers
                 {
                     if (fileSystemInfo is FileInfo fileInfo && m_fileFilterToApply != null)
                     {
-                        return m_fileFilterToApply.IsMatch(fileInfo.Name);
+                        return m_fileFilterToApply.IsMatch(fileInfo);
                     }
                     else
                     {
@@ -517,7 +517,7 @@ namespace MaterialDesignExtensions.Controllers
         /// </summary>
         /// <param name="fileFilters"></param>
         /// <param name="fileFilterToApply"></param>
-        public void SetFileFilter(IList<FileFilter> fileFilters, FileFilter fileFilterToApply)
+        public void SetFileFilter(IList<IFileFilter> fileFilters, IFileFilter fileFilterToApply)
         {
             if (m_fileFilters != fileFilters)
             {

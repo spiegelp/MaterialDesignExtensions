@@ -39,7 +39,7 @@ namespace MaterialDesignExtensions.Converters
 
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            if (value is IList<FileFilter> filters)
+            if (value is IList<IFileFilter> filters)
             {
                 return FileFilterHelper.ConvertFileFiltersToString(filters);
             }

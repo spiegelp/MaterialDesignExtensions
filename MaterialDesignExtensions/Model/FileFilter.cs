@@ -14,13 +14,51 @@ namespace MaterialDesignExtensions.Model
     /// <summary>
     /// A filter to apply to files in <see cref="MaterialDesignExtensions.Controls.OpenFileControl" /> and <see cref="MaterialDesignExtensions.Controls.SaveFileControl" />.
     /// </summary>
-    public class FileFilter : INotifyPropertyChanged
+    public interface IFileFilter
+    {
+        /// <summary>
+        /// The orignal filter portion string according to the original .NET API.
+        /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter)
+        /// </summary>
+        string Filters { get; }
+
+        /// <summary>
+        /// The label of the filter to show in the user interface.
+        /// </summary>
+        string Label { get; }
+
+        /// <summary>
+        /// The regular expressions used by this filter for filtering files.
+        /// </summary>
+        IEnumerable<string> RegularExpressions { get; }
+
+        /// <summary>
+        /// Tests if the specified filename matches any regular expression of this filter.
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        bool IsMatch(string filename);
+
+        /// <summary>
+        /// Tests if the filename of the specified file matches any regular expression of this filter.
+        /// </summary>
+        /// <param name="fileInfo"></param>
+        /// <returns></returns>
+        bool IsMatch(FileInfo fileInfo);
+
+        string ToString();
+    }
+
+    /// <summary>
+    /// An immutable filter to apply to files in <see cref="MaterialDesignExtensions.Controls.OpenFileControl" /> and <see cref="MaterialDesignExtensions.Controls.SaveFileControl" />.
+    /// </summary>
+    public class FileFilter : IFileFilter, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string m_label;
-        private string m_filters;
-        private IEnumerable<string> m_regularExpressions;
+        private readonly string m_label;
+        private readonly string m_filters;
+        private readonly IEnumerable<string> m_regularExpressions;
 
         /// <summary>
         /// The orignal filter portion string according to the original .NET API.
@@ -31,16 +69,6 @@ namespace MaterialDesignExtensions.Model
             get
             {
                 return m_filters;
-            }
-
-            set
-            {
-                if (m_filters != value)
-                {
-                    m_filters = value;
-
-                    OnPropertyChanged(nameof(Filters));
-                }
             }
         }
 
@@ -53,16 +81,6 @@ namespace MaterialDesignExtensions.Model
             {
                 return m_label;
             }
-
-            set
-            {
-                if (m_label != value)
-                {
-                    m_label = value;
-
-                    OnPropertyChanged(nameof(Label));
-                }
-            }
         }
 
         /// <summary>
@@ -74,26 +92,53 @@ namespace MaterialDesignExtensions.Model
             {
                 return m_regularExpressions;
             }
-
-            set
-            {
-                if (m_regularExpressions != value)
-                {
-                    m_regularExpressions = value;
-
-                    OnPropertyChanged(nameof(RegularExpressions));
-                }
-            }
+        }
+        
+        private FileFilter(string label, string filters, IEnumerable<string> regularExpressions)
+        {
+            m_label = label;
+            m_filters = filters;
+            m_regularExpressions = regularExpressions;
         }
 
         /// <summary>
-        /// Creates a new <see cref="FileFilter" />.
+        /// Creates a new, immutable <see cref="FileFilter" />.
+        /// <param name="label">The label of the filter</param>
+        /// <param name="filters">The filter portion string like: *.cs;*.xaml</param>
         /// </summary>
-        public FileFilter()
+        public static FileFilter Create(string label, string filters)
         {
-            m_label = null;
-            m_filters = null;
-            m_regularExpressions = null;
+            CheckArguments(label, filters);
+
+            IEnumerable<string> regularExpressions = FileFilterHelper.ParseFilterRegularExpressions(filters);
+
+            return Create(label, filters, regularExpressions);
+        }
+
+        /// <summary>
+        /// Creates a new, immutable <see cref="FileFilter" />.
+        /// <param name="label">The label of the filter</param>
+        /// <param name="filters">The filter portion string like: *.cs;*.xaml</param>
+        /// <param name="regularExpressions">The regular experssions to use</param>
+        /// </summary>
+        public static FileFilter Create(string label, string filters, IEnumerable<string> regularExpressions)
+        {
+            CheckArguments(label, filters);
+
+            return new FileFilter(label, filters, regularExpressions);
+        }
+
+        private static void CheckArguments(string label, string filters)
+        {
+            if (string.IsNullOrWhiteSpace(label))
+            {
+                throw new ArgumentException(nameof(label) + " must not be empty");
+            }
+
+            if (string.IsNullOrWhiteSpace(filters))
+            {
+                throw new ArgumentException(nameof(filters) + " must not be empty");
+            }
         }
 
         /// <summary>

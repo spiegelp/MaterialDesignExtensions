@@ -15,16 +15,16 @@ namespace MaterialDesignExtensions.Controllers
     /// </summary>
     public abstract class FileFilterHelper
     {
-        // private constructor to prevent object initialization
+        // abstract class with private constructor to prevent object initialization
         private FileFilterHelper() { }
 
         /// <summary>
         /// Parses the file filters out of a string similar to the original .NET API
         /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter).
         /// </summary>
-        /// <param name="filtersStr"></param>
-        /// <returns></returns>
-        public static IList<FileFilter> ParseFileFilters(string filtersStr)
+        /// <param name="filtersStr">The string containing the filters like: C#|*.cs|Web|*.html;*.css;*.js</param>
+        /// <returns>A list of the parsed filters or null if the input is empty</returns>
+        public static IList<IFileFilter> ParseFileFilters(string filtersStr)
         {
             if (string.IsNullOrWhiteSpace(filtersStr))
             {
@@ -39,7 +39,7 @@ namespace MaterialDesignExtensions.Controllers
                 throw new ArgumentException("invalid filter string");
             }
 
-            IList<FileFilter> filters = new List<FileFilter>();
+            IList<IFileFilter> filters = new List<IFileFilter>();
 
             for (int i = 0; i < filtersSplit.Length; i = i + 2)
             {
@@ -53,31 +53,31 @@ namespace MaterialDesignExtensions.Controllers
         /// Parses a file filter out of a filter portion string similar to the original .NET API
         /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter).
         /// </summary>
-        /// <param name="label"></param>
-        /// <param name="filters"></param>
+        /// <param name="label">The label of the filter</param>
+        /// <param name="filters">The filter portion string like: *.cs;*.xaml</param>
         /// <returns></returns>
-        public static FileFilter ParseFileFilter(string label, string filters)
+        public static IFileFilter ParseFileFilter(string label, string filters)
         {
             if (string.IsNullOrWhiteSpace(label))
             {
-                throw new ArgumentException("invalid filter string: label must not be empty");
+                throw new ArgumentException(nameof(label) + " must not be empty");
             }
 
             IEnumerable<string> regularExpressions = ParseFilterRegularExpressions(filters);
 
-            return new FileFilter() { Label = label, Filters = filters, RegularExpressions = regularExpressions };
+            return FileFilter.Create(label, filters, regularExpressions);
         }
 
         /// <summary>
         /// Creates regular expressions out of a filter portion string.
         /// </summary>
-        /// <param name="filters"></param>
+        /// <param name="filters">The filter portion string like: *.cs;*.xaml</param>
         /// <returns></returns>
         public static IEnumerable<string> ParseFilterRegularExpressions(string filters)
         {
             if (string.IsNullOrWhiteSpace(filters))
             {
-                throw new ArgumentException("invalid filter string: filters must not be empty");
+                throw new ArgumentException(nameof(filters) + " must not be empty");
             }
 
             string[] filtersSplit = filters.Split(';');
@@ -123,7 +123,7 @@ namespace MaterialDesignExtensions.Controllers
         /// </summary>
         /// <param name="fileFilter"></param>
         /// <returns></returns>
-        public static string ConvertFileFilterToString(FileFilter fileFilter)
+        public static string ConvertFileFilterToString(IFileFilter fileFilter)
         {
             return fileFilter.Label + "|" + fileFilter.Filters;
         }
@@ -134,11 +134,11 @@ namespace MaterialDesignExtensions.Controllers
         /// </summary>
         /// <param name="fileFilters"></param>
         /// <returns></returns>
-        public static string ConvertFileFiltersToString(IEnumerable<FileFilter> fileFilters)
+        public static string ConvertFileFiltersToString(IEnumerable<IFileFilter> fileFilters)
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (FileFilter fileFilter in fileFilters)
+            foreach (IFileFilter fileFilter in fileFilters)
             {
                 if (sb.Length > 0)
                 {

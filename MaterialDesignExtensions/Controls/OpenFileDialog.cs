@@ -131,7 +131,7 @@ namespace MaterialDesignExtensions.Controls
         {
             OpenFileDialog dialog = new OpenFileDialog();
             InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
-            dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<FileFilter>;
+            dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<IFileFilter>;
             dialog.FilterIndex = filterIndex;
 
             return dialog;

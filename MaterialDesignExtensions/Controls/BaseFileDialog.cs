@@ -55,7 +55,7 @@ namespace MaterialDesignExtensions.Controls
         /// </summary>
         public static readonly DependencyProperty FiltersProperty = DependencyProperty.Register(
             nameof(Filters),
-            typeof(IList<FileFilter>),
+            typeof(IList<IFileFilter>),
             typeof(BaseFileDialog),
             new PropertyMetadata(null));
 
@@ -65,11 +65,11 @@ namespace MaterialDesignExtensions.Controls
         /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter).
         /// </summary>
         [TypeConverter(typeof(FileFiltersTypeConverter))]
-        public IList<FileFilter> Filters
+        public IList<IFileFilter> Filters
         {
             get
             {
-                return (IList<FileFilter>)GetValue(FiltersProperty);
+                return (IList<IFileFilter>)GetValue(FiltersProperty);
             }
 
             set
@@ -85,7 +85,7 @@ namespace MaterialDesignExtensions.Controls
             nameof(FilterIndex),
             typeof(int),
             typeof(BaseFileDialog),
-            new PropertyMetadata(-1));
+            new PropertyMetadata(0));
 
         /// <summary>
         /// The index of the file filter to apply to the files inside the current directory.

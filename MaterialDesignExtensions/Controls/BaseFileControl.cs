@@ -79,7 +79,7 @@ namespace MaterialDesignExtensions.Controls
         /// </summary>
         public static readonly DependencyProperty FiltersProperty = DependencyProperty.Register(
             nameof(Filters),
-            typeof(IList<FileFilter>),
+            typeof(IList<IFileFilter>),
             typeof(BaseFileControl),
             new PropertyMetadata(null, FiltersChangedHandler));
 
@@ -89,11 +89,11 @@ namespace MaterialDesignExtensions.Controls
         /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter).
         /// </summary>
         [TypeConverter(typeof(FileFiltersTypeConverter))]
-        public IList<FileFilter> Filters
+        public IList<IFileFilter> Filters
         {
             get
             {
-                return (IList<FileFilter>)GetValue(FiltersProperty);
+                return (IList<IFileFilter>)GetValue(FiltersProperty);
             }
 
             set
@@ -109,7 +109,7 @@ namespace MaterialDesignExtensions.Controls
             nameof(FilterIndex),
             typeof(int),
             typeof(BaseFileControl),
-            new PropertyMetadata(-1, FiltersChangedHandler));
+            new PropertyMetadata(0, FiltersChangedHandler));
 
         /// <summary>
         /// The index of the file filter to apply to the files inside the current directory.
@@ -189,7 +189,7 @@ namespace MaterialDesignExtensions.Controls
         {
             if (args.Property == FiltersProperty)
             {
-                (obj as BaseFileControl)?.FileFiltersChangedHandler(args.NewValue as IList<FileFilter>);
+                (obj as BaseFileControl)?.FileFiltersChangedHandler(args.NewValue as IList<IFileFilter>);
             }
             else if (args.Property == FilterIndexProperty)
             {
@@ -197,7 +197,7 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private void FileFiltersChangedHandler(IList<FileFilter> newFilters)
+        private void FileFiltersChangedHandler(IList<IFileFilter> newFilters)
         {
             FileFiltersChangedHandler(newFilters, FilterIndex);
         }
@@ -207,9 +207,9 @@ namespace MaterialDesignExtensions.Controls
             FileFiltersChangedHandler(Filters, newFilterIndex);
         }
 
-        private void FileFiltersChangedHandler(IList<FileFilter> newFilters, int newFilterIndex)
+        private void FileFiltersChangedHandler(IList<IFileFilter> newFilters, int newFilterIndex)
         {
-            FileFilter fileFilter = null;
+            IFileFilter fileFilter = null;
 
             if (newFilters != null && newFilterIndex >= 0 && newFilterIndex < newFilters.Count)
             {
