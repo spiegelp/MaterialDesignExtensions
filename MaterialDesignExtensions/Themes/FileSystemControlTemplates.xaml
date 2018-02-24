@@ -582,14 +582,18 @@
                                 <TextBlock FontSize="20" Margin="72,0,16,0"
                                            Text="{x:Static localization:Strings.SelectDirectory}" VerticalAlignment="Center" />
                             </DockPanel>
-                            <Border Grid.Row="1" MinHeight="64" Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
-                                <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
+                            <Border Grid.Row="1" MinHeight="64" MaxHeight="128"
+                                    Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                                <ScrollViewer x:Name="pathPartsScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                              HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                    <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </ScrollViewer>
                             </Border>
                             <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
                                           ItemTemplate="{StaticResource directoryInfoItemTemplate}" />
@@ -650,14 +654,18 @@
                                 <TextBlock FontSize="20" Margin="72,0,16,0"
                                            Text="{x:Static localization:Strings.OpenFile}" VerticalAlignment="Center" />
                             </DockPanel>
-                            <Border Grid.Row="1" MinHeight="64" Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
-                                <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
+                            <Border Grid.Row="1" MinHeight="64" MaxHeight="128"
+                                    Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                                <ScrollViewer x:Name="pathPartsScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                              HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                    <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </ScrollViewer>
                             </Border>
                             <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
                                           ItemTemplateSelector="{StaticResource fileSystemEntryItemTemplateSelector}" />
@@ -718,14 +726,18 @@
                                 <TextBlock FontSize="20" Margin="72,0,16,0"
                                            Text="{x:Static localization:Strings.SaveFile}" VerticalAlignment="Center" />
                             </DockPanel>
-                            <Border Grid.Row="1" MinHeight="64" Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
-                                <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
+                            <Border Grid.Row="1" MinHeight="64" MaxHeight="128"
+                                    Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                                <ScrollViewer x:Name="pathPartsScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                              HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                    <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </ScrollViewer>
                             </Border>
                             <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
                                           ItemTemplateSelector="{StaticResource fileSystemEntryItemTemplateSelector}" />

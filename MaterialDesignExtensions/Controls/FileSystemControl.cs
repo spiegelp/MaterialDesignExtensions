@@ -24,6 +24,7 @@ namespace MaterialDesignExtensions.Controls
     public abstract class FileSystemControl : Control
     {
         protected const string DrawerHostName = "drawerHost";
+        protected const string PathPartsScrollViewerName = "pathPartsScrollViewer";
         protected const string PathPartsItemsControlName = "pathPartsItemsControl";
         protected const string FileSystemEntryItemsControlName = "fileSystemEntryItemsControl";
         protected const string EmptyDirectoryTextBlockName = "emptyDirectoryTextBlock";
@@ -209,8 +210,10 @@ namespace MaterialDesignExtensions.Controls
 
         protected FileSystemController m_controller;
 
+        protected ScrollViewer m_pathPartsScrollViewer;
         protected ItemsControl m_pathPartsItemsControl;
         // use an ItemsControl instead of a ListBox, because the ListBox raises several selection changed events without an explicit user input
+        // another advantage; non selectable items such as headers can be added
         protected ItemsControl m_fileSystemEntryItemsControl;
         // private to force the usage of the lazy getter, because it only works after applying the template
         private ScrollViewer m_fileSystemEntryItemsScrollViewer;
@@ -233,6 +236,7 @@ namespace MaterialDesignExtensions.Controls
             CommandBindings.Add(new CommandBinding(ShowInfoCommand, ShowInfoCommandHandler));
             CommandBindings.Add(new CommandBinding(CancelCommand, CancelCommandHandler));
 
+            m_pathPartsScrollViewer = null;
             m_pathPartsItemsControl = null;
             m_fileSystemEntryItemsScrollViewer = null;
             m_fileSystemEntryItemsControl = null;
@@ -244,6 +248,8 @@ namespace MaterialDesignExtensions.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+
+            m_pathPartsScrollViewer = Template.FindName(PathPartsScrollViewerName, this) as ScrollViewer;
 
             m_pathPartsItemsControl = Template.FindName(PathPartsItemsControlName, this) as ItemsControl;
             m_pathPartsItemsControl.ItemsSource = m_controller.CurrentDirectoryPathParts;
@@ -364,6 +370,8 @@ namespace MaterialDesignExtensions.Controls
                 else if (args.PropertyName == nameof(FileSystemController.CurrentDirectoryPathParts))
                 {
                     m_pathPartsItemsControl.ItemsSource = m_controller.CurrentDirectoryPathParts;
+
+                    m_pathPartsScrollViewer.ScrollToEnd();
                 }
                 else if (args.PropertyName == nameof(FileSystemController.ShowHiddenFilesAndDirectories))
                 {
