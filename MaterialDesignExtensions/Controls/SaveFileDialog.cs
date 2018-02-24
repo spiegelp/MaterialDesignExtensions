@@ -165,10 +165,19 @@ namespace MaterialDesignExtensions.Controls
         }
     }
 
+    /// <summary>
+    /// Arguments to initialize a save file dialog.
+    /// </summary>
     public class SaveFileDialogArguments : FileDialogArguments
     {
+        /// <summary>
+        /// The name of the file itself without the full path.
+        /// </summary>
         public string Filename { get; set; }
 
+        /// <summary>
+        /// Creates a new <see cref="SaveFileDialogArguments" />.
+        /// </summary>
         public SaveFileDialogArguments() : base() { }
     }
 
