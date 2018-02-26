@@ -11,12 +11,11 @@
         <ListBox Style="{StaticResource MaterialDesignGridList}" ItemsSource="{Binding Path=Items, Mode=OneTime}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                            Padding="8">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <materialDesign:PackIcon Kind="{Binding Path=Kind, Mode=OneTime}" Height="32" Width="32" HorizontalAlignment="Center" />
-                            <TextBlock FontSize="12" Text="{Binding Path=Label, Mode=OneTime}" Margin="0,8,0,0" HorizontalAlignment="Center" />
-                        </StackPanel>
+                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="8">
+                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="64" Height="64">
+                            <TextBlock DockPanel.Dock="Bottom" FontSize="12" Text="{Binding Path=Label, Mode=OneTime}" Margin="0,8,0,0" HorizontalAlignment="Center" />
+                            <materialDesign:PackIcon Kind="{Binding Path=Kind, Mode=OneTime}" Height="32" Width="32" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </DockPanel>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
