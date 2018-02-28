@@ -80,5 +80,14 @@ namespace MaterialDesignExtensionsDemo
         {
             Process.Start("https://github.com/spiegelp/MaterialDesignExtensions");
         }
+
+        private void GoToDocumentation(object sender, RoutedEventArgs args)
+        {
+
+            if (contentControl.Content is ViewModel.ViewModel viewModel && !string.IsNullOrWhiteSpace(viewModel.DocumentationUrl))
+            {
+                Process.Start(viewModel.DocumentationUrl);
+            }
+        }
     }
 }

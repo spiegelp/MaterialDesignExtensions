@@ -12,6 +12,14 @@ namespace MaterialDesignExtensionsDemo.ViewModel
     {
         private List<GridListItem> m_items;
 
+        public override string DocumentationUrl
+        {
+            get
+            {
+                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki/Grid-list";
+            }
+        }
+
         public List<GridListItem> Items
         {
             get

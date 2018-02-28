@@ -11,6 +11,14 @@ namespace MaterialDesignExtensionsDemo.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public virtual string DocumentationUrl
+        {
+            get
+            {
+                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki";
+            }
+        }
+
         public ViewModel() { }
 
         protected void OnPropertyChanged(string propertyName)

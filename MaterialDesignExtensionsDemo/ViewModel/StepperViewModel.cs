@@ -14,6 +14,14 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         private StepperLayout m_layout;
         private bool m_isLinear;
 
+        public override string DocumentationUrl
+        {
+            get
+            {
+                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki/Stepper";
+            }
+        }
+
         public bool IsLinear
         {
             get

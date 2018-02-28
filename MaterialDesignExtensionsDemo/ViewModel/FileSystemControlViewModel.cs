@@ -12,6 +12,14 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         private bool m_showHiddenFilesAndDirectories;
         private bool m_showSystemFilesAndDirectories;
 
+        public override string DocumentationUrl
+        {
+            get
+            {
+                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki/File-system-controls";
+            }
+        }
+
         public string SelectedAction
         {
             get

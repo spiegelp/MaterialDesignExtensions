@@ -57,6 +57,9 @@
                         <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="8,0" ToolTip="Material Design Exentions on GitHub" Click="GoToGitHubButtonClickHandler">
                             <wpfLib:PackIcon Kind="GithubCircle" Height="24" Width="24" />
                         </Button>
+                        <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="8,0" ToolTip="Documentation" Click="GoToDocumentation">
+                            <wpfLib:PackIcon Kind="HelpCircle" Height="24" Width="24" />
+                        </Button>
                     </controlsLib:AppBar>
                     <Border Grid.Row="1" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource MaterialDesignDivider}">
                         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">

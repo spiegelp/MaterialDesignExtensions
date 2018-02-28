@@ -12,6 +12,14 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         private int m_min;
         private int m_max;
 
+        public override string DocumentationUrl
+        {
+            get
+            {
+                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki/Oversized-number-spinner";
+            }
+        }
+
         public int Value
         {
             get
