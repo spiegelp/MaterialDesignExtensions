@@ -14,6 +14,8 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public class OversizedNumberSpinner : Control
     {
+        private const string ValueTextBoxName = "ValueTextBox";
+
         public static RoutedCommand EditValueCommand = new RoutedCommand();
         public static RoutedCommand MinusCommand = new RoutedCommand();
         public static RoutedCommand PlusCommand = new RoutedCommand();
@@ -82,13 +84,7 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private TextBox ValueTextBox
-        {
-            get
-            {
-                return Template.FindName("ValueTextBox", this) as TextBox;
-            }
-        }
+        private TextBox m_valueTextBox;
 
         static OversizedNumberSpinner()
         {
@@ -101,12 +97,40 @@ namespace MaterialDesignExtensions.Controls
             CommandBindings.Add(new CommandBinding(EditValueCommand, EditValueCommandHandler));
             CommandBindings.Add(new CommandBinding(MinusCommand, MinusCommandHandler));
             CommandBindings.Add(new CommandBinding(PlusCommand, PlusCommandHandler));
+
+            Loaded += LoadedHandler;
+            Unloaded += UnloadedHandler;
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (m_valueTextBox != null)
+            {
+                m_valueTextBox.LostFocus -= LostFocusHandler;
+                m_valueTextBox.KeyUp -= KeyUpHandler;
+            }
+
+            m_valueTextBox = Template.FindName(ValueTextBoxName, this) as TextBox;
+        }
+
+        private void LoadedHandler(object sender, RoutedEventArgs args)
+        {
+            m_valueTextBox.LostFocus += LostFocusHandler;
+            m_valueTextBox.KeyUp += KeyUpHandler;
+        }
+
+        private void UnloadedHandler(object sender, RoutedEventArgs args)
+        {
+            m_valueTextBox.LostFocus -= LostFocusHandler;
+            m_valueTextBox.KeyUp -= KeyUpHandler;
         }
 
         private void EditValueCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
             IsEditing = true;
-            ValueTextBox.Focus();
+            m_valueTextBox.Focus();
         }
 
         private void MinusCommandHandler(object sender, ExecutedRoutedEventArgs args)
@@ -134,12 +158,17 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        public override void OnApplyTemplate()
+        private void LostFocusHandler(object sender, EventArgs args)
         {
-            base.OnApplyTemplate();
+            IsEditing = false;
+        }
 
-            ValueTextBox.LostFocus += (sender, args) => IsEditing = false;
-            ValueTextBox.KeyUp += (sender, args) => { if (args.Key == Key.Enter) Focus(); };
+        private void KeyUpHandler(object sender, KeyEventArgs args)
+        {
+            if (args.Key == Key.Enter)
+            {
+                Focus();
+            }
         }
     }
 }

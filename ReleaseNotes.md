@@ -52,3 +52,5 @@
   * `Medium`
   * `MediumProminent`
   * `MediumExtraProminent`
+#### Fixes
+* Unregister old event handlers on applying templates

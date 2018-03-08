@@ -40,6 +40,12 @@ namespace MaterialDesignExtensions.Controls
         {
             base.OnApplyTemplate();
 
+            if (m_openDirectoryControl != null)
+            {
+                m_openDirectoryControl.Cancel -= CancelHandler;
+                m_openDirectoryControl.DirectorySelected -= OpenDirectoryControlDirectorySelectedHandler;
+            }
+
             m_openDirectoryControl = Template.FindName(OpenDirectoryControlName, this) as OpenDirectoryControl;
         }
 
