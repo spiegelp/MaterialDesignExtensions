@@ -89,6 +89,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\SearchTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\StepperTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -109,8 +113,10 @@
     <Compile Include="Controls\OpenFileControl.cs" />
     <Compile Include="Controls\OpenFileDialog.cs" />
     <Compile Include="Controls\OversizedNumberSpinner.cs" />
+    <Compile Include="Controls\PersistentSearch.cs" />
     <Compile Include="Controls\SaveFileControl.cs" />
     <Compile Include="Controls\SaveFileDialog.cs" />
+    <Compile Include="Controls\SearchBase.cs" />
     <Compile Include="Controls\StepButtonBar.cs" />
     <Compile Include="Controls\Stepper.cs" />
     <Compile Include="Converters\AsyncImageTask.cs" />

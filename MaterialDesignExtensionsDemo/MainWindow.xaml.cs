@@ -45,7 +45,8 @@ namespace MaterialDesignExtensionsDemo
                 new NavigationItem() { Label = "Open directory", Action = () => new OpenDirectoryControlViewModel() },
                 new NavigationItem() { Label = "Open file", Action = () => new OpenFileControlViewModel() },
                 new NavigationItem() { Label = "Save file", Action = () => new SaveFileControlViewModel() },
-                new NavigationItem() { Label = "Directory and file dialogs", Action = () => new FileSystemDialogViewModel() }
+                new NavigationItem() { Label = "Directory and file dialogs", Action = () => new FileSystemDialogViewModel() },
+                new NavigationItem() { Label = "Search", Action = () => new SearchViewModel() }
             };
 
             InitializeComponent();
