@@ -38,12 +38,24 @@
                 <controls:AppBar Type="Prominent" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
                 <TextBlock Text="Prominent app bar with title in prominent area" Margin="0,32,0,8" />
                 <controls:AppBar Type="Prominent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <TextBlock Text="Extra prominent app bar with title in prominent area" Margin="0,32,0,8" />
+                <controls:AppBar Type="ExtraProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
                 <TextBlock Text="Dense app bar" Margin="0,32,0,8" />
                 <controls:AppBar Type="Dense" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" />
                 <TextBlock Text="Dense prominent app bar" Margin="0,32,0,8" />
                 <controls:AppBar Type="DenseProminent" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
                 <TextBlock Text="Dense prominent app bar with title in prominent area" Margin="0,32,0,8" />
                 <controls:AppBar Type="DenseProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <TextBlock Text="Dense extra prominent app bar with title in prominent area" Margin="0,32,0,8" />
+                <controls:AppBar Type="DenseExtraProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <TextBlock Text="Medium app bar" Margin="0,32,0,8" />
+                <controls:AppBar Type="Medium" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" />
+                <TextBlock Text="Medium prominent app bar" Margin="0,32,0,8" />
+                <controls:AppBar Type="MediumProminent" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <TextBlock Text="Medium prominent app bar with title in prominent area" Margin="0,32,0,8" />
+                <controls:AppBar Type="MediumProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <TextBlock Text="Medium extra prominent app bar with title in prominent area" Margin="0,32,0,8" />
+                <controls:AppBar Type="MediumExtraProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

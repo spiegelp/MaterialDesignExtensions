@@ -44,3 +44,11 @@
 #### Fixes
 * Handle `null` in `FileFiltersTypeConverter`
 * Consistent default value for `FileDialogArguments.FilterIndex`
+### vX.X.X (upcoming release)
+#### Features
+* Additional layouts for `AppBar`
+  * `ExtraProminent`
+  * `DenseExtraProminent`
+  * `Medium`
+  * `MediumProminent`
+  * `MediumExtraProminent`

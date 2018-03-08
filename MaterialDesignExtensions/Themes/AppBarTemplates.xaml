@@ -48,11 +48,26 @@
                                         <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="Prominent">
                                             <Setter Property="Height" Value="64" />
                                         </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="ExtraProminent">
+                                            <Setter Property="Height" Value="64" />
+                                        </DataTrigger>
                                         <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="Dense">
                                             <Setter Property="Height" Value="48" />
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="DenseProminent">
                                             <Setter Property="Height" Value="48" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="DenseExtraProminent">
+                                            <Setter Property="Height" Value="48" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="Medium">
+                                            <Setter Property="Height" Value="56" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="MediumProminent">
+                                            <Setter Property="Height" Value="56" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource TemplatedParent}}" Value="MediumExtraProminent">
+                                            <Setter Property="Height" Value="56" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -146,11 +161,26 @@
             <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="Prominent">
                 <Setter Property="Height" Value="{x:Static controls:AppBar.ProminentHeight}" />
             </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="ExtraProminent">
+                <Setter Property="Height" Value="{x:Static controls:AppBar.ExtraProminentHeight}" />
+            </DataTrigger>
             <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="Dense">
                 <Setter Property="Height" Value="{x:Static controls:AppBar.DenseHeight}" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="DenseProminent">
                 <Setter Property="Height" Value="{x:Static controls:AppBar.DenseProminentHeight}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="DenseExtraProminent">
+                <Setter Property="Height" Value="{x:Static controls:AppBar.DenseExtraProminentHeight}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="Medium">
+                <Setter Property="Height" Value="{x:Static controls:AppBar.MediumHeight}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="MediumProminent">
+                <Setter Property="Height" Value="{x:Static controls:AppBar.MediumProminentHeight}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="MediumExtraProminent">
+                <Setter Property="Height" Value="{x:Static controls:AppBar.MediumExtraProminentHeight}" />
             </DataTrigger>
         </Style.Triggers>
     </Style>
