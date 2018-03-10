@@ -29,6 +29,11 @@ namespace MaterialDesignExtensions.Controls
         public const double ProminentHeight = 128;
 
         /// <summary>
+        /// The height of an extra prominent app bar.
+        /// </summary>
+        public const double ExtraProminentHeight = 136;
+
+        /// <summary>
         /// The height of a dense app bar.
         /// </summary>
         public const double DenseHeight = 48;
@@ -37,6 +42,26 @@ namespace MaterialDesignExtensions.Controls
         /// The height of a dense prominent app bar.
         /// </summary>
         public const double DenseProminentHeight = 96;
+
+        /// <summary>
+        /// The height of a dense extra prominent app bar.
+        /// </summary>
+        public const double DenseExtraProminentHeight = 120;
+
+        /// <summary>
+        /// The height of a medium app bar.
+        /// </summary>
+        public const double MediumHeight = 56;
+
+        /// <summary>
+        /// The height of a medium prominent app bar.
+        /// </summary>
+        public const double MediumProminentHeight = 102;
+
+        /// <summary>
+        /// The height of a dense medium prominent app bar.
+        /// </summary>
+        public const double MediumExtraProminentHeight = 128;
 
         /// <summary>
         /// The icon to show in the upper left corner.
@@ -267,6 +292,11 @@ namespace MaterialDesignExtensions.Controls
         Prominent,
 
         /// <summary>
+        /// <see cref="AppBar" /> with extra prominent height.
+        /// </summary>
+        ExtraProminent,
+
+        /// <summary>
         /// <see cref="AppBar" /> with dense height.
         /// </summary>
         Dense,
@@ -274,7 +304,27 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// <see cref="AppBar" /> with dense prominent height.
         /// </summary>
-        DenseProminent
+        DenseProminent,
+
+        /// <summary>
+        /// <see cref="AppBar" /> with dense extra prominent area.
+        /// </summary>
+        DenseExtraProminent,
+
+        /// <summary>
+        /// <see cref="AppBar" /> with medium height.
+        /// </summary>
+        Medium,
+
+        /// <summary>
+        /// <see cref="AppBar" /> with medium prominent height.
+        /// </summary>
+        MediumProminent,
+
+        /// <summary>
+        /// <see cref="AppBar" /> with medium extra prominent height.
+        /// </summary>
+        MediumExtraProminent
     }
 
     /// <summary>

@@ -126,6 +126,12 @@ namespace MaterialDesignExtensions.Controls
         {
             base.OnApplyTemplate();
 
+            if (m_fileControl != null)
+            {
+                m_fileControl.Cancel -= CancelHandler;
+                m_fileControl.FileSelected -= OpenDirectoryControlFileSelectedHandler;
+            }
+
             m_fileControl = Template.FindName(FileControlName, this) as BaseFileControl;
         }
 
