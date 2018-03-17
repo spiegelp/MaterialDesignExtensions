@@ -13,6 +13,22 @@ namespace MaterialDesignExtensionsDemo.ViewModel
     {
         private StepperLayout m_layout;
         private bool m_isLinear;
+        private bool m_blockNavigationOnValidationErrors;
+
+        public bool BlockNavigationOnValidationErrors
+        {
+            get
+            {
+                return m_blockNavigationOnValidationErrors;
+            }
+
+            set
+            {
+                m_blockNavigationOnValidationErrors = value;
+
+                OnPropertyChanged(nameof(BlockNavigationOnValidationErrors));
+            }
+        }
 
         public override string DocumentationUrl
         {
@@ -73,7 +89,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
                     new Step() { Header = new StepTitleHeader() { FirstLevelTitle = "What is a Stepper?" }, Content = new StepperTutorialOneViewModel() },
                     new Step() { Header = new StepTitleHeader() { FirstLevelTitle = "Layout and navigation" }, Content = new StepperTutorialTwoViewModel() },
                     new Step() { Header = new StepTitleHeader() { FirstLevelTitle = "Steps", SecondLevelTitle = "Header and content" }, Content = new StepperTutorialThreeViewModel() },
-                    new Step() { Header = new StepTitleHeader() { FirstLevelTitle = "Validation" }, Content = new StepperTutorialFourViewModel() }
+                    new ValidationStep()
                 };
             }
         }
@@ -83,26 +99,63 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         {
             m_layout = StepperLayout.Horizontal;
             m_isLinear = false;
+            m_blockNavigationOnValidationErrors = false;
         }
     }
 
-    public class StepperTutorialOneViewModel
+    public class ValidationStep : Step
+    {
+        public ValidationStep()
+            : base()
+        {
+            Header = new StepTitleHeader() { FirstLevelTitle = "Validation" };
+            Content = new StepperTutorialFourViewModel();
+        }
+
+        public override void Validate()
+        {
+            // example: the user must agree to the license in order to proceed to the next step
+            HasValidationErrors = !((StepperTutorialFourViewModel)Content).AgreedToLicense;
+        }
+    }
+
+    public class StepperTutorialOneViewModel : ViewModel
     {
         public StepperTutorialOneViewModel() { }
     }
 
-    public class StepperTutorialTwoViewModel
+    public class StepperTutorialTwoViewModel : ViewModel
     {
         public StepperTutorialTwoViewModel() { }
     }
 
-    public class StepperTutorialThreeViewModel
+    public class StepperTutorialThreeViewModel : ViewModel
     {
         public StepperTutorialThreeViewModel() { }
     }
 
-    public class StepperTutorialFourViewModel
+    public class StepperTutorialFourViewModel : ViewModel
     {
-        public StepperTutorialFourViewModel() { }
+        private bool m_agreedToLicense;
+
+        public bool AgreedToLicense
+        {
+            get
+            {
+                return m_agreedToLicense;
+            }
+
+            set
+            {
+                m_agreedToLicense = value;
+
+                OnPropertyChanged(nameof(AgreedToLicense));
+            }
+        }
+
+        public StepperTutorialFourViewModel()
+        {
+            m_agreedToLicense = false;
+        }
     }
 }

@@ -84,6 +84,7 @@
     <Compile Include="Controls\SaveFileControlControl.xaml.cs">
       <DependentUpon>SaveFileControlControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AlertDialogViewModel.cs" />
     <Compile Include="ViewModel\AppBarViewModel.cs" />
     <Compile Include="ViewModel\FileSystemControlViewModel.cs" />
     <Compile Include="ViewModel\FileSystemDialogViewModel.cs" />
