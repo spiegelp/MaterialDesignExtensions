@@ -2,7 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
+                    xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters"
                     xmlns:localization="clr-namespace:MaterialDesignExtensions.Localization">
+
+    <converters:BooleanOrToVisibilityConverter x:Key="orTrueAsVisibleConverter" TrueValue="Visible" FalseValue="Hidden" />
+    <converters:BooleanOrToVisibilityConverter x:Key="orFalseAsVisibleConverter" TrueValue="Hidden" FalseValue="Visible" />
+    <converters:NotNullBooleanConverter x:Key="notNullBooleanConverter" />
 
     <Style TargetType="{x:Type controls:PersistentSearch}">
         <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
@@ -13,16 +18,35 @@
                 <ControlTemplate TargetType="{x:Type controls:PersistentSearch}">
                     <Border Background="{TemplateBinding Background}" CornerRadius="2"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="100*" />
+                            </Grid.ColumnDefinitions>
+                            <wpfLib:PackIcon Kind="Magnify" Width="24" Height="24"
+                                             HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <wpfLib:PackIcon.Visibility>
+                                    <MultiBinding Converter="{StaticResource orFalseAsVisibleConverter}">
+                                        <Binding Path="IsFocused" ElementName="searchTextBox" />
+                                        <Binding Path="SearchTerm" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource notNullBooleanConverter}" />
+                                    </MultiBinding>
+                                </wpfLib:PackIcon.Visibility>
+                            </wpfLib:PackIcon>
                             <Button x:Name="cancelButton" DockPanel.Dock="Left" Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                                    Margin="8,0,0,0" VerticalAlignment="Center">
+                                    Margin="8,0,8,0" VerticalAlignment="Center">
+                                <Button.Visibility>
+                                    <MultiBinding Converter="{StaticResource orTrueAsVisibleConverter}">
+                                        <Binding Path="IsFocused" ElementName="searchTextBox" />
+                                        <Binding Path="SearchTerm" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource notNullBooleanConverter}" />
+                                    </MultiBinding>
+                                </Button.Visibility>
                                 <wpfLib:PackIcon Kind="ArrowLeft" Width="24" Height="24" />
                             </Button>
-                            <TextBox wpfLib:HintAssist.Hint="{x:Static localization:Strings.Search}"
+                            <TextBox x:Name="searchTextBox" Grid.Column="1" wpfLib:HintAssist.Hint="{x:Static localization:Strings.Search}"
                                      Text="{Binding Path=SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}}"
                                      FontSize="20"
-                                     Margin="16,8" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                        </DockPanel>
+                                     Margin="16,8,8,8" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

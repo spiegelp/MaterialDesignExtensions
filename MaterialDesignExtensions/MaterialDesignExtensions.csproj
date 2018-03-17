@@ -121,6 +121,7 @@
     <Compile Include="Controls\Stepper.cs" />
     <Compile Include="Converters\AsyncImageTask.cs" />
     <Compile Include="Converters\BooleanOrConverter.cs" />
+    <Compile Include="Converters\BooleanOrToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeAgoConverter.cs" />
     <Compile Include="Converters\EmptyEnumerableVisibilityConverter.cs" />

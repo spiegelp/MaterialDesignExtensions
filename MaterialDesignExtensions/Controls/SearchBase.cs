@@ -12,6 +12,7 @@ namespace MaterialDesignExtensions.Controls
     public class SearchBase : Control
     {
         protected const string CancelButtonName = "cancelButton";
+        protected const string SearchTextBoxName = "searchTextBox";
 
         public static readonly RoutedEvent SearchEvent = EventManager.RegisterRoutedEvent(
             nameof(Search), RoutingStrategy.Bubble, typeof(SearchEventHandler), typeof(SearchBase));
@@ -27,11 +28,6 @@ namespace MaterialDesignExtensions.Controls
             {
                 RemoveHandler(SearchEvent, value);
             }
-        }
-
-        public string SearchTerm
-        {
-            get; set;
         }
 
         public static readonly DependencyProperty SearchCommandProperty = DependencyProperty.Register(
@@ -50,12 +46,30 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        public static readonly DependencyProperty SearchTermProperty = DependencyProperty.Register(
+            nameof(SearchTerm), typeof(string), typeof(SearchBase), new PropertyMetadata(null, null));
+
+        public string SearchTerm
+        {
+            get
+            {
+                return (string)GetValue(SearchTermProperty);
+            }
+
+            set
+            {
+                SetValue(SearchTermProperty, value);
+            }
+        }
+
         protected Button m_cancelButton;
+        protected TextBox m_searchTextBox;
 
         public SearchBase()
             : base()
         {
             m_cancelButton = null;
+            m_searchTextBox = null;
         }
 
         public override void OnApplyTemplate()
@@ -69,26 +83,45 @@ namespace MaterialDesignExtensions.Controls
 
             m_cancelButton = Template.FindName(CancelButtonName, this) as Button;
             m_cancelButton.Click += CancelClickHandler;
+
+            if (m_searchTextBox != null)
+            {
+                m_searchTextBox.KeyUp -= SearchTextBoxKeyUpHandler;
+            }
+
+            m_searchTextBox = Template.FindName(SearchTextBoxName, this) as TextBox;
+            m_searchTextBox.KeyUp += SearchTextBoxKeyUpHandler;
         }
 
         protected void CancelClickHandler(object sender, RoutedEventArgs args)
         {
-            //
+            SearchTerm = null;
         }
 
         protected void SearchClickHander()
         {
+            DoSearch();
+        }
 
+        private void SearchTextBoxKeyUpHandler(object sender, KeyEventArgs args)
+        {
+            if (args.Key == Key.Enter)
+            {
+                DoSearch();
+            }
         }
 
         protected void DoSearch()
         {
-            SearchEventArgs eventArgs = new SearchEventArgs(SearchEvent, this, SearchTerm);
-            RaiseEvent(eventArgs);
-
-            if (SearchCommand != null && SearchCommand.CanExecute(SearchTerm))
+            if (!string.IsNullOrWhiteSpace(SearchTerm))
             {
-                SearchCommand.Execute(SearchTerm);
+                SearchEventArgs eventArgs = new SearchEventArgs(SearchEvent, this, SearchTerm);
+                RaiseEvent(eventArgs);
+
+                if (SearchCommand != null && SearchCommand.CanExecute(SearchTerm))
+                {
+                    SearchCommand.Execute(SearchTerm);
+                }
             }
         }
     }

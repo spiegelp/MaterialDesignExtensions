@@ -10,6 +10,8 @@ namespace MaterialDesignExtensions.Converters
 {
     public class BooleanOrConverter : IMultiValueConverter
     {
+        public BooleanOrConverter() { }
+
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             bool result = false;

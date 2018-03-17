@@ -13,9 +13,12 @@ namespace MaterialDesignExtensions.Converters
     {
         public Visibility FalseValue { get; set; }
 
+        public Visibility TrueValue { get; set; }
+
         public BoolToVisibilityConverter()
         {
             FalseValue = Visibility.Collapsed;
+            TrueValue = Visibility.Visible;
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -26,7 +29,7 @@ namespace MaterialDesignExtensions.Converters
             }
             else
             {
-                return Visibility.Visible;
+                return TrueValue;
             }
         }
 
