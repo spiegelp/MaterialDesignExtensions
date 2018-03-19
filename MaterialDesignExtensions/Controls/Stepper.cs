@@ -48,12 +48,12 @@ namespace MaterialDesignExtensions.Controls
         /// An event raised by changing to active <see cref="IStep" />.
         /// </summary>
         public static readonly RoutedEvent ActiveStepChangedEvent = EventManager.RegisterRoutedEvent(
-            nameof(ActiveStepChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Stepper));
+            nameof(ActiveStepChanged), RoutingStrategy.Bubble, typeof(ActiveStepChangedEventHandler), typeof(Stepper));
 
         /// <summary>
         /// An event raised by changing to active <see cref="IStep" />.
         /// </summary>
-        public event RoutedEventHandler ActiveStepChanged
+        public event ActiveStepChangedEventHandler ActiveStepChanged
         {
             add
             {
@@ -70,12 +70,12 @@ namespace MaterialDesignExtensions.Controls
         /// An event raised by navigating to the previous <see cref="IStep" /> in a linear order.
         /// </summary>
         public static readonly RoutedEvent BackNavigationEvent = EventManager.RegisterRoutedEvent(
-            nameof(BackNavigation), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Stepper));
+            nameof(BackNavigation), RoutingStrategy.Bubble, typeof(StepperNavigationEventHandler), typeof(Stepper));
 
         /// <summary>
         /// An event raised by navigating to the previous <see cref="IStep" /> in a linear order.
         /// </summary>
-        public event RoutedEventHandler BackNavigation
+        public event StepperNavigationEventHandler BackNavigation
         {
             add
             {
@@ -92,12 +92,12 @@ namespace MaterialDesignExtensions.Controls
         /// An event raised by cancelling the process.
         /// </summary>
         public static readonly RoutedEvent CancelNavigationEvent = EventManager.RegisterRoutedEvent(
-            nameof(CancelNavigation), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Stepper));
+            nameof(CancelNavigation), RoutingStrategy.Bubble, typeof(StepperNavigationEventHandler), typeof(Stepper));
 
         /// <summary>
         /// An event raised by cancelling the process.
         /// </summary>
-        public event RoutedEventHandler CancelNavigation
+        public event StepperNavigationEventHandler CancelNavigation
         {
             add
             {
@@ -114,12 +114,12 @@ namespace MaterialDesignExtensions.Controls
         /// An event raised by navigating to the next <see cref="IStep" /> in a linear order.
         /// </summary>
         public static readonly RoutedEvent ContinueNavigationEvent = EventManager.RegisterRoutedEvent(
-            nameof(ContinueNavigation), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Stepper));
+            nameof(ContinueNavigation), RoutingStrategy.Bubble, typeof(StepperNavigationEventHandler), typeof(Stepper));
 
         /// <summary>
         /// An event raised by navigating to the next <see cref="IStep" /> in a linear order.
         /// </summary>
-        public event RoutedEventHandler ContinueNavigation
+        public event StepperNavigationEventHandler ContinueNavigation
         {
             add
             {
@@ -133,15 +133,37 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// An event raised by navigating to an arbitrary <see cref="IStep" /> in a non-linear <see cref="Stepper" />.
+        /// An event raised if the navigation was canceled because of validation errors of the current <see cref="IStep" />.
         /// </summary>
-        public static readonly RoutedEvent StepNavigationEvent = EventManager.RegisterRoutedEvent(
-            nameof(StepNavigation), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Stepper));
+        public static readonly RoutedEvent NavigationCanceledByValidationEvent = EventManager.RegisterRoutedEvent(
+            nameof(NavigationCanceledByValidation), RoutingStrategy.Bubble, typeof(NavigationCanceledByValidationEventHandler), typeof(Stepper));
+
+        /// <summary>
+        /// An event raised if the navigation was canceled because of validation errors of the current <see cref="IStep" />.
+        /// </summary>
+        public event NavigationCanceledByValidationEventHandler NavigationCanceledByValidation
+        {
+            add
+            {
+                AddHandler(NavigationCanceledByValidationEvent, value);
+            }
+
+            remove
+            {
+                RemoveHandler(NavigationCanceledByValidationEvent, value);
+            }
+        }
 
         /// <summary>
         /// An event raised by navigating to an arbitrary <see cref="IStep" /> in a non-linear <see cref="Stepper" />.
         /// </summary>
-        public event RoutedEventHandler StepNavigation
+        public static readonly RoutedEvent StepNavigationEvent = EventManager.RegisterRoutedEvent(
+            nameof(StepNavigation), RoutingStrategy.Bubble, typeof(StepperNavigationEventHandler), typeof(Stepper));
+
+        /// <summary>
+        /// An event raised by navigating to an arbitrary <see cref="IStep" /> in a non-linear <see cref="Stepper" />.
+        /// </summary>
+        public event StepperNavigationEventHandler StepNavigation
         {
             add
             {
@@ -158,12 +180,12 @@ namespace MaterialDesignExtensions.Controls
         /// An event raised by starting the validation of an <see cref="IStep" />.
         /// </summary>
         public static readonly RoutedEvent StepValidationEvent = EventManager.RegisterRoutedEvent(
-            nameof(StepValidation), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Stepper));
+            nameof(StepValidation), RoutingStrategy.Bubble, typeof(StepValidationEventHandler), typeof(Stepper));
 
         /// <summary>
         /// An event raised by starting the validation of an <see cref="IStep" />.
         /// </summary>
-        public event RoutedEventHandler StepValidation
+        public event StepValidationEventHandler StepValidation
         {
             add
             {
@@ -360,6 +382,28 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// A command called if the navigation was canceled because of validation errors of the current <see cref="IStep" />.
+        /// </summary>
+        public static readonly DependencyProperty NavigationCanceledByValidationCommandProperty = DependencyProperty.Register(
+            nameof(NavigationCanceledByValidationCommand), typeof(ICommand), typeof(Stepper), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// A command called if the navigation was canceled because of validation errors of the current <see cref="IStep" />.
+        /// </summary>
+        public ICommand NavigationCanceledByValidationCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(NavigationCanceledByValidationCommandProperty);
+            }
+
+            set
+            {
+                SetValue(NavigationCanceledByValidationCommandProperty, value);
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the steps which will be shown inside this <see cref="Stepper" />.
         /// </summary>
         public static readonly DependencyProperty StepsProperty = DependencyProperty.Register(
@@ -517,6 +561,22 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        private void RaiseNavigationCanceledByValidation()
+        {
+            IStep step = m_controller.ActiveStepViewModel?.Step;
+
+            if (step != null)
+            {
+                NavigationCanceledByValidationEventArgs eventArgs = new NavigationCanceledByValidationEventArgs(NavigationCanceledByValidationEvent, this, step);
+                RaiseEvent(eventArgs);
+
+                if (NavigationCanceledByValidationCommand != null && NavigationCanceledByValidationCommand.CanExecute(step))
+                {
+                    NavigationCanceledByValidationCommand.Execute(step);
+                }
+            }
+        }
+
         private static void StepsChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             (obj as Stepper)?.StepsChangedHandler(args.OldValue, args.NewValue);
@@ -566,6 +626,8 @@ namespace MaterialDesignExtensions.Controls
 
             if (BlockNavigationOnValidationErrors && !isValid)
             {
+                RaiseNavigationCanceledByValidation();
+
                 return;
             }
 
@@ -605,6 +667,8 @@ namespace MaterialDesignExtensions.Controls
 
             if (BlockNavigationOnValidationErrors && !isValid)
             {
+                RaiseNavigationCanceledByValidation();
+
                 return;
             }
 
@@ -635,6 +699,8 @@ namespace MaterialDesignExtensions.Controls
 
                 if (BlockNavigationOnValidationErrors && !isValid)
                 {
+                    RaiseNavigationCanceledByValidation();
+
                     return;
                 }
 
@@ -723,7 +789,7 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// The new active <see cref="IStep" />.
         /// </summary>
-        public IStep Step { get; }
+        public IStep Step { get; protected set; }
 
         /// <summary>
         /// Creates a new <see cref="ActiveStepChangedEventArgs" />.
@@ -739,6 +805,11 @@ namespace MaterialDesignExtensions.Controls
     }
 
     /// <summary>
+    /// The delegate for handling the <see cref="Stepper.ActiveStepChanged" /> event.
+    /// </summary>
+    public delegate void ActiveStepChangedEventHandler(object sender, ActiveStepChangedEventArgs args);
+
+    /// <summary>
     /// The argument for the <see cref="Stepper.StepValidation" /> event and the <see cref="Stepper.StepValidationCommand" /> command.
     /// It holds the <see cref="IStep" /> to validate.
     /// </summary>
@@ -747,7 +818,7 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// The <see cref="IStep" /> to validate.
         /// </summary>
-        public IStep Step { get; }
+        public IStep Step { get; protected set; }
 
         /// <summary>
         /// Creates a new <see cref="StepValidationEventArgs" />
@@ -763,21 +834,26 @@ namespace MaterialDesignExtensions.Controls
     }
 
     /// <summary>
+    /// The delegate for handling the <see cref="Stepper.StepValidation" /> event.
+    /// </summary>
+    public delegate void StepValidationEventHandler(object sender, StepValidationEventArgs args);
+
+    /// <summary>
     /// The argument for the <see cref="Stepper.BackNavigation" />, <see cref="Stepper.ContinueNavigation" />, <see cref="Stepper.StepNavigation" /> and <see cref="Stepper.CancelNavigation" /> event.
     /// It holds the current <see cref="IStep" /> an the one to navigate to.
-    /// The events are raised before the actal navigation and the navigation can be cancelled by setting <see cref="Stepper.ContinueNavigation" /> to false.
+    /// The events are raised before the actal navigation and the navigation can be canceled by setting <see cref="Stepper.ContinueNavigation" /> to false.
     /// </summary>
     public class StepperNavigationEventArgs : RoutedEventArgs
     {
         /// <summary>
         /// The current <see cref="IStep" /> of the <see cref="Stepper" />.
         /// </summary>
-        public IStep CurrentStep { get; }
+        public IStep CurrentStep { get; protected set; }
 
         /// <summary>
         /// The next <see cref="IStep" /> to navigate to.
         /// </summary>
-        public IStep NextStep { get; }
+        public IStep NextStep { get; protected set; }
 
         /// <summary>
         /// A flag to cancel the navigation by setting it to false.
@@ -800,4 +876,40 @@ namespace MaterialDesignExtensions.Controls
             Cancel = cancel;
         }
     }
+
+    /// <summary>
+    /// The delegate for handling the <see cref="Stepper.BackNavigation" />, <see cref="Stepper.ContinueNavigation" />, <see cref="Stepper.StepNavigation" /> and <see cref="Stepper.CancelNavigation" /> event.
+    /// </summary>
+    public delegate void StepperNavigationEventHandler(object sender, StepperNavigationEventArgs args);
+
+    /// <summary>
+    /// The argument for the <see cref="Stepper.NavigationCanceledByValidation" /> event and the <see cref="Stepper.NavigationCanceledByValidationCommand" /> command.
+    /// It holds the active <see cref="IStep" /> which has validation errors.
+    /// </summary>
+    public class NavigationCanceledByValidationEventArgs : RoutedEventArgs
+    {
+        /// <summary>
+        /// The active <see cref="IStep" /> which has validation errors.
+        /// </summary>
+        public IStep StepWithValidationErrors { get; protected set; }
+
+        /// <summary>
+        /// Creates a new <see cref="NavigationCanceledByValidationEventArgs" />.
+        /// </summary>
+        /// <param name="routedEvent"></param>
+        /// <param name="source"></param>
+        /// <param name="stepWithValidationErrors"></param>
+        public NavigationCanceledByValidationEventArgs(RoutedEvent routedEvent, object source, IStep stepWithValidationErrors)
+            : base(routedEvent, source)
+        {
+            StepWithValidationErrors = stepWithValidationErrors;
+        }
+    }
+
+    /// <summary>
+    /// The delegate for handling the <see cref="Stepper.NavigationCanceledByValidation" /> event.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    public delegate void NavigationCanceledByValidationEventHandler(object sender, NavigationCanceledByValidationEventArgs args);
 }

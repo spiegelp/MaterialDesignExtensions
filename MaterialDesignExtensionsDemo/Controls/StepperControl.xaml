@@ -6,10 +6,12 @@
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
              xmlns:viewModel="clr-namespace:MaterialDesignExtensionsDemo.ViewModel"
              xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+             xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters;assembly=MaterialDesignExtensions"
              xmlns:model="clr-namespace:MaterialDesignExtensions.Model;assembly=MaterialDesignExtensions"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
     <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" FalseValue="Collapsed" />
         <DataTemplate DataType="{x:Type viewModel:StepperTutorialOneViewModel}">
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Steppers are handy to break a big task into smaller parts. These are so called steps. It displays the progress of the full task as a numbered sequence of steps." TextWrapping="WrapWithOverflow" />
@@ -35,6 +37,10 @@
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Each time the user switches to another step, an optional validation phase for the until now active step will be started by the Stepper. The Validate() method of the step will be called first. Afterwards the StepValidation event will be raised followed by the call of the StepValidationCommand command." TextWrapping="WrapWithOverflow" />
                 <TextBlock Margin="0,16,0,0" Text="The different validation handlers may set the HasValidationErrors property of the step to indicate input errors. If the BlockNavigationOnValidationErrors property of the Stepper is true, the Stepper blocks the navigation as long as the active step has invalid data." TextWrapping="WrapWithOverflow" />
+                <TextBlock Margin="0,32,0,4" Text="Example: The user must agree to the license in order to proceed to the next step." TextWrapping="WrapWithOverflow" />
+                <TextBlock Margin="0,4,0,0" Foreground="Red" Text="You must accept the license terms."
+                           Visibility="{Binding Path=ActiveStep.HasValidationErrors, Converter={StaticResource boolToVisibilityConverter}, ElementName=stepper}" />
+                <CheckBox Margin="0,4,0,0" IsChecked="{Binding Path=AgreedToLicense, Mode=TwoWay}">Accept the licence terms</CheckBox>
                 <controls:StepButtonBar Back="BACK" Continue="FINISH" Cancel="CANCEL" />
             </StackPanel>
         </DataTemplate>
@@ -44,17 +50,19 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="100*" />
         </Grid.RowDefinitions>
-        <StackPanel Margin="4,4,4,16" Orientation="Horizontal">
+        <WrapPanel Margin="4,4,4,16" Orientation="Horizontal">
             <TextBlock Margin="0,0,8,0" Text="Layout" VerticalAlignment="Center" />
             <ComboBox Height="25" HorizontalAlignment="Left" ItemsSource="{Binding Path=Layouts, Mode=OneTime}" SelectedItem="{Binding Path=Layout, Mode=TwoWay}" VerticalAlignment="Center" Width="120" />
-            <TextBlock Margin="48,0,8,0" Text="Is linear" VerticalAlignment="Center" />
-            <CheckBox IsChecked="{Binding Path=IsLinear, Mode=TwoWay}" VerticalAlignment="Center" />
+            <CheckBox Margin="48,0,0,0" IsChecked="{Binding Path=IsLinear, Mode=TwoWay}" VerticalAlignment="Center">Is linear</CheckBox>
+            <CheckBox Margin="48,0,0,0" IsChecked="{Binding Path=BlockNavigationOnValidationErrors, Mode=TwoWay}" VerticalAlignment="Center">Block navigation on validation errors</CheckBox>
             <!-- bind to read-only Stepper.ActiveStep property -->
             <TextBlock Text="Active step: " Margin="48,0,0,0" VerticalAlignment="Center" />
             <TextBlock Text="{Binding Path=ActiveStep.Header.FirstLevelTitle, ElementName=stepper}" VerticalAlignment="Center" />
-        </StackPanel>
+        </WrapPanel>
         <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
-            <controls:Stepper x:Name="stepper" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}" Steps="{Binding Path=Steps, Mode=OneTime}"
+            <controls:Stepper x:Name="stepper" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}"
+                              BlockNavigationOnValidationErrors="{Binding Path=BlockNavigationOnValidationErrors}"
+                              Steps="{Binding Path=Steps, Mode=OneTime}"
                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             <!-- example for defining the Stepper in XAML -->
             <!--<controls:Stepper IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

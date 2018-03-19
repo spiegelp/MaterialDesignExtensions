@@ -52,5 +52,6 @@
   * `Medium`
   * `MediumProminent`
   * `MediumExtraProminent`
+* New `NavigationCanceledByValidation` event and `NavigationCanceledByValidationCommand` command for `Stepper`
 #### Fixes
 * Unregister old event handlers on applying templates
