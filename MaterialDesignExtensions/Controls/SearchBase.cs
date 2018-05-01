@@ -5,14 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+
+using MaterialDesignExtensions.Controllers;
+using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
 {
     public class SearchBase : Control
     {
         protected const string CancelButtonName = "cancelButton";
+        protected const string ClearButtonName = "clearButton";
         protected const string SearchTextBoxName = "searchTextBox";
+        protected const string SearchSuggestionsPopupName = "searchSuggestionsPopup";
+        protected const string SearchSuggestionsItemsControlName = "searchSuggestionsItemsControl";
+
+        public static RoutedCommand SelectSearchSuggestionCommand = new RoutedCommand();
 
         public static readonly RoutedEvent SearchEvent = EventManager.RegisterRoutedEvent(
             nameof(Search), RoutingStrategy.Bubble, typeof(SearchEventHandler), typeof(SearchBase));
@@ -46,8 +55,24 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        public static readonly DependencyProperty SearchSuggestionsSourceProperty = DependencyProperty.Register(
+            nameof(SearchSuggestionsSource), typeof(ISearchSuggestionsSource), typeof(SearchBase), new PropertyMetadata(null, SearchSuggestionSourceChangedHandler));
+
+        public ISearchSuggestionsSource SearchSuggestionsSource
+        {
+            get
+            {
+                return (ISearchSuggestionsSource)GetValue(SearchSuggestionsSourceProperty);
+            }
+
+            set
+            {
+                SetValue(SearchSuggestionsSourceProperty, value);
+            }
+        }
+
         public static readonly DependencyProperty SearchTermProperty = DependencyProperty.Register(
-            nameof(SearchTerm), typeof(string), typeof(SearchBase), new PropertyMetadata(null, null));
+            nameof(SearchTerm), typeof(string), typeof(SearchBase), new PropertyMetadata(null, SearchTermChangedHandler));
 
         public string SearchTerm
         {
@@ -62,14 +87,28 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        protected Button m_cancelButton;
-        protected TextBox m_searchTextBox;
+        private Button m_cancelButton;
+        private Button m_clearButton;
+        private TextBox m_searchTextBox;
+        private Popup m_searchSuggestionsPopup;
+        private ItemsControl m_searchSuggestionsItemsControl;
+
+        private SearchSuggestionsController m_searchSuggestionsController;
 
         public SearchBase()
             : base()
         {
             m_cancelButton = null;
             m_searchTextBox = null;
+            m_searchSuggestionsPopup = null;
+            m_searchSuggestionsItemsControl = null;
+
+            m_searchSuggestionsController = new SearchSuggestionsController() { SearchSuggestionsSource = SearchSuggestionsSource };
+
+            CommandBindings.Add(new CommandBinding(SelectSearchSuggestionCommand, SelectSearchSuggestionCommandHandler));
+
+            Loaded += LoadedHandler;
+            Unloaded += UnloadedHandler;
         }
 
         public override void OnApplyTemplate()
@@ -84,23 +123,63 @@ namespace MaterialDesignExtensions.Controls
             m_cancelButton = Template.FindName(CancelButtonName, this) as Button;
             m_cancelButton.Click += CancelClickHandler;
 
+            if (m_clearButton != null)
+            {
+                m_clearButton.Click -= ClearClickHandler;
+            }
+
+            m_clearButton = Template.FindName(ClearButtonName, this) as Button;
+            m_clearButton.Click += ClearClickHandler;
+
             if (m_searchTextBox != null)
             {
+                m_searchTextBox.GotFocus -= SearchTextBoxGotFocusHandler;
                 m_searchTextBox.KeyUp -= SearchTextBoxKeyUpHandler;
             }
 
             m_searchTextBox = Template.FindName(SearchTextBoxName, this) as TextBox;
+            m_searchTextBox.GotFocus += SearchTextBoxGotFocusHandler;
             m_searchTextBox.KeyUp += SearchTextBoxKeyUpHandler;
+
+            m_searchSuggestionsPopup = Template.FindName(SearchSuggestionsPopupName, this) as Popup;
+
+            m_searchSuggestionsItemsControl = Template.FindName(SearchSuggestionsItemsControlName, this) as ItemsControl;
         }
 
-        protected void CancelClickHandler(object sender, RoutedEventArgs args)
+        private void LoadedHandler(object sender, RoutedEventArgs args)
+        {
+            if (m_searchSuggestionsController != null)
+            {
+                m_searchSuggestionsController.SearchSuggestionsChanged += SearchSuggestionsChangedHandler;
+            }
+        }
+
+        private void UnloadedHandler(object sender, RoutedEventArgs args)
+        {
+            if (m_searchSuggestionsController != null)
+            {
+                m_searchSuggestionsController.SearchSuggestionsChanged -= SearchSuggestionsChangedHandler;
+            }
+        }
+
+        private void CancelClickHandler(object sender, RoutedEventArgs args)
         {
             SearchTerm = null;
         }
 
-        protected void SearchClickHander()
+        private void ClearClickHandler(object sender, RoutedEventArgs args)
         {
-            DoSearch();
+            SearchTerm = null;
+
+            m_searchTextBox.Focus();
+        }
+
+        private void SearchTextBoxGotFocusHandler(object sender, RoutedEventArgs args)
+        {
+            if (sender == m_searchTextBox && string.IsNullOrEmpty(SearchTerm) && SearchSuggestionsSource != null)
+            {
+                SetSuggestions(SearchSuggestionsSource.GetSearchSuggestions(), true);
+            }
         }
 
         private void SearchTextBoxKeyUpHandler(object sender, KeyEventArgs args)
@@ -111,10 +190,12 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        protected void DoSearch()
+        private void DoSearch()
         {
             if (!string.IsNullOrWhiteSpace(SearchTerm))
             {
+                m_searchTextBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+
                 SearchEventArgs eventArgs = new SearchEventArgs(SearchEvent, this, SearchTerm);
                 RaiseEvent(eventArgs);
 
@@ -123,6 +204,59 @@ namespace MaterialDesignExtensions.Controls
                     SearchCommand.Execute(SearchTerm);
                 }
             }
+        }
+
+        private static void SearchSuggestionSourceChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            (obj as SearchBase)?.SearchSuggestionSourceChangedHandler(args.NewValue as ISearchSuggestionsSource);
+        }
+
+        private void SearchSuggestionSourceChangedHandler(ISearchSuggestionsSource newSearchSuggestionSource)
+        {
+            if (m_searchSuggestionsController != null)
+            {
+                m_searchSuggestionsController.SearchSuggestionsSource = newSearchSuggestionSource;
+            }
+        }
+
+        private static void SearchTermChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            (obj as SearchBase)?.SearchTermChangedHandler(args.NewValue as string);
+        }
+
+        private void SearchTermChangedHandler(string searchTerm)
+        {
+            m_searchSuggestionsController?.Search(searchTerm);
+        }
+
+        private void SearchSuggestionsChangedHandler(object sender, SearchSuggestionsChangedEventArgs args)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                SetSuggestions(args.SearchSuggestions, args.IsFromHistory);
+            });
+        }
+
+        private void SetSuggestions(IList<string> suggestions, bool isFromHistory)
+        {
+            if (m_searchSuggestionsItemsControl != null)
+            {
+                if (suggestions != null)
+                {
+                    m_searchSuggestionsItemsControl.ItemsSource = suggestions.Select(suggestion => new SearchSuggestionItem() { Suggestion = suggestion, IsFromHistory = isFromHistory });
+                }
+                else
+                {
+                    m_searchSuggestionsItemsControl.ItemsSource = null;
+                }
+            }
+        }
+
+        private void SelectSearchSuggestionCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            SearchTerm = args.Parameter as string;
+
+            DoSearch();
         }
     }
 

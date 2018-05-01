@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using MaterialDesignExtensions.Controls;
+
 namespace MaterialDesignExtensionsDemo.Controls
 {
     public partial class SearchControl : UserControl
@@ -20,6 +22,11 @@ namespace MaterialDesignExtensionsDemo.Controls
         public SearchControl()
         {
             InitializeComponent();
+        }
+
+        private void SearchHandler1(object sender, SearchEventArgs args)
+        {
+            searchResultTextBlock1.Text = "Your are looking for '" + args.SearchTerm + "'.";
         }
     }
 }

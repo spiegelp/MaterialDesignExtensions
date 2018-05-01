@@ -12,8 +12,11 @@
                       HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <StackPanel HorizontalAlignment="Center" Width="400" Orientation="Vertical">
                 <TextBlock Text="Persistent search" />
-                <Border BorderThickness="1" BorderBrush="Black" Height="150" SnapsToDevicePixels="True">
-                    <controls:PersistentSearch VerticalAlignment="Top" Margin="8" />
+                <Border BorderThickness="1" BorderBrush="Black" Height="150" Background="Transparent" SnapsToDevicePixels="True">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <controls:PersistentSearch VerticalAlignment="Top" Margin="8" SearchSuggestionsSource="{Binding Path=SearchSuggestionsSource}" Search="SearchHandler1" />
+                        <TextBlock x:Name="searchResultTextBlock1" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                    </Grid>
                 </Border>
             </StackPanel>
         </ScrollViewer>

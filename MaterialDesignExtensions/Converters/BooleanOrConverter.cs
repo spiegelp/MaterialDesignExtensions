@@ -18,7 +18,7 @@ namespace MaterialDesignExtensions.Converters
 
             if (values != null)
             {
-                for (int i = 0; i < values.Length; i++)
+                for (int i = 0; i < values.Length && !result; i++)
                 {
                     bool? b = values[i] as bool?;
 
