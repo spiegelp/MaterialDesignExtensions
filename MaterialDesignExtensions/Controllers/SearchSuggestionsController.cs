@@ -8,10 +8,17 @@ using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controllers
 {
+    /// <summary>
+    /// Controller behind the <see cref="Controls.PersistentSearch"/> control.
+    /// It does the technical stuff and delegates the actual search to the specified <see cref="SearchSuggestionsSource" />.
+    /// </summary>
     public class SearchSuggestionsController
     {
         private readonly object m_lockObject = new object();
 
+        /// <summary>
+        /// An event raised to return the result of an search.
+        /// </summary>
         public event SearchSuggestionsChangedEventHandler SearchSuggestionsChanged;
 
         // delay between input and actual search in milliseconds
@@ -40,6 +47,9 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// The source providing the suggestions to do the actual search with.
+        /// </summary>
         public ISearchSuggestionsSource SearchSuggestionsSource
         {
             get
@@ -59,12 +69,20 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="SearchSuggestionsController" />.
+        /// </summary>
         public SearchSuggestionsController() {
             m_searchSuggestionsSource = null;
 
             m_lastId = null;
         }
 
+        /// <summary>
+        /// Starts a new task for the search and propagates the result via the <see cref="SearchSuggestionsChanged" /> event.
+        /// This method does some technical stuff and delegates the actual search to the <see cref="SearchSuggestionsSource" />.
+        /// </summary>
+        /// <param name="searchTerm">The term to search for</param>
         public void Search(string searchTerm)
         {
             string id = Guid.NewGuid().ToString();
@@ -83,6 +101,7 @@ namespace MaterialDesignExtensions.Controllers
 
                 LastId = id;
             }
+
             Task.Delay(SearchDelay)
                 .ContinueWith((prevTask) =>
                 {
@@ -121,12 +140,26 @@ namespace MaterialDesignExtensions.Controllers
         }
     }
 
+    /// <summary>
+    /// The arguments for the <see cref="SearchSuggestionsController.SearchSuggestionsChanged" /> event.
+    /// </summary>
     public class SearchSuggestionsChangedEventArgs : EventArgs
     {
+        /// <summary>
+        /// The result of the search.
+        /// </summary>
         public IList<string> SearchSuggestions { get; private set; }
 
+        /// <summary>
+        /// Boolean indicating if the result contains suggestions of previous searches or based on the current input.
+        /// </summary>
         public bool IsFromHistory { get; private set; }
 
+        /// <summary>
+        /// Creates a new <see cref="SearchSuggestionsChangedEventArgs" />.
+        /// </summary>
+        /// <param name="searchSuggestions">The result of the search</param>
+        /// <param name="isFromHistory">Boolean indicating if the result contains suggestions of previous searches or based on the current input</param>
         public SearchSuggestionsChangedEventArgs(IList<string> searchSuggestions, bool isFromHistory)
         {
             SearchSuggestions = searchSuggestions;
@@ -134,5 +167,10 @@ namespace MaterialDesignExtensions.Controllers
         }
     }
 
+    /// <summary>
+    /// The delegate for handling the <see cref="SearchSuggestionsController.SearchSuggestionsChanged" /> event.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
     public delegate void SearchSuggestionsChangedEventHandler(object sender, SearchSuggestionsChangedEventArgs args);
 }

@@ -13,7 +13,10 @@ using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
 {
-    public class SearchBase : Control
+    /// <summary>
+    /// The base control with common logic for <see cref="PersistentSearch" />.
+    /// </summary>
+    public abstract class SearchBase : Control
     {
         protected const string CancelButtonName = "cancelButton";
         protected const string ClearButtonName = "clearButton";
@@ -21,11 +24,20 @@ namespace MaterialDesignExtensions.Controls
         protected const string SearchSuggestionsPopupName = "searchSuggestionsPopup";
         protected const string SearchSuggestionsItemsControlName = "searchSuggestionsItemsControl";
 
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
         public static RoutedCommand SelectSearchSuggestionCommand = new RoutedCommand();
 
+        /// <summary>
+        /// An event raised by triggering a search (select a suggestion or hit enter).
+        /// </summary>
         public static readonly RoutedEvent SearchEvent = EventManager.RegisterRoutedEvent(
             nameof(Search), RoutingStrategy.Bubble, typeof(SearchEventHandler), typeof(SearchBase));
 
+        /// <summary>
+        /// An event raised by triggering a search (select a suggestion or hit enter).
+        /// </summary>
         public event SearchEventHandler Search
         {
             add
@@ -39,9 +51,15 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// A command called if a search is triggered (select a suggestion or hit enter).
+        /// </summary>
         public static readonly DependencyProperty SearchCommandProperty = DependencyProperty.Register(
             nameof(SearchCommand), typeof(ICommand), typeof(SearchBase), new PropertyMetadata(null, null));
 
+        /// <summary>
+        /// A command called if a search is triggered (select a suggestion or hit enter).
+        /// </summary>
         public ICommand SearchCommand
         {
             get
@@ -55,9 +73,15 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// A source for providing suggestions to search for.
+        /// </summary>
         public static readonly DependencyProperty SearchSuggestionsSourceProperty = DependencyProperty.Register(
             nameof(SearchSuggestionsSource), typeof(ISearchSuggestionsSource), typeof(SearchBase), new PropertyMetadata(null, SearchSuggestionSourceChangedHandler));
 
+        /// <summary>
+        /// A source for providing suggestions to search for.
+        /// </summary>
         public ISearchSuggestionsSource SearchSuggestionsSource
         {
             get
@@ -71,9 +95,15 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The term to search for.
+        /// </summary>
         public static readonly DependencyProperty SearchTermProperty = DependencyProperty.Register(
             nameof(SearchTerm), typeof(string), typeof(SearchBase), new PropertyMetadata(null, SearchTermChangedHandler));
 
+        /// <summary>
+        /// The term to search for.
+        /// </summary>
         public string SearchTerm
         {
             get
@@ -260,10 +290,22 @@ namespace MaterialDesignExtensions.Controls
         }
     }
 
+    /// <summary>
+    /// The arguments for the <see cref="SearchBase.Search" /> event.
+    /// </summary>
     public class SearchEventArgs : RoutedEventArgs
     {
+        /// <summary>
+        /// The term to search for.
+        /// </summary>
         public string SearchTerm { get; private set; }
 
+        /// <summary>
+        /// Creates a new <see cref="SearchEventArgs" />.
+        /// </summary>
+        /// <param name="routedEvent"></param>
+        /// <param name="source">The source object</param>
+        /// <param name="searchTerm">The term to search for</param>
         public SearchEventArgs(RoutedEvent routedEvent, object source, string searchTerm)
             : base(routedEvent, source)
         {
@@ -271,5 +313,10 @@ namespace MaterialDesignExtensions.Controls
         }
     }
 
+    /// <summary>
+    /// The delegate for handling the <see cref="SearchBase.Search" /> event.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
     public delegate void SearchEventHandler(object sender, SearchEventArgs args);
 }
