@@ -93,6 +93,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\SideNavigationTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\StepperTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -118,6 +122,7 @@
     <Compile Include="Controls\SaveFileControl.cs" />
     <Compile Include="Controls\SaveFileDialog.cs" />
     <Compile Include="Controls\SearchBase.cs" />
+    <Compile Include="Controls\SideNavigation.cs" />
     <Compile Include="Controls\StepButtonBar.cs" />
     <Compile Include="Controls\Stepper.cs" />
     <Compile Include="Converters\AsyncImageTask.cs" />
@@ -149,18 +154,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\BaseNavigationItem.cs" />
     <Compile Include="Model\DirectoryInfoItem.cs" />
+    <Compile Include="Model\DividerNavigationItem.cs" />
     <Compile Include="Model\FileInfoItem.cs" />
     <Compile Include="Model\FileSystemEntriesGroupHeader.cs" />
     <Compile Include="Model\FileSystemEntryItem.cs" />
     <Compile Include="Model\FileFilter.cs" />
+    <Compile Include="Model\FirstLevelNavigationItem.cs" />
+    <Compile Include="Model\INavigationItem.cs" />
+    <Compile Include="Model\NavigationItem.cs" />
+    <Compile Include="Model\NotSelectableNavigationItem.cs" />
     <Compile Include="Model\SearchSuggestionItem.cs" />
     <Compile Include="Model\SearchSuggestionsSource.cs" />
+    <Compile Include="Model\SecondLevelNavigationItem.cs" />
     <Compile Include="Model\SpecialDirectory.cs" />
     <Compile Include="Model\SpecialDrive.cs" />
     <Compile Include="Model\Step.cs" />
     <Compile Include="Model\StepperStepViewModel.cs" />
     <Compile Include="Model\StepTitleHeader.cs" />
+    <Compile Include="Model\SubheaderNavigationItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -10,7 +10,7 @@
         xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:controlsLib="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
         mc:Ignorable="d"
-        Title="Material Design Extensions - Demo" Height="700" Width="1100" WindowStartupLocation="CenterScreen"
+        Title="Material Design Extensions - Demo" Height="700" Width="1200" WindowStartupLocation="CenterScreen"
         Background="{DynamicResource MaterialDesignBackground}" Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
     <Window.Resources>
@@ -61,7 +61,7 @@
                 </wpfLib:DrawerHost.LeftDrawerContent>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="250" />
+                        <ColumnDefinition Width="280" />
                         <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -78,7 +78,8 @@
                     </controlsLib:AppBar>
                     <Border Grid.Row="1" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource MaterialDesignDivider}">
                         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                            <ItemsControl x:Name="navigationItemsControl" ItemsSource="{Binding Path=NavigationItems, Mode=OneTime}"
+                            <controlsLib:SideNavigation x:Name="sideNav" Items="{Binding Path=NavigationItems, Mode=OneTime}" />
+                            <!--<ItemsControl x:Name="navigationItemsControl" ItemsSource="{Binding Path=NavigationItems, Mode=OneTime}"
                                   HorizontalAlignment="Stretch" VerticalAlignment="Top">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
@@ -131,7 +132,7 @@
                                         </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                            </ItemsControl>-->
                         </ScrollViewer>
                     </Border>
                     <ContentControl x:Name="contentControl" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></ContentControl>
