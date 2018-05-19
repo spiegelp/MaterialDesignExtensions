@@ -11,6 +11,10 @@
 
         <!-- additional resources -->
         <ResourceDictionary>
+            <SolidColorBrush x:Key="MaterialDesignNavigationItemIcon" Color="#8AFFFFFF" po:Freeze="True" /> <!-- 54% white -->
+            <SolidColorBrush x:Key="MaterialDesignNavigationItemText" Color="#DEFFFFFF" po:Freeze="True" /> <!-- 87% white -->
+            <SolidColorBrush x:Key="MaterialDesignNavigationItemSubheader" Color="#8AFFFFFF" po:Freeze="True" /> <!-- 54% white -->
+            
             <SolidColorBrush x:Key="MaterialDesignStepperInactiveStep" Color="#61FFFFFF" po:Freeze="True" /> <!-- 38% white -->
             <SolidColorBrush x:Key="MaterialDesignStepperActiveStep" Color="#DDFFFFFF" po:Freeze="True" /> <!-- 87% white -->
         </ResourceDictionary>

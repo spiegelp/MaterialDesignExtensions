@@ -2,112 +2,140 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
-                    xmlns:model="clr-namespace:MaterialDesignExtensions.Model">
+                    xmlns:model="clr-namespace:MaterialDesignExtensions.Model"
+                    xmlns:templateSelectors="clr-namespace:MaterialDesignExtensions.TemplateSelectors">
+
+    <templateSelectors:NavigationItemKindTemplateSelector x:Key="navigationItemKindTemplateSelector" />
+
+    <Style x:Key="navigationItemBackgroundBorderStyle" TargetType="{x:Type Border}">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Opacity" Value="0.12" />
+        <Setter Property="CornerRadius" Value="{Binding Path=SelectionCornerRadius, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
+        <Setter Property="Margin" Value="{Binding Path=SelectionMargin, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                <Setter Property="Background" Value="Transparent" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                <Setter Property="Background" Value="{Binding Path=SelectionBackground, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 
     <DataTemplate DataType="{x:Type model:FirstLevelNavigationItem}">
-        <Border Background="Transparent" Height="48" Padding="16,0,0,0">
-            <Grid Height="24" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="24" />
-                    <ColumnDefinition Width="100*" />
-                </Grid.ColumnDefinitions>
-                <ContentControl Content="{Binding Path=Icon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <ContentControl.Resources>
-                        <DataTemplate DataType="{x:Type BitmapImage}">
-                            <Image HorizontalAlignment="Stretch" Source="{Binding}" SnapsToDevicePixels="True" VerticalAlignment="Stretch" />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type wpfLib:PackIconKind}">
-                            <wpfLib:PackIcon Kind="{Binding}" Height="24" Width="24" />
-                        </DataTemplate>
-                    </ContentControl.Resources>
-                    <ContentControl.Style>
-                        <Style TargetType="{x:Type ContentControl}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
-                                    <Setter Property="Foreground" Value="{DynamicResource MaterialDesignNavigationItemIcon}" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
-                                    <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ContentControl.Style>
-                </ContentControl>
-                <TextBlock Grid.Column="1" FontSize="14" FontWeight="Bold" HorizontalAlignment="Stretch" Margin="32,0,0,0" Text="{Binding Path=Label}" VerticalAlignment="Center">
-                    <TextBlock.Style>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
-                                    <Setter Property="Foreground" Value="{DynamicResource MaterialDesignNavigationItemText}" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
-                                    <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-            </Grid>
-        </Border>
+        <Grid Height="48">
+            <Border Style="{StaticResource navigationItemBackgroundBorderStyle}" />
+            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="16,0,0,0">
+                <Grid Height="24" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24" />
+                        <ColumnDefinition Width="100*" />
+                    </Grid.ColumnDefinitions>
+                    <ContentControl Content="{Binding Path=Icon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <ContentControl.Resources>
+                            <DataTemplate DataType="{x:Type BitmapImage}">
+                                <Image HorizontalAlignment="Stretch" Source="{Binding}" SnapsToDevicePixels="True" VerticalAlignment="Stretch" />
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type wpfLib:PackIconKind}">
+                                <wpfLib:PackIcon Kind="{Binding}" Height="24" Width="24" />
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                        <ContentControl.Style>
+                            <Style TargetType="{x:Type ContentControl}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignNavigationItemIcon}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                        <Setter Property="Foreground" Value="{Binding Path=SelectionForeground, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+                    <TextBlock Grid.Column="1" FontSize="14" FontWeight="Bold" Text="{Binding Path=Label}" TextTrimming="CharacterEllipsis"
+                               Margin="32,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignNavigationItemText}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                        <Setter Property="Foreground" Value="{Binding Path=SelectionForeground, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </Border>
+        </Grid>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type model:SecondLevelNavigationItem}">
-        <Border Background="Transparent" Height="48" Padding="48,0,0,0">
-            <Grid Height="24" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="24" />
-                    <ColumnDefinition Width="100*" />
-                </Grid.ColumnDefinitions>
-                <ContentControl Content="{Binding Path=Icon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <ContentControl.Resources>
-                        <DataTemplate DataType="{x:Type BitmapImage}">
-                            <Image HorizontalAlignment="Stretch" Source="{Binding}" SnapsToDevicePixels="True" VerticalAlignment="Stretch" />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type wpfLib:PackIconKind}">
-                            <wpfLib:PackIcon Kind="{Binding}" Height="24" Width="24" />
-                        </DataTemplate>
-                    </ContentControl.Resources>
-                    <ContentControl.Style>
-                        <Style TargetType="{x:Type ContentControl}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
-                                    <Setter Property="Foreground" Value="{DynamicResource MaterialDesignNavigationItemIcon}" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
-                                    <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ContentControl.Style>
-                </ContentControl>
-                <TextBlock Grid.Column="1" FontSize="14" HorizontalAlignment="Stretch" Margin="32,0,0,0" Text="{Binding Path=Label}" VerticalAlignment="Center">
-                    <TextBlock.Style>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
-                                    <Setter Property="FontWeight" Value="Normal" />
-                                    <Setter Property="Foreground" Value="{DynamicResource MaterialDesignNavigationItemText}" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                    <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-            </Grid>
-        </Border>
+        <Grid Height="48">
+            <Border Style="{StaticResource navigationItemBackgroundBorderStyle}" />
+            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="48,0,0,0">
+                <Grid Height="24" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24" />
+                        <ColumnDefinition Width="100*" />
+                    </Grid.ColumnDefinitions>
+                    <ContentControl Content="{Binding Path=Icon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <ContentControl.Resources>
+                            <DataTemplate DataType="{x:Type BitmapImage}">
+                                <Image HorizontalAlignment="Stretch" Source="{Binding}" SnapsToDevicePixels="True" VerticalAlignment="Stretch" />
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type wpfLib:PackIconKind}">
+                                <wpfLib:PackIcon Kind="{Binding}" Height="24" Width="24" />
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                        <ContentControl.Style>
+                            <Style TargetType="{x:Type ContentControl}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignNavigationItemIcon}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                        <Setter Property="Foreground" Value="{Binding Path=SelectionForeground, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+                    <TextBlock Grid.Column="1" FontSize="14" Text="{Binding Path=Label}" TextTrimming="CharacterEllipsis"
+                               Margin="32,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                                        <Setter Property="FontWeight" Value="Normal" />
+                                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignNavigationItemText}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        <Setter Property="Foreground" Value="{Binding Path=SelectionForeground, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </Border>
+        </Grid>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type model:DividerNavigationItem}">
-        <Border BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="0,0,0,1" Height="8" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" Margin="0,8" SnapsToDevicePixels="True" />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type model:SubheaderNavigationItem}">
-        <Border Background="Transparent" Height="48" Padding="16,0,0,0">
-            <TextBlock Grid.Column="1" FontSize="14" FontWeight="Medium" Foreground="{DynamicResource MaterialDesignNavigationItemSubheader}"
-                       HorizontalAlignment="Stretch" Text="{Binding Path=Subheader}" VerticalAlignment="Center" />
+        <Border Background="Transparent" Height="36" Padding="16,0,0,0">
+            <TextBlock Grid.Column="1" FontSize="14" FontWeight="Medium" Text="{Binding Path=Subheader}" TextTrimming="CharacterEllipsis"
+                       Foreground="{DynamicResource MaterialDesignNavigationItemSubheader}"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
         </Border>
     </DataTemplate>
 
@@ -115,6 +143,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="0"/>
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="wpfLib:RippleAssist.Feedback" Value="{DynamicResource MaterialDesignFlatButtonRipple}" />
         <Setter Property="wpfLib:RippleAssist.ClipToBounds" Value="True"/>
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -125,39 +154,48 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <wpfLib:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"    
-                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                    <wpfLib:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"
+                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                   Padding="{TemplateBinding Padding}" 
+                                   Padding="{TemplateBinding Padding}"
+                                   Feedback="{Binding Path=NavigationItemFeedback, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}"
                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
+    <DataTemplate x:Key="selectableNavigationItemTemplate">
+        <Button Style="{StaticResource navigationItemButtonStyle}" Content="{Binding}"
+                Command="{x:Static controls:SideNavigation.SelectNavigationItemCommand}" CommandParameter="{Binding}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="notSelectableNavigationItemTemplate">
+        <ContentControl Content="{Binding}" />
+    </DataTemplate>
+
     <Style TargetType="{x:Type controls:SideNavigation}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="SelectionForeground" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="SelectionBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="SelectionCornerRadius" Value="4" />
+        <Setter Property="SelectionMargin" Value="8,4" />
+        <Setter Property="NavigationItemFeedback" Value="{DynamicResource PrimaryHueMidBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SideNavigation}">
-                    <Border>
+                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                       HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                            <ItemsControl x:Name="navigationItemsControl">
+                            <ItemsControl x:Name="navigationItemsControl" ItemTemplateSelector="{StaticResource navigationItemKindTemplateSelector}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel IsItemsHost="True" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Button Style="{StaticResource navigationItemButtonStyle}" Content="{Binding}"
-                                                Command="{x:Static controls:SideNavigation.SelectNavigationItemCommand}" CommandParameter="{Binding}" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </ScrollViewer>
                     </Border>

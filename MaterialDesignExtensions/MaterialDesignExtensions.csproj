@@ -192,6 +192,7 @@
     <Compile Include="TemplateSelectors\FileSystemEntryInfoTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\FileSystemInfoIconTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\HorizontalStepperHeaderTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\NavigationItemKindTemplateSelector.cs" />
     <EmbeddedResource Include="Localization\Strings.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.de.Designer.cs</LastGenOutput>

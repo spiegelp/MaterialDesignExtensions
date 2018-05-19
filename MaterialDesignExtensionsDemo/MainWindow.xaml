@@ -77,63 +77,8 @@
                         </Button>
                     </controlsLib:AppBar>
                     <Border Grid.Row="1" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource MaterialDesignDivider}">
-                        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                            <controlsLib:SideNavigation x:Name="sideNav" Items="{Binding Path=NavigationItems, Mode=OneTime}" />
-                            <!--<ItemsControl x:Name="navigationItemsControl" ItemsSource="{Binding Path=NavigationItems, Mode=OneTime}"
-                                  HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Vertical" IsItemsHost="True" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border HorizontalAlignment="Stretch" Height="48" Cursor="Hand" Padding="0" Margin="0">
-                                            <Border.Style>
-                                                <Style TargetType="{x:Type Border}">
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="False">
-                                                            <Setter Property="Background" Value="Transparent" />
-                                                        </Trigger>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Background" Value="{DynamicResource MaterialDesignDivider}" />
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Border.Style>
-                                            <Button Command="{x:Static local:MainWindow.NavigationItemSelectedCommand}" CommandParameter="{Binding}"
-                                                    HorizontalAlignment="Stretch" Height="48" Background="Transparent"
-                                                    Padding="0" Margin="0">
-                                                <Button.Template>
-                                                    <ControlTemplate TargetType="{x:Type Button}">
-                                                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
-                                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </Button.Template>
-                                                <Button.Content>
-                                                    <TextBlock FontSize="14" FontWeight="Bold" Text="{Binding Label}"
-                                                               HorizontalAlignment="Stretch" Margin="48,0,4,0" VerticalAlignment="Center">
-                                                        <TextBlock.Style>
-                                                            <Style TargetType="{x:Type TextBlock}">
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding IsSelected}" Value="False">
-                                                                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                                                        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </TextBlock.Style>
-                                                    </TextBlock>
-                                                </Button.Content>
-                                            </Button>
-                                        </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>-->
-                        </ScrollViewer>
+                        <controlsLib:SideNavigation x:Name="sideNav" Items="{Binding Path=NavigationItems, Mode=OneTime}"
+                                                    NavigationItemSelected="NavigationItemSelectedHandler" />
                     </Border>
                     <ContentControl x:Name="contentControl" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></ContentControl>
                 </Grid>

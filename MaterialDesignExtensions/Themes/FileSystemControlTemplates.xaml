@@ -336,10 +336,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <wpfLib:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"    
-                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                    <wpfLib:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"
+                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                   Padding="{TemplateBinding Padding}" 
+                                   Padding="{TemplateBinding Padding}"
                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 </ControlTemplate>
             </Setter.Value>
