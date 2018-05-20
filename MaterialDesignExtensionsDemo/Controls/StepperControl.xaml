@@ -30,6 +30,31 @@
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="The Stepper uses the steps out of its Steps property. This property expects a collection of IStep objects. The Step class already implements this basic interface for a step." TextWrapping="WrapWithOverflow" />
                 <TextBlock Margin="0,16,0,0" Text="A step consists out of a header and a content. Consider to define one view model class per step content and a DataTemplate for it (just the everyday MVVM magic). The header may contain arbitrary content. If you like the header of this tutorial, just use the StepTitleHeader class." TextWrapping="WrapWithOverflow" />
+                <TextBlock Margin="0,24,0,8" Text="An example for inserting file dialogs" FontSize="24" />
+                <CheckBox IsChecked="{Binding Path=ShowFileDialogs, Mode=TwoWay}" Margin="0,0,0,8">Attach file</CheckBox>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <Grid.Style>
+                        <Style TargetType="{x:Type Grid}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=ShowFileDialogs}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=ShowFileDialogs}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100*" />
+                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Border VerticalAlignment="Top" Height="400">
+                        <controls:OpenFileControl />
+                    </Border>
+                    <Button Grid.Column="2" Margin="0,0,8,0" VerticalAlignment="Top" Content="SHOW DIALOG" Click="OpenFileDialogButtonClickHandler" />
+                </Grid>
                 <controls:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
             </StackPanel>
         </DataTemplate>

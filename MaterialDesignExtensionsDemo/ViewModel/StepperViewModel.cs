@@ -131,7 +131,27 @@ namespace MaterialDesignExtensionsDemo.ViewModel
 
     public class StepperTutorialThreeViewModel : ViewModel
     {
-        public StepperTutorialThreeViewModel() { }
+        private bool m_showFileDialogs;
+
+        public bool ShowFileDialogs
+        {
+            get
+            {
+                return m_showFileDialogs;
+            }
+
+            set
+            {
+                m_showFileDialogs = value;
+
+                OnPropertyChanged(nameof(ShowFileDialogs));
+            }
+        }
+
+        public StepperTutorialThreeViewModel()
+        {
+            m_showFileDialogs = false;
+        }
     }
 
     public class StepperTutorialFourViewModel : ViewModel
