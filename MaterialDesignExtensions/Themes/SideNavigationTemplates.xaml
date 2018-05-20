@@ -132,7 +132,7 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type model:SubheaderNavigationItem}">
-        <Border Background="Transparent" Height="36" Padding="16,0,0,0">
+        <Border Background="Transparent" Height="36" Padding="16,0,0,4">
             <TextBlock Grid.Column="1" FontSize="14" FontWeight="Medium" Text="{Binding Path=Subheader}" TextTrimming="CharacterEllipsis"
                        Foreground="{DynamicResource MaterialDesignNavigationItemSubheader}"
                        HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
