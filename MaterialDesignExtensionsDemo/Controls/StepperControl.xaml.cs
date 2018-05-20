@@ -37,5 +37,26 @@ namespace MaterialDesignExtensionsDemo.Controls
                 DialogHost.Show(new AlertDialogViewModel("Accept the license terms please."), MainWindow.DialogHostName);
             }
         }
+
+        private async void OpenFileDialogButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            OpenFileDialogArguments dialogArgs = new OpenFileDialogArguments()
+            {
+                Width = 600,
+                Height = 400
+            };
+
+            // await the result of OpenFileDialogResult and do something with it
+            OpenFileDialogResult result = await OpenFileDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
+            
+            if (!result.Canceled)
+            {
+                Console.WriteLine("Selected file: " + result.FileInfo.FullName);
+            }
+            else
+            {
+                Console.WriteLine("Cancel open file");
+            }
+        }
     }
 }
