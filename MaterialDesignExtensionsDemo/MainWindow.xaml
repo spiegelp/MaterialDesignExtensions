@@ -49,15 +49,19 @@
         <DataTemplate DataType="{x:Type viewModel:FileSystemDialogViewModel}">
             <controls:FileSystemDialogControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:NavigationViewModel}">
+            <controls:NavigationControl />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:SearchViewModel}">
             <controls:SearchControl />
         </DataTemplate>
     </Window.Resources>
     <Grid>
         <wpfLib:DialogHost Identifier="dialogHost">
-            <wpfLib:DrawerHost IsLeftDrawerOpen="{Binding Path=IsNavigationDrawerOpen, ElementName=appBar}">
+            <wpfLib:DrawerHost IsLeftDrawerOpen="{Binding Path=IsNavigationDrawerOpen, ElementName=appBar}" LeftDrawerBackground="{DynamicResource MaterialDesignBackground}">
                 <wpfLib:DrawerHost.LeftDrawerContent>
-                    <TextBlock Text="This could be your navigation drawer." FontSize="16" Margin="16" />
+                    <controlsLib:SideNavigation x:Name="navigationDrawerNav" Items="{Binding Path=NavigationItems, Mode=OneTime}" Width="280"
+                                                NavigationItemSelected="NavigationItemSelectedHandler" />
                 </wpfLib:DrawerHost.LeftDrawerContent>
                 <Grid>
                     <Grid.ColumnDefinitions>

@@ -41,6 +41,7 @@ namespace MaterialDesignExtensionsDemo
         {
             m_navigationItems = new List<INavigationItem>()
             {
+                new SubheaderNavigationItem() { Subheader = "Controls" },
                 new FirstLevelNavigationItem() { Label = "App bar", NavigationItemSelectedCallback = item => new AppBarViewModel() },
                 new FirstLevelNavigationItem() { Label = "Oversized Number Spinner", NavigationItemSelectedCallback = item => new OversizedNumberSpinnerViewModel() },
                 new FirstLevelNavigationItem() { Label = "Grid list", NavigationItemSelectedCallback = item => new GridListViewModel() },
@@ -52,16 +53,19 @@ namespace MaterialDesignExtensionsDemo
                 new FirstLevelNavigationItem() { Label = "Save file", Icon = PackIconKind.File, NavigationItemSelectedCallback = item => new SaveFileControlViewModel() },
                 new FirstLevelNavigationItem() { Label = "Directory and file dialogs", NavigationItemSelectedCallback = item => new FileSystemDialogViewModel() },
                 new DividerNavigationItem(),
+                new SubheaderNavigationItem() { Subheader = "Navigation and searching" },
+                new FirstLevelNavigationItem() { Label = "Navigation", Icon = PackIconKind.Menu, NavigationItemSelectedCallback = item => new NavigationViewModel() },
                 new FirstLevelNavigationItem() { Label = "Search", Icon = PackIconKind.Magnify, NavigationItemSelectedCallback = item => new SearchViewModel() }
             };
 
             InitializeComponent();
 
-            sideNav.SelectedItem = m_navigationItems[0];
-            m_navigationItems[0].IsSelected = true;
-            //SelectNavigationItem(m_navigationItems[0]);
+            navigationDrawerNav.SelectedItem = m_navigationItems[1];
+            sideNav.SelectedItem = m_navigationItems[1];
+            m_navigationItems[1].IsSelected = true;
 
             sideNav.DataContext = this;
+            navigationDrawerNav.DataContext = this;
         }
 
         private void NavigationItemSelectedHandler(object sender, NavigationItemSelectedEventArgs args)
@@ -78,6 +82,11 @@ namespace MaterialDesignExtensionsDemo
             else
             {
                 contentControl.Content = null;
+            }
+
+            if (appBar != null)
+            {
+                appBar.IsNavigationDrawerOpen = false;
             }
         }
 

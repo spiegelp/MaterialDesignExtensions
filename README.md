@@ -24,6 +24,7 @@ Material Design Extensions features the following controls:
 | [Save file](https://github.com/spiegelp/MaterialDesignExtensions/wiki/File-system-controls) | Custom `SaveFileControl` and `SaveFileDialog` control | Done |
 | [App bar](https://github.com/spiegelp/MaterialDesignExtensions/wiki/App-bar) | Custom `AppBar` control ([specification](https://material.io/guidelines/layout/structure.html#structure-app-bar)) | Done |
 | Persistent search | Custom `PersistentSearch` control ([specification](https://material.io/guidelines/patterns/search.html#search-in-app-search)) | In progress |
+| [Side navigation](https://github.com/spiegelp/MaterialDesignExtensions/wiki/Navigation) | Custom `SideNavigation` control ([specification](https://material.io/design/components/navigation-drawer.html#usage)) | In progress |
 
 # Screenshots
 ### Horizontal stepper
@@ -31,6 +32,9 @@ Material Design Extensions features the following controls:
 
 ### Vertical stepper
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/VerticalStepper.png)
+
+### Side navigation
+![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/SideNavigation.png)
 
 ### Grid list
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/GridList.png)
