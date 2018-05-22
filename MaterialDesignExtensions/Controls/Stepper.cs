@@ -314,6 +314,30 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// Enables the animation of the content triggered by navigation.
+        /// The default is true (enabled).
+        /// </summary>
+        public static readonly DependencyProperty ContentAnimationsEnabledProperty = DependencyProperty.Register(
+            nameof(ContentAnimationsEnabled), typeof(bool), typeof(Stepper), new PropertyMetadata(true, null));
+
+        /// <summary>
+        /// Enables the animation of the content triggered by navigation.
+        /// The default is true (enabled).
+        /// </summary>
+        public bool ContentAnimationsEnabled
+        {
+            get
+            {
+                return (bool)GetValue(ContentAnimationsEnabledProperty);
+            }
+
+            set
+            {
+                SetValue(ContentAnimationsEnabledProperty, value);
+            }
+        }
+
+        /// <summary>
         /// A command called by navigating to the next <see cref="IStep" /> in a linear order.
         /// </summary>
         public static readonly DependencyProperty ContinueNavigationCommandProperty = DependencyProperty.Register(
@@ -751,7 +775,7 @@ namespace MaterialDesignExtensions.Controls
         {
             // there is no event raised if the Content of a ContentControl changes
             //     therefore trigger the animation in code
-            if (Layout == StepperLayout.Horizontal)
+            if (ContentAnimationsEnabled && Layout == StepperLayout.Horizontal)
             {
                 Storyboard storyboard = (Storyboard)FindResource("horizontalContentChangedStoryboard");
                 FrameworkElement element = GetTemplateChild("PART_horizontalContent") as FrameworkElement;

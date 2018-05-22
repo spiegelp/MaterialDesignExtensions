@@ -14,6 +14,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         private StepperLayout m_layout;
         private bool m_isLinear;
         private bool m_blockNavigationOnValidationErrors;
+        private bool m_contentAnimationsEnabled;
 
         public bool BlockNavigationOnValidationErrors
         {
@@ -27,6 +28,21 @@ namespace MaterialDesignExtensionsDemo.ViewModel
                 m_blockNavigationOnValidationErrors = value;
 
                 OnPropertyChanged(nameof(BlockNavigationOnValidationErrors));
+            }
+        }
+
+        public bool ContentAnimationsEnabled
+        {
+            get
+            {
+                return m_contentAnimationsEnabled;
+            }
+
+            set
+            {
+                m_contentAnimationsEnabled = value;
+
+                OnPropertyChanged(nameof(ContentAnimationsEnabled));
             }
         }
 
@@ -100,6 +116,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
             m_layout = StepperLayout.Horizontal;
             m_isLinear = false;
             m_blockNavigationOnValidationErrors = false;
+            m_contentAnimationsEnabled = true;
         }
     }
 

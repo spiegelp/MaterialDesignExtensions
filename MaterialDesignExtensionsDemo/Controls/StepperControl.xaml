@@ -80,6 +80,7 @@
             <ComboBox Height="25" HorizontalAlignment="Left" ItemsSource="{Binding Path=Layouts, Mode=OneTime}" SelectedItem="{Binding Path=Layout, Mode=TwoWay}" VerticalAlignment="Center" Width="120" />
             <CheckBox Margin="48,0,0,0" IsChecked="{Binding Path=IsLinear, Mode=TwoWay}" VerticalAlignment="Center">Is linear</CheckBox>
             <CheckBox Margin="48,0,0,0" IsChecked="{Binding Path=BlockNavigationOnValidationErrors, Mode=TwoWay}" VerticalAlignment="Center">Block navigation on validation errors</CheckBox>
+            <CheckBox Margin="48,0,0,0" IsChecked="{Binding Path=ContentAnimationsEnabled, Mode=TwoWay}" VerticalAlignment="Center">Animations enabled</CheckBox>
             <!-- bind to read-only Stepper.ActiveStep property -->
             <TextBlock Text="Active step: " Margin="48,0,0,0" VerticalAlignment="Center" />
             <TextBlock Text="{Binding Path=ActiveStep.Header.FirstLevelTitle, ElementName=stepper}" VerticalAlignment="Center" />
@@ -87,6 +88,7 @@
         <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
             <controls:Stepper x:Name="stepper" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}"
                               BlockNavigationOnValidationErrors="{Binding Path=BlockNavigationOnValidationErrors}"
+                              ContentAnimationsEnabled="{Binding Path=ContentAnimationsEnabled}"
                               Steps="{Binding Path=Steps, Mode=OneTime}"
                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             <!-- example for defining the Stepper in XAML -->
