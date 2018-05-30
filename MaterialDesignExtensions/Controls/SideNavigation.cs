@@ -50,6 +50,28 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// An event raised before the item of the user selection will be assigned as <see cref="SelectedItem" />.
+        /// </summary>
+        public static readonly RoutedEvent WillSelectNavigationItemEvent = EventManager.RegisterRoutedEvent(
+            nameof(WillSelectNavigationItem), RoutingStrategy.Bubble, typeof(WillSelectNavigationItemEventHandler), typeof(SideNavigation));
+
+        /// <summary>
+        /// An event raised before the item of the user selection will be assigned as <see cref="SelectedItem" />.
+        /// </summary>
+        public event WillSelectNavigationItemEventHandler WillSelectNavigationItem
+        {
+            add
+            {
+                AddHandler(WillSelectNavigationItemEvent, value);
+            }
+
+            remove
+            {
+                RemoveHandler(WillSelectNavigationItemEvent, value);
+            }
+        }
+
+        /// <summary>
         /// The color of the click ripple by selecting an item.
         /// </summary>
         public static readonly DependencyProperty NavigationItemFeedbackProperty = DependencyProperty.Register(
@@ -231,6 +253,33 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// A callback called after the <see cref="WillSelectNavigationItem" /> event, because events cannot await async code.
+        /// </summary>
+        public WillSelectNavigationItemCallbackAsync WillSelectNavigationItemCallbackAsync { get; set; }
+
+        /// <summary>
+        /// A command called before the item of the user selection will be assigned as <see cref="SelectedItem" />.
+        /// </summary>
+        public static readonly DependencyProperty WillSelectNavigationItemCommandProperty = DependencyProperty.Register(
+            nameof(WillSelectNavigationItemCommand), typeof(ICommand), typeof(SideNavigation), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// A command called before the item of the user selection will be assigned as <see cref="SelectedItem" />.
+        /// </summary>
+        public ICommand WillSelectNavigationItemCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(WillSelectNavigationItemCommandProperty);
+            }
+
+            set
+            {
+                SetValue(WillSelectNavigationItemCommandProperty, value);
+            }
+        }
+
         private ItemsControl m_navigationItemsControl;
 
         static SideNavigation()
@@ -247,7 +296,7 @@ namespace MaterialDesignExtensions.Controls
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
 
-            CommandBindings.Add(new CommandBinding(SelectNavigationItemCommand, SelectNavigationItemCommandHandler));
+            CommandBindings.Add(new CommandBinding(SelectNavigationItemCommand, SelectNavigationItemCommandHandlerAsync));
         }
 
         public override void OnApplyTemplate()
@@ -325,9 +374,22 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private void SelectNavigationItemCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        private async void SelectNavigationItemCommandHandlerAsync(object sender, ExecutedRoutedEventArgs args)
         {
-            SelectedItem = args.Parameter as INavigationItem;
+            INavigationItem navigationItemToSelect = args.Parameter as INavigationItem;
+
+            WillSelectNavigationItemEventArgs eventArgs = new WillSelectNavigationItemEventArgs(WillSelectNavigationItemEvent, this, SelectedItem, navigationItemToSelect);
+            RaiseEvent(eventArgs);
+
+            if (WillSelectNavigationItemCommand != null && WillSelectNavigationItemCommand.CanExecute(eventArgs))
+            {
+                WillSelectNavigationItemCommand.Execute(eventArgs);
+            }
+
+            if (!eventArgs.Cancel && (WillSelectNavigationItemCallbackAsync == null || !(await WillSelectNavigationItemCallbackAsync(SelectedItem, navigationItemToSelect))))
+            {
+                SelectedItem = navigationItemToSelect;
+            }
         }
 
         private void InitItems(IList values)
@@ -353,6 +415,59 @@ namespace MaterialDesignExtensions.Controls
             }
         }
     }
+
+    /// <summary>
+    /// The arguments for the <see cref="SideNavigation.WillSelectNavigationItem" /> event.
+    /// </summary>
+    public class WillSelectNavigationItemEventArgs : RoutedEventArgs
+    {
+        /// <summary>
+        /// Set this property to <code>true</code> for cancelling the selection of <see cref="NavigationItemToSelect" />.
+        /// </summary>
+        public bool Cancel { get; set; }
+
+        /// <summary>
+        /// The current item before the selection.
+        /// </summary>
+        public INavigationItem CurrentNavigationItem { get; private set; }
+
+        /// <summary>
+        /// The item to be selected.
+        /// </summary>
+        public INavigationItem NavigationItemToSelect { get; private set; }
+
+        /// <summary>
+        /// Creates a new <see cref="WillSelectNavigationItemEventArgs" />.
+        /// </summary>
+        /// <param name="routedEvent"></param>
+        /// <param name="source">The source object</param>
+        /// <param name="currentNavigationItem">The current item before the selection</param>
+        /// <param name="navigationToSelect">The item to be selected</param>
+        public WillSelectNavigationItemEventArgs(RoutedEvent routedEvent, object source, INavigationItem currentNavigationItem, INavigationItem navigationToSelect)
+            : base(routedEvent, source)
+        {
+            CurrentNavigationItem = currentNavigationItem;
+            NavigationItemToSelect = navigationToSelect;
+
+            Cancel = false;
+        }
+    }
+
+    /// <summary>
+    /// The delegate for handling the <see cref="SideNavigation.WillSelectNavigationItem" /> event.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    public delegate void WillSelectNavigationItemEventHandler(object sender, WillSelectNavigationItemEventArgs args);
+
+    /// <summary>
+    /// A delegate for a kind of Javascript style event handling, because events cannot await async code.
+    /// It will be called after the <see cref="SideNavigation.WillSelectNavigationItem" /> event.
+    /// </summary>
+    /// <param name="currentNavigationItem"></param>
+    /// <param name="navigationToSelect"></param>
+    /// <returns></returns>
+    public delegate Task<bool> WillSelectNavigationItemCallbackAsync(INavigationItem currentNavigationItem, INavigationItem navigationToSelect);
 
     /// <summary>
     /// The arguments for the <see cref="SideNavigation.NavigationItemSelected" /> event.

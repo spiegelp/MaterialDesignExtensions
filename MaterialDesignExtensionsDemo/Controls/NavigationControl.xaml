@@ -22,11 +22,14 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.ColumnSpan="5" Text="The SideNavigation control can be used as a persistent navigation or inside a navigation drawer. Here are some different styles:" TextWrapping="WrapWithOverflow" />
-                <controls:SideNavigation Grid.Row="1" Grid.Column="0" Items="{Binding Path=NavigationItems, Mode=OneTime}" />
-                <controls:SideNavigation Grid.Row="1" Grid.Column="2" Items="{Binding Path=NavigationItems, Mode=OneTime}"
-                                         SelectionCornerRadius="0,24,24,0" SelectionMargin="0" />
-                <controls:SideNavigation Grid.Row="1" Grid.Column="4" Items="{Binding Path=NavigationItems, Mode=OneTime}"
-                                         SelectionCornerRadius="0" SelectionMargin="0" />
+                <controls:SideNavigation x:Name="navigation1" Grid.Row="1" Grid.Column="0" Items="{Binding Path=NavigationItems, Mode=OneTime}"
+                                         WillSelectNavigationItemCommand="{Binding Path=WillSelectNavigationItemCommand}" />
+                <controls:SideNavigation x:Name="navigation2" Grid.Row="1" Grid.Column="2" Items="{Binding Path=NavigationItems, Mode=OneTime}"
+                                         SelectionCornerRadius="0,24,24,0" SelectionMargin="0"
+                                         WillSelectNavigationItemCommand="{Binding Path=WillSelectNavigationItemCommand}" />
+                <controls:SideNavigation x:Name="navigation3" Grid.Row="1" Grid.Column="4" Items="{Binding Path=NavigationItems, Mode=OneTime}"
+                                         SelectionCornerRadius="0" SelectionMargin="0"
+                                         WillSelectNavigationItemCommand="{Binding Path=WillSelectNavigationItemCommand}" />
             </Grid>
         </ScrollViewer>
     </Grid>
