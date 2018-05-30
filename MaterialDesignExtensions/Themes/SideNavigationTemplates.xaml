@@ -174,7 +174,7 @@
         <ContentControl Content="{Binding}" />
     </DataTemplate>
 
-    <Style TargetType="{x:Type controls:SideNavigation}">
+    <Style x:Key="MaterialSideNavigationDefault" TargetType="{x:Type controls:SideNavigation}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -203,5 +203,17 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style TargetType="{x:Type controls:SideNavigation}" BasedOn="{StaticResource MaterialSideNavigationDefault}" />
+
+    <Style x:Key="MaterialSideNavigationSemicircle" TargetType="{x:Type controls:SideNavigation}" BasedOn="{StaticResource MaterialSideNavigationDefault}">
+        <Setter Property="SelectionCornerRadius" Value="0,24,24,0" />
+        <Setter Property="SelectionMargin" Value="0" />
+    </Style>
+
+    <Style x:Key="MaterialSideNavigationBlock" TargetType="{x:Type controls:SideNavigation}" BasedOn="{StaticResource MaterialSideNavigationDefault}">
+        <Setter Property="SelectionCornerRadius" Value="0" />
+        <Setter Property="SelectionMargin" Value="0" />
+    </Style>
+
 </ResourceDictionary>
