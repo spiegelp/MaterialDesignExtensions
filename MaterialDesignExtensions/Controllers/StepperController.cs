@@ -20,8 +20,8 @@ namespace MaterialDesignExtensions.Controllers
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private StepperStepViewModel[] _stepViewModels;
-        private ObservableCollection<StepperStepViewModel> _observableStepViewModels;
+        private StepperStepViewModel[] m_stepViewModels;
+        private ObservableCollection<StepperStepViewModel> m_observableStepViewModels;
 
         /// <summary>
         /// Gets the active <see cref="IStep"/> or null.
@@ -52,12 +52,12 @@ namespace MaterialDesignExtensions.Controllers
         {
             get
             {
-                if (_stepViewModels == null)
+                if (m_stepViewModels == null)
                 {
                     return null;
                 }
 
-                return _stepViewModels.Where(stepViewModel => stepViewModel.IsActive).FirstOrDefault();
+                return m_stepViewModels.Where(stepViewModel => stepViewModel.IsActive).FirstOrDefault();
             }
         }
 
@@ -69,7 +69,7 @@ namespace MaterialDesignExtensions.Controllers
         {
             get
             {
-                return _observableStepViewModels;
+                return m_observableStepViewModels;
             }
         }
 
@@ -82,9 +82,9 @@ namespace MaterialDesignExtensions.Controllers
             {
                 int activeStepIndex = GetActiveStepIndex();
 
-                if (activeStepIndex >= 0 && activeStepIndex < (_stepViewModels.Length - 1))
+                if (activeStepIndex >= 0 && activeStepIndex < (m_stepViewModels.Length - 1))
                 {
-                    return _stepViewModels[activeStepIndex + 1].Step;
+                    return m_stepViewModels[activeStepIndex + 1].Step;
                 }
                 else
                 {
@@ -102,9 +102,9 @@ namespace MaterialDesignExtensions.Controllers
             {
                 int activeStepIndex = GetActiveStepIndex();
 
-                if (activeStepIndex > 0 && activeStepIndex < _stepViewModels.Length)
+                if (activeStepIndex > 0 && activeStepIndex < m_stepViewModels.Length)
                 {
-                    return _stepViewModels[activeStepIndex - 1].Step;
+                    return m_stepViewModels[activeStepIndex - 1].Step;
                 }
                 else
                 {
@@ -120,12 +120,12 @@ namespace MaterialDesignExtensions.Controllers
         {
             get
             {
-                if (_stepViewModels == null)
+                if (m_stepViewModels == null)
                 {
                     return null;
                 }
 
-                return _stepViewModels.Select(viewModel => viewModel.Step).ToArray();
+                return m_stepViewModels.Select(viewModel => viewModel.Step).ToArray();
             }
         }
 
@@ -134,8 +134,8 @@ namespace MaterialDesignExtensions.Controllers
         /// </summary>
         public StepperController()
         {
-            _stepViewModels = null;
-            _observableStepViewModels = new ObservableCollection<StepperStepViewModel>();
+            m_stepViewModels = null;
+            m_observableStepViewModels = new ObservableCollection<StepperStepViewModel>();
         }
 
         /// <summary>
@@ -154,11 +154,11 @@ namespace MaterialDesignExtensions.Controllers
         /// <param name="steps"></param>
         public void InitSteps(IStep[] steps)
         {
-            _observableStepViewModels.Clear();
+            m_observableStepViewModels.Clear();
 
             if (steps != null)
             {
-                _stepViewModels = new StepperStepViewModel[steps.Length];
+                m_stepViewModels = new StepperStepViewModel[steps.Length];
 
                 for (int i = 0; i < steps.Length; i++)
                 {
@@ -169,7 +169,7 @@ namespace MaterialDesignExtensions.Controllers
                         throw new ArgumentNullException("null is not a valid step");
                     }
 
-                    _stepViewModels[i] = new StepperStepViewModel()
+                    m_stepViewModels[i] = new StepperStepViewModel()
                     {
                         Controller = this,
                         Step = step,
@@ -180,12 +180,12 @@ namespace MaterialDesignExtensions.Controllers
                         IsLastStep = i == (steps.Length - 1)
                     };
 
-                    _observableStepViewModels.Add(_stepViewModels[i]);
+                    m_observableStepViewModels.Add(m_stepViewModels[i]);
                 }
 
-                if (_stepViewModels.Length > 0)
+                if (m_stepViewModels.Length > 0)
                 {
-                    _stepViewModels[0].IsActive = true;
+                    m_stepViewModels[0].IsActive = true;
                 }
 
                 OnPropertyChanged(nameof(Steps));
@@ -198,11 +198,11 @@ namespace MaterialDesignExtensions.Controllers
 
         private int GetActiveStepIndex()
         {
-            if (_stepViewModels != null)
+            if (m_stepViewModels != null)
             {
-                for (int i = 0; i < _stepViewModels.Length; i++)
+                for (int i = 0; i < m_stepViewModels.Length; i++)
                 {
-                    if (_stepViewModels[i].IsActive)
+                    if (m_stepViewModels[i].IsActive)
                     {
                         return i;
                     }
@@ -217,7 +217,7 @@ namespace MaterialDesignExtensions.Controllers
         /// </summary>
         public void Continue()
         {
-            if (_stepViewModels == null)
+            if (m_stepViewModels == null)
             {
                 return;
             }
@@ -225,7 +225,7 @@ namespace MaterialDesignExtensions.Controllers
             // find the active step and go to the next one
             int activeStepIndex = GetActiveStepIndex();
 
-            if (activeStepIndex >= 0 && activeStepIndex < (_stepViewModels.Length - 1))
+            if (activeStepIndex >= 0 && activeStepIndex < (m_stepViewModels.Length - 1))
             {
                 GotoStep(activeStepIndex + 1);
             }
@@ -236,7 +236,7 @@ namespace MaterialDesignExtensions.Controllers
         /// </summary>
         public void Back()
         {
-            if (_stepViewModels == null)
+            if (m_stepViewModels == null)
             {
                 return;
             }
@@ -244,7 +244,7 @@ namespace MaterialDesignExtensions.Controllers
             // find the active step and go to the previous one
             int activeStepIndex = GetActiveStepIndex();
 
-            if (activeStepIndex > 0 && activeStepIndex < _stepViewModels.Length)
+            if (activeStepIndex > 0 && activeStepIndex < m_stepViewModels.Length)
             {
                 GotoStep(activeStepIndex - 1);
             }
@@ -256,9 +256,9 @@ namespace MaterialDesignExtensions.Controllers
         /// <param name="index"></param>
         public void GotoStep(int index)
         {
-            if (_stepViewModels != null && index >= 0 && index < _stepViewModels.Length)
+            if (m_stepViewModels != null && index >= 0 && index < m_stepViewModels.Length)
             {
-                GotoStep(_stepViewModels[index]);
+                GotoStep(m_stepViewModels[index]);
             }
             else
             {
@@ -278,7 +278,7 @@ namespace MaterialDesignExtensions.Controllers
                 throw new ArgumentNullException("null is not a valid step");
             }
 
-            GotoStep(_stepViewModels.Where(stepViewModel => stepViewModel.Step == step).FirstOrDefault());
+            GotoStep(m_stepViewModels.Where(stepViewModel => stepViewModel.Step == step).FirstOrDefault());
         }
 
         /// <summary>
@@ -294,7 +294,7 @@ namespace MaterialDesignExtensions.Controllers
             }
 
             // set all steps inactive except the next one to show
-            foreach (StepperStepViewModel stepViewModelItem in _stepViewModels)
+            foreach (StepperStepViewModel stepViewModelItem in m_stepViewModels)
             {
                 stepViewModelItem.IsActive = stepViewModelItem == stepViewModel;
             }

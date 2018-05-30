@@ -786,6 +786,41 @@ namespace MaterialDesignExtensions.Controls
                 }
             }
         }
+
+        /// <summary>
+        /// Goes to the next <see cref="IStep"/> if the active <see cref="IStep"/> is not the last one.
+        /// </summary>
+        public void Continue()
+        {
+            m_controller.Continue();
+        }
+
+        /// <summary>
+        /// Goes to the previous <see cref="IStep"/> if the active <see cref="IStep"/> is not the first one.
+        /// </summary>
+        public void Back()
+        {
+            m_controller.Back();
+        }
+
+        /// <summary>
+        /// Goes to the <see cref="IStep"/> specified by the index.
+        /// </summary>
+        /// <param name="index"></param>
+        public void GotoStep(int index)
+        {
+            m_controller.GotoStep(index);
+        }
+
+        /// <summary>
+        /// Goes to the specified <see cref="IStep"/>.
+        /// Throws an <see cref="ArgumentNullException"/> if step is null or step is not inside this <see cref="Stepper"/>.
+        /// </summary>
+        /// <param name="step"></param>
+        public void GotoStep(IStep step)
+        {
+            m_controller.GotoStep(step);
+        }
     }
 
     /// <summary>

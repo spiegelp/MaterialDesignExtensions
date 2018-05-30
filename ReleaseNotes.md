@@ -53,6 +53,7 @@
   * `MediumProminent`
   * `MediumExtraProminent`
 * New `NavigationCanceledByValidation` event and `NavigationCanceledByValidationCommand` command for `Stepper`
+* Methods on `Stepper` to navigate by code
 * New `ContentAnimationsEnabled` property for `Stepper` to enable or disable its animations
 * New control `PersistentSearch`
 #### Fixes
