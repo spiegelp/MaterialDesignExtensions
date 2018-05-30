@@ -54,5 +54,6 @@
   * `MediumExtraProminent`
 * New `NavigationCanceledByValidation` event and `NavigationCanceledByValidationCommand` command for `Stepper`
 * New control `PersistentSearch`
+* New control `SideNavigation`
 #### Fixes
 * Unregister old event handlers on applying templates
