@@ -56,5 +56,6 @@
 * Methods on `Stepper` to navigate by code
 * New `ContentAnimationsEnabled` property for `Stepper` to enable or disable its animations
 * New control `PersistentSearch`
+* New control `SideNavigation`
 #### Fixes
 * Unregister old event handlers on applying templates

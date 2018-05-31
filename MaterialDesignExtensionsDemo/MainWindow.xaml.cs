@@ -14,6 +14,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using MaterialDesignThemes.Wpf;
+
+using MaterialDesignExtensions.Controls;
+using MaterialDesignExtensions.Model;
+
 using MaterialDesignExtensionsDemo.ViewModel;
 
 namespace MaterialDesignExtensionsDemo
@@ -22,11 +27,9 @@ namespace MaterialDesignExtensionsDemo
     {
         public const string DialogHostName = "dialogHost";
 
-        public static RoutedCommand NavigationItemSelectedCommand = new RoutedCommand();
+        private List<INavigationItem> m_navigationItems;
 
-        private List<NavigationItem> m_navigationItems;
-
-        public List<NavigationItem> NavigationItems
+        public List<INavigationItem> NavigationItems
         {
             get
             {
@@ -36,44 +39,54 @@ namespace MaterialDesignExtensionsDemo
 
         public MainWindow()
         {
-            m_navigationItems = new List<NavigationItem>()
+            m_navigationItems = new List<INavigationItem>()
             {
-                new NavigationItem() { Label = "App bar", Action = () => new AppBarViewModel() },
-                new NavigationItem() { Label = "Oversized Number Spinner", Action = () => new OversizedNumberSpinnerViewModel() },
-                new NavigationItem() { Label = "Grid list", Action = () => new GridListViewModel() },
-                new NavigationItem() { Label = "Stepper", Action = () => new StepperViewModel() },
-                new NavigationItem() { Label = "Open directory", Action = () => new OpenDirectoryControlViewModel() },
-                new NavigationItem() { Label = "Open file", Action = () => new OpenFileControlViewModel() },
-                new NavigationItem() { Label = "Save file", Action = () => new SaveFileControlViewModel() },
-                new NavigationItem() { Label = "Directory and file dialogs", Action = () => new FileSystemDialogViewModel() },
-                new NavigationItem() { Label = "Search", Action = () => new SearchViewModel() }
+                new SubheaderNavigationItem() { Subheader = "Controls" },
+                new FirstLevelNavigationItem() { Label = "App bar", NavigationItemSelectedCallback = item => new AppBarViewModel() },
+                new FirstLevelNavigationItem() { Label = "Oversized Number Spinner", NavigationItemSelectedCallback = item => new OversizedNumberSpinnerViewModel() },
+                new FirstLevelNavigationItem() { Label = "Grid list", NavigationItemSelectedCallback = item => new GridListViewModel() },
+                new FirstLevelNavigationItem() { Label = "Stepper", NavigationItemSelectedCallback = item => new StepperViewModel() },
+                new DividerNavigationItem(),
+                new SubheaderNavigationItem() { Subheader = "Directories and files" },
+                new FirstLevelNavigationItem() { Label = "Open directory", Icon = PackIconKind.Folder, NavigationItemSelectedCallback = item => new OpenDirectoryControlViewModel() },
+                new FirstLevelNavigationItem() { Label = "Open file", Icon = PackIconKind.File, NavigationItemSelectedCallback = item => new OpenFileControlViewModel() },
+                new FirstLevelNavigationItem() { Label = "Save file", Icon = PackIconKind.File, NavigationItemSelectedCallback = item => new SaveFileControlViewModel() },
+                new FirstLevelNavigationItem() { Label = "Directory and file dialogs", NavigationItemSelectedCallback = item => new FileSystemDialogViewModel() },
+                new DividerNavigationItem(),
+                new SubheaderNavigationItem() { Subheader = "Navigation and searching" },
+                new FirstLevelNavigationItem() { Label = "Navigation", Icon = PackIconKind.Menu, NavigationItemSelectedCallback = item => new NavigationViewModel() },
+                new FirstLevelNavigationItem() { Label = "Search", Icon = PackIconKind.Magnify, NavigationItemSelectedCallback = item => new SearchViewModel() }
             };
 
             InitializeComponent();
 
-            SelectNavigationItem(m_navigationItems[0]);
+            navigationDrawerNav.SelectedItem = m_navigationItems[1];
+            sideNav.SelectedItem = m_navigationItems[1];
+            m_navigationItems[1].IsSelected = true;
 
-            CommandBindings.Add(new CommandBinding(NavigationItemSelectedCommand, NavigationItemSelectedHandler));
-
-            navigationItemsControl.DataContext = this;
+            sideNav.DataContext = this;
+            navigationDrawerNav.DataContext = this;
         }
 
-        private void NavigationItemSelectedHandler(object sender, ExecutedRoutedEventArgs args)
+        private void NavigationItemSelectedHandler(object sender, NavigationItemSelectedEventArgs args)
         {
-            SelectNavigationItem(args.Parameter as NavigationItem);
+            SelectNavigationItem(args.NavigationItem);
         }
 
-        private void SelectNavigationItem(NavigationItem navigationItem)
+        private void SelectNavigationItem(INavigationItem navigationItem)
         {
-            m_navigationItems.ForEach(item => item.IsSelected = item == navigationItem);
-
             if (navigationItem != null)
             {
-                contentControl.Content = navigationItem.Action.Invoke();
+                contentControl.Content = navigationItem.NavigationItemSelectedCallback(navigationItem);
             }
             else
             {
                 contentControl.Content = null;
+            }
+
+            if (appBar != null)
+            {
+                appBar.IsNavigationDrawerOpen = false;
             }
         }
 

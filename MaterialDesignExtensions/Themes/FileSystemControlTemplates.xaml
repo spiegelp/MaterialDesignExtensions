@@ -67,7 +67,7 @@
     <DataTemplate x:Key="specialDriveItemTemplate">
         <Grid x:Name="specialDriveItemGrid" HorizontalAlignment="Stretch">
             <Border Background="{Binding Path=Foreground, Converter={StaticResource brushRoundConverter}, ElementName=specialDriveItemButton}"
-                                            HorizontalAlignment="Stretch">
+                    HorizontalAlignment="Stretch">
                 <Border.Style>
                     <Style TargetType="{x:Type Border}">
                         <Style.Triggers>
@@ -82,8 +82,8 @@
                 </Border.Style>
             </Border>
             <Button x:Name="specialDriveItemButton" Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                                                Command="{x:Static controls:FileSystemControl.SelectDirectoryItemCommand}" CommandParameter="{Binding}"
-                                                HorizontalContentAlignment="Left">
+                    Command="{x:Static controls:FileSystemControl.SelectDirectoryItemCommand}" CommandParameter="{Binding}"
+                    HorizontalContentAlignment="Left">
                 <DockPanel>
                     <wpfLib:PackIcon DockPanel.Dock="Left" Kind="{Binding Path=Icon, Mode=OneTime}" Height="24" Width="24" VerticalAlignment="Center" />
                     <TextBlock Text="{Binding Path=Label, Mode=OneTime}" VerticalAlignment="Center" Margin="16,0,0,0" />
@@ -336,10 +336,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <wpfLib:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"    
-                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                    <wpfLib:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"
+                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                   Padding="{TemplateBinding Padding}" 
+                                   Padding="{TemplateBinding Padding}"
                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                 </ControlTemplate>
             </Setter.Value>
