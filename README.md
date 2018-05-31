@@ -11,6 +11,11 @@ Install NuGet package. `PM> Install-Package MaterialDesignExtensions`
 
 Assemblies are compiled for .NET Framework 4.5
 
+# Getting started
+1. Create a WPF desktop application
+2. Install Material Design Extensions via [NuGet](https://www.nuget.org/packages/MaterialDesignExtensions/)
+3. Add the styles to your App.xaml (see [App.xaml](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/MaterialDesignExtensionsDemo/App.xaml) in the demo)
+
 # Controls
 Material Design Extensions features the following controls:
 
@@ -18,13 +23,13 @@ Material Design Extensions features the following controls:
 | --- | --- | --- |
 | [Stepper](https://github.com/spiegelp/MaterialDesignExtensions/wiki/Stepper) | Custom `Stepper` control ([specification](https://material.io/guidelines/components/steppers.html)) | Done |
 | [Oversized number spinner](https://github.com/spiegelp/MaterialDesignExtensions/wiki/Oversized-number-spinner) | Custom `OversizedNumberSpinner` control | Done |
-| [Grid list](https://github.com/spiegelp/MaterialDesignExtensions/wiki/Grid-list) | Templates for `ListBox` to render as a grid list ([specification](https://material.io/guidelines/components/grid-lists.html)) | Done |
+| [Grid list](https://github.com/spiegelp/MaterialDesignExtensions/wiki/Grid-list) | Templates for `ListBox` to render as a grid list ([specification](https://material.io/design/components/image-lists.html#usage)) | Done |
 | [Open directory](https://github.com/spiegelp/MaterialDesignExtensions/wiki/File-system-controls) | Custom `OpenDirectoryControl` and `OpenDirectoryDialog` control | Done |
 | [Open file](https://github.com/spiegelp/MaterialDesignExtensions/wiki/File-system-controls) | Custom `OpenFileControl` and `OpenFileDialog` control | Done |
 | [Save file](https://github.com/spiegelp/MaterialDesignExtensions/wiki/File-system-controls) | Custom `SaveFileControl` and `SaveFileDialog` control | Done |
-| [App bar](https://github.com/spiegelp/MaterialDesignExtensions/wiki/App-bar) | Custom `AppBar` control ([specification](https://material.io/guidelines/layout/structure.html#structure-app-bar)) | Done |
-| Persistent search | Custom `PersistentSearch` control ([specification](https://material.io/guidelines/patterns/search.html#search-in-app-search)) | In progress |
-| [Side navigation](https://github.com/spiegelp/MaterialDesignExtensions/wiki/Navigation) | Custom `SideNavigation` control ([specification](https://material.io/design/components/navigation-drawer.html#usage)) | In progress |
+| [App bar](https://github.com/spiegelp/MaterialDesignExtensions/wiki/App-bar) | Custom `AppBar` control ([specification](https://material.io/design/components/app-bars-top.html#usage)) | Done |
+| [Persistent search](https://github.com/spiegelp/MaterialDesignExtensions/wiki/Search) | Custom `PersistentSearch` control ([specification](https://material.io/design/navigation/search.html)) | Done |
+| [Side navigation](https://github.com/spiegelp/MaterialDesignExtensions/wiki/Navigation) | Custom `SideNavigation` control ([specification](https://material.io/design/components/navigation-drawer.html#usage)) | Done |
 
 # Screenshots
 ### Horizontal stepper
@@ -44,6 +49,9 @@ Material Design Extensions features the following controls:
 
 ### Oversized number spinner
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/OversizedNumberSpinner.png)
+
+# Documentation
+You find the API documentation inside the [wiki](https://github.com/spiegelp/MaterialDesignExtensions/wiki).
 
 # License
 Material Design Extensions is licensed under the [MIT](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/LICENSE) license.

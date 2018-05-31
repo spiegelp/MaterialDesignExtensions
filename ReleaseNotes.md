@@ -4,7 +4,7 @@
 #### Features
 * Stepper from the [Material Design specification](https://material.io/guidelines/components/steppers.html)
 * Oversized number spinner
-* `ListBox` template to render as a grid list from the [Material Design specification](https://material.io/guidelines/components/grid-lists.html)
+* `ListBox` template to render as a grid list from the [Material Design specification](https://material.io/design/components/image-lists.html#usage)
 ### v1.1.0
 #### Features
 * Assign steps to the `Stepper` via XAML
@@ -16,7 +16,7 @@
 * Pack localized resources into NuGet package
 ### v1.2.0
 #### Features
-* New `AppBar` control with basic behavior defined in the [Material Design specification](https://material.io/guidelines/layout/structure.html#structure-app-bar)
+* New `AppBar` control with basic behavior defined in the [Material Design specification](https://material.io/design/components/app-bars-top.html#usage)
 * Extensions for the `Stepper` API
   * Read-only `ActiveStep` property
   * Event `ActiveStepChangedEvent`
@@ -44,7 +44,7 @@
 #### Fixes
 * Handle `null` in `FileFiltersTypeConverter`
 * Consistent default value for `FileDialogArguments.FilterIndex`
-### vX.X.X (upcoming release)
+### v2.1.0
 #### Features
 * Additional layouts for `AppBar`
   * `ExtraProminent`
@@ -52,9 +52,10 @@
   * `Medium`
   * `MediumProminent`
   * `MediumExtraProminent`
-* New `NavigationCanceledByValidation` event and `NavigationCanceledByValidationCommand` command for `Stepper`
-* Methods on `Stepper` to navigate by code
-* New `ContentAnimationsEnabled` property for `Stepper` to enable or disable its animations
+* Extensions for the `Stepper` API
+  * `NavigationCanceledByValidation` event and `NavigationCanceledByValidationCommand` command
+  * `ContentAnimationsEnabled` property to enable or disable animations
+  * Methods to navigate by code
 * New control `PersistentSearch`
 * New control `SideNavigation`
 #### Fixes
