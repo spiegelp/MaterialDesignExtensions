@@ -60,3 +60,6 @@
 * New control `SideNavigation`
 #### Fixes
 * Unregister old event handlers on applying templates
+### vX.X.X (upcoming release)
+#### Features
+* `IsBackEnabled`, `IsCancelEnabled` and `IsContinueEnabled` properties for `StepButtonBar`

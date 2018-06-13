@@ -15,6 +15,9 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public class StepButtonBar : Control
     {
+        /// <summary>
+        /// The content for the back button.
+        /// </summary>
         public static readonly DependencyProperty BackProperty = DependencyProperty.Register(
                 nameof(Back), typeof(object), typeof(StepButtonBar), new PropertyMetadata(null));
 
@@ -34,6 +37,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The content for the cancel button.
+        /// </summary>
         public static readonly DependencyProperty CancelProperty = DependencyProperty.Register(
                 nameof(Cancel), typeof(object), typeof(StepButtonBar), new PropertyMetadata(null));
 
@@ -53,6 +59,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The content for the continue button.
+        /// </summary>
         public static readonly DependencyProperty ContinueProperty = DependencyProperty.Register(
                 nameof(Continue), typeof(object), typeof(StepButtonBar), new PropertyMetadata(null));
 
@@ -69,6 +78,72 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(ContinueProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Enables or disables the back button.
+        /// </summary>
+        public static readonly DependencyProperty IsBackEnabledProperty = DependencyProperty.Register(
+                nameof(IsBackEnabled), typeof(bool), typeof(StepButtonBar), new PropertyMetadata(true));
+
+        /// <summary>
+        /// Enables or disables the back button.
+        /// </summary>
+        public bool IsBackEnabled
+        {
+            get
+            {
+                return (bool)GetValue(IsBackEnabledProperty);
+            }
+
+            set
+            {
+                SetValue(IsBackEnabledProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Enables or disables the cancel button.
+        /// </summary>
+        public static readonly DependencyProperty IsCancelEnabledProperty = DependencyProperty.Register(
+                nameof(IsCancelEnabled), typeof(bool), typeof(StepButtonBar), new PropertyMetadata(true));
+
+        /// <summary>
+        /// Enables or disables the cancel button.
+        /// </summary>
+        public bool IsCancelEnabled
+        {
+            get
+            {
+                return (bool)GetValue(IsCancelEnabledProperty);
+            }
+
+            set
+            {
+                SetValue(IsCancelEnabledProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Enables or disables the continue button.
+        /// </summary>
+        public static readonly DependencyProperty IsContinueEnabledProperty = DependencyProperty.Register(
+                nameof(IsContinueEnabled), typeof(bool), typeof(StepButtonBar), new PropertyMetadata(true));
+
+        /// <summary>
+        /// Enables or disables the continue button.
+        /// </summary>
+        public bool IsContinueEnabled
+        {
+            get
+            {
+                return (bool)GetValue(IsContinueEnabledProperty);
+            }
+
+            set
+            {
+                SetValue(IsContinueEnabledProperty, value);
             }
         }
 

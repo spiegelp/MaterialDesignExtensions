@@ -465,16 +465,19 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                     <Button Style="{DynamicResource MaterialDesignFlatButton}" Foreground="{DynamicResource MaterialDesignBodyLight}"
-                                        Content="{Binding Path=Back, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.BackCommand}"
-                                        Visibility="{Binding Path=Back, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}" />
+                                            Content="{Binding Path=Back, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.BackCommand}"
+                                            Visibility="{Binding Path=Back, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}"
+                                            IsEnabled="{Binding Path=IsBackEnabled, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </StackPanel>
                                 <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
                                     <Button Style="{DynamicResource MaterialDesignFlatButton}" Foreground="{DynamicResource MaterialDesignBody}"
-                                        Content="{Binding Path=Cancel, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.CancelCommand}"
-                                        Visibility="{Binding Path=Cancel, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}" />
+                                            Content="{Binding Path=Cancel, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.CancelCommand}"
+                                            Visibility="{Binding Path=Cancel, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}"
+                                            IsEnabled="{Binding Path=IsCancelEnabled, RelativeSource={RelativeSource TemplatedParent}}" />
                                     <Button Style="{DynamicResource MaterialDesignFlatButton}" Margin="8,0,0,0"
-                                        Content="{Binding Path=Continue, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.ContinueCommand}"
-                                        Visibility="{Binding Path=Continue, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}" />
+                                            Content="{Binding Path=Continue, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.ContinueCommand}"
+                                            Visibility="{Binding Path=Continue, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}"
+                                            IsEnabled="{Binding Path=IsContinueEnabled, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </StackPanel>
                             </Grid>
                         </ControlTemplate>
@@ -488,13 +491,16 @@
                             <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" VerticalAlignment="Center">
                                 <Button Style="{DynamicResource MaterialDesignFlatButton}" Foreground="{DynamicResource MaterialDesignBodyLight}" Margin="0,0,10,0"
                                         Content="{Binding Path=Back, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.BackCommand}"
-                                        Visibility="{Binding Path=Back, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}" />
+                                        Visibility="{Binding Path=Back, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}"
+                                        IsEnabled="{Binding Path=IsBackEnabled, RelativeSource={RelativeSource TemplatedParent}}" />
                                 <Button Style="{DynamicResource MaterialDesignRaisedButton}" Margin="0,0,10,0"
                                         Content="{Binding Path=Continue, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.ContinueCommand}"
-                                        Visibility="{Binding Path=Continue, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}" />
+                                        Visibility="{Binding Path=Continue, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}"
+                                        IsEnabled="{Binding Path=IsContinueEnabled, RelativeSource={RelativeSource TemplatedParent}}" />
                                 <Button Style="{DynamicResource MaterialDesignFlatButton}" Foreground="{DynamicResource MaterialDesignBody}"
                                         Content="{Binding Path=Cancel, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.CancelCommand}"
-                                        Visibility="{Binding Path=Cancel, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}" />
+                                        Visibility="{Binding Path=Cancel, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}"
+                                        IsEnabled="{Binding Path=IsCancelEnabled, RelativeSource={RelativeSource TemplatedParent}}" />
                             </StackPanel>
                         </ControlTemplate>
                     </Setter.Value>
