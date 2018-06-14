@@ -7,17 +7,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Markup;
 
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
-    /// A custom control implementing the concept of the app bar (https://material.io/guidelines/layout/structure.html#structure-app-bar).
+    /// A custom control implementing the concept of the app bar (https://material.io/design/components/app-bars-top.html#usage).
     /// It provides an optional toggle button for a navigation drawer, an icon, a title and a content area (to add toolbar buttons for example).
     /// </summary>
     [ContentProperty(nameof(Children))]
     public class AppBar : Control
     {
+        private const string BackButtonName = "backButton";
+
         /// <summary>
         /// The height of a default app bar.
         /// </summary>
@@ -64,6 +67,28 @@ namespace MaterialDesignExtensions.Controls
         public const double MediumExtraProminentHeight = 128;
 
         /// <summary>
+        /// An event raised by clicking the back button.
+        /// </summary>
+        public static readonly RoutedEvent BackEvent = EventManager.RegisterRoutedEvent(
+            nameof(Back), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(AppBar));
+
+        /// <summary>
+        /// An event raised by clicking the back button.
+        /// </summary>
+        public event RoutedEventHandler Back
+        {
+            add
+            {
+                AddHandler(BackEvent, value);
+            }
+
+            remove
+            {
+                RemoveHandler(BackEvent, value);
+            }
+        }
+
+        /// <summary>
         /// The icon to show in the upper left corner.
         /// </summary>
         public static readonly DependencyProperty AppIconProperty = DependencyProperty.Register(
@@ -82,6 +107,28 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(AppIconProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// An command called by clicking the back button.
+        /// </summary>
+        public static readonly DependencyProperty BackCommandProperty = DependencyProperty.Register(
+            nameof(BackCommand), typeof(ICommand), typeof(AppBar), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// An command called by clicking the back button.
+        /// </summary>
+        public ICommand BackCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(BackCommandProperty);
+            }
+
+            set
+            {
+                SetValue(BackCommandProperty, value);
             }
         }
 
@@ -148,6 +195,28 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(OpaqueModeProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Shows or hides the back button on the upper left corner.
+        /// </summary>
+        public static readonly DependencyProperty ShowBackButtonProperty = DependencyProperty.Register(
+            nameof(ShowBackButton), typeof(bool), typeof(AppBar), new PropertyMetadata(false));
+
+        /// <summary>
+        /// Shows or hides the back button on the upper left corner.
+        /// </summary>
+        public bool ShowBackButton
+        {
+            get
+            {
+                return (bool)GetValue(ShowBackButtonProperty);
+            }
+
+            set
+            {
+                SetValue(ShowBackButtonProperty, value);
             }
         }
 
@@ -261,6 +330,8 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        private Button m_backButton;
+
         static AppBar()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(AppBar), new FrameworkPropertyMetadata(typeof(AppBar)));
@@ -272,7 +343,33 @@ namespace MaterialDesignExtensions.Controls
         public AppBar()
             : base()
         {
+            m_backButton = null;
+
             Children = new ObservableCollection<object>();
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (m_backButton != null)
+            {
+                m_backButton.Click -= BackButtonClickHandler;
+            }
+
+            m_backButton = Template.FindName(BackButtonName, this) as Button;
+            m_backButton.Click += BackButtonClickHandler;
+        }
+
+        private void BackButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            RoutedEventArgs backArgs = new RoutedEventArgs(BackEvent, this);
+            RaiseEvent(backArgs);
+
+            if (BackCommand != null && BackCommand.CanExecute(null))
+            {
+                BackCommand.Execute(null);
+            }
         }
     }
 

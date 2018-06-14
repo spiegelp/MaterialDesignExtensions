@@ -21,5 +21,11 @@ namespace MaterialDesignExtensionsDemo.Controls
         {
             InitializeComponent();
         }
+
+        private void BackButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            // do something after clicking the back button
+            //     or use the AppBar.BackCommand to get notified about a click on the back button
+        }
     }
 }

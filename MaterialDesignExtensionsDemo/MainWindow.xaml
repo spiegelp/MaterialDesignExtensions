@@ -10,7 +10,7 @@
         xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:controlsLib="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
         mc:Ignorable="d"
-        Title="Material Design Extensions - Demo" Height="700" Width="1200" WindowStartupLocation="CenterScreen"
+        Title="Material Design Extensions - Demo" Height="800" Width="1300" WindowStartupLocation="CenterScreen"
         Background="{DynamicResource MaterialDesignBackground}" Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
     <Window.Resources>

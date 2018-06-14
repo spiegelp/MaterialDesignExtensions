@@ -96,6 +96,13 @@
                                         </DataTemplate>
                                     </ContentControl.Resources>
                                 </ContentControl>
+                                
+                                <!-- back button -->
+                                <Button x:Name="backButton" Grid.Column="0" Style="{DynamicResource MaterialDesignToolForegroundButton}" Foreground="{TemplateBinding Foreground}"
+                                        Margin="18,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                        Visibility="{TemplateBinding ShowBackButton, Converter={StaticResource boolToVisibilityConverter}}">
+                                    <wpfLib:PackIcon Kind="ArrowLeft" Height="28" Width="28" />
+                                </Button>
 
                                 <!-- title -->
                                 <ContentControl Grid.Column="1" Content="{TemplateBinding Title}" Margin="0,0,16,0" HorizontalAlignment="Left" VerticalAlignment="Center"
