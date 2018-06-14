@@ -57,6 +57,8 @@
                 <TextBlock Text="Medium extra prominent app bar with title in prominent area" Margin="0,32,0,8" />
                 <controls:AppBar Type="MediumExtraProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowBackButton="True"
                                  Back="BackButtonClickHandler" />
+                <TextBlock Text="Default transparent app bar" Margin="0,32,0,8" />
+                <controls:AppBar Type="Default" OpaqueMode="Transparent" Title="Material Design Extensions" ShowBackButton="True" Foreground="{DynamicResource MaterialDesignBody}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

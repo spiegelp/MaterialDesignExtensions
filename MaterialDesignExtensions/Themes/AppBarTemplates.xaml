@@ -82,7 +82,7 @@
 
                                 <!-- toggle button for the navigation drawer -->
                                 <ToggleButton Grid.Column="0" IsChecked="{Binding Path=IsNavigationDrawerOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                                              Margin="18,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                              Margin="18,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="24" Width="24"
                                               Style="{DynamicResource MaterialDesignHamburgerToggleButton}"
                                               Visibility="{TemplateBinding ShowNavigationDrawerButton, Converter={StaticResource boolToVisibilityConverter}}">
                                 </ToggleButton>
@@ -101,7 +101,7 @@
                                 <Button x:Name="backButton" Grid.Column="0" Style="{DynamicResource MaterialDesignToolForegroundButton}" Foreground="{TemplateBinding Foreground}"
                                         Margin="18,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
                                         Visibility="{TemplateBinding ShowBackButton, Converter={StaticResource boolToVisibilityConverter}}">
-                                    <wpfLib:PackIcon Kind="ArrowLeft" Height="28" Width="28" />
+                                    <wpfLib:PackIcon Kind="ArrowLeft" Height="24" Width="24" />
                                 </Button>
 
                                 <!-- title -->

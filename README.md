@@ -44,7 +44,7 @@ Material Design Extensions features the following controls:
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/SideNavigation.png)
 
 ### App bar
-![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/AppBar.png)
+![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/AppBar1.png)
 
 ### Grid list
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/GridList.png)
