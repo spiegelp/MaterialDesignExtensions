@@ -15,6 +15,8 @@ Assemblies are compiled for .NET Framework 4.5
 1. Create a WPF desktop application
 2. Install Material Design Extensions via [NuGet](https://www.nuget.org/packages/MaterialDesignExtensions/)
 3. Add the styles to your App.xaml (see [App.xaml](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/MaterialDesignExtensionsDemo/App.xaml) in the demo)
+4. Add the namespace `xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"` to your XAML 
+5. You are ready to use the controls
 
 # Controls
 Material Design Extensions features the following controls:
@@ -40,6 +42,9 @@ Material Design Extensions features the following controls:
 
 ### Side navigation
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/SideNavigation.png)
+
+### App bar
+![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/AppBar.png)
 
 ### Grid list
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/GridList.png)
