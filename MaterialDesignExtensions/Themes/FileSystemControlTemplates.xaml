@@ -412,7 +412,7 @@
                     </StackPanel>
                     <Button Grid.Column="2" Cursor="Hand"
                             Command="{x:Static controls:FileSystemControl.ShowInfoCommand}" CommandParameter="{Binding Path=Value}"
-                            HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20">
+                            HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Template">
@@ -426,7 +426,7 @@
                                 </Setter>
                             </Style>
                         </Button.Style>
-                        <wpfLib:PackIcon Grid.Column="2" Kind="Information" Height="20" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        <wpfLib:PackIcon Grid.Column="2" Kind="Information" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
                                          Foreground="{DynamicResource MaterialDesignDivider}" SnapsToDevicePixels="True" />
                     </Button>
                 </Grid>
@@ -485,7 +485,7 @@
                     </StackPanel>
                     <Button Grid.Column="2" Cursor="Hand"
                             Command="{x:Static controls:FileSystemControl.ShowInfoCommand}" CommandParameter="{Binding Value}"
-                            HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20">
+                            HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Template">
@@ -499,7 +499,7 @@
                                 </Setter>
                             </Style>
                         </Button.Style>
-                        <wpfLib:PackIcon Grid.Column="2" Kind="Information" Height="20" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        <wpfLib:PackIcon Grid.Column="2" Kind="Information" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
                                          Foreground="{DynamicResource MaterialDesignDivider}" SnapsToDevicePixels="True" />
                     </Button>
                 </Grid>
