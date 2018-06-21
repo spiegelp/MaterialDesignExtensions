@@ -24,11 +24,14 @@ namespace MaterialDesignExtensions.Converters
 
         public int ImageTargetHeight { get; set; }
 
+        public bool UseCache { get; set; }
+
         public FileSystemInfoIconConverter()
         {
             ImageMode = FileSystemInfoIconConverterImageMode.Icon;
             ImageTargetWidth = 40;
             ImageTargetHeight = 40;
+            UseCache = false;
 
             m_imageFileExtensions = new HashSet<string>()
             {
@@ -178,11 +181,11 @@ namespace MaterialDesignExtensions.Converters
             {
                 if (ImageMode == FileSystemInfoIconConverterImageMode.Image)
                 {
-                    return BitmapImageHelper.LoadImage(filename, ImageTargetWidth, ImageTargetHeight);
+                    return BitmapImageHelper.LoadImage(filename, ImageTargetWidth, ImageTargetHeight, UseCache);
                 }
                 else if (ImageMode == FileSystemInfoIconConverterImageMode.AsyncImageTask)
                 {
-                    return new AsyncImageTask(filename, ImageTargetWidth, ImageTargetHeight);
+                    return new AsyncImageTask(filename, ImageTargetWidth, ImageTargetHeight, UseCache);
                 }
             }
 

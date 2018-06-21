@@ -13,6 +13,12 @@ namespace MaterialDesignExtensions.Controllers
     /// </summary>
     public abstract class BitmapImageHelper
     {
+        private static readonly object m_staticLockObject = new object();
+
+        private static readonly int BufferSize = 1024 * 64;
+
+        private static readonly Dictionary<string, BitmapImage> Cache = new Dictionary<string, BitmapImage>();
+
         private BitmapImageHelper() { }
 
         /// <summary>
@@ -21,12 +27,30 @@ namespace MaterialDesignExtensions.Controllers
         /// <param name="imageFilename"></param>
         /// <param name="targetWidth"></param>
         /// <param name="targetHeight"></param>
+        /// <param name="useCache"></param>
         /// <returns></returns>
-        public static BitmapImage LoadImage(string imageFilename, int targetWidth = 40, int targetHeight = 40)
+        public static BitmapImage LoadImage(string imageFilename, int targetWidth = 40, int targetHeight = 40, bool useCache = false)
         {
+            string key = GetKey(imageFilename, targetWidth, targetHeight);
+
+            BitmapImage image = null;
+
+            if (useCache)
+            {
+                lock (m_staticLockObject)
+                {
+                    Cache.TryGetValue(key, out image);
+                }
+
+                if (image != null)
+                {
+                    return image;
+                }
+            }
+
             try
             {
-                using (FileStream fileStream = new FileStream(imageFilename, FileMode.Open))
+                using (BufferedStream fileStream = new BufferedStream(new FileStream(imageFilename, FileMode.Open), BufferSize))
                 {
                     BitmapDecoder bitmapDecoder = BitmapDecoder.Create(fileStream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.Default);
                     int width = bitmapDecoder.Frames[0].PixelWidth;
@@ -34,7 +58,7 @@ namespace MaterialDesignExtensions.Controllers
 
                     fileStream.Position = 0;
 
-                    BitmapImage image = new BitmapImage();
+                    image = new BitmapImage();
                     image.BeginInit();
 
                     double targetRatio = ((double)targetWidth) / targetHeight;
@@ -53,7 +77,16 @@ namespace MaterialDesignExtensions.Controllers
                     image.StreamSource = fileStream;
 
                     image.EndInit();
+                    image.StreamSource = null;
                     image.Freeze();
+
+                    if (useCache)
+                    {
+                        lock (m_staticLockObject)
+                        {
+                            Cache[key] = image;
+                        }
+                    }
 
                     return image;
                 }
@@ -68,6 +101,19 @@ namespace MaterialDesignExtensions.Controllers
                 {
                     throw;
                 }
+            }
+        }
+
+        private static string GetKey(string imageFilename, int targetWidth, int targetHeight)
+        {
+            return string.Format("{0}_{1}_file://{2}", targetWidth, targetHeight, imageFilename);
+        }
+
+        public static void ClearCache()
+        {
+            lock (m_staticLockObject)
+            {
+                Cache.Clear();
             }
         }
     }

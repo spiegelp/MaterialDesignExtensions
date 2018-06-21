@@ -34,16 +34,16 @@ namespace MaterialDesignExtensions.Converters
         /// <param name="imageFilename"></param>
         /// <param name="targetWidth"></param>
         /// <param name="targetHeight"></param>
-        public AsyncImageTask(string imageFilename, int targetWidth = 40, int targetHeight = 40)
+        public AsyncImageTask(string imageFilename, int targetWidth = 40, int targetHeight = 40, bool useCache = false)
         {
             Image = PackIconKind.FileImage;
 
-            LoadImageAsync(imageFilename, targetWidth, targetHeight);
+            LoadImageAsync(imageFilename, targetWidth, targetHeight, useCache);
         }
 
-        private async void LoadImageAsync(string imageFilename, int targetWidth, int targetHeight)
+        private async void LoadImageAsync(string imageFilename, int targetWidth, int targetHeight, bool useCache)
         {
-            Image = await Task.Run(() => BitmapImageHelper.LoadImage(imageFilename, targetWidth, targetHeight));
+            Image = await Task.Run(() => BitmapImageHelper.LoadImage(imageFilename, targetWidth, targetHeight, useCache));
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Image)));
         }

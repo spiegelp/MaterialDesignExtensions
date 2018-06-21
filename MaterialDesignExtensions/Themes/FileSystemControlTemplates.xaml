@@ -17,9 +17,10 @@
     
     <converters:DateTimeAgoConverter x:Key="dateTimeAgoConverter" />
     <converters:UpperCaseConverter x:Key="upperCaseConverter" />
-    <converters:FileSystemInfoIconConverter ImageMode="Icon" x:Key="fileSystemInfoIconConverterImageModeIcon" />
+    <!--<converters:FileSystemInfoIconConverter x:Key="fileSystemInfoIconConverterImageModeIcon" ImageMode="Icon" />-->
+    <converters:FileSystemInfoIconConverter x:Key="fileSystemInfoIconConverterThumbnail" ImageMode="AsyncImageTask" ImageTargetHeight="40" ImageTargetWidth="40" UseCache="True" />
     <converters:FileSystemInfoPackIconColorConverter x:Key="fileSystemInfoPackIconColorConverter" />
-    <converters:FileSystemInfoIconConverter ImageMode="AsyncImageTask" ImageTargetWidth="256" ImageTargetHeight="144" x:Key="fileSystemInfoIconConverterInfoImagePreview" />
+    <converters:FileSystemInfoIconConverter x:Key="fileSystemInfoIconConverterInfoImagePreview" ImageMode="AsyncImageTask" ImageTargetWidth="256" ImageTargetHeight="144" UseCache="True" />
     <converters:FileSizeConverter x:Key="fileSizeConverter" />
     <converters:NotNullBooleanConverter x:Key="notNullBooleanConverter" />
     <converters:ObjectToTypeStringConverter x:Key="objectToTypeStringConverter" />
@@ -145,7 +146,7 @@
                 <RowDefinition Height="100*" />
             </Grid.RowDefinitions>
             <Border Background="{DynamicResource PrimaryHueMidBrush}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <ContentControl Content="{Binding Converter={StaticResource fileSystemInfoIconConverterImageModeIcon}}"
+                <ContentControl Content="{Binding Converter={StaticResource fileSystemInfoIconConverterThumbnail}}"
                                 ContentTemplateSelector="{StaticResource fileSystemInfoIconTemplateSelector}" />
             </Border>
             <ToggleButton Style="{StaticResource closeToggleButtonStyle}"
@@ -402,7 +403,7 @@
                         <ColumnDefinition Width="100*" />
                         <ColumnDefinition Width="36" />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Content="{Binding Path=Value, Converter={StaticResource fileSystemInfoIconConverterImageModeIcon}}"
+                    <ContentControl Content="{Binding Path=Value, Converter={StaticResource fileSystemInfoIconConverterThumbnail}}"
                                     ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}" />
                     <StackPanel Grid.Column="1" Orientation="Vertical" Margin="8,0,8,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                         <TextBlock Foreground="{DynamicResource MaterialDesignBody}" FontSize="16"
@@ -475,7 +476,7 @@
                         <ColumnDefinition Width="100*" />
                         <ColumnDefinition Width="36" />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Content="{Binding Path=Value, Converter={StaticResource fileSystemInfoIconConverterImageModeIcon}}"
+                    <ContentControl Content="{Binding Path=Value, Converter={StaticResource fileSystemInfoIconConverterThumbnail}}"
                                     ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}" />
                     <StackPanel Grid.Column="1" Orientation="Vertical" Margin="8,0,8,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                         <TextBlock Foreground="{DynamicResource MaterialDesignBody}" FontSize="16"

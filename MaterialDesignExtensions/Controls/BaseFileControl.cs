@@ -47,6 +47,28 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        public static readonly DependencyProperty ClearCacheOnUnloadProperty = DependencyProperty.Register(
+                nameof(ClearCacheOnUnload),
+                typeof(bool),
+                typeof(FileSystemControl),
+                new PropertyMetadata(true));
+
+        /// <summary>
+        /// True, to clear the cache during unloading the control.
+        /// </summary>
+        public bool ClearCacheOnUnload
+        {
+            get
+            {
+                return (bool)GetValue(ClearCacheOnUnloadProperty);
+            }
+
+            set
+            {
+                SetValue(ClearCacheOnUnloadProperty, value);
+            }
+        }
+
         /// <summary>
         /// The current file of the control.
         /// </summary>
@@ -170,6 +192,13 @@ namespace MaterialDesignExtensions.Controls
             m_fileFiltersComboBox.ItemsSource = Filters;
 
             UpdateFileFiltersVisibility();
+        }
+
+        protected override void UnloadedHandler(object sender, RoutedEventArgs args)
+        {
+            BitmapImageHelper.ClearCache();
+
+            base.UnloadedHandler(sender, args);
         }
 
         protected virtual void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)

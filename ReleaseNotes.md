@@ -63,4 +63,5 @@
 ### vX.X.X (upcoming release)
 #### Features
 * `IsBackEnabled`, `IsCancelEnabled` and `IsContinueEnabled` properties for `StepButtonBar`
-* `Back` event and `BackCommand` comannd for `AppBar`
+* `Back` event and `BackCommand` command for `AppBar`
+* Image thumbnails in `OpenFileControl` and `SaveFileControl`
