@@ -54,6 +54,9 @@ namespace MaterialDesignExtensions.Controls
         /// </summary>
         public static readonly RoutedCommand CancelCommand = new RoutedCommand();
 
+        /// <summary>
+        /// An event raised by canceling the operation.
+        /// </summary>
         public static readonly RoutedEvent CancelEvent = EventManager.RegisterRoutedEvent(
             nameof(Cancel), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FileSystemControl));
 
@@ -84,6 +87,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The current directory of the control.
+        /// </summary>
         public static readonly DependencyProperty CurrentDirectoryProperty = DependencyProperty.Register(
                 nameof(CurrentDirectory),
                 typeof(string),
@@ -106,6 +112,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The currently selected directory or file to display additional information about it.
+        /// </summary>
         public static readonly DependencyProperty FileSystemInfoToShowProperty = DependencyProperty.Register(
                 nameof(FileSystemInfoToShow),
                 typeof(FileSystemInfo),
@@ -161,6 +170,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Shows or hides hidden directories and files.
+        /// </summary>
         public static readonly DependencyProperty ShowHiddenFilesAndDirectoriesProperty = DependencyProperty.Register(
                 nameof(ShowHiddenFilesAndDirectories),
                 typeof(bool),
@@ -183,6 +195,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Shows or hides protected directories and files of the system.
+        /// </summary>
         public static readonly DependencyProperty ShowSystemFilesAndDirectoriesProperty = DependencyProperty.Register(
                 nameof(ShowSystemFilesAndDirectories),
                 typeof(bool),
@@ -205,6 +220,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The message queue for the Snackbar. This property is intended for internal use.
+        /// </summary>
         public static readonly DependencyProperty SnackbarMessageQueueProperty = DependencyProperty.Register(
                 nameof(SnackbarMessageQueue),
                 typeof(ISnackbarMessageQueue),

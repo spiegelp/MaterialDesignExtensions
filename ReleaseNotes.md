@@ -65,3 +65,6 @@
 * `IsBackEnabled`, `IsCancelEnabled` and `IsContinueEnabled` properties for `StepButtonBar`
 * `Back` event and `BackCommand` command for `AppBar`
 * Image thumbnails in `OpenFileControl` and `SaveFileControl`
+* Extensions to file system controls API
+  * `FileSelectedCommand` command for `BaseFileControl`
+  * `DirectorySelectedCommand` command for `OpenDirectoryControl`

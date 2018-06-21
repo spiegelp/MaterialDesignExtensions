@@ -101,6 +101,28 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// An command called by by selecting a file.
+        /// </summary>
+        public static readonly DependencyProperty FileSelectedCommandProperty = DependencyProperty.Register(
+            nameof(FileSelectedCommand), typeof(ICommand), typeof(BaseFileControl), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// An command called by by selecting a file.
+        /// </summary>
+        public ICommand FileSelectedCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(FileSelectedCommandProperty);
+            }
+
+            set
+            {
+                SetValue(FileSelectedCommandProperty, value);
+            }
+        }
+
+        /// <summary>
         /// The possible file filters to select from for applying to the files inside the current directory.
         /// Strings according to the original .NET API will be converted automatically
         /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter).
@@ -211,6 +233,11 @@ namespace MaterialDesignExtensions.Controls
         {
             FileSelectedEventArgs eventArgs = new FileSelectedEventArgs(FileSelectedEvent, this, m_controller.CurrentFileFullName);
             RaiseEvent(eventArgs);
+
+            if (FileSelectedCommand != null && FileSelectedCommand.CanExecute(m_controller.CurrentFileFullName))
+            {
+                FileSelectedCommand.Execute(m_controller.CurrentFileFullName);
+            }
         }
 
         private static void CurrentFileChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)

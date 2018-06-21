@@ -46,6 +46,28 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// An command called by by selecting a directory to open.
+        /// </summary>
+        public static readonly DependencyProperty DirectorySelectedCommandProperty = DependencyProperty.Register(
+            nameof(DirectorySelectedCommand), typeof(ICommand), typeof(OpenDirectoryControl), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// An command called by by selecting a directory to open.
+        /// </summary>
+        public ICommand DirectorySelectedCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(DirectorySelectedCommandProperty);
+            }
+
+            set
+            {
+                SetValue(DirectorySelectedCommandProperty, value);
+            }
+        }
+
         static OpenDirectoryControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(OpenDirectoryControl), new FrameworkPropertyMetadata(typeof(OpenDirectoryControl)));
@@ -64,6 +86,11 @@ namespace MaterialDesignExtensions.Controls
         {
             DirectorySelectedEventArgs eventArgs = new DirectorySelectedEventArgs(DirectorySelectedEvent, this, m_controller.CurrentDirectory);
             RaiseEvent(eventArgs);
+
+            if (DirectorySelectedCommand != null && DirectorySelectedCommand.CanExecute(m_controller.CurrentDirectory))
+            {
+                DirectorySelectedCommand.Execute(m_controller.CurrentDirectory);
+            }
         }
 
         protected override void ControllerPropertyChangedHandler(object sender, PropertyChangedEventArgs args)
