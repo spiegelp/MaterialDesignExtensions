@@ -23,7 +23,10 @@ namespace MaterialDesignExtensions.Controls
     {
         protected const string FileFiltersComboBoxName = "fileFiltersComboBox";
 
-        public static RoutedCommand SelectFileCommand = new RoutedCommand();
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand SelectFileCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by selecting a file.
@@ -47,6 +50,9 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// True, to clear the cache during unloading the control.
+        /// </summary>
         public static readonly DependencyProperty ClearCacheOnUnloadProperty = DependencyProperty.Register(
                 nameof(ClearCacheOnUnload),
                 typeof(bool),

@@ -29,11 +29,30 @@ namespace MaterialDesignExtensions.Controls
         protected const string FileSystemEntryItemsControlName = "fileSystemEntryItemsControl";
         protected const string EmptyDirectoryTextBlockName = "emptyDirectoryTextBlock";
 
-        public static RoutedCommand OpenSpecialDirectoriesDrawerCommand = new RoutedCommand();
-        public static RoutedCommand SelectDirectoryItemCommand = new RoutedCommand();
-        public static RoutedCommand SelectFileSystemEntryCommand = new RoutedCommand();
-        public static RoutedCommand ShowInfoCommand = new RoutedCommand();
-        public static RoutedCommand CancelCommand = new RoutedCommand();
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand OpenSpecialDirectoriesDrawerCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand SelectDirectoryItemCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand SelectFileSystemEntryCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand ShowInfoCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand CancelCommand = new RoutedCommand();
 
         public static readonly RoutedEvent CancelEvent = EventManager.RegisterRoutedEvent(
             nameof(Cancel), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(FileSystemControl));

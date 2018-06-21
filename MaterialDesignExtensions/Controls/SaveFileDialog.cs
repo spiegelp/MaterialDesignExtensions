@@ -18,6 +18,9 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public class SaveFileDialog : BaseFileDialog
     {
+        /// <summary>
+        /// The name of the file itself without the full path.
+        /// </summary>
         public static readonly DependencyProperty FilenameProperty = DependencyProperty.Register(
                 nameof(Filename),
                 typeof(string),

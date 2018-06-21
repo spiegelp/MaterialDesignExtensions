@@ -16,9 +16,20 @@ namespace MaterialDesignExtensions.Controls
     {
         private const string ValueTextBoxName = "ValueTextBox";
 
-        public static RoutedCommand EditValueCommand = new RoutedCommand();
-        public static RoutedCommand MinusCommand = new RoutedCommand();
-        public static RoutedCommand PlusCommand = new RoutedCommand();
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand EditValueCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand MinusCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand PlusCommand = new RoutedCommand();
 
         public static readonly DependencyProperty IsEditingProperty = DependencyProperty.Register(
             nameof(IsEditing), typeof(bool), typeof(OversizedNumberSpinner), new PropertyMetadata(false));

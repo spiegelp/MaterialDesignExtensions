@@ -19,8 +19,14 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public class OpenDirectoryControl : FileSystemControl
     {
-        public static RoutedCommand SelectDirectoryCommand = new RoutedCommand();
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand SelectDirectoryCommand = new RoutedCommand();
 
+        /// <summary>
+        /// An event raised by selecting a directory to open.
+        /// </summary>
         public static readonly RoutedEvent DirectorySelectedEvent = EventManager.RegisterRoutedEvent(
             nameof(DirectorySelected), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(OpenDirectoryControl));
 

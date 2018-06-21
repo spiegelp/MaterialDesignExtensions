@@ -46,8 +46,6 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-
-
         /// <summary>
         /// The possible file filters to select from for applying to the files inside the current directory.
         /// Strings according to the original .NET API will be converted automatically

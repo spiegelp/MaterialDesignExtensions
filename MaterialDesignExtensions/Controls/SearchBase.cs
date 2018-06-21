@@ -27,7 +27,7 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
         /// </summary>
-        public static RoutedCommand SelectSearchSuggestionCommand = new RoutedCommand();
+        public static readonly RoutedCommand SelectSearchSuggestionCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by triggering a search (select a suggestion or hit enter).
