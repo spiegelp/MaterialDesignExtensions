@@ -60,7 +60,7 @@
 * New control `SideNavigation`
 #### Fixes
 * Unregister old event handlers on applying templates
-### vX.X.X (upcoming release)
+### v2.2.0
 #### Features
 * `IsBackEnabled`, `IsCancelEnabled` and `IsContinueEnabled` properties for `StepButtonBar`
 * `Back` event and `BackCommand` command for `AppBar`
