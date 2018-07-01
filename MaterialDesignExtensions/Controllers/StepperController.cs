@@ -273,12 +273,15 @@ namespace MaterialDesignExtensions.Controllers
         /// <param name="step"></param>
         public void GotoStep(IStep step)
         {
-            if (step == null)
+            if (step != ActiveStep)
             {
-                throw new ArgumentNullException("null is not a valid step");
-            }
+                if (step == null)
+                {
+                    throw new ArgumentNullException("null is not a valid step");
+                }
 
-            GotoStep(m_stepViewModels.Where(stepViewModel => stepViewModel.Step == step).FirstOrDefault());
+                GotoStep(m_stepViewModels.Where(stepViewModel => stepViewModel.Step == step).FirstOrDefault());
+            }
         }
 
         /// <summary>
@@ -288,20 +291,23 @@ namespace MaterialDesignExtensions.Controllers
         /// <param name="stepViewModel"></param>
         public void GotoStep(StepperStepViewModel stepViewModel)
         {
-            if (stepViewModel == null)
+            if (stepViewModel != ActiveStepViewModel)
             {
-                throw new ArgumentNullException(nameof(stepViewModel) + " must not be null");
-            }
+                if (stepViewModel == null)
+                {
+                    throw new ArgumentNullException(nameof(stepViewModel) + " must not be null");
+                }
 
-            // set all steps inactive except the next one to show
-            foreach (StepperStepViewModel stepViewModelItem in m_stepViewModels)
-            {
-                stepViewModelItem.IsActive = stepViewModelItem == stepViewModel;
-            }
+                // set all steps inactive except the next one to show
+                foreach (StepperStepViewModel stepViewModelItem in m_stepViewModels)
+                {
+                    stepViewModelItem.IsActive = stepViewModelItem == stepViewModel;
+                }
 
-            OnPropertyChanged(nameof(ActiveStepViewModel));
-            OnPropertyChanged(nameof(ActiveStep));
-            OnPropertyChanged(nameof(ActiveStepContent));
+                OnPropertyChanged(nameof(ActiveStepViewModel));
+                OnPropertyChanged(nameof(ActiveStep));
+                OnPropertyChanged(nameof(ActiveStepContent));
+            }
         }
 
         private void OnPropertyChanged(string propertyName)

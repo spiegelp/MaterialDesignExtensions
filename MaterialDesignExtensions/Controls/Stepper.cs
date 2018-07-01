@@ -199,18 +199,13 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// The active <see cref="IStep" />. (read-only)
+        /// The active <see cref="IStep" />.
         /// </summary>
-        public static readonly DependencyPropertyKey ActiveStepPropertyKey = DependencyProperty.RegisterReadOnly(
-                nameof(ActiveStep), typeof(IStep), typeof(Stepper), new PropertyMetadata(null, null));
+        public static readonly DependencyProperty ActiveStepProperty = DependencyProperty.Register(
+                nameof(ActiveStep), typeof(IStep), typeof(Stepper), new PropertyMetadata(null, ActiveStepChangedHandler));
 
         /// <summary>
-        /// The active <see cref="IStep" />. (read-only)
-        /// </summary>
-        public static readonly DependencyProperty ActiveStepProperty = ActiveStepPropertyKey.DependencyProperty;
-
-        /// <summary>
-        /// The active <see cref="IStep" />. (read-only)
+        /// The active <see cref="IStep" />.
         /// </summary>
         public IStep ActiveStep
         {
@@ -219,9 +214,9 @@ namespace MaterialDesignExtensions.Controls
                 return (IStep)GetValue(ActiveStepProperty);
             }
 
-            private set
+            set
             {
-                SetValue(ActiveStepPropertyKey, value);
+                SetValue(ActiveStepProperty, value);
             }
         }
 
@@ -601,6 +596,49 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        private void SelectStep(IStep step)
+        {
+            if (step != null && step != m_controller.ActiveStep && !IsLinear)
+            {
+                bool isValid = ValidateActiveStep();
+
+                if (BlockNavigationOnValidationErrors && !isValid)
+                {
+                    RaiseNavigationCanceledByValidation();
+
+                    return;
+                }
+
+                StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(StepNavigationEvent, this, m_controller.ActiveStep, step, false);
+                RaiseEvent(navigationArgs);
+
+                if (StepNavigationCommand != null && StepNavigationCommand.CanExecute(navigationArgs))
+                {
+                    StepNavigationCommand.Execute(navigationArgs);
+                }
+
+                if (!navigationArgs.Cancel)
+                {
+                    m_controller.GotoStep(step);
+                }
+                else
+                {
+                    // refresh the property with the old state
+                    ActiveStep = m_controller.ActiveStep;
+                }
+            }
+        }
+
+        private static void ActiveStepChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            (obj as Stepper)?.ActiveStepChangedHandler(args.NewValue as IStep);
+        }
+
+        private void ActiveStepChangedHandler(IStep step)
+        {
+            SelectStep(step);
+        }
+
         private static void StepsChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             (obj as Stepper)?.StepsChangedHandler(args.OldValue, args.NewValue);
@@ -717,29 +755,7 @@ namespace MaterialDesignExtensions.Controls
 
         private void StepSelectedHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            if (!IsLinear)
-            {
-                bool isValid = ValidateActiveStep();
-
-                if (BlockNavigationOnValidationErrors && !isValid)
-                {
-                    RaiseNavigationCanceledByValidation();
-
-                    return;
-                }
-
-                StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(StepNavigationEvent, this, m_controller.ActiveStep, ((StepperStepViewModel)args.Parameter).Step, false);
-                RaiseEvent(navigationArgs);
-
-                if (StepNavigationCommand != null && StepNavigationCommand.CanExecute(navigationArgs)) {
-                    StepNavigationCommand.Execute(navigationArgs);
-                }
-
-                if (!navigationArgs.Cancel)
-                {
-                    m_controller.GotoStep((StepperStepViewModel)args.Parameter);
-                }
-            }
+            SelectStep(((StepperStepViewModel)args.Parameter).Step);
         }
 
         private void PropertyChangedHandler(object sender, PropertyChangedEventArgs args)
@@ -789,6 +805,7 @@ namespace MaterialDesignExtensions.Controls
 
         /// <summary>
         /// Goes to the next <see cref="IStep"/> if the active <see cref="IStep"/> is not the last one.
+        /// The behavior and validation logic will be bypassed.
         /// </summary>
         public void Continue()
         {
@@ -797,6 +814,7 @@ namespace MaterialDesignExtensions.Controls
 
         /// <summary>
         /// Goes to the previous <see cref="IStep"/> if the active <see cref="IStep"/> is not the first one.
+        /// The behavior and validation logic will be bypassed.
         /// </summary>
         public void Back()
         {
@@ -805,6 +823,7 @@ namespace MaterialDesignExtensions.Controls
 
         /// <summary>
         /// Goes to the <see cref="IStep"/> specified by the index.
+        /// The behavior and validation logic will be bypassed.
         /// </summary>
         /// <param name="index"></param>
         public void GotoStep(int index)
@@ -814,6 +833,7 @@ namespace MaterialDesignExtensions.Controls
 
         /// <summary>
         /// Goes to the specified <see cref="IStep"/>.
+        /// The behavior and validation logic will be bypassed.
         /// Throws an <see cref="ArgumentNullException"/> if step is null or step is not inside this <see cref="Stepper"/>.
         /// </summary>
         /// <param name="step"></param>
