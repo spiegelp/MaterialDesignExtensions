@@ -53,6 +53,19 @@
                                     <ColumnDefinition Width="100*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
+                                <ContentControl Content="{TemplateBinding SearchIcon}" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <ContentControl.Resources>
+                                        <DataTemplate DataType="{x:Type wpfLib:PackIconKind}">
+                                            <wpfLib:PackIcon Kind="{Binding}" Width="24" Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </DataTemplate>
+                                    </ContentControl.Resources>
+                                    <ContentControl.Visibility>
+                                        <MultiBinding Converter="{StaticResource orFalseAsVisibleConverter}">
+                                            <Binding Path="IsFocused" ElementName="searchTextBox" />
+                                            <Binding Path="SearchTerm" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource notNullBooleanConverter}" />
+                                        </MultiBinding>
+                                    </ContentControl.Visibility>
+                                </ContentControl>
                                 <wpfLib:PackIcon Kind="Magnify" Width="24" Height="24"
                                                  HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <wpfLib:PackIcon.Visibility>
@@ -72,7 +85,7 @@
                                     </Button.Visibility>
                                     <wpfLib:PackIcon Kind="ArrowLeft" Width="24" Height="24" />
                                 </Button>
-                                <TextBox x:Name="searchTextBox" Grid.Column="1" wpfLib:HintAssist.Hint="{x:Static localization:Strings.Search}"
+                                <TextBox x:Name="searchTextBox" Grid.Column="1" wpfLib:HintAssist.Hint="{TemplateBinding SearchHint}"
                                          Text="{Binding Path=SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}}"
                                          FontSize="20" BorderThickness="0"
                                          Margin="16,8,8,8" HorizontalAlignment="Stretch" VerticalAlignment="Center" />

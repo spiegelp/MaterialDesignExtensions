@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
+using MaterialDesignThemes.Wpf;
+
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
@@ -70,6 +72,50 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(SearchCommandProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// A hint to show inside the empty search text box.
+        /// </summary>
+        public static readonly DependencyProperty SearchHintProperty = DependencyProperty.Register(
+            nameof(SearchHint), typeof(string), typeof(SearchBase), new PropertyMetadata(Localization.Strings.Search));
+
+        /// <summary>
+        /// A hint to show inside the empty search text box.
+        /// </summary>
+        public string SearchHint
+        {
+            get
+            {
+                return (string)GetValue(SearchHintProperty);
+            }
+
+            set
+            {
+                SetValue(SearchHintProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The icon on the left side of the search text box.
+        /// </summary>
+        public static readonly DependencyProperty SearchIconProperty = DependencyProperty.Register(
+            nameof(SearchIcon), typeof(object), typeof(SearchBase), new PropertyMetadata(PackIconKind.Magnify, null));
+
+        /// <summary>
+        /// The icon on the left side of the search text box.
+        /// </summary>
+        public object SearchIcon
+        {
+            get
+            {
+                return GetValue(SearchIconProperty);
+            }
+
+            set
+            {
+                SetValue(SearchIconProperty, value);
             }
         }
 
