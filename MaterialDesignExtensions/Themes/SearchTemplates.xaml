@@ -3,8 +3,7 @@
                     xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:convertersLib="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
-                    xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters"
-                    xmlns:localization="clr-namespace:MaterialDesignExtensions.Localization">
+                    xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
@@ -21,7 +20,7 @@
     <converters:BoolToVisibilityConverter x:Key="falseToHiddenConverter" TrueValue="Visible" FalseValue="Hidden" />
 
     <Style TargetType="{x:Type controls:PersistentSearch}">
-        <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="wpfLib:ShadowAssist.ShadowDepth" Value="Depth1" />
@@ -66,15 +65,6 @@
                                         </MultiBinding>
                                     </ContentControl.Visibility>
                                 </ContentControl>
-                                <wpfLib:PackIcon Kind="Magnify" Width="24" Height="24"
-                                                 HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <wpfLib:PackIcon.Visibility>
-                                        <MultiBinding Converter="{StaticResource orFalseAsVisibleConverter}">
-                                            <Binding Path="IsFocused" ElementName="searchTextBox" />
-                                            <Binding Path="SearchTerm" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource notNullBooleanConverter}" />
-                                        </MultiBinding>
-                                    </wpfLib:PackIcon.Visibility>
-                                </wpfLib:PackIcon>
                                 <Button x:Name="cancelButton" Style="{DynamicResource MaterialDesignToolForegroundButton}"
                                         Margin="8,0,8,0" VerticalAlignment="Center">
                                     <Button.Visibility>
@@ -87,7 +77,7 @@
                                 </Button>
                                 <TextBox x:Name="searchTextBox" Grid.Column="1" wpfLib:HintAssist.Hint="{TemplateBinding SearchHint}"
                                          Text="{Binding Path=SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}}"
-                                         FontSize="20" BorderThickness="0"
+                                         FontSize="20" BorderBrush="Transparent"
                                          Margin="16,8,8,8" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
                                 <Button x:Name="clearButton" Grid.Column="2" Style="{DynamicResource MaterialDesignToolForegroundButton}"
                                         Margin="8,0,8,0" VerticalAlignment="Center">
@@ -120,7 +110,7 @@
                                     </Popup.Style>
                                     <Border HorizontalAlignment="Stretch">
                                         <Border Background="{TemplateBinding Background}" CornerRadius="0,0,2,2"
-                                                BorderThickness="0,1,0,0" BorderBrush="{DynamicResource MaterialDesignDivider}"
+                                                BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignDivider}"
                                                 SnapsToDevicePixels="True"
                                                 HorizontalAlignment="Stretch">
                                             <!-- Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpfLib:ShadowAssist.ShadowDepth), Converter={x:Static convertersLib:ShadowConverter.Instance}}" -->
