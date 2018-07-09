@@ -10,6 +10,15 @@ namespace MaterialDesignExtensionsDemo.ViewModel
 {
     public class SearchViewModel : ViewModel
     {
+
+        public override string DocumentationUrl
+        {
+            get
+            {
+                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki/Search";
+            }
+        }
+
         public ISearchSuggestionsSource SearchSuggestionsSource
         {
             get

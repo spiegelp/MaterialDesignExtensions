@@ -32,6 +32,7 @@ Material Design Extensions features the following controls:
 | [App bar](https://github.com/spiegelp/MaterialDesignExtensions/wiki/App-bar) | Custom `AppBar` control ([specification](https://material.io/design/components/app-bars-top.html#usage)) | Done |
 | [Persistent search](https://github.com/spiegelp/MaterialDesignExtensions/wiki/Search) | Custom `PersistentSearch` control ([specification](https://material.io/design/navigation/search.html)) | Done |
 | [Side navigation](https://github.com/spiegelp/MaterialDesignExtensions/wiki/Navigation) | Custom `SideNavigation` control ([specification](https://material.io/design/components/navigation-drawer.html#usage)) | Done |
+| [Autocomplete](https://github.com/spiegelp/MaterialDesignExtensions/wiki/Autocomplete) | Custom `Autocomplete` control | In progress |
 
 # Screenshots
 ### Horizontal stepper

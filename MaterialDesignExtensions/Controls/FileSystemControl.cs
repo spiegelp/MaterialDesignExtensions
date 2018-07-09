@@ -138,7 +138,7 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// The ScrollViewer of the ItemsControls with the file system entries
+        /// The ScrollViewer of the ItemsControls with the file system entries.
         /// </summary>
         protected ScrollViewer ItemsScrollViewer
         {

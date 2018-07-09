@@ -80,7 +80,7 @@ namespace MaterialDesignExtensions.Controllers
 
         /// <summary>
         /// Starts a new task for the search and propagates the result via the <see cref="SearchSuggestionsChanged" /> event.
-        /// This method does some technical stuff and delegates the actual search to the <see cref="SearchSuggestionsSource" />.
+        /// This method does some technical stuff and delegates the actual search to the <see cref="ISearchSuggestionsSource" />.
         /// </summary>
         /// <param name="searchTerm">The term to search for</param>
         public void Search(string searchTerm)

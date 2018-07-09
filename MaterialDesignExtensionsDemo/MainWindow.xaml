@@ -55,6 +55,9 @@
         <DataTemplate DataType="{x:Type viewModel:SearchViewModel}">
             <controls:SearchControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AutocompleteViewModel}">
+            <controls:AutocompleteControl />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <wpfLib:DialogHost Identifier="dialogHost">

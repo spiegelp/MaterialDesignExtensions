@@ -45,13 +45,13 @@ namespace MaterialDesignExtensions.Controls
         public static RoutedCommand StepSelectedCommand = new RoutedCommand();
 
         /// <summary>
-        /// An event raised by changing to active <see cref="IStep" />.
+        /// An event raised by changing the active <see cref="IStep" />.
         /// </summary>
         public static readonly RoutedEvent ActiveStepChangedEvent = EventManager.RegisterRoutedEvent(
             nameof(ActiveStepChanged), RoutingStrategy.Bubble, typeof(ActiveStepChangedEventHandler), typeof(Stepper));
 
         /// <summary>
-        /// An event raised by changing to active <see cref="IStep" />.
+        /// An event raised by changing the active <see cref="IStep" />.
         /// </summary>
         public event ActiveStepChangedEventHandler ActiveStepChanged
         {
