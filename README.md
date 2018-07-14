@@ -53,6 +53,9 @@ Material Design Extensions features the following controls:
 ### Persistent search
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/PersistentSearch.png)
 
+### Autocomplete
+![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/Autocomplete.png)
+
 ### Oversized number spinner
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/OversizedNumberSpinner.png)
 
