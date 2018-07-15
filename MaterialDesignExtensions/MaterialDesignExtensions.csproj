@@ -105,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\TextBoxSuggestionsTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AutocompleteController.cs" />
@@ -131,6 +135,7 @@
     <Compile Include="Controls\SideNavigation.cs" />
     <Compile Include="Controls\StepButtonBar.cs" />
     <Compile Include="Controls\Stepper.cs" />
+    <Compile Include="Controls\TextBoxSuggestions.cs" />
     <Compile Include="Converters\AsyncImageTask.cs" />
     <Compile Include="Converters\BooleanAndConverter.cs" />
     <Compile Include="Converters\BooleanAndToVisibilityConverter.cs" />
@@ -171,6 +176,7 @@
     <Compile Include="Model\FileFilter.cs" />
     <Compile Include="Model\FirstLevelNavigationItem.cs" />
     <Compile Include="Model\INavigationItem.cs" />
+    <Compile Include="Model\ITextBoxSuggestionsSource.cs" />
     <Compile Include="Model\NavigationItem.cs" />
     <Compile Include="Model\NotSelectableNavigationItem.cs" />
     <Compile Include="Model\SearchSuggestionItem.cs" />

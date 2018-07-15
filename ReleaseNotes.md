@@ -72,3 +72,5 @@
 #### Features
 * `SearchHint` and `SearchIcon` properties for `SearchBase`
 * Setter for `Stepper.ActiveStep` property in order to navigate by a data binding
+* New control `Autocomplete`
+* New control `TextBoxSuggestions`

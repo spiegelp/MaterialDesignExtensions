@@ -98,8 +98,9 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         public IEnumerable Search(string searchTerm)
         {
             searchTerm = searchTerm ?? string.Empty;
+            searchTerm = searchTerm.ToLower();
 
-            return m_operatingSystemItems.Where(item => item.Name.ToLower().Contains(searchTerm.ToLower()));
+            return m_operatingSystemItems.Where(item => item.Name.ToLower().Contains(searchTerm));
         }
     }
 }

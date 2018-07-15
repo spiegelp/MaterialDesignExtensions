@@ -37,6 +37,12 @@
         <DataTemplate DataType="{x:Type viewModel:StepperViewModel}">
             <controls:StepperControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AutocompleteViewModel}">
+            <controls:AutocompleteControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:TextBoxSuggestionsViewModel}">
+            <controls:TextBoxSuggestionsControl />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:OpenDirectoryControlViewModel}">
             <controls:OpenDirectoryControlControl />
         </DataTemplate>
@@ -54,9 +60,6 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:SearchViewModel}">
             <controls:SearchControl />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:AutocompleteViewModel}">
-            <controls:AutocompleteControl />
         </DataTemplate>
     </Window.Resources>
     <Grid>

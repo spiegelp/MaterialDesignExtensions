@@ -47,6 +47,7 @@ namespace MaterialDesignExtensionsDemo
                 new FirstLevelNavigationItem() { Label = "Grid list", NavigationItemSelectedCallback = item => new GridListViewModel() },
                 new FirstLevelNavigationItem() { Label = "Stepper", NavigationItemSelectedCallback = item => new StepperViewModel() },
                 new FirstLevelNavigationItem() { Label = "Autocomplete", NavigationItemSelectedCallback = item => new AutocompleteViewModel() },
+                new FirstLevelNavigationItem() { Label = "TextBoxSuggestions", NavigationItemSelectedCallback = item => new TextBoxSuggestionsViewModel() },
                 new DividerNavigationItem(),
                 new SubheaderNavigationItem() { Subheader = "Directories and files" },
                 new FirstLevelNavigationItem() { Label = "Open directory", Icon = PackIconKind.Folder, NavigationItemSelectedCallback = item => new OpenDirectoryControlViewModel() },
