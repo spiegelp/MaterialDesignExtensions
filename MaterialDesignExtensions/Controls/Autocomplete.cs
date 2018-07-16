@@ -49,6 +49,28 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// The size of the icon inside the clear button.
+        /// </summary>
+        public static readonly DependencyProperty ClearIconSizeProperty = DependencyProperty.Register(
+            nameof(ClearIconSize), typeof(double), typeof(Autocomplete));
+
+        /// <summary>
+        /// The size of the icon inside the clear button.
+        /// </summary>
+        public double ClearIconSize
+        {
+            get
+            {
+                return (double)GetValue(ClearIconSizeProperty);
+            }
+
+            set
+            {
+                SetValue(ClearIconSizeProperty, value);
+            }
+        }
+
+        /// <summary>
         /// A source for providing the autocomplete items.
         /// </summary>
         public static readonly DependencyProperty AutocompleteSourceProperty = DependencyProperty.Register(

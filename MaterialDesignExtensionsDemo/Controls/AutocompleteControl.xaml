@@ -18,6 +18,13 @@
                 <TextBlock FontSize="14" Text="{Binding Path=Name}" VerticalAlignment="Center" Margin="24,0,0,0" />
             </DockPanel>
         </DataTemplate>
+        
+        <DataTemplate x:Key="itemTemplateDense">
+            <DockPanel>
+                <wpfLib:PackIcon DockPanel.Dock="Left" Kind="{Binding Path=Icon}" Width="12" Height="12" VerticalAlignment="Center" SnapsToDevicePixels="True" />
+                <TextBlock FontSize="12" Text="{Binding Path=Name}" VerticalAlignment="Center" Margin="24,0,0,0" />
+            </DockPanel>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="16"
@@ -29,6 +36,10 @@
                     <TextBlock Text="Your selection:" Margin="0,0,0,8" />
                     <ContentControl Content="{Binding Path=SelectedItem}" ContentTemplate="{StaticResource itemTemplate}" />
                 </StackPanel>
+                <TextBlock Text="Dense variant with the style MaterialDesignAutocompleteDense:" Margin="0,64,0,0" />
+                <controls:Autocomplete Style="{StaticResource MaterialDesignAutocompleteDense}" AutocompleteSource="{Binding Path=AutocompleteSource}" Hint="Which OS?"
+                                       Margin="0,16,0,0"
+                                       ItemTemplate="{StaticResource itemTemplateDense}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
