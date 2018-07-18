@@ -137,6 +137,28 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// True for triggering a search on the initial focus of the control.
+        /// </summary>
+        public static readonly DependencyProperty SearchOnInitialFocusProperty = DependencyProperty.Register(
+            nameof(SearchOnInitialFocus), typeof(bool), typeof(Autocomplete), new PropertyMetadata(false));
+
+        /// <summary>
+        /// True for triggering a search on the initial focus of the control.
+        /// </summary>
+        public bool SearchOnInitialFocus
+        {
+            get
+            {
+                return (bool)GetValue(SearchOnInitialFocusProperty);
+            }
+
+            set
+            {
+                SetValue(SearchOnInitialFocusProperty, value);
+            }
+        }
+
+        /// <summary>
         /// The term to search for.
         /// </summary>
         public static readonly DependencyProperty SearchTermProperty = DependencyProperty.Register(
@@ -246,6 +268,7 @@ namespace MaterialDesignExtensions.Controls
             m_clearButton.Click += ClearClickHandler;
 
             m_searchTextBox = Template.FindName(SearchTextBoxName, this) as TextBox;
+            m_searchTextBox.GotFocus += SearchTextBoxGotFocusHandler;
 
             m_autocompleteItemsPopup = Template.FindName(AutocompleteItemsPopupName, this) as Popup;
 
@@ -265,6 +288,16 @@ namespace MaterialDesignExtensions.Controls
             if (m_autocompleteController != null)
             {
                 m_autocompleteController.AutocompleteItemsChanged -= AutocompleteItemsChangedHandler;
+            }
+        }
+
+        private void SearchTextBoxGotFocusHandler(object sender, RoutedEventArgs args)
+        {
+            if (SearchOnInitialFocus
+                && m_autocompleteItemsControl != null
+                && m_autocompleteItemsControl.ItemsSource == null)
+            {
+                m_autocompleteController?.Search(SearchTerm);
             }
         }
 
