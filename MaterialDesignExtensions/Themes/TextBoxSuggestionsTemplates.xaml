@@ -51,6 +51,7 @@
                                     <ItemsControl x:Name="suggestionItemsControl" IsEnabled="{TemplateBinding IsEnabled}"
                                                   Margin="0,4,0,4"
                                                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                  VirtualizingStackPanel.IsVirtualizing="True"
                                                   ScrollViewer.CanContentScroll="True"
                                                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                                         <ItemsControl.Template>
@@ -64,7 +65,7 @@
                                         </ItemsControl.Template>
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <StackPanel IsItemsHost="True" Orientation="Vertical" />
+                                                <VirtualizingStackPanel IsItemsHost="True" Orientation="Vertical" />
                                             </ItemsPanelTemplate>
                                         </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
