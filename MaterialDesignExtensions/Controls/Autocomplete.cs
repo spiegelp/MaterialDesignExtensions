@@ -96,16 +96,16 @@ namespace MaterialDesignExtensions.Controls
         /// A hint to show inside the empty text box.
         /// </summary>
         public static readonly DependencyProperty HintProperty = DependencyProperty.Register(
-            nameof(Hint), typeof(string), typeof(Autocomplete));
+            nameof(Hint), typeof(object), typeof(Autocomplete));
 
         /// <summary>
         /// A hint to show inside the empty text box.
         /// </summary>
-        public string Hint
+        public object Hint
         {
             get
             {
-                return (string)GetValue(HintProperty);
+                return GetValue(HintProperty);
             }
 
             set
