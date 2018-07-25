@@ -339,6 +339,11 @@ namespace MaterialDesignExtensions.Controls
 
         private void SelectedItemChangedHandler(object selectedItem)
         {
+            if (m_autocompleteItemsControl != null)
+            {
+                m_autocompleteItemsControl.ItemsSource = null;
+            }
+
             SelectedItemChangedEventArgs eventArgs = new SelectedItemChangedEventArgs(SelectedItemChangedEvent, this, selectedItem);
             RaiseEvent(eventArgs);
 
