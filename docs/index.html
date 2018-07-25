@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+        <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" />
+
+        <link rel="stylesheet" href="css/theme.css" />
+        <link rel="stylesheet" href="css/style.css" />
+
+        <title>Material Design Extensions</title>
+    </head>
+    <body class="mdc-typography">
+        <div id="root">
+            <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
+                <div class="mdc-top-app-bar__row">
+                    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                        <!--<button class="material-icons mdc-top-app-bar__navigation-icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded menu"
+                        style="--mdc-ripple-fg-size:28.799999999999997px; --mdc-ripple-fg-scale:1.6666666666666667; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">menu</button>-->
+                        <button class="material-icons mdc-top-app-bar__navigation-icon menu">menu</button>
+                        <span class="mdc-top-app-bar__title">Material Design Extensions</span>
+                    </section>
+                    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                        <a href="https://github.com/spiegelp/MaterialDesignExtensions" class="mdc-top-app-bar__action-item" aria-label="GitHub" alt="GitHub" target="_blank">
+                            <img class="nav-github-image" src="images/GitHub-Mark-Light-120px-plus.png" />
+                        </a>
+                    </section>
+                </div>
+            </header>
+
+            <aside class="mdc-drawer mdc-drawer--temporary">
+                <nav class="mdc-drawer__drawer">
+                    <nav class="mdc-drawer__content mdc-list" data-bind="foreach: navigationItems">
+                        <span class="mdc-list-item mdc-list-item__link" data-bind="css: { 'mdc-list-item--selected': $data.isSelected }, click: $root.goToNavigationItem">
+                            <i class="material-icons mdc-list-item__graphic" aria-hidden="true" data-bind="text: $data.icon"></i>
+                            <span data-bind="text: $data.label"></span>
+                        </span>
+                    </nav>
+                </nav>
+            </aside>
+
+            <main class="mdc-top-app-bar--fixed-adjust">
+                <div id="content">
+                    <h1>tset</h1>
+                    <p>test</p>
+                </div>
+            </main>
+        </div>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sammy.js/0.7.6/sammy.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+
+        <script type="text/javascript" src="js/NavigationItem.js"></script>
+        <script type="text/javascript" src="js/AppViewModel.js"></script>
+
+        <script type="text/javascript">
+            window.mdc.autoInit();
+
+            let drawer = new mdc.drawer.MDCTemporaryDrawer(document.querySelector('.mdc-drawer--temporary'));
+            document.querySelector('.menu').addEventListener('click', () => drawer.open = true);
+
+            let appViewModel = new AppViewModel('content', drawer);
+            ko.applyBindings(appViewModel);
+        </script>
+    </body>
+</html>

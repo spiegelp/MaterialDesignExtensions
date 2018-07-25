@@ -1,7 +1,7 @@
 <img src="https://github.com/spiegelp/MaterialDesignExtensions/raw/master/icon/icon.png" width="128px" />
 
 # Material Design Extensions
-Material Design Extensions is based on [Material Design in XAML Toolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit) to provide additional controls and features for WPF apps. The controls might not be specified in the [Material Design specification](https://material.io/guidelines/material-design/introduction.html) or would crash the scope of [Material Design in XAML Toolkit](https://github.com/ButchersBoy/MaterialDesignInXamlToolkit).
+Material Design Extensions is based on [Material Design in XAML Toolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit) to provide additional controls and features for WPF apps. The controls might not be specified in the [Material Design specification](https://material.io/guidelines/material-design/introduction.html) or would crash the scope of [Material Design in XAML Toolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit).
 
 # NuGet
 

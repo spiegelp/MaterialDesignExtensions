@@ -1,0 +1,32 @@
+﻿body {
+    margin: 0;
+}
+
+#content {
+    margin: 0 auto;
+    padding: 16px;
+    max-width: 1024px;
+}
+
+.mdc-list-item__link {
+    cursor: pointer;
+}
+
+.mdc-drawer--temporary .mdc-list-item--selected {
+    color: var(--mdc-theme-primary, #2196F3);
+}
+
+.nav-github-image {
+    width: 24px;
+}
+
+.screenshot-image {
+    max-width: 1024px;
+    min-width: 200px;
+}
+
+.mdc-card__documentation_overview {
+    display: inline-block;
+    margin: 8px;
+    width: 384px;
+}

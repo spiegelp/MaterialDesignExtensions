@@ -1,0 +1,21 @@
+﻿:root {
+    --mdc-theme-primary: #2196F3;
+    --mdc-theme-primary-transparency: rgba(33, 150, 243, 0.5);
+    --mdc-theme-accent: #D50000;
+    --mdc-theme-text-primary-on-primary: rgba(255, 255, 255, 1);
+    --mdc-theme-text-secondary-on-primary: rgba(255, 255, 255, 0.7);
+    --mdc-theme-text-hint-on-primary: rgba(255, 255, 255, 0.5);
+    --mdc-theme-text-disabled-on-primary: rgba(255, 255, 255, 0.5);
+    --mdc-theme-text-icon-on-primary: rgba(255, 255, 255, 1);
+    --mdc-theme-text-primary-on-accent: rgba(255, 255, 255, 1);
+    --mdc-theme-text-secondary-on-accent: rgba(255, 255, 255, 0.7);
+    --mdc-theme-text-hint-on-accent: rgba(255, 255, 255, 0.5);
+    --mdc-theme-text-disabled-on-accent: rgba(255, 255, 255, 0.5);
+    --mdc-theme-text-icon-on-accent: rgba(255, 255, 255, 1);
+
+    --mdc-theme-background: #FFFFFF;
+}
+
+body {
+    color: var(--mdc-theme-text-primary-on-light, rgba(0, 0, 0, 0.87));
+}
