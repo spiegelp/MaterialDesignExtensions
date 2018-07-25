@@ -17,6 +17,7 @@
             
             <SolidColorBrush x:Key="MaterialDesignStepperInactiveStep" Color="#61FFFFFF" po:Freeze="True" /> <!-- 38% white -->
             <SolidColorBrush x:Key="MaterialDesignStepperActiveStep" Color="#DDFFFFFF" po:Freeze="True" /> <!-- 87% white -->
+            <SolidColorBrush x:Key="MaterialDesignStepperSeparator" Color="#1FFFFFFF" po:Freeze="True" /> <!-- 12% white -->
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
 

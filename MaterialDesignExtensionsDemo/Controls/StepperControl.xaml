@@ -11,13 +11,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
     <UserControl.Resources>
+        <!-- hide the seperator of the horizontal Stepper by setting the resource to "Transparent" -->
+        <!--<SolidColorBrush x:Key="MaterialDesignStepperSeparator" Color="Transparent" />-->
+        
         <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" FalseValue="Collapsed" />
+        
         <DataTemplate DataType="{x:Type viewModel:StepperTutorialOneViewModel}">
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Steppers are handy to break a big task into smaller parts. These are so called steps. It displays the progress of the full task as a numbered sequence of steps." TextWrapping="WrapWithOverflow" />
                 <controls:StepButtonBar Continue="CONTINUE" Cancel="CANCEL" />
             </StackPanel>
         </DataTemplate>
+        
         <DataTemplate DataType="{x:Type viewModel:StepperTutorialTwoViewModel}">
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="There a two layouts for a Stepper, namely horizontal and vertical. It can be set by using the Layout property." TextWrapping="WrapWithOverflow" />
@@ -26,6 +31,7 @@
                 <controls:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
             </StackPanel>
         </DataTemplate>
+        
         <DataTemplate DataType="{x:Type viewModel:StepperTutorialThreeViewModel}">
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="The Stepper uses the steps out of its Steps property. This property expects a collection of IStep objects. The Step class already implements this basic interface for a step." TextWrapping="WrapWithOverflow" />
@@ -58,6 +64,7 @@
                 <controls:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
             </StackPanel>
         </DataTemplate>
+        
         <DataTemplate DataType="{x:Type viewModel:StepperTutorialFourViewModel}">
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Each time the user switches to another step, an optional validation phase for the until now active step will be started by the Stepper. The Validate() method of the step will be called first. Afterwards the StepValidation event will be raised followed by the call of the StepValidationCommand command." TextWrapping="WrapWithOverflow" />

@@ -228,7 +228,7 @@
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="100*" />
                                 </Grid.RowDefinitions>
-                                <Border BorderBrush="{DynamicResource MaterialDesignDivider}" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True">
+                                <Border BorderBrush="{DynamicResource MaterialDesignStepperSeparator}" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True">
                                     <ItemsControl HorizontalAlignment="Stretch" ItemsSource="{Binding Path=Controller.InternalSteps, RelativeSource={RelativeSource TemplatedParent}}"
                                                   ItemTemplateSelector="{StaticResource horizontalStepperHeaderTemplateSelector}" VerticalAlignment="Top">
                                         <ItemsControl.Resources>
