@@ -72,5 +72,6 @@
 #### Features
 * `SearchHint` and `SearchIcon` properties for `SearchBase`
 * Setter for `Stepper.ActiveStep` property in order to navigate by a data binding
+* Change the horizontal `Stepper` separator color via the resource `MaterialDesignStepperSeparator`
 * New control `Autocomplete`
 * New control `TextBoxSuggestions`

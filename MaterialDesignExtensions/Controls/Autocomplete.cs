@@ -267,8 +267,15 @@ namespace MaterialDesignExtensions.Controls
             m_clearButton = Template.FindName(ClearButtonName, this) as Button;
             m_clearButton.Click += ClearClickHandler;
 
+            if (m_searchTextBox != null)
+            {
+                m_searchTextBox.GotFocus -= SearchTextBoxGotFocusHandler;
+                m_searchTextBox.KeyUp -= SearchTextBoxKeyUpHandler;
+            }
+
             m_searchTextBox = Template.FindName(SearchTextBoxName, this) as TextBox;
             m_searchTextBox.GotFocus += SearchTextBoxGotFocusHandler;
+            m_searchTextBox.KeyUp += SearchTextBoxKeyUpHandler;
 
             m_autocompleteItemsPopup = Template.FindName(AutocompleteItemsPopupName, this) as Popup;
 
@@ -298,6 +305,19 @@ namespace MaterialDesignExtensions.Controls
                 && m_autocompleteItemsControl.ItemsSource == null)
             {
                 m_autocompleteController?.Search(SearchTerm);
+            }
+        }
+
+        private void SearchTextBoxKeyUpHandler(object sender, KeyEventArgs args)
+        {
+            if (args.Key == Key.Down)
+            {
+                if (m_autocompleteItemsControl != null
+                    && m_autocompleteItemsControl.ItemsSource != null
+                    && m_autocompleteItemsControl.ItemsSource.GetEnumerator().MoveNext())
+                {
+                    m_autocompleteItemsControl.Focus();
+                }
             }
         }
 
