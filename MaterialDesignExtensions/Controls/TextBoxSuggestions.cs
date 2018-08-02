@@ -120,9 +120,11 @@ namespace MaterialDesignExtensions.Controls
             {
                 // first remove the event handler to prevent multiple registrations
                 TextBox.TextChanged -= TextBoxTextChangedHandler;
+                TextBox.KeyUp -= TextBoxKeyUpHandler;
 
                 // and then set the event handler
                 TextBox.TextChanged += TextBoxTextChangedHandler;
+                TextBox.KeyUp += TextBoxKeyUpHandler;
             }
         }
 
@@ -136,6 +138,7 @@ namespace MaterialDesignExtensions.Controls
             if (TextBox != null)
             {
                 TextBox.TextChanged -= TextBoxTextChangedHandler;
+                TextBox.KeyUp -= TextBoxKeyUpHandler;
             }
         }
 
@@ -157,11 +160,13 @@ namespace MaterialDesignExtensions.Controls
             if (oldTextBox != null)
             {
                 oldTextBox.TextChanged -= TextBoxTextChangedHandler;
+                newTextBox.KeyUp -= TextBoxKeyUpHandler;
             }
 
             if (newTextBox != null)
             {
                 newTextBox.TextChanged += TextBoxTextChangedHandler;
+                newTextBox.KeyUp += TextBoxKeyUpHandler;
             }
         }
 
@@ -170,6 +175,14 @@ namespace MaterialDesignExtensions.Controls
             if (sender == TextBox)
             {
                 m_autocompleteController?.Search(TextBox.Text);
+            }
+        }
+
+        private void TextBoxKeyUpHandler(object sender, KeyEventArgs args)
+        {
+            if (sender == TextBox && args.Key == Key.Down)
+            {
+                m_suggestionItemsControl.Focus();
             }
         }
 

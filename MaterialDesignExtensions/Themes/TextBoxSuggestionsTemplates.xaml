@@ -11,7 +11,8 @@
             <convertersLib:BrushRoundConverter x:Key="brushRoundConverter"/>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
-    
+
+    <converters:BooleanOrConverter x:Key="booleanOrConverter" />
     <converters:EmptyEnumerableToBoolConverter x:Key="emptyEnumerableToFalseConverter" EmptyValue="False" />
     
     <Style TargetType="{x:Type controls:TextBoxSuggestions}">
@@ -36,7 +37,7 @@
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>
                                                 <Condition Binding="{Binding Path=ItemsSource, ElementName=suggestionItemsControl, Converter={StaticResource emptyEnumerableToFalseConverter}}" Value="True" />
-                                                <Condition Binding="{Binding Path=Content.IsFocused, Mode=OneWay, ElementName=textBoxContentControl}" Value="True" />
+                                                <Condition Binding="{Binding Path=IsKeyboardFocusWithin, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type controls:TextBoxSuggestions}}}" Value="True" />
                                             </MultiDataTrigger.Conditions>
                                             <Setter Property="IsOpen" Value="True" />
                                         </MultiDataTrigger>
@@ -76,10 +77,22 @@
                                                         <Border.Style>
                                                             <Style TargetType="{x:Type Border}">
                                                                 <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="True">
+                                                                    <DataTrigger Value="True">
+                                                                        <DataTrigger.Binding>
+                                                                            <MultiBinding Converter="{StaticResource booleanOrConverter}">
+                                                                                <Binding Path="IsMouseOver" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}" />
+                                                                                <Binding Path="IsKeyboardFocusWithin" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}" />
+                                                                            </MultiBinding>
+                                                                        </DataTrigger.Binding>
                                                                         <Setter Property="Opacity" Value="0.1" />
                                                                     </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="False">
+                                                                    <DataTrigger Value="False">
+                                                                        <DataTrigger.Binding>
+                                                                            <MultiBinding Converter="{StaticResource booleanOrConverter}">
+                                                                                <Binding Path="IsMouseOver" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}" />
+                                                                                <Binding Path="IsKeyboardFocusWithin" RelativeSource="{RelativeSource AncestorType={x:Type Grid}}" />
+                                                                            </MultiBinding>
+                                                                        </DataTrigger.Binding>
                                                                         <Setter Property="Opacity" Value="0" />
                                                                     </DataTrigger>
                                                                 </Style.Triggers>
