@@ -18,7 +18,7 @@ namespace MaterialDesignExtensions.Controls
     /// <summary>
     /// The base control with common logic for <see cref="PersistentSearch" />.
     /// </summary>
-    public abstract class SearchBase : Control
+    public abstract class SearchBase : ControlWithPopup
     {
         protected const string CancelButtonName = "cancelButton";
         protected const string ClearButtonName = "clearButton";
@@ -166,7 +166,6 @@ namespace MaterialDesignExtensions.Controls
         private Button m_cancelButton;
         private Button m_clearButton;
         private TextBox m_searchTextBox;
-        private Popup m_searchSuggestionsPopup;
         private ItemsControl m_searchSuggestionsItemsControl;
 
         private SearchSuggestionsController m_searchSuggestionsController;
@@ -176,7 +175,6 @@ namespace MaterialDesignExtensions.Controls
         {
             m_cancelButton = null;
             m_searchTextBox = null;
-            m_searchSuggestionsPopup = null;
             m_searchSuggestionsItemsControl = null;
 
             m_searchSuggestionsController = new SearchSuggestionsController() { SearchSuggestionsSource = SearchSuggestionsSource };
@@ -217,21 +215,25 @@ namespace MaterialDesignExtensions.Controls
             m_searchTextBox.GotFocus += SearchTextBoxGotFocusHandler;
             m_searchTextBox.KeyUp += SearchTextBoxKeyUpHandler;
 
-            m_searchSuggestionsPopup = Template.FindName(SearchSuggestionsPopupName, this) as Popup;
+            m_popup = Template.FindName(SearchSuggestionsPopupName, this) as Popup;
 
             m_searchSuggestionsItemsControl = Template.FindName(SearchSuggestionsItemsControlName, this) as ItemsControl;
         }
 
-        private void LoadedHandler(object sender, RoutedEventArgs args)
+        protected override void LoadedHandler(object sender, RoutedEventArgs args)
         {
+            base.LoadedHandler(sender, args);
+
             if (m_searchSuggestionsController != null)
             {
                 m_searchSuggestionsController.SearchSuggestionsChanged += SearchSuggestionsChangedHandler;
             }
         }
 
-        private void UnloadedHandler(object sender, RoutedEventArgs args)
+        protected override void UnloadedHandler(object sender, RoutedEventArgs args)
         {
+            base.UnloadedHandler(sender, args);
+
             if (m_searchSuggestionsController != null)
             {
                 m_searchSuggestionsController.SearchSuggestionsChanged -= SearchSuggestionsChangedHandler;

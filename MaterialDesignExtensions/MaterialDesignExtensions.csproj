@@ -121,6 +121,7 @@
     <Compile Include="Controls\Autocomplete.cs" />
     <Compile Include="Controls\BaseFileControl.cs" />
     <Compile Include="Controls\BaseFileDialog.cs" />
+    <Compile Include="Controls\ControlWithPopup.cs" />
     <Compile Include="Controls\FileSystemControl.cs" />
     <Compile Include="Controls\FileSystemDialog.cs" />
     <Compile Include="Controls\OpenDirectoryControl.cs" />

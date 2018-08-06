@@ -14,7 +14,7 @@ using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
 {
-    public class Autocomplete : Control
+    public class Autocomplete : ControlWithPopup
     {
         private static readonly string AutocompleteItemsControlName = "autocompleteItemsControl";
         private static readonly string AutocompleteItemsPopupName = "autocompleteItemsPopup";
@@ -226,7 +226,6 @@ namespace MaterialDesignExtensions.Controls
 
         private Button m_clearButton;
         private TextBox m_searchTextBox;
-        private Popup m_autocompleteItemsPopup;
         private ItemsControl m_autocompleteItemsControl;
 
         private AutocompleteController m_autocompleteController;
@@ -244,15 +243,11 @@ namespace MaterialDesignExtensions.Controls
         {
             m_clearButton = null;
             m_searchTextBox = null;
-            m_autocompleteItemsPopup = null;
             m_autocompleteItemsControl = null;
 
             m_autocompleteController = new AutocompleteController() { AutocompleteSource = AutocompleteSource };
 
             CommandBindings.Add(new CommandBinding(SelectAutocompleteItemCommand, SelectAutocompleteItemCommandHandler));
-
-            Loaded += LoadedHandler;
-            Unloaded += UnloadedHandler;
         }
 
         public override void OnApplyTemplate()
@@ -277,21 +272,25 @@ namespace MaterialDesignExtensions.Controls
             m_searchTextBox.GotFocus += SearchTextBoxGotFocusHandler;
             m_searchTextBox.KeyUp += SearchTextBoxKeyUpHandler;
 
-            m_autocompleteItemsPopup = Template.FindName(AutocompleteItemsPopupName, this) as Popup;
+            m_popup = Template.FindName(AutocompleteItemsPopupName, this) as Popup;
 
             m_autocompleteItemsControl = Template.FindName(AutocompleteItemsControlName, this) as ItemsControl;
         }
 
-        private void LoadedHandler(object sender, RoutedEventArgs args)
+        protected override void LoadedHandler(object sender, RoutedEventArgs args)
         {
+            base.LoadedHandler(sender, args);
+
             if (m_autocompleteController != null)
             {
                 m_autocompleteController.AutocompleteItemsChanged += AutocompleteItemsChangedHandler;
             }
         }
 
-        private void UnloadedHandler(object sender, RoutedEventArgs args)
+        protected override void UnloadedHandler(object sender, RoutedEventArgs args)
         {
+            base.UnloadedHandler(sender, args);
+
             if (m_autocompleteController != null)
             {
                 m_autocompleteController.AutocompleteItemsChanged -= AutocompleteItemsChangedHandler;

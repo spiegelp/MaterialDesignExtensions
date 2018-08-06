@@ -19,7 +19,7 @@ namespace MaterialDesignExtensions.Controls
     /// A decorator control to add some kind of autocomplete features to a default TextBox.
     /// </summary>
     [ContentProperty(nameof(TextBox))]
-    public class TextBoxSuggestions : Control
+    public class TextBoxSuggestions : ControlWithPopup
     {
         private static readonly string SuggestionItemsControlName = "suggestionItemsControl";
         private static readonly string SuggestionItemsPopupName = "suggestionItemsPopup";
@@ -73,7 +73,6 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private Popup m_suggestionItemsPopup;
         private ItemsControl m_suggestionItemsControl;
 
         private AutocompleteController m_autocompleteController;
@@ -89,7 +88,6 @@ namespace MaterialDesignExtensions.Controls
         public TextBoxSuggestions()
             : base()
         {
-            m_suggestionItemsPopup = null;
             m_suggestionItemsControl = null;
 
             m_autocompleteController = new AutocompleteController() { AutocompleteSource = TextBoxSuggestionsSource };
@@ -104,13 +102,15 @@ namespace MaterialDesignExtensions.Controls
         {
             base.OnApplyTemplate();
 
-            m_suggestionItemsPopup = Template.FindName(SuggestionItemsPopupName, this) as Popup;
+            m_popup = Template.FindName(SuggestionItemsPopupName, this) as Popup;
 
             m_suggestionItemsControl = Template.FindName(SuggestionItemsControlName, this) as ItemsControl;
         }
 
-        private void LoadedHandler(object sender, RoutedEventArgs args)
+        protected override void LoadedHandler(object sender, RoutedEventArgs args)
         {
+            base.LoadedHandler(sender, args);
+
             if (m_autocompleteController != null)
             {
                 m_autocompleteController.AutocompleteItemsChanged += AutocompleteItemsChangedHandler;
@@ -128,8 +128,10 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private void UnloadedHandler(object sender, RoutedEventArgs args)
+        protected override void UnloadedHandler(object sender, RoutedEventArgs args)
         {
+            base.UnloadedHandler(sender, args);
+
             if (m_autocompleteController != null)
             {
                 m_autocompleteController.AutocompleteItemsChanged -= AutocompleteItemsChangedHandler;
