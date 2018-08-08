@@ -523,6 +523,8 @@ namespace MaterialDesignExtensions.Controls
             CommandBindings.Add(new CommandBinding(CancelCommand, CancelHandler));
             CommandBindings.Add(new CommandBinding(ContinueCommand, ContinueHandler));
             CommandBindings.Add(new CommandBinding(StepSelectedCommand, StepSelectedHandler, CanExecuteStepSelectedHandler));
+
+            Focusable = false;
         }
 
         private void LoadedHandler(object sender, RoutedEventArgs args)

@@ -17,6 +17,7 @@
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Type" Value="Default" />
         <Setter Property="OpaqueMode" Value="Opaque" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:AppBar}">
@@ -90,7 +91,8 @@
 
                                 <!-- app icon -->
                                 <ContentControl Grid.Column="0" Height="28" Margin="18,0,0,0" Content="{Binding Path=AppIcon, RelativeSource={RelativeSource TemplatedParent}}"
-                                                VerticalAlignment="Center" Width="28" Visibility="{TemplateBinding AppIcon, Converter={StaticResource notNullToVisibilityConverter}}">
+                                                VerticalAlignment="Center" Width="28" Visibility="{TemplateBinding AppIcon, Converter={StaticResource notNullToVisibilityConverter}}"
+                                                Focusable="False">
                                     <ContentControl.Resources>
                                         <DataTemplate DataType="{x:Type BitmapImage}">
                                             <Image Source="{Binding}" Height="28" Width="28" VerticalAlignment="Center" />
@@ -108,7 +110,7 @@
 
                                 <!-- title -->
                                 <ContentControl Grid.Column="1" Content="{TemplateBinding Title}" Margin="0,0,16,0" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                                TextBlock.FontSize="20">
+                                                TextBlock.FontSize="20" Focusable="False">
                                     <ContentControl.Resources>
                                         <DataTemplate DataType="{x:Type system:String}">
                                             <TextBlock FontSize="20" SnapsToDevicePixels="True" Text="{Binding}" />
@@ -129,7 +131,8 @@
                                 </ContentControl>
 
                                 <!-- toolbar buttons -->
-                                <ItemsControl Grid.Column="3" x:Name="PartHostActionButtons" HorizontalAlignment="Right" Margin="0,0,12,0" VerticalAlignment="Stretch"
+                                <ItemsControl Grid.Column="3" x:Name="PartHostActionButtons" Focusable="False"
+                                              Margin="0,0,12,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"
                                               ItemsSource="{TemplateBinding Children}"
                                               Visibility="{TemplateBinding Children, Converter={StaticResource objectCollectionToVisibilityConverter}}">
                                     <ItemsControl.ItemsPanel>
@@ -140,8 +143,9 @@
                                 </ItemsControl>
                             </Grid>
                         </Border>
-                        <Border Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <TextBlock FontSize="20" HorizontalAlignment="Left" Margin="80,0,16,0" Text="{TemplateBinding Title}" VerticalAlignment="Center">
+                        <Border Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
+                            <TextBlock FontSize="20" Text="{TemplateBinding Title}" Focusable="True"
+                                       Margin="80,0,16,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>

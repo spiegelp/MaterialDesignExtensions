@@ -223,14 +223,14 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type controls:Stepper}">
-                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Focusable="False">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="100*" />
                                 </Grid.RowDefinitions>
                                 <Border BorderBrush="{DynamicResource MaterialDesignStepperSeparator}" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True">
                                     <ItemsControl HorizontalAlignment="Stretch" ItemsSource="{Binding Path=Controller.InternalSteps, RelativeSource={RelativeSource TemplatedParent}}"
-                                                  ItemTemplateSelector="{StaticResource horizontalStepperHeaderTemplateSelector}" VerticalAlignment="Top">
+                                                  ItemTemplateSelector="{StaticResource horizontalStepperHeaderTemplateSelector}" VerticalAlignment="Top" Focusable="False">
                                         <ItemsControl.Resources>
                                             <DataTemplate x:Key="firstHorizontalStepHeaderTemplate" DataType="{x:Type model:StepperStepViewModel}">
                                                 <!-- header as button to switch steps in non-linear steppers -->
@@ -246,7 +246,8 @@
                                                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
                                                             </Border>
                                                             <!-- header -->
-                                                            <ContentControl Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" Style="{StaticResource headerContentControlStyle}" />
+                                                            <ContentControl Style="{StaticResource headerContentControlStyle}" Focusable="False"
+                                                                            Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" />
                                                         </StackPanel>
                                                         <Border Grid.Column="1" Style="{StaticResource MaterialDesignHorizontalStepperSpaceLine}" />
                                                     </Grid>
@@ -268,7 +269,8 @@
                                                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
                                                             </Border>
                                                             <!-- header -->
-                                                            <ContentControl Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" Style="{StaticResource headerContentControlStyle}" />
+                                                            <ContentControl Style="{StaticResource headerContentControlStyle}" Focusable="False"
+                                                                            Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" />
                                                         </StackPanel>
                                                         <Border Grid.Column="2" Style="{StaticResource MaterialDesignHorizontalStepperSpaceLine}" />
                                                     </Grid>
@@ -289,7 +291,8 @@
                                                                 <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
                                                             </Border>
                                                             <!-- header -->
-                                                            <ContentControl Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" Style="{StaticResource headerContentControlStyle}" />
+                                                            <ContentControl Style="{StaticResource headerContentControlStyle}" Focusable="False"
+                                                                            Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" />
                                                         </StackPanel>
                                                     </Grid>
                                                 </Button>
@@ -305,8 +308,8 @@
                                 <!-- content -->
                                 <!-- removed the ScrollViewer due to strange behaviour after switching the steps -->
                                 <ContentControl x:Name="PART_horizontalContent" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                    Content="{Binding Path=Controller.ActiveStepContent, RelativeSource={RelativeSource TemplatedParent}}"
-                                                    Margin="0,24,0,0" RenderTransformOrigin="0.5,0.5" SnapsToDevicePixels="True">
+                                                Content="{Binding Path=Controller.ActiveStepContent, RelativeSource={RelativeSource TemplatedParent}}"
+                                                Margin="0,24,0,0" RenderTransformOrigin="0.5,0.5" SnapsToDevicePixels="True" Focusable="False">
                                     <ContentControl.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform />
@@ -322,15 +325,18 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type controls:Stepper}">
-                            <ItemsControl HorizontalAlignment="Stretch" ItemsSource="{Binding Path=Controller.InternalSteps, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Top">
+                            <ItemsControl ItemsSource="{Binding Path=Controller.InternalSteps, RelativeSource={RelativeSource TemplatedParent}}"
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Top" Focusable="False">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel Grid.Column="1" HorizontalAlignment="Stretch" IsItemsHost="True" Orientation="Vertical" VerticalAlignment="Top" />
+                                        <VirtualizingStackPanel Grid.Column="1" IsItemsHost="True" Orientation="Vertical"
+                                                                HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                                                Focusable="False" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid>
+                                        <Grid Focusable="False">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="60" />
                                                 <ColumnDefinition Width="100*" />
@@ -376,7 +382,8 @@
                                                     <!-- vertical line after the circle -->
                                                     <Border Grid.Column="1" Grid.Row="3" Style="{StaticResource MaterialDesignVerticalStepperSpaceLine}" Margin="0,8,0,0" Padding="0" />
                                                     <!-- header -->
-                                                    <ContentControl Grid.Column="3" Grid.Row="2" Grid.RowSpan="2" Content="{Binding Path=Step.Header}" Margin="0,4,0,16" Style="{StaticResource headerContentControlStyle}" />
+                                                    <ContentControl Grid.Column="3" Grid.Row="2" Grid.RowSpan="2" Style="{StaticResource headerContentControlStyle}"
+                                                                    Content="{Binding Path=Step.Header}" Margin="0,4,0,16" Focusable="False" />
                                                 </Grid>
                                             </Button>
                                             <!-- vertical line at the left side -->
@@ -384,7 +391,7 @@
                                                 <Border Style="{StaticResource MaterialDesignVerticalStepperSpaceLine}" />
                                             </Border>
                                             <!-- content -->
-                                            <Border Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <Border Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
                                                 <Border.Style>
                                                     <Style TargetType="{x:Type Border}">
                                                         <Style.Triggers>
@@ -397,7 +404,8 @@
                                                         </Style.Triggers>
                                                     </Style>
                                                 </Border.Style>
-                                                <ContentControl x:Name="PART_verticalContent" Content="{Binding Path=Step.Content}" HorizontalAlignment="Stretch" SnapsToDevicePixels="True">
+                                                <ContentControl x:Name="PART_verticalContent" Content="{Binding Path=Step.Content}" HorizontalAlignment="Stretch" SnapsToDevicePixels="True"
+                                                                Focusable="False">
                                                     <ContentControl.LayoutTransform>
                                                         <TransformGroup>
                                                             <ScaleTransform x:Name="verticalContentScaleTransform" ScaleY="0" />
@@ -452,6 +460,7 @@
         <Setter Property="Height" Value="48" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Margin" Value="0,16,0,0" />
+        <Setter Property="Focusable" Value="False" />
         <Style.Triggers>
             <Trigger Property="Mode" Value="Horizontal">
                 <Setter Property="Template">
@@ -492,15 +501,18 @@
                                 <Button Style="{DynamicResource MaterialDesignFlatButton}" Foreground="{DynamicResource MaterialDesignBodyLight}" Margin="0,0,10,0"
                                         Content="{Binding Path=Back, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.BackCommand}"
                                         Visibility="{Binding Path=Back, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}"
-                                        IsEnabled="{Binding Path=IsBackEnabled, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        IsEnabled="{Binding Path=IsBackEnabled, RelativeSource={RelativeSource TemplatedParent}}"
+                                        Focusable="{Binding Path=DataContext.IsActive, ElementName=PART_verticalContent}" />
                                 <Button Style="{DynamicResource MaterialDesignRaisedButton}" Margin="0,0,10,0"
                                         Content="{Binding Path=Continue, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.ContinueCommand}"
                                         Visibility="{Binding Path=Continue, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}"
-                                        IsEnabled="{Binding Path=IsContinueEnabled, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        IsEnabled="{Binding Path=IsContinueEnabled, RelativeSource={RelativeSource TemplatedParent}}"
+                                        Focusable="{Binding Path=DataContext.IsActive, ElementName=PART_verticalContent}" />
                                 <Button Style="{DynamicResource MaterialDesignFlatButton}" Foreground="{DynamicResource MaterialDesignBody}"
                                         Content="{Binding Path=Cancel, RelativeSource={RelativeSource TemplatedParent}}" Command="{x:Static controls:Stepper.CancelCommand}"
                                         Visibility="{Binding Path=Cancel, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource nullableToVisibilityConverter}}"
-                                        IsEnabled="{Binding Path=IsCancelEnabled, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        IsEnabled="{Binding Path=IsCancelEnabled, RelativeSource={RelativeSource TemplatedParent}}"
+                                        Focusable="{Binding Path=DataContext.IsActive, ElementName=PART_verticalContent}" />
                             </StackPanel>
                         </ControlTemplate>
                     </Setter.Value>

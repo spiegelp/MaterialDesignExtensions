@@ -18,12 +18,14 @@
     <Style TargetType="{x:Type controls:TextBoxSuggestions}">
         <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:TextBoxSuggestions}">
                     <Grid Background="Transparent">
                         <Border x:Name="rootBorder">
-                            <ContentControl x:Name="textBoxContentControl" Content="{TemplateBinding TextBox}" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+                            <ContentControl x:Name="textBoxContentControl" Content="{TemplateBinding TextBox}"
+                                            HorizontalAlignment="Stretch" VerticalAlignment="Top" Focusable="False" />
                         </Border>
                         <Popup x:Name="suggestionItemsPopup"
                                PlacementTarget="{Binding ElementName=rootBorder}"

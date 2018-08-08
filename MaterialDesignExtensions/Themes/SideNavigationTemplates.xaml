@@ -32,7 +32,7 @@
                         <ColumnDefinition Width="24" />
                         <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Content="{Binding Path=Icon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ContentControl Content="{Binding Path=Icon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
                         <ContentControl.Resources>
                             <DataTemplate DataType="{x:Type BitmapImage}">
                                 <Image HorizontalAlignment="Stretch" Source="{Binding}" SnapsToDevicePixels="True" VerticalAlignment="Stretch" />
@@ -83,7 +83,7 @@
                         <ColumnDefinition Width="24" />
                         <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Content="{Binding Path=Icon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ContentControl Content="{Binding Path=Icon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
                         <ContentControl.Resources>
                             <DataTemplate DataType="{x:Type BitmapImage}">
                                 <Image HorizontalAlignment="Stretch" Source="{Binding}" SnapsToDevicePixels="True" VerticalAlignment="Stretch" />
@@ -171,7 +171,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="notSelectableNavigationItemTemplate">
-        <ContentControl Content="{Binding}" />
+        <ContentControl Content="{Binding}" Focusable="False" />
     </DataTemplate>
 
     <Style x:Key="MaterialSideNavigationDefault" TargetType="{x:Type controls:SideNavigation}">
@@ -179,6 +179,7 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="SelectionForeground" Value="{DynamicResource PrimaryHueMidBrush}" />
         <Setter Property="SelectionBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
         <Setter Property="SelectionCornerRadius" Value="4" />
@@ -187,13 +188,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SideNavigation}">
-                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
                         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                       HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                            <ItemsControl x:Name="navigationItemsControl" ItemTemplateSelector="{StaticResource navigationItemKindTemplateSelector}">
+                            <ItemsControl x:Name="navigationItemsControl" ItemTemplateSelector="{StaticResource navigationItemKindTemplateSelector}" Focusable="False">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <StackPanel IsItemsHost="True" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                        <StackPanel IsItemsHost="True" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                             </ItemsControl>

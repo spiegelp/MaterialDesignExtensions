@@ -75,3 +75,4 @@
 * Change the horizontal `Stepper` separator color via the resource `MaterialDesignStepperSeparator`
 * New control `Autocomplete`
 * New control `TextBoxSuggestions`
+* Improved keyboard navigation
