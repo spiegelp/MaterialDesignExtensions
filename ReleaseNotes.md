@@ -76,3 +76,5 @@
 * New control `Autocomplete`
 * New control `TextBoxSuggestions`
 * Improved keyboard navigation
+#### Fixes
+* Fixed `AppBar` title in the prominent area

@@ -144,10 +144,16 @@
                             </Grid>
                         </Border>
                         <Border Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
-                            <TextBlock FontSize="20" Text="{TemplateBinding Title}" Focusable="True"
-                                       Margin="80,0,16,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <TextBlock.Style>
-                                    <Style TargetType="{x:Type TextBlock}">
+                            <ContentControl Grid.Column="1" Content="{TemplateBinding Title}"
+                                            Margin="80,0,16,0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                            TextBlock.FontSize="20" Focusable="False">
+                                <ContentControl.Resources>
+                                    <DataTemplate DataType="{x:Type system:String}">
+                                        <TextBlock FontSize="20" SnapsToDevicePixels="True" Text="{Binding}" />
+                                    </DataTemplate>
+                                </ContentControl.Resources>
+                                <ContentControl.Style>
+                                    <Style TargetType="{x:Type ContentControl}">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=ShowTitleInProminentArea, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
                                                 <Setter Property="Visibility" Value="Collapsed" />
@@ -157,8 +163,8 @@
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
+                                </ContentControl.Style>
+                            </ContentControl>
                         </Border>
                     </Grid>
                 </ControlTemplate>
