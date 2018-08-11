@@ -28,7 +28,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:Autocomplete}">
-                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                          Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
                         <Border x:Name="rootBorder" Background="{TemplateBinding Background}"
                                 SnapsToDevicePixels="True"
                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

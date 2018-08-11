@@ -66,6 +66,9 @@
     <Compile Include="Controls\AutocompleteControl.xaml.cs">
       <DependentUpon>AutocompleteControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AutocompleteInTabControlControl.xaml.cs">
+      <DependentUpon>AutocompleteInTabControlControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FileSystemDialogControl.xaml.cs">
       <DependentUpon>FileSystemDialogControl.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,7 @@
     </Compile>
     <Compile Include="ViewModel\AlertDialogViewModel.cs" />
     <Compile Include="ViewModel\AppBarViewModel.cs" />
+    <Compile Include="ViewModel\AutocompleteInTabControlViewModel.cs" />
     <Compile Include="ViewModel\AutocompleteViewModel.cs" />
     <Compile Include="ViewModel\FileSystemControlViewModel.cs" />
     <Compile Include="ViewModel\FileSystemDialogViewModel.cs" />
@@ -116,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\AutocompleteControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AutocompleteInTabControlControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

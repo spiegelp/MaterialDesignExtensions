@@ -40,6 +40,9 @@
         <DataTemplate DataType="{x:Type viewModel:AutocompleteViewModel}">
             <controls:AutocompleteControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AutocompleteInTabControlViewModel}">
+            <controls:AutocompleteInTabControlControl />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:TextBoxSuggestionsViewModel}">
             <controls:TextBoxSuggestionsControl />
         </DataTemplate>
