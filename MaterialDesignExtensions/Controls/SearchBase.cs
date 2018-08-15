@@ -18,7 +18,7 @@ namespace MaterialDesignExtensions.Controls
     /// <summary>
     /// The base control with common logic for <see cref="PersistentSearch" />.
     /// </summary>
-    public abstract class SearchBase : ControlWithPopup
+    public abstract class SearchBase : ControlWithAutocompletePopup
     {
         protected const string CancelButtonName = "cancelButton";
         protected const string ClearButtonName = "clearButton";
@@ -215,7 +215,7 @@ namespace MaterialDesignExtensions.Controls
             m_searchTextBox.GotFocus += SearchTextBoxGotFocusHandler;
             m_searchTextBox.KeyUp += SearchTextBoxKeyUpHandler;
 
-            m_popup = Template.FindName(SearchSuggestionsPopupName, this) as Popup;
+            m_popup = Template.FindName(SearchSuggestionsPopupName, this) as AutocompletePopup;
 
             m_searchSuggestionsItemsControl = Template.FindName(SearchSuggestionsItemsControlName, this) as ItemsControl;
         }

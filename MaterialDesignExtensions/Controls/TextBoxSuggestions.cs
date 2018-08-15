@@ -19,7 +19,7 @@ namespace MaterialDesignExtensions.Controls
     /// A decorator control to add some kind of autocomplete features to a default TextBox.
     /// </summary>
     [ContentProperty(nameof(TextBox))]
-    public class TextBoxSuggestions : ControlWithPopup
+    public class TextBoxSuggestions : ControlWithAutocompletePopup
     {
         private static readonly string SuggestionItemsControlName = "suggestionItemsControl";
         private static readonly string SuggestionItemsPopupName = "suggestionItemsPopup";
@@ -102,7 +102,7 @@ namespace MaterialDesignExtensions.Controls
         {
             base.OnApplyTemplate();
 
-            m_popup = Template.FindName(SuggestionItemsPopupName, this) as Popup;
+            m_popup = Template.FindName(SuggestionItemsPopupName, this) as AutocompletePopup;
 
             m_suggestionItemsControl = Template.FindName(SuggestionItemsControlName, this) as ItemsControl;
         }

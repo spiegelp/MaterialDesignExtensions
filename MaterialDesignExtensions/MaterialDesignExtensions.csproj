@@ -119,9 +119,10 @@
     <Compile Include="Controllers\StepperController.cs" />
     <Compile Include="Controls\AppBar.cs" />
     <Compile Include="Controls\Autocomplete.cs" />
+    <Compile Include="Controls\AutocompletePopup.cs" />
     <Compile Include="Controls\BaseFileControl.cs" />
     <Compile Include="Controls\BaseFileDialog.cs" />
-    <Compile Include="Controls\ControlWithPopup.cs" />
+    <Compile Include="Controls\ControlWithAutocompletePopup.cs" />
     <Compile Include="Controls\FileSystemControl.cs" />
     <Compile Include="Controls\FileSystemDialog.cs" />
     <Compile Include="Controls\OpenDirectoryControl.cs" />

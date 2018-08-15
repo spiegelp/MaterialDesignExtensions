@@ -14,7 +14,7 @@ using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
 {
-    public class Autocomplete : ControlWithPopup
+    public class Autocomplete : ControlWithAutocompletePopup
     {
         private static readonly string AutocompleteItemsControlName = "autocompleteItemsControl";
         private static readonly string AutocompleteItemsPopupName = "autocompleteItemsPopup";
@@ -272,7 +272,7 @@ namespace MaterialDesignExtensions.Controls
             m_searchTextBox.GotFocus += SearchTextBoxGotFocusHandler;
             m_searchTextBox.KeyUp += SearchTextBoxKeyUpHandler;
 
-            m_popup = Template.FindName(AutocompleteItemsPopupName, this) as Popup;
+            m_popup = Template.FindName(AutocompleteItemsPopupName, this) as AutocompletePopup;
 
             m_autocompleteItemsControl = Template.FindName(AutocompleteItemsControlName, this) as ItemsControl;
         }

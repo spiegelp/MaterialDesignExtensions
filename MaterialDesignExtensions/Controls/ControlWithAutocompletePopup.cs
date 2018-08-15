@@ -13,15 +13,15 @@ namespace MaterialDesignExtensions.Controls
     /// <summary>
     /// A base class to provide common functionality for controls with a <code>Popup</code>.
     /// </summary>
-    public abstract class ControlWithPopup : Control
+    public abstract class ControlWithAutocompletePopup : Control
     {
         protected Window m_window;
-        protected Popup m_popup;
+        protected AutocompletePopup m_popup;
 
         /// <summary>
         /// Creates a new <code>ControlWithPopup</code>.
         /// </summary>
-        public ControlWithPopup()
+        public ControlWithAutocompletePopup()
             : base()
         {
             m_window = null;
@@ -51,14 +51,22 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private void WindowSizeChangedHandler(object sender, SizeChangedEventArgs args)
+        protected virtual void WindowSizeChangedHandler(object sender, SizeChangedEventArgs args)
         {
-            UpdatePopup();
+            ClearFocus();
         }
 
-        private void WindowLocationChanged(object sender, EventArgs args)
+        protected virtual void WindowLocationChanged(object sender, EventArgs args)
         {
-            UpdatePopup();
+            ClearFocus();
+        }
+
+        protected void ClearFocus()
+        {
+            if (IsKeyboardFocusWithin)
+            {
+                Keyboard.ClearFocus();
+            }
         }
 
         /// <summary>
@@ -67,13 +75,7 @@ namespace MaterialDesignExtensions.Controls
         /// </summary>
         public void UpdatePopup()
         {
-            if (m_popup != null)
-            {
-                // change the offset to trigger an update of the Popup user interface
-                double offset = m_popup.VerticalOffset;
-                m_popup.VerticalOffset = offset + 1;
-                m_popup.VerticalOffset = offset;
-            }
+            m_popup?.UpdatePosition();
         }
     }
 }

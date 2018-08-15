@@ -110,13 +110,13 @@
                                     <wpfLib:PackIcon Kind="Close" Width="{TemplateBinding ClearIconSize}" Height="{TemplateBinding ClearIconSize}"
                                                      HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Button>
-                                <Popup x:Name="autocompleteItemsPopup"
+                                <controls:AutocompletePopup x:Name="autocompleteItemsPopup"
                                        PlacementTarget="{Binding ElementName=rootBorder}"
                                        Placement="Bottom"
                                        PopupAnimation="Fade" AllowsTransparency="True" Focusable="False"
                                        SnapsToDevicePixels="True"
                                        MaxHeight="300" Width="{Binding Path=ActualWidth, ElementName=rootBorder}">
-                                    <Popup.Style>
+                                    <controls:AutocompletePopup.Style>
                                         <Style TargetType="{x:Type Popup}">
                                             <Style.Triggers>
                                                 <MultiDataTrigger>
@@ -128,7 +128,7 @@
                                                 </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </Popup.Style>
+                                    </controls:AutocompletePopup.Style>
                                     <Border HorizontalAlignment="Stretch">
                                         <!-- Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpfLib:ShadowAssist.ShadowDepth), Converter={x:Static convertersLib:ShadowConverter.Instance}}" -->
                                         <Border Background="{TemplateBinding Background}" BorderBrush="{Binding Path=BorderBrush, ElementName=rootBorder}"
@@ -222,7 +222,7 @@
                                             </ItemsControl>
                                         </Border>
                                     </Border>
-                                </Popup>
+                                </controls:AutocompletePopup>
                             </Grid>
                         </Border>
                     </Grid>

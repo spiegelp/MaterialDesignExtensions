@@ -27,13 +27,13 @@
                             <ContentControl x:Name="textBoxContentControl" Content="{TemplateBinding TextBox}"
                                             HorizontalAlignment="Stretch" VerticalAlignment="Top" Focusable="False" />
                         </Border>
-                        <Popup x:Name="suggestionItemsPopup"
+                        <controls:AutocompletePopup x:Name="suggestionItemsPopup"
                                PlacementTarget="{Binding ElementName=rootBorder}"
                                Placement="Bottom"
                                PopupAnimation="Fade" AllowsTransparency="True" Focusable="False"
                                SnapsToDevicePixels="True"
                                MaxHeight="300" Width="{Binding Path=ActualWidth, ElementName=rootBorder}">
-                            <Popup.Style>
+                            <controls:AutocompletePopup.Style>
                                 <Style TargetType="{x:Type Popup}">
                                     <Style.Triggers>
                                         <MultiDataTrigger>
@@ -45,7 +45,7 @@
                                         </MultiDataTrigger>
                                     </Style.Triggers>
                                 </Style>
-                            </Popup.Style>
+                            </controls:AutocompletePopup.Style>
                             <Border Background="Transparent" HorizontalAlignment="Stretch" Padding="0,4,0,0">
                                 <!-- Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpfLib:ShadowAssist.ShadowDepth), Converter={x:Static convertersLib:ShadowConverter.Instance}}" -->
                                 <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
@@ -139,7 +139,7 @@
                                     </ItemsControl>
                                 </Border>
                             </Border>
-                        </Popup>
+                        </controls:AutocompletePopup>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

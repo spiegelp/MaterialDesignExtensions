@@ -90,25 +90,25 @@
                                     </Button.Visibility>
                                     <wpfLib:PackIcon Kind="Close" Width="24" Height="24" />
                                 </Button>
-                                <Popup x:Name="searchSuggestionsPopup"
+                                <controls:AutocompletePopup x:Name="searchSuggestionsPopup"
                                        PlacementTarget="{Binding ElementName=rootBorder}"
                                        Placement="Bottom"
                                        PopupAnimation="Fade" AllowsTransparency="True" Focusable="False"
                                        SnapsToDevicePixels="True"
                                        MaxHeight="300" Width="{Binding Path=ActualWidth, ElementName=rootBorder}">
-                                    <Popup.Style>
+                                    <controls:AutocompletePopup.Style>
                                         <Style TargetType="{x:Type Popup}">
                                             <Style.Triggers>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
                                                         <Condition Binding="{Binding Path=ItemsSource, ElementName=searchSuggestionsItemsControl, Converter={StaticResource emptyEnumerableToFalseConverter}}" Value="True" />
-                                                        <Condition Binding="{Binding Path=IsFocused, Mode=OneWay, ElementName=searchTextBox}" Value="True" />
+                                                        <Condition Binding="{Binding Path=IsKeyboardFocusWithin, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type controls:PersistentSearch}}}" Value="True" />
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="IsOpen" Value="True" />
                                                 </MultiDataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </Popup.Style>
+                                    </controls:AutocompletePopup.Style>
                                     <Border HorizontalAlignment="Stretch">
                                         <Border Background="{TemplateBinding Background}" CornerRadius="0,0,2,2"
                                                 BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignDivider}"
@@ -210,7 +210,7 @@
                                             </ItemsControl>
                                         </Border>
                                     </Border>
-                                </Popup>
+                                </controls:AutocompletePopup>
                             </Grid>
                         </Border>
                     </Grid>
