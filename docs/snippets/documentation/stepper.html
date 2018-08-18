@@ -1,0 +1,525 @@
+﻿<div>
+    <h1>Stepper</h1>
+    <p>
+        Steppers are handy to break a big task into smaller parts. These are so called steps. It displays the progress of the full task as a numbered sequence of steps.
+    </p>
+    <p>
+        There a two layouts for a stepper, namely horizontal and vertical. Additionally the stepper can be in linear mode. This means that the user can only edit the
+        steps in their fixed order. A non-linear Stepper allows the user to edit the steps in any order. You will find details and usage scenarios in the
+        <a href="https://material.io/guidelines/components/steppers.html" target="_blank">Material Design specification</a>.
+    </p>
+    <h2>API</h2>
+    <h3>Stepper</h3>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>ActiveStep</code>
+                    </td>
+                    <td>
+                        The active step.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>BlockNavigationOnValidationErrors</code>
+                    </td>
+                    <td>
+                        Specifies whether validation errors will block the navigation or not.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>IsLinear</code>
+                    </td>
+                    <td>
+                        Enables the linear mode by disabling the buttons of the header.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>Layout</code>
+                    </td>
+                    <td>
+                        Defines the stepper as either horizontal or vertical.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>Steps</code>
+                    </td>
+                    <td>
+                        The steps which will be shown inside the stepper.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>ActiveStepChanged</code>
+                    </td>
+                    <td>
+                        An event raised by changing to active step.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>BackNavigation</code>
+                    </td>
+                    <td>
+                        An event raised by navigating to the previous step in a linear order.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>CancelValidation</code>
+                    </td>
+                    <td>
+                        An event raised by cancelling the process.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>ContinueNavigation</code>
+                    </td>
+                    <td>
+                        An event raised by navigating to the next step in a linear order.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>StepNavigation</code>
+                    </td>
+                    <td>
+                        An event raised by navigating to an arbitrarystep in a non-linear stepper.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>StepValidation</code>
+                    </td>
+                    <td>
+                        An event raised by starting the validation of an step.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>ActiveStepChangedCommand</code>
+                    </td>
+                    <td>
+                        A command called by changing to active step.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>BackNavigationCommand</code>
+                    </td>
+                    <td>
+                        A command called by navigating to the previous step in a linear order.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>CancelValidationCommand</code>
+                    </td>
+                    <td>
+                        A command called by cancelling the process.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>ContinueNavigationCommand</code>
+                    </td>
+                    <td>
+                        A command called by navigating to the next step in a linear order.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>StepNavigationCommand</code>
+                    </td>
+                    <td>
+                        A command called by navigating to an arbitrarystep in a non-linear stepper.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>StepValidationCommand</code>
+                    </td>
+                    <td>
+                        A command called by starting the validation of an step.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <h3>IStep</h3>
+    <p>
+        <code>IStep</code> is the basic interface for representing a step in a <code>Stepper</code>. <code>Step</code> does implement it.
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>Content</code>
+                    </td>
+                    <td>
+                        The content of the step.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>HasValidationErrors</code>
+                    </td>
+                    <td>
+                        <code>True</code>, if this step is in an invalid semantic state.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>Header</code>
+                    </td>
+                    <td>
+                        The header of the step.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>Validate</code>
+                    </td>
+                    <td>
+                        Validates this step.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <h3>StepTitleHeader</h3>
+    <p>
+        <code>StepTitleHeader</code> realizes a nice text header with first and second level titles as shown on the screenshots. The corresponding data template
+        is already implemented and will be automatically applied.
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>FirstLevelTitle</code>
+                    </td>
+                    <td>
+                        The text of the first level title. A value of null will hide this title.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>SecondLevelTitle</code>
+                    </td>
+                    <td>
+                        The text of the second level title beneath the first level title. A value of null will hide the this title. It uses a smaller font size.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <h3>StepButtonBar</h3>
+    <p>
+        <code>StepButtonBar</code> is a convenience control for the navigation buttons inside a <code>Stepper</code>. It features buttons as shown on the bottom
+        of screenshots. Setting the content for a button will show it. Otherwise the button will be collapsed.
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>Back</code>
+                    </td>
+                    <td>
+                        The content for the back button.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>Cancel</code>
+                    </td>
+                    <td>
+                        The content for the cancel button.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>Continue</code>
+                    </td>
+                    <td>
+                        The content for the continue button.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <h2>Screenshots</h2>
+    <p>
+        <img src="https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/HorizontalStepper.png" />
+    </p>
+    <p>
+        <img src="https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/VerticalStepper.png" />
+    </p>
+    <h2>Code example</h2>
+    <p>
+        We begin by defining some view models for the content of the steps:
+    </p>
+    <pre class="language-csharp"><code class="language-csharp">public class StepperTutorialOneViewModel
+{
+    public StepperTutorialOneViewModel() { }
+}
+
+public class StepperTutorialTwoViewModel
+{
+    public StepperTutorialTwoViewModel() { }
+}
+
+public class StepperTutorialThreeViewModel
+{
+    public StepperTutorialThreeViewModel() { }
+}
+
+public class StepperTutorialFourViewModel
+{
+    public StepperTutorialFourViewModel() { }
+}</code></pre>
+    <p>
+        Next we create a property for the list of steps. Our stepper will bind to it. The steps are required to implement the <code>IStep</code> interface.
+        The class <code>Step</code> already implements the interface, so we will use it. If you like to implement some custom validation logic, you may create
+        your own sub class to override the <code>Validate()</code> method.
+    </p>
+    <pre class="language-csharp"><code class="language-csharp">public List&lt;IStep> Steps
+{
+    get
+    {
+        return new List&lt;IStep>()
+        {
+            new Step() { Header = new StepTitleHeader() { FirstLevelTitle = "What is a Stepper?" }, Content = new StepperTutorialOneViewModel() },
+            new Step() { Header = new StepTitleHeader() { FirstLevelTitle = "Layout and navigation" }, Content = new StepperTutorialTwoViewModel() },
+            new Step() { Header = new StepTitleHeader() { FirstLevelTitle = "Steps", SecondLevelTitle = "Header and content" }, Content = new StepperTutorialThreeViewModel() },
+            new Step() { Header = new StepTitleHeader() { FirstLevelTitle = "Validation" }, Content = new StepperTutorialFourViewModel() }
+        };
+    }
+}</code></pre>
+    <p>
+        Thirdly, we need some data templates for the content. Have a look at the <code>StepButtonBar</code> inside each data template. It creates the navigation
+        buttons at the bottom of the steps:
+    </p>
+    <pre class="language-markup"><code class="language-markup">&lt;!-- import namespaces -->
+xmlns:viewModel="clr-namespace:MaterialDesignExtensionsDemo.ViewModel"
+xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+
+&lt;!-- define the data templates -->
+&lt;DataTemplate DataType="{x:Type viewModel:StepperTutorialOneViewModel}">
+    &lt;StackPanel Orientation="Vertical">
+        &lt;TextBlock Text="Steppers are handy to break a big task into smaller parts. These are so called steps. It displays the progress of the full task as a numbered sequence of steps." TextWrapping="WrapWithOverflow" />
+        &lt;controls:StepButtonBar Continue="CONTINUE" Cancel="CANCEL" />
+    &lt;/StackPanel>
+&lt;/DataTemplate>
+&lt;DataTemplate DataType="{x:Type viewModel:StepperTutorialTwoViewModel}">
+    &lt;StackPanel Orientation="Vertical">
+        &lt;TextBlock Text="There a two layouts for a Stepper, namely horizontal and vertical. It can be set by using the Layout property." TextWrapping="WrapWithOverflow" />
+        &lt;TextBlock Margin="0,16,0,0" Text="Additionally the Stepper will be in linear mode by setting the IsLinear property to true. This means that the user can only edit the steps in their fixed order. A non-linear Stepper allows the user to edit the steps in any order." TextWrapping="WrapWithOverflow" />
+        &lt;TextBlock Margin="0,16,0,0" Text="The basic navigation inside a stepper will be accomplished by using simple back and continue buttons. They allow the user to browse through the steps in their order. Just use the StepButtonBar like this tutorial to avoid the nasty reimplementation on your own. The user may also switch the steps of a non-linear Stepper by clicking on the headers. " TextWrapping="WrapWithOverflow" />
+        &lt;controls:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
+    &lt;/StackPanel>
+&lt;/DataTemplate>
+&lt;DataTemplate DataType="{x:Type viewModel:StepperTutorialThreeViewModel}">
+    &lt;StackPanel Orientation="Vertical">
+        &lt;TextBlock Text="The Stepper uses the steps out of its Steps property. This property expects a collection of IStep objects. The Step class already implements this basic interface for a step." TextWrapping="WrapWithOverflow" />
+        &lt;TextBlock Margin="0,16,0,0" Text="A step consists out of a header and a content. Consider to define one view model class per step content and a DataTemplate for it (just the everyday MVVM magic). The header may contain arbitrary content. If you like the header of this tutorial, just use the StepTitleHeader class." TextWrapping="WrapWithOverflow" />
+        &lt;controls:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
+    &lt;/StackPanel>
+&lt;/DataTemplate>
+&lt;DataTemplate DataType="{x:Type viewModel:StepperTutorialFourViewModel}">
+    &lt;StackPanel Orientation="Vertical">
+        &lt;TextBlock Text="Each time the user switches to another step, an optional validation phase for the until now active step will be started by the Stepper. The Validate() method of the step will be called first. Afterwards the StepValidation event will be raised followed by the call of the StepValidationCommand command." TextWrapping="WrapWithOverflow" />
+        &lt;TextBlock Margin="0,16,0,0" Text="The different validation handlers may set the HasValidationErrors property of the step to indicate input errors. If the BlockNavigationOnValidationErrors property of the Stepper is true, the Stepper blocks the navigation as long as the active step has invalid data." TextWrapping="WrapWithOverflow" />
+        &lt;controls:StepButtonBar Back="BACK" Continue="FINISH" Cancel="CANCEL" />
+    &lt;/StackPanel>
+&lt;/DataTemplate></code></pre>
+    <p>
+        Finally, we can create the <code>Stepper</code>:
+    </p>
+    <pre class="language-markup"><code class="language-markup"><controls:Stepper IsLinear="False" Layout="Horizontal" Steps="{Binding Path=Steps, Mode=OneTime}" /></code></pre>
+    <p>
+        You can define the steps inside the XAML alternatively, if you do not like the code behind:
+    </p>
+    <pre class="language-markup"><code class="language-markup">&lt;!-- we also need the namespace of Step next to the others defined by the previous snippet -->
+xmlns:model="clr-namespace:MaterialDesignExtensions.Model;assembly=MaterialDesignExtensions"
+
+&lt;!-- assuming the data templates are available -->
+
+&lt;controls:Stepper IsLinear="False" Layout="Horizontal">
+    &lt;model:Step>
+        &lt;model:Step.Header>
+            &lt;model:StepTitleHeader FirstLevelTitle="What is a Stepper?" />
+        &lt;/model:Step.Header>
+        &lt;model:Step.Content>
+            &lt;viewModel:StepperTutorialOneViewModel />
+        &lt;/model:Step.Content>
+    &lt;/model:Step>
+    &lt;model:Step>
+        &lt;model:Step.Header>
+            &lt;model:StepTitleHeader FirstLevelTitle="Layout and navigation" />
+        &lt;/model:Step.Header>
+        &lt;model:Step.Content>
+            &lt;viewModel:StepperTutorialTwoViewModel />
+        &lt;/model:Step.Content>
+    &lt;/model:Step>
+    &lt;model:Step>
+        &lt;model:Step.Header>
+            &lt;model:StepTitleHeader FirstLevelTitle="Steps" SecondLevelTitle="Header and content" />
+        &lt;/model:Step.Header>
+        &lt;model:Step.Content>
+            &lt;viewModel:StepperTutorialThreeViewModel />
+        &lt;/model:Step.Content>
+    &lt;/model:Step>
+    &lt;model:Step>
+        &lt;model:Step.Header>
+            &lt;model:StepTitleHeader FirstLevelTitle="Validation" />
+        &lt;/model:Step.Header>
+        &lt;model:Step.Content>
+            &lt;viewModel:StepperTutorialFourViewModel />
+        &lt;/model:Step.Content>
+    &lt;/model:Step>
+&lt;/controls:Stepper></code></pre>
+    <h2>Validation</h2>
+    <p>
+        The <code>Stepper</code> supports different ways to run custom validation logic for its steps. The validation procedure will be triggered right before
+        any navigation. The validation logic will set the <code>HasValidationErrors</code> property of the step, if it detects some invalid data. According to
+        the <code>BlockNavigationOnValidationErrors</code> property the <code>Stepper</code> may cancel the navigation as long as the step has validation errors.
+    </p>
+    <h3>Sub class of IStep</h3>
+    <p>
+        You can implement validation logic for each step by implementing your own class by inheriting from <code>IStep</code> or <code>Step</code>. Then you can
+        override the <code>Validate()</code> method.
+    </p>
+    <pre class="language-csharp"><code class="language-csharp">public class MyStepOne : Step
+{
+    public MyStepOne() : base() { }
+    
+    public override void Validate()
+    {
+        // place your validation logic here
+        //     assuming we have a input field for the birthday of the person and want to check the input
+        bool ageOk = CheckAgeOfPerson();
+        
+        // if the age is not OK, we set a validation error
+        if (ageOk)
+        {
+            HasValidationErrors = false;
+        }
+        else
+        {
+            HasValidationErrors = true;
+        }
+    }
+}</code></pre>
+    <h3>Register for the event or command</h3>
+    <p>
+        The <code>Stepper</code> has a <code>StepValidation</code> event and a <code>StepValidationCommand</code> command. You can register your custom event
+        handler or command to hook up validation. The step to validate will be assigned to the arguments of them.
+    </p>
+    <pre class="language-csharp"><code class="language-csharp">public class MyControl : UserControl
+{
+    // define a command
+    public static readonly MyValidationCommand = new RoutedCommand();
+    
+    public MyControl()
+        : base()
+    {
+        CommandBindings.Add(new CommandBinding(MyValidationCommand, StepValidationCommandHandler));
+    }
+    
+    // define an event handler
+    private void StepValidationHandler(object sender, StepValidationEventArgs args)
+    {
+        // call some validation logic
+        args.Step.HasValidationErrors = !ValidateTheStep(args.Step);
+    }
+
+    private void StepValidationCommandHandler(object sender, ExecutedRoutedEventArgs args)
+    {
+        // call some validation logic
+        args.Step.HasValidationErrors = !ValidateTheStep(args.Parameter as IStep);
+    }
+    
+    // the validation method
+    private bool ValidateTheStep(IStep step)
+    {
+        // do some validation and return true or false
+        return true;
+    }
+}</code></pre>
+    <pre class="language-markup"><code class="language-markup">&lt;!-- register the event handler via XAML -->
+&lt;controls:Stepper IsLinear="False" Layout="Horizontal" Steps="{Binding Path=Steps, Mode=OneTime}"
+                  StepValidation="StepValidationHandler"
+                  StepValidationCommand="{x:static local:MyControl.MyValidationCommand}" /></code></pre>
+    <script type="text/javascript">
+        appViewModel.prepareCodeSnippets();
+</script>
+</div>

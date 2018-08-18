@@ -1,16 +1,24 @@
-﻿<div>
+﻿<div id="documentationContent">
     <h1>Documentation</h1>
-    <p>Under construction</p>
-    <!--<div class="mdc-card mdc-card__documentation_overview">
-        <div class="mdc-card__media mdc-card__media--16-9">
-        </div>
-        <div style="padding: 8px">
-            title
-        </div>
-        <div class="mdc-card__actions">
-            <div class="mdc-card__action-buttons">
-                <button class="mdc-button mdc-card__action mdc-card__action--button">Action 1</button>
+    <div class="documentation-items" data-bind="foreach: documentationItems">
+        <div class="mdc-card mdc-card__documentation_overview">
+            <div class="mdc-card__media--16-9__image">
+                <img data-bind="attr: { 'src': $data.imageUrl }" />
+            </div>
+            <div class="card-title">
+                <span data-bind="text: $data.title"></span>
+            </div>
+            <div class="mdc-card__actions">
+                <div class="mdc-card__action-buttons">
+                    <span class="mdc-button mdc-card__action mdc-card__action--button"
+                          data-bind="click: $root.goToDocumentationItem">
+                        DOCUMENTATION
+                    </span>
+                </div>
             </div>
         </div>
-    </div>-->
+    </div>
+    <script type="text/javascript">
+        ko.applyBindings(appViewModel, document.getElementById('documentationContent'));
+    </script>
 </div>

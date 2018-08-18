@@ -1,4 +1,5 @@
 ﻿body {
+    font-size: 14px;
     margin: 0;
 }
 
@@ -29,4 +30,42 @@
     display: inline-block;
     margin: 8px;
     width: 384px;
+}
+
+.mdc-card__media--16-9__image {
+    width: 384px;
+    height: 216px;
+    overflow: hidden;
+}
+
+.card-title {
+    font-size: 24px;
+    padding: 8px 16px;
+}
+
+.documentation-items {
+    text-align: center;
+}
+
+.documentation-items * {
+    text-align: left;
+}
+
+table[class=documentation] {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table[class=documentation] th {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.5);
+    padding: 4px 8px;
+    text-align: left;
+}
+
+table[class=documentation] td {
+    font-size: 14px;
+    padding: 4px 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.5);
 }

@@ -1,0 +1,59 @@
+﻿<div>
+    <h1>Grid list</h1>
+    <p>
+        The grid list is not a control. It is template for a <code>ListBox</code> to render it as a grid list. You will find details and usage scenarios
+        in the <a href="https://material.io/guidelines/components/grid-lists.html" target="_blank">Material Design specification</a>.
+    </p>
+    <h2>Screenshots</h2>
+    <img src="https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/GridList.png" />
+    <h2>Code example</h2>
+    <pre class="language-markup"><code class="language-markup">&lt;ListBox Style="{StaticResource MaterialDesignGridList}" ItemsSource="{Binding Path=Items, Mode=OneTime}">
+    &lt;ListBox.ItemTemplate>
+        &lt;DataTemplate>
+            &lt;Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="8">
+                &lt;DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="64" Height="64">
+                    &lt;TextBlock DockPanel.Dock="Bottom" FontSize="12" Text="{Binding Path=Label, Mode=OneTime}"
+                               Margin="0,8,0,0" HorizontalAlignment="Center" />
+                    &lt;materialDesign:PackIcon Kind="{Binding Path=Kind, Mode=OneTime}"
+                                             Height="32" Width="32"
+                                             HorizontalAlignment="Center" VerticalAlignment="Center" />
+                &lt;/DockPanel>
+            &lt;/Border>
+        &lt;/DataTemplate>
+    &lt;/ListBox.ItemTemplate>
+&lt;/ListBox></code></pre>
+    <pre class="language-csharp"><code class="language-csharp">public class GridListViewModel : ViewModel
+{
+    private List<GridListItem> m_items;
+
+    public List<GridListItem> Items
+    {
+        get
+        {
+            return m_items;
+        }
+    }
+
+    public GridListViewModel()
+        : base()
+    {
+        m_items = new List<GridListItem>()
+        {
+            new GridListItem() { Kind = PackIconKind.Android, Label = "Android" },
+            new GridListItem() { Kind = PackIconKind.Windows, Label = "Windows" },
+            new GridListItem() { Kind = PackIconKind.AppleIos, Label = "iOS" }
+        };
+    }
+}
+
+public class GridListItem : ViewModel
+{
+    public PackIconKind Kind { get; set; }
+    public string Label { get; set; }
+
+    public GridListItem() { }
+}</code></pre>
+    <script type="text/javascript">
+        appViewModel.prepareCodeSnippets();
+    </script>
+</div>
