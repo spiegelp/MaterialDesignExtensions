@@ -3,10 +3,22 @@
     margin: 0;
 }
 
-#content {
+.content {
     margin: 0 auto;
     padding: 16px;
     max-width: 1024px;
+}
+
+#footer {
+    background-color: #212121;
+    color: #757575;
+    padding: 16px 0px;
+    text-align: center;
+}
+
+#footer a {
+    color: #757575;
+    text-decoration: underline;
 }
 
 .mdc-list-item__link {
