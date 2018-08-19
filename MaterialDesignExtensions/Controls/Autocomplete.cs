@@ -14,6 +14,9 @@ using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// A control for providing arbitrary items for a search string.
+    /// </summary>
     public class Autocomplete : ControlWithAutocompletePopup
     {
         private static readonly string AutocompleteItemsControlName = "autocompleteItemsControl";
@@ -209,7 +212,7 @@ namespace MaterialDesignExtensions.Controls
             nameof(SelectedItemChangedCommand), typeof(ICommand), typeof(Autocomplete), new PropertyMetadata(null, null));
 
         /// <summary>
-        /// A command called by changing the selected item;
+        /// A command called by changing the selected item.
         /// </summary>
         public ICommand SelectedItemChangedCommand
         {
@@ -221,6 +224,28 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(SelectedItemChangedCommandProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// True (default value) for showing the clear button only if <see cref="SelectedItem" /> != null.
+        /// </summary>
+        public static readonly DependencyProperty ShowClearButtonOnlyOnSelectedItemProperty = DependencyProperty.Register(
+            nameof(ShowClearButtonOnlyOnSelectedItem), typeof(bool), typeof(Autocomplete), new PropertyMetadata(true, ShowClearButtonOnlyOnSelectedItemChangedHandler));
+
+        /// <summary>
+        /// True (default value) for showing the clear button only if <see cref="SelectedItem" /> != null.
+        /// </summary>
+        public bool ShowClearButtonOnlyOnSelectedItem
+        {
+            get
+            {
+                return (bool)GetValue(ShowClearButtonOnlyOnSelectedItemProperty);
+            }
+
+            set
+            {
+                SetValue(ShowClearButtonOnlyOnSelectedItemProperty, value);
             }
         }
 
@@ -275,6 +300,8 @@ namespace MaterialDesignExtensions.Controls
             m_popup = Template.FindName(AutocompleteItemsPopupName, this) as AutocompletePopup;
 
             m_autocompleteItemsControl = Template.FindName(AutocompleteItemsControlName, this) as ItemsControl;
+
+            UpdateClearButtonVisibility();
         }
 
         protected override void LoadedHandler(object sender, RoutedEventArgs args)
@@ -349,6 +376,8 @@ namespace MaterialDesignExtensions.Controls
         private void SearchTermChangedHandler(string searchTerm)
         {
             m_autocompleteController?.Search(searchTerm);
+
+            UpdateClearButtonVisibility();
         }
 
         private static void SelectedItemChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
@@ -363,6 +392,8 @@ namespace MaterialDesignExtensions.Controls
                 m_autocompleteItemsControl.ItemsSource = null;
             }
 
+            UpdateClearButtonVisibility();
+
             SelectedItemChangedEventArgs eventArgs = new SelectedItemChangedEventArgs(SelectedItemChangedEvent, this, selectedItem);
             RaiseEvent(eventArgs);
 
@@ -370,6 +401,16 @@ namespace MaterialDesignExtensions.Controls
             {
                 SelectedItemChangedCommand.Execute(selectedItem);
             }
+        }
+
+        private static void ShowClearButtonOnlyOnSelectedItemChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            (obj as Autocomplete)?.ShowClearButtonOnlyOnSelectedItemChangedHandler();
+        }
+
+        private void ShowClearButtonOnlyOnSelectedItemChangedHandler()
+        {
+            UpdateClearButtonVisibility();
         }
 
         private void SelectAutocompleteItemCommandHandler(object sender, ExecutedRoutedEventArgs args)
@@ -396,6 +437,21 @@ namespace MaterialDesignExtensions.Controls
                 else
                 {
                     m_autocompleteItemsControl.ItemsSource = null;
+                }
+            }
+        }
+
+        private void UpdateClearButtonVisibility()
+        {
+            if (m_clearButton != null)
+            {
+                if (SelectedItem != null || (!ShowClearButtonOnlyOnSelectedItem && !string.IsNullOrEmpty(SearchTerm)))
+                {
+                    m_clearButton.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    m_clearButton.Visibility = Visibility.Collapsed;
                 }
             }
         }

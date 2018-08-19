@@ -79,8 +79,8 @@
                                                 Margin="0,0,8,0" HorizontalAlignment="Stretch" VerticalAlignment="Center"
                                                 Visibility="{TemplateBinding SelectedItem, Converter={StaticResource notNullToVisibleConverter}}" />
                                 <Button x:Name="clearButton" Grid.Column="1" Cursor="Hand" SnapsToDevicePixels="True"
-                                        Margin="16,0,0,0" Padding="8,0,8,0" VerticalAlignment="Stretch" MaxHeight="52"
-                                        Visibility="{TemplateBinding SelectedItem, Converter={StaticResource notNullToVisibleConverter}}">
+                                        Margin="16,0,0,0" Padding="8,0,8,0" VerticalAlignment="Stretch" MaxHeight="52">
+                                    <!-- visibility will be set via code -->
                                     <Button.Style>
                                         <Style TargetType="{x:Type Button}">
                                             <Setter Property="Background" Value="Transparent" />
