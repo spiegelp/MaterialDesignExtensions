@@ -15,11 +15,13 @@ function AppViewModel(contentDivId, drawer) {
     self.documentationItems = [
         new DocumentationItem('appbar', 'App bar', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/AppBar1.png', 'snippets/documentation/appbar.html'),
         new DocumentationItem('autocomplete', 'Autocomplate', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/Autocomplete.png', 'snippets/documentation/autocomplete.html'),
+        new DocumentationItem('filesystemcontrols', 'File system controls', null, 'snippets/documentation/filesystemcontrols.html'),
         new DocumentationItem('gridlist', 'Grid list', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/GridList.png', 'snippets/documentation/gridlist.html'),
         new DocumentationItem('navigation', 'Navigation', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/SideNavigation.png', 'snippets/documentation/sidenavigation.html'),
         new DocumentationItem('oversizednumberspinner', 'Oversized number spinner', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/OversizedNumberSpinner.png', 'snippets/documentation/oversizednumberspinner.html'),
         new DocumentationItem('search', 'Search', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/PersistentSearch.png', 'snippets/documentation/search.html'),
-        new DocumentationItem('stepper', 'Stepper', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/HorizontalStepper.png', 'snippets/documentation/stepper.html')
+        new DocumentationItem('stepper', 'Stepper', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/HorizontalStepper.png', 'snippets/documentation/stepper.html'),
+        new DocumentationItem('textboxsuggestions', 'Text box suggestions', null, 'snippets/documentation/textboxsuggestions.html')
     ];
 
     self.goToNavigationItem = function (navigationItem) {
