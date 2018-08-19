@@ -1,25 +1,26 @@
 ﻿<!DOCTYPE html>
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-        <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" />
 
-        <link rel="stylesheet" href="css/theme.css" />
-        <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/prism.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/style.css" />
 
-        <title>Material Design Extensions</title>
-    </head>
+    <title>Material Design Extensions</title>
+</head>
     <body class="mdc-typography">
         <div id="root">
             <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
                 <div class="mdc-top-app-bar__row">
                     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                         <!--<button class="material-icons mdc-top-app-bar__navigation-icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded menu"
-                        style="--mdc-ripple-fg-size:28.799999999999997px; --mdc-ripple-fg-scale:1.6666666666666667; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">menu</button>-->
+                    style="--mdc-ripple-fg-size:28.799999999999997px; --mdc-ripple-fg-scale:1.6666666666666667; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">menu</button>-->
                         <button class="material-icons mdc-top-app-bar__navigation-icon menu">menu</button>
                         <span class="mdc-top-app-bar__title">Material Design Extensions</span>
                     </section>
@@ -43,9 +44,13 @@
             </aside>
 
             <main class="mdc-top-app-bar--fixed-adjust">
-                <div id="content">
-                    <h1>tset</h1>
-                    <p>test</p>
+                <div id="content" class="content">
+                    <p>Loading...</p>
+                </div>
+                <div id="footer">
+                    <div class="content">
+                        Made with ♥ by Philipp Spiegel - Code licensed under the <a href="javascript: appViewModel.goToNavigationItemId('license')">MIT license</a>
+                    </div>
                 </div>
             </main>
         </div>
@@ -56,7 +61,10 @@
         <script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
         <script type="text/javascript" src="js/NavigationItem.js"></script>
+        <script type="text/javascript" src="js/DocumentationItem.js"></script>
         <script type="text/javascript" src="js/AppViewModel.js"></script>
+
+        <script type="text/javascript" src="js/prism.js"></script>
 
         <script type="text/javascript">
             window.mdc.autoInit();
