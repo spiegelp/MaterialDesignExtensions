@@ -61,7 +61,7 @@ Material Design Extensions features the following controls:
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/OversizedNumberSpinner.png)
 
 # Documentation
-You find the API documentation inside the [wiki](https://github.com/spiegelp/MaterialDesignExtensions/wiki).
+You will find the API documentation on the [website](https://spiegelp.github.io/MaterialDesignExtensions/#documentation).
 
 # License
 Material Design Extensions is licensed under the [MIT](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/LICENSE) license.

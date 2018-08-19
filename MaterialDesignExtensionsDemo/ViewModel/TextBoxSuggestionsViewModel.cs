@@ -19,8 +19,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         {
             get
             {
-                //TODO replace with link to specific docs
-                return base.DocumentationUrl;
+                return "https://spiegelp.github.io/MaterialDesignExtensions/#documentation/textboxsuggestions";
             }
         }
 

@@ -12,7 +12,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         {
             get
             {
-                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki/File-system-controls";
+                return "https://spiegelp.github.io/MaterialDesignExtensions/#documentation/filesystemcontrols";
             }
         }
 

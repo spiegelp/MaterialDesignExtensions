@@ -50,7 +50,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         {
             get
             {
-                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki/Stepper";
+                return "https://spiegelp.github.io/MaterialDesignExtensions/#documentation/stepper";
             }
         }
 

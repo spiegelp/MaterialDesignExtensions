@@ -15,7 +15,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         {
             get
             {
-                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki";
+                return "https://spiegelp.github.io/MaterialDesignExtensions/#documentation";
             }
         }
 

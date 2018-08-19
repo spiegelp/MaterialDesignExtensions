@@ -16,7 +16,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         {
             get
             {
-                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki/Oversized-number-spinner";
+                return "https://spiegelp.github.io/MaterialDesignExtensions/#documentation/oversizednumberspinner";
             }
         }
 

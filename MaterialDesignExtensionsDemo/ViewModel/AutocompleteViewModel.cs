@@ -29,7 +29,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         {
             get
             {
-                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki/Autocomplete";
+                return "https://spiegelp.github.io/MaterialDesignExtensions/#documentation/autocomplete";
             }
         }
 

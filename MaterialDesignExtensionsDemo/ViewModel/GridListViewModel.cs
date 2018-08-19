@@ -16,7 +16,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         {
             get
             {
-                return "https://github.com/spiegelp/MaterialDesignExtensions/wiki/Grid-list";
+                return "https://spiegelp.github.io/MaterialDesignExtensions/#documentation/gridlist";
             }
         }
 
