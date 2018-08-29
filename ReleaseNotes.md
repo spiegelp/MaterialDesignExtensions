@@ -78,3 +78,4 @@
 * Improved keyboard navigation
 #### Fixes
 * Fixed `AppBar` title in the prominent area
+* Prevent `NullReferenceException` in `BaseFileControl` and `OpenDirectoryControl`

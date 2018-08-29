@@ -103,7 +103,7 @@ namespace MaterialDesignExtensions.Controls
 
                     if (m_controller.Directories != null && m_controller.Directories.Any())
                     {
-                        ItemsScrollViewer.ScrollToTop();
+                        ItemsScrollViewer?.ScrollToTop();
                     }
 
                     UpdateListVisibility();

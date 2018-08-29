@@ -292,7 +292,7 @@ namespace MaterialDesignExtensions.Controls
 
                     if (items != null && items.Any())
                     {
-                        ItemsScrollViewer.ScrollToTop();
+                        ItemsScrollViewer?.ScrollToTop();
                     }
 
                     UpdateListVisibility();
