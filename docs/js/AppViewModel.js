@@ -8,6 +8,7 @@ function AppViewModel(contentDivId, drawer) {
     
     self.navigationItems = [
         new NavigationItem('home', 'Home', 'home', 'snippets/home.html'),
+        new NavigationItem('releasenotes', 'Release notes', 'subject', 'snippets/releasenotes.html'),
         new NavigationItem('documentation', 'Documentation', 'help', 'snippets/documentation.html'),
         new NavigationItem('license', 'License', 'receipt', 'snippets/license.html')
     ];

@@ -1,0 +1,136 @@
+﻿<div>
+    <h1>Release notes</h1>
+    <h2>vX.X.X (upcoming release)</h2>
+    <h3>Features</h3>
+    <ul>
+        <li><code>SearchHint</code> and <code>SearchIcon</code> properties for <code>SearchBase</code></li>
+        <li>Setter for <code>Stepper.ActiveStep</code> property in order to navigate by a data binding</li>
+        <li>Change the horizontal <code>Stepper</code> separator color via the resource <code>MaterialDesignStepperSeparator</code></li>
+        <li>New control <code>Autocomplete</code></li>
+        <li>New control <code>TextBoxSuggestions</code></li>
+        <li>Improved keyboard navigation</li>
+    </ul>
+    <h3>Fixes</h3>
+    <ul>
+        <li>Fixed <code>AppBar</code> title in the prominent area</li>
+        <li>Prevent <code>NullReferenceException</code> in <code>BaseFileControl</code> and <code>OpenDirectoryControl</code></li>
+    </ul>
+    <h2>v2.2.0</h2>
+    <h3>Features</h3>
+    <ul>
+        <li><code>IsBackEnabled</code>, <code>IsCancelEnabled</code> and <code>IsContinueEnabled</code> properties for <code>StepButtonBar</code></li>
+        <li><code>Back</code> event and <code>BackCommand</code> command for <code>AppBar</code></li>
+        <li>Image thumbnails in <code>OpenFileControl</code> and <code>SaveFileControl</code></li>
+        <li>
+            Extensions to file system controls API
+            <ul>
+                <li><code>FileSelectedCommand</code> command for <code>BaseFileControl</code></li>
+                <li><code>DirectorySelectedCommand</code> command for <code>OpenDirectoryControl</code></li>
+            </ul>
+        </li>
+    </ul>
+    <h2>v2.1.0</h2>
+    <h3>Features</h3>
+    <ul>
+        <li>
+            Additional layouts for <code>AppBar</code>
+            <ul>
+                <li><code>ExtraProminent</code></li>
+                <li><code>DenseExtraProminent</code></li>
+                <li><code>Medium</code></li>
+                <li><code>MediumProminent</code></li>
+                <li><code>MediumExtraProminent</code></li>
+            </ul>
+        </li>
+        <li>
+            Extensions for the <code>Stepper</code> API
+            <ul>
+                <li><code>NavigationCanceledByValidation</code> event and <code>NavigationCanceledByValidationCommand</code> command</li>
+                <li><code>ContentAnimationsEnabled</code> property to enable or disable animations</li>
+                <li>Methods to navigate by code</li>
+            </ul>
+        </li>
+        <li>New control <code>PersistentSearch</code></li>
+        <li>New control <code>SideNavigation</code></li>
+    </ul>
+    <h3>Fixes</h3>
+    <ul>
+        <li>Unregister old event handlers on applying templates</li>
+    </ul>
+    <h2>v2.0.1</h2>
+    <h3>Fixes</h3>
+    <ul>
+        <li>Handle null in <code>FileFiltersTypeConverter</code></li>
+        <li>Consistent default value for <code>FileDialogArguments.FilterIndex</code></li>
+    </ul>
+    <h2>v2.0.0</h2>
+    <h3>Features</h3>
+    <ul>
+        <li>File filtering for <code>OpenFileControl</code>, <code>SaveFileControl</code>, <code>OpenFileDialog</code> and <code>SaveFileDialog</code></li>
+        <li>Improved user interface for the file system controls</li>
+    </ul>
+    <h3>Fixes</h3>
+    <ul>
+        <li>Type dots into<code>SaveFileControl</code>'s text field</li>
+        <li>
+            Use <code>ItemsControl</code> instead of <code>ListBox</code> inside the file system controls
+            <ul>
+                <li><code>ListBox.SelectionChanged</code> was raised several times without any explicit user input causing undesired behavior</li>
+            </ul>
+        </li>
+    </ul>
+    <h3>Obsolete</h3>
+    <ul>
+        <li>Old overloads of the show dialog methods are obsolete (in <code>OpenDirectoryControl</code>, <code>OpenFileControl</code> and <code>SaveFileControl</code>)</li>
+    </ul>
+    <h3>Breaking API</h3>
+    <ul>
+        <li>Modified and removed members in <code>FileSystemControl</code> and sub classes</li>
+    </ul>
+    <h2>v1.2.0</h2>
+    <h3>Features</h3>
+    <ul>
+        <li>New <code>AppBar</code> control with basic behavior defined in the <a href="https://material.io/design/components/app-bars-top.html#usage" target="_blank">Material Design specification</a></li>
+        <li>
+            Extensions for the <code>Stepper</code> API
+            <ul>
+                <li>Read-only <code>ActiveStep</code> property</li>
+                <li>Event <code>ActiveStepChangedEvent</code></li>
+                <li>
+                    Command properties for navigation callbacks
+                    <ul>
+                        <li><code>ActiveStepChangedCommand</code></li>
+                        <li><code>BackNavigationCommand</code></li>
+                        <li><code>CancelNavigationCommand</code></li>
+                        <li><code>ContinueNavigationCommand</code></li>
+                        <li><code>StepNavigationCommand</code></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h3>Fixes</h3>
+    <ul>
+        <li>Initialize <code>Stepper.Steps</code> in the constructor</li>
+    </ul>
+    <h2>v1.1.1</h2>
+    <h3>Fixes</h3>
+    <ul>
+        <li>Pack localized resources into NuGet package</li>
+    </ul>
+    <h2>v1.1.0</h2>
+    <h3>Features</h3>
+    <ul>
+        <li>Assign steps to the <code>Stepper</code> via XAML</li>
+        <li><code>OpenDirectoryControl</code> and <code>OpenDirectoryDialog</code> to select a directory</li>
+        <li><code>OpenFileControl</code> and <code>OpenFileDialog</code> to select a file for opening</li>
+        <li><code>SaveFileControl</code> and <code>SaveFileDialog</code> to select a file for saving data into</li>
+    </ul>
+    <h2>v1.0.0</h2>
+    <h3>Features</h3>
+    <ul>
+        <li>Stepper from the <a href="https://material.io/guidelines/components/steppers.html" target="_blank">Material Design specification</a></li>
+        <li>Oversized number spinner</li>
+        <li><code>ListBox</code> template to render as a grid list from the <a href="https://material.io/design/components/image-lists.html#usage" target="_blank">Material Design specification</a></li>
+    </ul>
+</div>
