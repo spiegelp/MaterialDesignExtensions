@@ -68,7 +68,7 @@
 * Extensions to file system controls API
   * `FileSelectedCommand` command for `BaseFileControl`
   * `DirectorySelectedCommand` command for `OpenDirectoryControl`
-### vX.X.X (upcoming release)
+### v2.3.0
 #### Features
 * `SearchHint` and `SearchIcon` properties for `SearchBase`
 * Setter for `Stepper.ActiveStep` property in order to navigate by a data binding
