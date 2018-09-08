@@ -196,6 +196,15 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Long paths are not supported ähnelt.
+        /// </summary>
+        public static string LongPathsAreNotSupported {
+            get {
+                return ResourceManager.GetString("LongPathsAreNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Music ähnelt.
         /// </summary>
         public static string Music {

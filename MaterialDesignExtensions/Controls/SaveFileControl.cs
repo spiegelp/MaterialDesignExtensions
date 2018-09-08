@@ -63,7 +63,14 @@ namespace MaterialDesignExtensions.Controls
 
         protected override void CurrentFileChangedHandler(string newCurrentFile)
         {
-            m_controller.SelectFile(newCurrentFile);
+            try
+            {
+                m_controller.SelectFile(newCurrentFile);
+            }
+            catch (PathTooLongException)
+            {
+                SnackbarMessageQueue.Enqueue(Localization.Strings.LongPathsAreNotSupported);
+            }
         }
 
         private static void FilenameChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
@@ -73,7 +80,14 @@ namespace MaterialDesignExtensions.Controls
 
         protected virtual void FilenameChangedHandler(string newFilename)
         {
-            m_controller.SelectFile(BuildFullFilename(newFilename));
+            try
+            {
+                m_controller.SelectFile(BuildFullFilename(newFilename));
+            }
+            catch (PathTooLongException)
+            {
+                SnackbarMessageQueue.Enqueue(Localization.Strings.LongPathsAreNotSupported);
+            }
         }
 
         protected override void ControllerPropertyChangedHandler(object sender, PropertyChangedEventArgs args)

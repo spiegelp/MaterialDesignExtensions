@@ -195,4 +195,7 @@
   <data name="Search" xml:space="preserve">
     <value>Suchen</value>
   </data>
+  <data name="LongPathsAreNotSupported" xml:space="preserve">
+    <value>Lange Pfade werden nicht unterstützt</value>
+  </data>
 </root>

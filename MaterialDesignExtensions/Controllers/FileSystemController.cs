@@ -441,10 +441,8 @@ namespace MaterialDesignExtensions.Controllers
         /// Selects a file.
         /// </summary>
         /// <param name="file"></param>
-        public void SelectFile(String file)
+        public void SelectFile(string file)
         {
-            CurrentFileFullName = file;
-
             if (!string.IsNullOrWhiteSpace(file))
             {
                 CurrentFile = new FileInfo(file);
@@ -453,6 +451,9 @@ namespace MaterialDesignExtensions.Controllers
             {
                 CurrentFile = null;
             }
+
+            // assign the string at the end, because we might get a PathTooLongException
+            CurrentFileFullName = file;
         }
 
         /// <summary>

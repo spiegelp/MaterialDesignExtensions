@@ -231,12 +231,19 @@ namespace MaterialDesignExtensions.Controls
 
         protected virtual void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            FileSelectedEventArgs eventArgs = new FileSelectedEventArgs(FileSelectedEvent, this, m_controller.CurrentFileFullName);
-            RaiseEvent(eventArgs);
-
-            if (FileSelectedCommand != null && FileSelectedCommand.CanExecute(m_controller.CurrentFileFullName))
+            try
             {
-                FileSelectedCommand.Execute(m_controller.CurrentFileFullName);
+                FileSelectedEventArgs eventArgs = new FileSelectedEventArgs(FileSelectedEvent, this, m_controller.CurrentFileFullName);
+                RaiseEvent(eventArgs);
+
+                if (FileSelectedCommand != null && FileSelectedCommand.CanExecute(m_controller.CurrentFileFullName))
+                {
+                    FileSelectedCommand.Execute(m_controller.CurrentFileFullName);
+                }
+            }
+            catch (PathTooLongException)
+            {
+                SnackbarMessageQueue.Enqueue(Localization.Strings.LongPathsAreNotSupported);
             }
         }
 

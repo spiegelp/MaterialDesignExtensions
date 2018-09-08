@@ -377,6 +377,10 @@ namespace MaterialDesignExtensions.Controls
             {
                 m_controller.SelectDirectory(newCurrentDirectory);
             }
+            catch (PathTooLongException)
+            {
+                SnackbarMessageQueue.Enqueue(Localization.Strings.LongPathsAreNotSupported);
+            }
             catch (Exception exc)
                 when (exc is UnauthorizedAccessException || exc is FileNotFoundException)
             {

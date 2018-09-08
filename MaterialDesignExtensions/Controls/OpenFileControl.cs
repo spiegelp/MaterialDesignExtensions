@@ -29,7 +29,14 @@ namespace MaterialDesignExtensions.Controls
 
         protected override void CurrentFileChangedHandler(string newCurrentFile)
         {
-            m_controller.SelectFile(newCurrentFile);
+            try
+            {
+                m_controller.SelectFile(newCurrentFile);
+            }
+            catch (PathTooLongException)
+            {
+                SnackbarMessageQueue.Enqueue(Localization.Strings.LongPathsAreNotSupported);
+            }
         }
 
         protected override void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
