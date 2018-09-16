@@ -43,7 +43,14 @@ namespace MaterialDesignExtensions.Converters
 
         private async void LoadImageAsync(string imageFilename, int targetWidth, int targetHeight, bool useCache)
         {
-            Image = await Task.Run(() => BitmapImageHelper.LoadImage(imageFilename, targetWidth, targetHeight, useCache));
+            object image = await Task.Run(() => BitmapImageHelper.LoadImage(imageFilename, targetWidth, targetHeight, useCache));
+
+            if (image == null)
+            {
+                image = PackIconKind.Image;
+            }
+
+            Image = image;
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Image)));
         }

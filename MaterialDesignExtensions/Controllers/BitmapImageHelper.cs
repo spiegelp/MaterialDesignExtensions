@@ -93,7 +93,7 @@ namespace MaterialDesignExtensions.Controllers
             }
             catch (Exception exc)
             {
-                if (exc is IOException || exc is UnauthorizedAccessException)
+                if (exc is IOException || exc is UnauthorizedAccessException || exc is PathTooLongException)
                 {
                     return null;
                 }
