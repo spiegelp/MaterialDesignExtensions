@@ -1,7 +1,18 @@
 ﻿body {
+    font-family: Roboto, sans-serif;
     font-size: 14px;
+    font-weight: 300;
     line-height: 1.5;
     margin: 0;
+}
+
+code {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 90%;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+    font-family: 'Roboto Mono', monospace;
 }
 
 .content {
@@ -53,6 +64,7 @@
 
 .card-title {
     font-size: 24px;
+    font-weight: 400;
     padding: 8px 16px;
 }
 
