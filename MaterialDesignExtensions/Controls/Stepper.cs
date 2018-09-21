@@ -19,30 +19,30 @@ using MaterialDesignExtensions.Model;
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
-    /// A control which implements the Stepper of the Material design specification (https://material.google.com/components/steppers.html).
+    /// A control which implements the Stepper of the Material design specification (https://material.io/archive/guidelines/components/steppers.html).
     /// </summary>
     [ContentProperty(nameof(Steps))]
-    public class Stepper : Control
+    public class Stepper : Control, IStepper
     {
         /// <summary>
         /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
         /// </summary>
-        public static RoutedCommand BackCommand = new RoutedCommand();
+        public static readonly RoutedCommand BackCommand = new RoutedCommand();
 
         /// <summary>
         /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
         /// </summary>
-        public static RoutedCommand CancelCommand = new RoutedCommand();
+        public static readonly RoutedCommand CancelCommand = new RoutedCommand();
 
         /// <summary>
         /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
         /// </summary>
-        public static RoutedCommand ContinueCommand = new RoutedCommand();
+        public static readonly RoutedCommand ContinueCommand = new RoutedCommand();
 
         /// <summary>
         /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
         /// </summary>
-        public static RoutedCommand StepSelectedCommand = new RoutedCommand();
+        public static readonly RoutedCommand StepSelectedCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by changing the active <see cref="IStep" />.
@@ -202,7 +202,7 @@ namespace MaterialDesignExtensions.Controls
         /// The active <see cref="IStep" />.
         /// </summary>
         public static readonly DependencyProperty ActiveStepProperty = DependencyProperty.Register(
-                nameof(ActiveStep), typeof(IStep), typeof(Stepper), new PropertyMetadata(null, ActiveStepChangedHandler));
+            nameof(ActiveStep), typeof(IStep), typeof(Stepper), new PropertyMetadata(null, ActiveStepChangedHandler));
 
         /// <summary>
         /// The active <see cref="IStep" />.
@@ -268,7 +268,7 @@ namespace MaterialDesignExtensions.Controls
         /// Specifies whether validation errors will block the navigation or not.
         /// </summary>
         public static readonly DependencyProperty BlockNavigationOnValidationErrorsProperty = DependencyProperty.Register(
-                nameof(BlockNavigationOnValidationErrors), typeof(bool), typeof(Stepper), new PropertyMetadata(false));
+            nameof(BlockNavigationOnValidationErrors), typeof(bool), typeof(Stepper), new PropertyMetadata(false));
 
         /// <summary>
         /// Specifies whether validation errors will block the navigation or not.
@@ -359,7 +359,7 @@ namespace MaterialDesignExtensions.Controls
         /// The navigation must be accomplished by using the navigation commands.
         /// </summary>
         public static readonly DependencyProperty IsLinearProperty = DependencyProperty.Register(
-                nameof(IsLinear), typeof(bool), typeof(Stepper), new PropertyMetadata(false));
+            nameof(IsLinear), typeof(bool), typeof(Stepper), new PropertyMetadata(false));
 
         /// <summary>
         /// Enables the linear mode by disabling the buttons of the header.
@@ -382,7 +382,7 @@ namespace MaterialDesignExtensions.Controls
         /// Defines this <see cref="Stepper" /> as either horizontal or vertical.
         /// </summary>
         public static readonly DependencyProperty LayoutProperty = DependencyProperty.Register(
-                nameof(Layout), typeof(StepperLayout), typeof(Stepper), new PropertyMetadata(StepperLayout.Horizontal));
+            nameof(Layout), typeof(StepperLayout), typeof(Stepper), new PropertyMetadata(StepperLayout.Horizontal));
 
         /// <summary>
         /// Defines this <see cref="Stepper" /> as either horizontal or vertical.
@@ -426,7 +426,7 @@ namespace MaterialDesignExtensions.Controls
         /// Gets or sets the steps which will be shown inside this <see cref="Stepper" />.
         /// </summary>
         public static readonly DependencyProperty StepsProperty = DependencyProperty.Register(
-                nameof(Steps), typeof(IList), typeof(Stepper), new PropertyMetadata(null, StepsChangedHandler));
+            nameof(Steps), typeof(IList), typeof(Stepper), new PropertyMetadata(null, StepsChangedHandler));
 
         /// <summary>
         /// Gets or sets the steps which will be shown inside this <see cref="Stepper" />.

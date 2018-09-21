@@ -9,12 +9,9 @@ using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensionsDemo.ViewModel
 {
-    public class StepperViewModel : ViewModel
+    public class StepperViewModel : StepperBaseViewModel
     {
-        private StepperLayout m_layout;
-        private bool m_isLinear;
         private bool m_blockNavigationOnValidationErrors;
-        private bool m_contentAnimationsEnabled;
 
         public bool BlockNavigationOnValidationErrors
         {
@@ -28,71 +25,6 @@ namespace MaterialDesignExtensionsDemo.ViewModel
                 m_blockNavigationOnValidationErrors = value;
 
                 OnPropertyChanged(nameof(BlockNavigationOnValidationErrors));
-            }
-        }
-
-        public bool ContentAnimationsEnabled
-        {
-            get
-            {
-                return m_contentAnimationsEnabled;
-            }
-
-            set
-            {
-                m_contentAnimationsEnabled = value;
-
-                OnPropertyChanged(nameof(ContentAnimationsEnabled));
-            }
-        }
-
-        public override string DocumentationUrl
-        {
-            get
-            {
-                return "https://spiegelp.github.io/MaterialDesignExtensions/#documentation/stepper";
-            }
-        }
-
-        public bool IsLinear
-        {
-            get
-            {
-                return m_isLinear;
-            }
-
-            set
-            {
-                m_isLinear = value;
-
-                OnPropertyChanged(nameof(IsLinear));
-            }
-        }
-
-        public StepperLayout Layout
-        {
-            get
-            {
-                return m_layout;
-            }
-
-            set
-            {
-                m_layout = value;
-
-                OnPropertyChanged(nameof(Layout));
-            }
-        }
-
-        public IEnumerable<StepperLayout> Layouts
-        {
-            get
-            {
-                return new List<StepperLayout>()
-                {
-                    StepperLayout.Horizontal,
-                    StepperLayout.Vertical
-                };
             }
         }
 

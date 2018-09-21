@@ -37,6 +37,9 @@
         <DataTemplate DataType="{x:Type viewModel:StepperViewModel}">
             <controls:StepperControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:TabControlStepperViewModel}">
+            <controls:TabControlStepperControl />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:AutocompleteViewModel}">
             <controls:AutocompleteControl />
         </DataTemplate>

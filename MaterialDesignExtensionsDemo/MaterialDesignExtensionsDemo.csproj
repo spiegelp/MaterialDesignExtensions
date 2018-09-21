@@ -96,6 +96,9 @@
     <Compile Include="Controls\SaveFileControlControl.xaml.cs">
       <DependentUpon>SaveFileControlControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TabControlStepperControl.xaml.cs">
+      <DependentUpon>TabControlStepperControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TextBoxSuggestionsControl.xaml.cs">
       <DependentUpon>TextBoxSuggestionsControl.xaml</DependentUpon>
     </Compile>
@@ -112,7 +115,9 @@
     <Compile Include="ViewModel\OversizedNumberSpinnerViewModel.cs" />
     <Compile Include="ViewModel\SaveFileControlViewModel.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />
+    <Compile Include="ViewModel\StepperBaseViewModel.cs" />
     <Compile Include="ViewModel\StepperViewModel.cs" />
+    <Compile Include="ViewModel\TabControlStepperViewModel.cs" />
     <Compile Include="ViewModel\TextBoxSuggestionsViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Page Include="Controls\AppBarControl.xaml">
@@ -152,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\StepperControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TabControlStepperControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

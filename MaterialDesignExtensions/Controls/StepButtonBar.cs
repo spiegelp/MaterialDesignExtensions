@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace MaterialDesignExtensions.Controls
@@ -36,6 +37,27 @@ namespace MaterialDesignExtensions.Controls
                 SetValue(BackProperty, value);
             }
         }
+        /// <summary>
+        /// The interal back command of the parent stepper.
+        /// </summary>
+        public static readonly DependencyProperty BackCommandProperty = DependencyProperty.Register(
+            nameof(BackCommand), typeof(ICommand), typeof(StepButtonBar), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// The interal back command of the parent stepper.
+        /// </summary>
+        public ICommand BackCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(BackCommandProperty);
+            }
+
+            set
+            {
+                SetValue(BackCommandProperty, value);
+            }
+        }
 
         /// <summary>
         /// The content for the cancel button.
@@ -58,6 +80,27 @@ namespace MaterialDesignExtensions.Controls
                 SetValue(CancelProperty, value);
             }
         }
+        /// <summary>
+        /// The interal cancel command of the parent stepper.
+        /// </summary>
+        public static readonly DependencyProperty CancelCommandProperty = DependencyProperty.Register(
+            nameof(CancelCommand), typeof(ICommand), typeof(StepButtonBar), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// The interal cancel command of the parent stepper.
+        /// </summary>
+        public ICommand CancelCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(CancelCommandProperty);
+            }
+
+            set
+            {
+                SetValue(CancelCommandProperty, value);
+            }
+        }
 
         /// <summary>
         /// The content for the continue button.
@@ -78,6 +121,28 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(ContinueProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The interal continue command of the parent stepper.
+        /// </summary>
+        public static readonly DependencyProperty ContinueCommandProperty = DependencyProperty.Register(
+            nameof(ContinueCommand), typeof(ICommand), typeof(StepButtonBar), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// The interal continue command of the parent stepper.
+        /// </summary>
+        public ICommand ContinueCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(ContinueCommandProperty);
+            }
+
+            set
+            {
+                SetValue(ContinueCommandProperty, value);
             }
         }
 
@@ -175,26 +240,39 @@ namespace MaterialDesignExtensions.Controls
             // read the Orientation of the Stepper and set it as the Mode
             //     - changing the Layout throws the UI of the Stepper and builds a new one
             //     - therefore this method will be called for a new instance and the changes of the Layout will be applied to Mode
-            Stepper stepper = FindStepper();
+            IStepper stepper = FindStepper();
 
             if (stepper != null)
             {
                 Mode = stepper.Layout;
+
+                if (stepper is TabControlStepper)
+                {
+                    BackCommand = TabControlStepper.BackCommand;
+                    CancelCommand = TabControlStepper.CancelCommand;
+                    ContinueCommand = TabControlStepper.ContinueCommand;
+                }
+                else
+                {
+                    BackCommand = Stepper.BackCommand;
+                    CancelCommand = Stepper.CancelCommand;
+                    ContinueCommand = Stepper.ContinueCommand;
+                }
             }
 
             base.OnApplyTemplate();
         }
 
-        private Stepper FindStepper()
+        private IStepper FindStepper()
         {
             DependencyObject element = VisualTreeHelper.GetParent(this);
 
-            while (element != null && !(element is Stepper))
+            while (element != null && !(element is IStepper))
             {
                 element = VisualTreeHelper.GetParent(element);
             }
 
-            return element as Stepper;
+            return element as IStepper;
         }
     }
 }

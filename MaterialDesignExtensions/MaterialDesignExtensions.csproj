@@ -125,6 +125,7 @@
     <Compile Include="Controls\ControlWithAutocompletePopup.cs" />
     <Compile Include="Controls\FileSystemControl.cs" />
     <Compile Include="Controls\FileSystemDialog.cs" />
+    <Compile Include="Controls\IStepper.cs" />
     <Compile Include="Controls\OpenDirectoryControl.cs" />
     <Compile Include="Controls\OpenDirectoryDialog.cs" />
     <Compile Include="Controls\OpenFileControl.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Controls\SideNavigation.cs" />
     <Compile Include="Controls\StepButtonBar.cs" />
     <Compile Include="Controls\Stepper.cs" />
+    <Compile Include="Controls\TabControlStepper.cs" />
     <Compile Include="Controls\TextBoxSuggestions.cs" />
     <Compile Include="Converters\AsyncImageTask.cs" />
     <Compile Include="Converters\BooleanAndConverter.cs" />
