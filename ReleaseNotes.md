@@ -80,5 +80,7 @@
 * Fixed `AppBar` title in the prominent area
 * Prevent `NullReferenceException` in `BaseFileControl` and `OpenDirectoryControl`
 ### vX.X.X (upcoming release)
+#### Features
+* Improved layout for file system controls
 #### Fixes
 * Handle `PathTooLongException`
