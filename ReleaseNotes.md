@@ -82,5 +82,6 @@
 ### vX.X.X (upcoming release)
 #### Features
 * Improved layout for file system controls
+* New control `TabControlStepper`
 #### Fixes
 * Handle `PathTooLongException`

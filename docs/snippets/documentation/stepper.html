@@ -404,7 +404,7 @@ xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=Materia
     <p>
         Finally, we can create the <code>Stepper</code>:
     </p>
-    <pre class="language-markup"><code class="language-markup"><controls:Stepper IsLinear="False" Layout="Horizontal" Steps="{Binding Path=Steps, Mode=OneTime}" /></code></pre>
+    <pre class="language-markup"><code class="language-markup">&lt;controls:Stepper IsLinear="False" Layout="Horizontal" Steps="{Binding Path=Steps, Mode=OneTime}" /></code></pre>
     <p>
         You can define the steps inside the XAML alternatively, if you do not like the code behind:
     </p>
@@ -519,7 +519,46 @@ xmlns:model="clr-namespace:MaterialDesignExtensions.Model;assembly=MaterialDesig
 &lt;controls:Stepper IsLinear="False" Layout="Horizontal" Steps="{Binding Path=Steps, Mode=OneTime}"
                   StepValidation="StepValidationHandler"
                   StepValidationCommand="{x:static local:MyControl.MyValidationCommand}" /></code></pre>
+    <h2>TabControlStepper</h2>
+    <p>
+        <code>TabControlStepper</code> is a simple version of a stepper. It extends <code>TabControl</code> to enable a stepper style for tab controls.
+    </p>
+    <pre class="language-markup"><code class="language-markup">&lt;!-- import namespaces -->
+xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+xmlns:model="clr-namespace:MaterialDesignExtensions.Model;assembly=MaterialDesignExtensions"
+
+&lt;controls:TabControlStepper IsLinear="False" Layout="Horizontal">
+    &lt;TabItem>
+        &lt;TabItem.Header>
+            &lt;model:StepTitleHeader FirstLevelTitle="What is a Stepper?" />
+        &lt;/TabItem.Header>
+        &lt;StackPanel Orientation="Vertical">
+            &lt;TextBlock Text="Steppers are handy to break a big task into smaller parts. These are so called steps. It displays the progress of the full task as a numbered sequence of steps." TextWrapping="WrapWithOverflow" />
+            &lt;controls:StepButtonBar Continue="CONTINUE" Cancel="CANCEL" />
+        &lt;/StackPanel>
+    &lt;/TabItem>
+    &lt;TabItem>
+        &lt;TabItem.Header>
+            &lt;model:StepTitleHeader FirstLevelTitle="Layout and navigation" />
+        &lt;/TabItem.Header>
+        &lt;StackPanel Orientation="Vertical">
+            &lt;TextBlock Text="There a two layouts for a Stepper, namely horizontal and vertical. It can be set by using the Layout property." TextWrapping="WrapWithOverflow" />
+            &lt;TextBlock Margin="0,16,0,0" Text="Additionally the Stepper will be in linear mode by setting the IsLinear property to true. This means that the user can only edit the steps in their fixed order. A non-linear Stepper allows the user to edit the steps in any order." TextWrapping="WrapWithOverflow" />
+            &lt;TextBlock Margin="0,16,0,0" Text="The basic navigation inside a stepper will be accomplished by using simple back and continue buttons. They allow the user to browse through the steps in their order. Just use the StepButtonBar like this tutorial to avoid the nasty reimplementation on your own. The user may also switch the steps of a non-linear Stepper by clicking on the headers. " TextWrapping="WrapWithOverflow" />
+            &lt;controls:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
+        &lt;/StackPanel>
+    &lt;/TabItem>
+    &lt;TabItem>
+        &lt;TabItem.Header>
+            &lt;model:StepTitleHeader FirstLevelTitle="Conclusion" />
+        &lt;/TabItem.Header>
+        &lt;StackPanel>
+            &lt;TextBlock Text="Well, that's all to say about this simple stepper version." />
+            &lt;controls:StepButtonBar Back="BACK" Continue="FINISH" Cancel="CANCEL" />
+        &lt;/StackPanel>
+    &lt;/TabItem>
+&lt;/controls:TabControlStepper></code></pre>
     <script type="text/javascript">
         appViewModel.prepareCodeSnippets();
-    </script>
+</script>
 </div>
