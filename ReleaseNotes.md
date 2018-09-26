@@ -82,5 +82,6 @@
 ### vX.X.X (upcoming release)
 #### Features
 * Improved layout for file system controls
+* Improved layout for `OversizedNumberSpinner`
 #### Fixes
 * Handle `PathTooLongException`

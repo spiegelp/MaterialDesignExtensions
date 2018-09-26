@@ -25,7 +25,7 @@
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
     </Style>
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignOverSizedNumberSpinnerButton}" x:Key="MaterialDesignOverSizedNumberSpinnerPlusButton">
@@ -34,7 +34,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" CornerRadius="5,5,0,0">
                         <wpf:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False" Feedback="White"
-                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    HorizontalContentAlignment="Center" VerticalContentAlignment="Top"
                                     Padding="{TemplateBinding Padding}"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
@@ -49,7 +49,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" CornerRadius="0,0,5,5">
                         <wpf:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False" Feedback="White"
-                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"
                                     Padding="{TemplateBinding Padding}"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
@@ -66,7 +66,7 @@
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -116,22 +116,23 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="25*" />
                             <RowDefinition Height="25*" />
-                            <RowDefinition Height="0.5" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="25*" />
                             <RowDefinition Height="25*" />
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="3" Background="{DynamicResource MaterialDesignSeperator}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        <Border Grid.Row="2" Background="{DynamicResource MaterialDesignSeperator}" SnapsToDevicePixels="True" HorizontalAlignment="Stretch" Height="1" />
                         <Button Grid.RowSpan="2" Style="{StaticResource MaterialDesignOverSizedNumberSpinnerPlusButton}"
                                 Background="{TemplateBinding Background}"
                                 Command="{x:Static controls:OversizedNumberSpinner.PlusCommand}">
-                            <Viewbox>
+                            <!--<Viewbox>
                                 <Canvas Width="24" Height="35">
                                     <Path Data="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" SnapsToDevicePixels="True"
                                           Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
                                           Stroke="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}">
                                     </Path>
                                 </Canvas>
-                            </Viewbox>
+                            </Viewbox>-->
+                            <wpf:PackIcon Kind="ChevronUp" Foreground="{TemplateBinding Foreground}" Width="30" Height="30" />
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
                                     <BeginStoryboard Storyboard="{StaticResource PlusAnimation}" />
@@ -141,7 +142,7 @@
                         <Button Grid.Row="3" Grid.RowSpan="2" x:Name="PlusButton" Style="{StaticResource MaterialDesignOverSizedNumberSpinnerMinusButton}"
                                 Background="{TemplateBinding Background}"
                                 Command="{x:Static controls:OversizedNumberSpinner.MinusCommand}">
-                            <Viewbox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <!--<Viewbox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Canvas Width="24" Height="35" RenderTransformOrigin="0.5, 0.5">
                                     <Canvas.RenderTransform>
                                         <RotateTransform Angle="180" />
@@ -151,7 +152,8 @@
                                           Stroke="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}">
                                     </Path>
                                 </Canvas>
-                            </Viewbox>
+                            </Viewbox>-->
+                            <wpf:PackIcon Kind="ChevronDown" Foreground="{TemplateBinding Foreground}" Width="30" Height="30" />
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
                                     <BeginStoryboard Storyboard="{StaticResource MinusAnimation}" />
@@ -174,7 +176,7 @@
                             <TextBlock x:Name="ValueTextBlock" FontSize="20" Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
                                        HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value}" VerticalAlignment="Center" />
                         </Button>
-                        <Border Grid.Row="1" Grid.RowSpan="3" Background="White" CornerRadius="3" HorizontalAlignment="Center" Padding="3" VerticalAlignment="Center">
+                        <Border Grid.Row="1" Grid.RowSpan="3" Background="White" CornerRadius="2" Margin="4,0,4,0" Padding="4,2,4,2" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Border.Style>
                                 <Style TargetType="{x:Type Border}">
                                     <Style.Triggers>
@@ -187,7 +189,7 @@
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
-                            <TextBox x:Name="ValueTextBox" Foreground="Black" MinWidth="10" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            <TextBox x:Name="ValueTextBox" Foreground="Black" MinWidth="10" HorizontalAlignment="Stretch" VerticalAlignment="Center"
                                     Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                         </Border>
                     </Grid>
