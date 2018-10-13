@@ -177,6 +177,7 @@
     <Compile Include="Model\FileSystemEntryItem.cs" />
     <Compile Include="Model\FileFilter.cs" />
     <Compile Include="Model\FirstLevelNavigationItem.cs" />
+    <Compile Include="Model\IAutocompleteSourceChangingItems.cs" />
     <Compile Include="Model\INavigationItem.cs" />
     <Compile Include="Model\ITextBoxSuggestionsSource.cs" />
     <Compile Include="Model\NavigationItem.cs" />

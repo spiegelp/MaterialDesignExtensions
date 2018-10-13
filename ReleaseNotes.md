@@ -83,5 +83,6 @@
 #### Features
 * Improved layout for file system controls
 * Improved layout for `OversizedNumberSpinner`
+* New interface `IAutocompleteSourceChangingItems` to propagate source changes to `Autocomplete`
 #### Fixes
 * Handle `PathTooLongException`
