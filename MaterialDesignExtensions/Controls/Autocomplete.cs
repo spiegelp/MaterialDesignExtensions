@@ -312,6 +312,15 @@ namespace MaterialDesignExtensions.Controls
             {
                 m_autocompleteController.AutocompleteItemsChanged += AutocompleteItemsChangedHandler;
             }
+
+            if (AutocompleteSource != null && AutocompleteSource is IAutocompleteSourceChangingItems)
+            {
+                // remove the event handler first to prevent multiple registration
+                ((IAutocompleteSourceChangingItems)AutocompleteSource).AutocompleteSourceItemsChanged -= AutocompleteSourceItemsChangedHandler;
+
+                // and then set the event handler
+                ((IAutocompleteSourceChangingItems)AutocompleteSource).AutocompleteSourceItemsChanged += AutocompleteSourceItemsChangedHandler;
+            }
         }
 
         protected override void UnloadedHandler(object sender, RoutedEventArgs args)
@@ -321,6 +330,11 @@ namespace MaterialDesignExtensions.Controls
             if (m_autocompleteController != null)
             {
                 m_autocompleteController.AutocompleteItemsChanged -= AutocompleteItemsChangedHandler;
+            }
+
+            if (AutocompleteSource != null && AutocompleteSource is IAutocompleteSourceChangingItems)
+            {
+                ((IAutocompleteSourceChangingItems)AutocompleteSource).AutocompleteSourceItemsChanged -= AutocompleteSourceItemsChangedHandler;
             }
         }
 
@@ -357,11 +371,21 @@ namespace MaterialDesignExtensions.Controls
 
         private static void AutocompleteSourceChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            (obj as Autocomplete)?.AutocompleteSourceChangedHandler(args.NewValue as IAutocompleteSource);
+            (obj as Autocomplete)?.AutocompleteSourceChangedHandler(args.NewValue as IAutocompleteSource, args.OldValue as IAutocompleteSource);
         }
 
-        private void AutocompleteSourceChangedHandler(IAutocompleteSource newAutocompleteSource)
+        private void AutocompleteSourceChangedHandler(IAutocompleteSource newAutocompleteSource, IAutocompleteSource oldAutocompleteSource)
         {
+            if (oldAutocompleteSource != null && oldAutocompleteSource is IAutocompleteSourceChangingItems)
+            {
+                ((IAutocompleteSourceChangingItems)oldAutocompleteSource).AutocompleteSourceItemsChanged -= AutocompleteSourceItemsChangedHandler;
+            }
+
+            if (newAutocompleteSource != null && newAutocompleteSource is IAutocompleteSourceChangingItems)
+            {
+                ((IAutocompleteSourceChangingItems)newAutocompleteSource).AutocompleteSourceItemsChanged += AutocompleteSourceItemsChangedHandler;
+            }
+
             if (m_autocompleteController != null)
             {
                 m_autocompleteController.AutocompleteSource = newAutocompleteSource;
@@ -416,6 +440,16 @@ namespace MaterialDesignExtensions.Controls
         private void SelectAutocompleteItemCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
             SelectedItem = args.Parameter;
+        }
+
+        public void AutocompleteSourceItemsChangedHandler(object sender, AutocompleteSourceItemsChangedEventArgs args)
+        {
+            if (m_searchTextBox != null && m_searchTextBox.IsKeyboardFocused)
+            {
+                m_autocompleteController?.Search(SearchTerm);
+
+                UpdateClearButtonVisibility();
+            }
         }
 
         private void AutocompleteItemsChangedHandler(object sender, AutocompleteItemsChangedEventArgs args)
