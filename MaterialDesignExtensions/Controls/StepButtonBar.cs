@@ -212,10 +212,16 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        internal static readonly DependencyProperty ModeProperty = DependencyProperty.Register(
-                nameof(Mode), typeof(StepperLayout), typeof(StepButtonBar), new PropertyMetadata(StepperLayout.Horizontal));
+        /// <summary>
+        /// The mode of the button bar according to <see cref="Stepper.Layout" />.
+        /// </summary>
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(
+                nameof(Mode), typeof(StepperLayout), typeof(StepButtonBar), new PropertyMetadata(StepperLayout.Vertical));
 
-        internal StepperLayout Mode
+        /// <summary>
+        /// The mode of the button bar according to <see cref="Stepper.Layout" />.
+        /// </summary>
+        public StepperLayout Mode
         {
             get
             {
@@ -244,8 +250,6 @@ namespace MaterialDesignExtensions.Controls
 
             if (stepper != null)
             {
-                Mode = stepper.Layout;
-
                 if (stepper is TabControlStepper)
                 {
                     BackCommand = TabControlStepper.BackCommand;

@@ -44,15 +44,15 @@ namespace MaterialDesignExtensions.Controls
         public static readonly RoutedCommand StepSelectedCommand = new RoutedCommand();
 
         /// <summary>
-        /// An event raised by navigating to the previous <see cref="IStep"/> in a linear order.
+        /// An event raised by navigating to the previous <see cref="IStep" /> in a linear order.
         /// </summary>
         public static readonly RoutedEvent BackNavigationEvent = EventManager.RegisterRoutedEvent(
-            nameof(BackNavigation), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TabControlStepper));
+            nameof(BackNavigation), RoutingStrategy.Bubble, typeof(StepperNavigationEventHandler), typeof(TabControlStepper));
 
         /// <summary>
-        /// An event raised by navigating to the previous <see cref="IStep"/> in a linear order.
+        /// An event raised by navigating to the previous <see cref="IStep" /> in a linear order.
         /// </summary>
-        public event RoutedEventHandler BackNavigation
+        public event StepperNavigationEventHandler BackNavigation
         {
             add
             {
@@ -69,12 +69,12 @@ namespace MaterialDesignExtensions.Controls
         /// An event raised by cancelling the process.
         /// </summary>
         public static readonly RoutedEvent CancelNavigationEvent = EventManager.RegisterRoutedEvent(
-            nameof(CancelNavigation), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TabControlStepper));
+            nameof(CancelNavigation), RoutingStrategy.Bubble, typeof(StepperNavigationEventHandler), typeof(TabControlStepper));
 
         /// <summary>
         /// An event raised by cancelling the process.
         /// </summary>
-        public event RoutedEventHandler CancelNavigation
+        public event StepperNavigationEventHandler CancelNavigation
         {
             add
             {
@@ -88,15 +88,15 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// An event raised by navigating to the next <see cref="IStep"/> in a linear order.
+        /// An event raised by navigating to the next <see cref="IStep" /> in a linear order.
         /// </summary>
         public static readonly RoutedEvent ContinueNavigationEvent = EventManager.RegisterRoutedEvent(
-            nameof(ContinueNavigation), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TabControlStepper));
+            nameof(ContinueNavigation), RoutingStrategy.Bubble, typeof(StepperNavigationEventHandler), typeof(TabControlStepper));
 
         /// <summary>
-        /// An event raised by navigating to the next <see cref="IStep"/> in a linear order.
+        /// An event raised by navigating to the next <see cref="IStep" /> in a linear order.
         /// </summary>
-        public event RoutedEventHandler ContinueNavigation
+        public event StepperNavigationEventHandler ContinueNavigation
         {
             add
             {
@@ -110,15 +110,15 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// An event raised by navigating to an arbitrary <see cref="IStep"/> in a non-linear <see cref="TabControlStepper"/>.
+        /// An event raised by navigating to an arbitrary <see cref="IStep" /> in a non-linear <see cref="TabControlStepper" />.
         /// </summary>
         public static readonly RoutedEvent StepNavigationEvent = EventManager.RegisterRoutedEvent(
-            nameof(StepNavigation), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TabControlStepper));
+            nameof(StepNavigation), RoutingStrategy.Bubble, typeof(StepperNavigationEventHandler), typeof(TabControlStepper));
 
         /// <summary>
-        /// An event raised by navigating to an arbitrary <see cref="IStep"/> in a non-linear <see cref="TabControlStepper"/>.
+        /// An event raised by navigating to an arbitrary <see cref="IStep" /> in a non-linear <see cref="TabControlStepper" />.
         /// </summary>
-        public event RoutedEventHandler StepNavigation
+        public event StepperNavigationEventHandler StepNavigation
         {
             add
             {
@@ -128,6 +128,50 @@ namespace MaterialDesignExtensions.Controls
             remove
             {
                 RemoveHandler(StepNavigationEvent, value);
+            }
+        }
+
+        /// <summary>
+        /// A command called by navigating to the previous <see cref="IStep" /> in a linear order.
+        /// </summary>
+        public static readonly DependencyProperty BackNavigationCommandProperty = DependencyProperty.Register(
+            nameof(BackNavigationCommand), typeof(ICommand), typeof(TabControlStepper), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// A command called by navigating to the previous <see cref="IStep" /> in a linear order.
+        /// </summary>
+        public ICommand BackNavigationCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(BackNavigationCommandProperty);
+            }
+
+            set
+            {
+                SetValue(BackNavigationCommandProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// A command called by cancelling the process.
+        /// </summary>
+        public static readonly DependencyProperty CancelNavigationCommandProperty = DependencyProperty.Register(
+            nameof(CancelNavigationCommand), typeof(ICommand), typeof(TabControlStepper), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// A command called by cancelling the process.
+        /// </summary>
+        public ICommand CancelNavigationCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(CancelNavigationCommandProperty);
+            }
+
+            set
+            {
+                SetValue(CancelNavigationCommandProperty, value);
             }
         }
 
@@ -152,6 +196,28 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(ContentAnimationsEnabledProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// A command called by navigating to the next <see cref="IStep" /> in a linear order.
+        /// </summary>
+        public static readonly DependencyProperty ContinueNavigationCommandProperty = DependencyProperty.Register(
+            nameof(ContinueNavigationCommand), typeof(ICommand), typeof(TabControlStepper), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// A command called by navigating to the next <see cref="IStep" /> in a linear order.
+        /// </summary>
+        public ICommand ContinueNavigationCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(ContinueNavigationCommandProperty);
+            }
+
+            set
+            {
+                SetValue(ContinueNavigationCommandProperty, value);
             }
         }
 
@@ -202,6 +268,28 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// A command called by navigating to an arbitrary <see cref="IStep" /> in a non-linear <see cref="TabControlStepper" />.
+        /// </summary>
+        public static readonly DependencyProperty StepNavigationCommandProperty = DependencyProperty.Register(
+            nameof(StepNavigationCommand), typeof(ICommand), typeof(TabControlStepper), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// A command called by navigating to an arbitrary <see cref="IStep" /> in a non-linear <see cref="TabControlStepper" />.
+        /// </summary>
+        public ICommand StepNavigationCommand
+        {
+            get
+            {
+                return (ICommand)GetValue(StepNavigationCommandProperty);
+            }
+
+            set
+            {
+                SetValue(StepNavigationCommandProperty, value);
+            }
+        }
+
+        /// <summary>
         /// Gets the controller for this <see cref="TabControlStepper" />.
         /// Must to be public for the bindings.
         /// </summary>
@@ -209,11 +297,11 @@ namespace MaterialDesignExtensions.Controls
         {
             get
             {
-                return _controller;
+                return m_controller;
             }
         }
 
-        private StepperController _controller;
+        private StepperController m_controller;
 
         static TabControlStepper()
         {
@@ -226,7 +314,7 @@ namespace MaterialDesignExtensions.Controls
         public TabControlStepper()
             : base()
         {
-            _controller = new StepperController();
+            m_controller = new StepperController();
 
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
@@ -239,7 +327,7 @@ namespace MaterialDesignExtensions.Controls
 
         private void LoadedHandler(object sender, RoutedEventArgs args)
         {
-            _controller.PropertyChanged += PropertyChangedHandler;
+            m_controller.PropertyChanged += PropertyChangedHandler;
 
             // there is no event raised if the Content of a ContentControl changes
             //     therefore trigger the animation in code
@@ -248,7 +336,7 @@ namespace MaterialDesignExtensions.Controls
 
         private void UnloadedHandler(object sender, RoutedEventArgs args)
         {
-            _controller.PropertyChanged -= PropertyChangedHandler;
+            m_controller.PropertyChanged -= PropertyChangedHandler;
         }
 
         private void InitSteps()
@@ -260,7 +348,7 @@ namespace MaterialDesignExtensions.Controls
                 steps.Add(new Step() { Header = tabItem.Header, Content = tabItem.Content });
             }
 
-            _controller.InitSteps(steps);
+            m_controller.InitSteps(steps);
         }
 
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs args)
@@ -272,12 +360,17 @@ namespace MaterialDesignExtensions.Controls
 
         private void BackHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(BackNavigationEvent, this, _controller.ActiveStep, _controller.PreviousStep, false);
+            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(BackNavigationEvent, this, m_controller.ActiveStep, m_controller.PreviousStep, false);
             RaiseEvent(navigationArgs);
+
+            if (BackNavigationCommand != null && BackNavigationCommand.CanExecute(navigationArgs))
+            {
+                BackNavigationCommand.Execute(navigationArgs);
+            }
 
             if (!navigationArgs.Cancel)
             {
-                _controller.Back();
+                m_controller.Back();
             }
         }
 
@@ -288,18 +381,28 @@ namespace MaterialDesignExtensions.Controls
                 return;
             }
 
-            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(CancelNavigationEvent, this, _controller.ActiveStep, null, false);
+            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(CancelNavigationEvent, this, m_controller.ActiveStep, null, false);
             RaiseEvent(navigationArgs);
+
+            if (CancelNavigationCommand != null && CancelNavigationCommand.CanExecute(navigationArgs))
+            {
+                CancelNavigationCommand.Execute(navigationArgs);
+            }
         }
 
         private void ContinueHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(ContinueNavigationEvent, this, _controller.ActiveStep, _controller.NextStep, false);
+            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(ContinueNavigationEvent, this, m_controller.ActiveStep, m_controller.NextStep, false);
             RaiseEvent(navigationArgs);
+
+            if (ContinueNavigationCommand != null && ContinueNavigationCommand.CanExecute(navigationArgs))
+            {
+                ContinueNavigationCommand.Execute(navigationArgs);
+            }
 
             if (!navigationArgs.Cancel)
             {
-                _controller.Continue();
+                m_controller.Continue();
             }
         }
 
@@ -312,20 +415,25 @@ namespace MaterialDesignExtensions.Controls
         {
             if (!IsLinear)
             {
-                StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(StepNavigationEvent, this, _controller.ActiveStep, ((StepperStepViewModel)args.Parameter).Step, false);
+                StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(StepNavigationEvent, this, m_controller.ActiveStep, ((StepperStepViewModel)args.Parameter).Step, false);
                 RaiseEvent(navigationArgs);
+
+                if (StepNavigationCommand != null && StepNavigationCommand.CanExecute(navigationArgs))
+                {
+                    StepNavigationCommand.Execute(navigationArgs);
+                }
 
                 if (!navigationArgs.Cancel)
                 {
-                    _controller.GotoStep((StepperStepViewModel)args.Parameter);
+                    m_controller.GotoStep((StepperStepViewModel)args.Parameter);
                 }
             }
         }
 
         private void PropertyChangedHandler(object sender, PropertyChangedEventArgs args)
         {
-            if (sender == _controller && args.PropertyName == nameof(_controller.ActiveStepContent)
-                    && _controller.ActiveStepContent != null && Layout == StepperLayout.Horizontal)
+            if (sender == m_controller && args.PropertyName == nameof(m_controller.ActiveStepContent)
+                    && m_controller.ActiveStepContent != null && Layout == StepperLayout.Horizontal)
             {
                 // there is no event raised if the Content of a ContentControl changes
                 //     therefore trigger the animation in code
