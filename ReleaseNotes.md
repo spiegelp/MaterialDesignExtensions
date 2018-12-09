@@ -79,7 +79,7 @@
 #### Fixes
 * Fixed `AppBar` title in the prominent area
 * Prevent `NullReferenceException` in `BaseFileControl` and `OpenDirectoryControl`
-### vX.X.X (upcoming release)
+### v2.4.0
 #### Features
 * Improved layout for file system controls
 * New control `TabControlStepper`
