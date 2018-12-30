@@ -87,3 +87,6 @@
 * New interface `IAutocompleteSourceChangingItems` to propagate source changes to `Autocomplete`
 #### Fixes
 * Handle `PathTooLongException`
+### vX.X.X (upcoming release)
+#### Features
+* New control `StepTitleHeaderControl` to use bindings in a XAML defined step

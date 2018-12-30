@@ -138,6 +138,7 @@
     <Compile Include="Controls\SideNavigation.cs" />
     <Compile Include="Controls\StepButtonBar.cs" />
     <Compile Include="Controls\Stepper.cs" />
+    <Compile Include="Controls\StepTitleHeaderControl.cs" />
     <Compile Include="Controls\TabControlStepper.cs" />
     <Compile Include="Controls\TextBoxSuggestions.cs" />
     <Compile Include="Converters\AsyncImageTask.cs" />

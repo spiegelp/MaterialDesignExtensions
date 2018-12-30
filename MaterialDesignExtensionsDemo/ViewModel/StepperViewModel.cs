@@ -28,15 +28,55 @@ namespace MaterialDesignExtensionsDemo.ViewModel
             }
         }
 
+        public string Step1FirstLevelTitle
+        {
+            get
+            {
+                return "What is a Stepper ?";
+            }
+        }
+
+        public string Step2FirstLevelTitle
+        {
+            get
+            {
+                return "Layout and navigation";
+            }
+        }
+
+        public string Step3FirstLevelTitle
+        {
+            get
+            {
+                return "Steps";
+            }
+        }
+
+        public string Step3SecondLevelTitle
+        {
+            get
+            {
+                return "Header and content";
+            }
+        }
+
+        public string Step4FirstLevelTitle
+        {
+            get
+            {
+                return "Validation";
+            }
+        }
+
         public IEnumerable<IStep> Steps
         {
             get
             {
                 return new List<IStep>()
                 {
-                    new Step() { Header = new StepTitleHeader() { FirstLevelTitle = "What is a Stepper?" }, Content = new StepperTutorialOneViewModel() },
-                    new Step() { Header = new StepTitleHeader() { FirstLevelTitle = "Layout and navigation" }, Content = new StepperTutorialTwoViewModel() },
-                    new Step() { Header = new StepTitleHeader() { FirstLevelTitle = "Steps", SecondLevelTitle = "Header and content" }, Content = new StepperTutorialThreeViewModel() },
+                    new Step() { Header = new StepTitleHeader() { FirstLevelTitle = Step1FirstLevelTitle }, Content = new StepperTutorialOneViewModel() },
+                    new Step() { Header = new StepTitleHeader() { FirstLevelTitle = Step2FirstLevelTitle }, Content = new StepperTutorialTwoViewModel() },
+                    new Step() { Header = new StepTitleHeader() { FirstLevelTitle = Step3FirstLevelTitle, SecondLevelTitle = Step3SecondLevelTitle }, Content = new StepperTutorialThreeViewModel() },
                     new ValidationStep()
                 };
             }

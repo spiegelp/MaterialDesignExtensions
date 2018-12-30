@@ -99,10 +99,10 @@
                               Steps="{Binding Path=Steps, Mode=OneTime}"
                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             <!-- example for defining the Stepper in XAML -->
-            <!--<controls:Stepper IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <!--<controls:Stepper x:Name="stepper" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <model:Step>
                     <model:Step.Header>
-                        <model:StepTitleHeader FirstLevelTitle="What is a Stepper?" />
+                        <controls:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step1FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type controls:Stepper}}}" />
                     </model:Step.Header>
                     <model:Step.Content>
                         <viewModel:StepperTutorialOneViewModel />
@@ -110,7 +110,7 @@
                 </model:Step>
                 <model:Step>
                     <model:Step.Header>
-                        <model:StepTitleHeader FirstLevelTitle="Layout and navigation" />
+                        <controls:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step2FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type controls:Stepper}}}" />
                     </model:Step.Header>
                     <model:Step.Content>
                         <viewModel:StepperTutorialTwoViewModel />
@@ -118,7 +118,8 @@
                 </model:Step>
                 <model:Step>
                     <model:Step.Header>
-                        <model:StepTitleHeader FirstLevelTitle="Steps" SecondLevelTitle="Header and content" />
+                        <controls:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step3FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type controls:Stepper}}}"
+                                                         SecondLevelTitle="{Binding Path=DataContext.Step3SecondLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type controls:Stepper}}}" />
                     </model:Step.Header>
                     <model:Step.Content>
                         <viewModel:StepperTutorialThreeViewModel />
@@ -126,7 +127,7 @@
                 </model:Step>
                 <model:Step>
                     <model:Step.Header>
-                        <model:StepTitleHeader FirstLevelTitle="Validation" />
+                        <controls:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step4FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type controls:Stepper}}}" />
                     </model:Step.Header>
                     <model:Step.Content>
                         <viewModel:StepperTutorialFourViewModel />

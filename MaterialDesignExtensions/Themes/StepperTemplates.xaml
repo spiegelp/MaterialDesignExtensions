@@ -152,6 +152,19 @@
                                Visibility="{Binding Path=SecondLevelTitle, Converter={StaticResource nullableToVisibilityConverter}}" />
                 </StackPanel>
             </DataTemplate>
+            <Style TargetType="{x:Type controls:StepTitleHeaderControl}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:StepTitleHeaderControl}">
+                            <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical" VerticalAlignment="Top">
+                                <TextBlock FontSize="14" FontWeight="Medium" Text="{Binding Path=Step.Header.FirstLevelTitle}" />
+                                <TextBlock FontSize="12" Text="{Binding Path=Step.Header.SecondLevelTitle}"
+                                           Visibility="{Binding Path=Step.Header.SecondLevelTitle, Converter={StaticResource nullableToVisibilityConverter}}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
             <Style x:Key="headerContentControlStyle" TargetType="{x:Type ContentControl}">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=IsActive}" Value="False">
