@@ -90,3 +90,5 @@
 ### vX.X.X (upcoming release)
 #### Features
 * New control `StepTitleHeaderControl` to use bindings in a XAML defined step
+#### Fixes
+* Handle broken image files in `BitmapImageHelper`
