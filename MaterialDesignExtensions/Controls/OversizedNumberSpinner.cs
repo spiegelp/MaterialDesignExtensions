@@ -141,7 +141,16 @@ namespace MaterialDesignExtensions.Controls
         private void EditValueCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
             IsEditing = true;
-            m_valueTextBox.Focus();
+            
+            try
+            {
+                m_valueTextBox.Focus();
+            }
+            catch (InvalidOperationException)
+            {
+                // This is a hack. The above call of Focus() will cause an exception inside MaterialDesignThemes version 2.5.0.1205.
+                // Older or newer versions of MaterialDesignThemes work as expected.
+            }
         }
 
         private void MinusCommandHandler(object sender, ExecutedRoutedEventArgs args)

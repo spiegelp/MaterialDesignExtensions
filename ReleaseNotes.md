@@ -92,3 +92,4 @@
 * New control `StepTitleHeaderControl` to use bindings in a XAML defined step
 #### Fixes
 * Handle broken image files in `BitmapImageHelper`
+* Handle issues if MaterialDesignThemes version 2.5.0.1205 is used
