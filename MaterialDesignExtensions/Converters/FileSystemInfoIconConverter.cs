@@ -48,15 +48,15 @@ namespace MaterialDesignExtensions.Converters
                 // code
                 ["cs"] = PackIconKind.LanguageCsharp,
                 ["xaml"] = PackIconKind.Xml,
-                ["ts"] = PackIconKind.CodeBraces,
+                ["ts"] = PackIconKind.LanguageTypescript,
                 ["js"] = PackIconKind.LanguageJavascript,
-                ["java"] = PackIconKind.CodeBraces,
+                ["java"] = PackIconKind.LanguageJava,
                 ["c"] = PackIconKind.LanguageC,
                 ["cpp"] = PackIconKind.LanguageCpp,
                 ["h"] = PackIconKind.CodeBraces,
                 ["py"] = PackIconKind.LanguagePython,
                 ["php"] = PackIconKind.LanguagePhp,
-                ["r"] = PackIconKind.CodeBraces,
+                ["r"] = PackIconKind.LanguageR,
 
                 // compiled code and executables
                 ["exe"] = PackIconKind.Settings,
