@@ -93,3 +93,4 @@
 #### Fixes
 * Handle broken image files in `BitmapImageHelper`
 * Handle issues if MaterialDesignThemes version 2.5.0.1205 is used
+* Use `Dispatcher` in `Autocomplete.AutocompleteSourceItemsChangedHandler()`

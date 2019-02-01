@@ -442,14 +442,17 @@ namespace MaterialDesignExtensions.Controls
             SelectedItem = args.Parameter;
         }
 
-        public void AutocompleteSourceItemsChangedHandler(object sender, AutocompleteSourceItemsChangedEventArgs args)
+        private void AutocompleteSourceItemsChangedHandler(object sender, AutocompleteSourceItemsChangedEventArgs args)
         {
-            if (m_searchTextBox != null && m_searchTextBox.IsKeyboardFocused)
+            Dispatcher.Invoke(() =>
             {
-                m_autocompleteController?.Search(SearchTerm);
+                if (m_searchTextBox != null && m_searchTextBox.IsKeyboardFocused)
+                {
+                    m_autocompleteController?.Search(SearchTerm);
 
-                UpdateClearButtonVisibility();
-            }
+                    UpdateClearButtonVisibility();
+                }
+            });
         }
 
         private void AutocompleteItemsChangedHandler(object sender, AutocompleteItemsChangedEventArgs args)
