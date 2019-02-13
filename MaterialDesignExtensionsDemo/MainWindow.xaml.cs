@@ -45,6 +45,7 @@ namespace MaterialDesignExtensionsDemo
                 new FirstLevelNavigationItem() { Label = "App bar", NavigationItemSelectedCallback = item => new AppBarViewModel() },
                 new FirstLevelNavigationItem() { Label = "Oversized number spinner", NavigationItemSelectedCallback = item => new OversizedNumberSpinnerViewModel() },
                 new FirstLevelNavigationItem() { Label = "Grid list", NavigationItemSelectedCallback = item => new GridListViewModel() },
+                new FirstLevelNavigationItem() { Label = "TabControl", NavigationItemSelectedCallback = item => new TabControlViewModel() },
                 new FirstLevelNavigationItem() { Label = "Stepper", NavigationItemSelectedCallback = item => new StepperViewModel() },
                 new FirstLevelNavigationItem() { Label = "TabControl as stepper", NavigationItemSelectedCallback = item => new TabControlStepperViewModel() },
                 new FirstLevelNavigationItem() { Label = "Autocomplete", NavigationItemSelectedCallback = item => new AutocompleteViewModel() },

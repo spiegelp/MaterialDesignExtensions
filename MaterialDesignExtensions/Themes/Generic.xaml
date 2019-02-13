@@ -13,6 +13,7 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/SearchTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/SideNavigationTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/StepperTemplates.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/TabControlTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/TextBoxSuggestionsTemplates.xaml" />
     </ResourceDictionary.MergedDictionaries>
     

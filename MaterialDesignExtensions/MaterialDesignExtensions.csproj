@@ -105,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\TabControlTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\TextBoxSuggestionsTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +143,7 @@
     <Compile Include="Controls\StepButtonBar.cs" />
     <Compile Include="Controls\Stepper.cs" />
     <Compile Include="Controls\StepTitleHeaderControl.cs" />
+    <Compile Include="Controls\TabControlAssist.cs" />
     <Compile Include="Controls\TabControlStepper.cs" />
     <Compile Include="Controls\TextBoxSuggestions.cs" />
     <Compile Include="Converters\AsyncImageTask.cs" />
