@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MaterialDesignExtensions</id>
-    <version>2.4.0</version>
+    <version>2.5.0-a1</version>
     <title>Material Design Extensions</title>
     <authors>Philipp Spiegel</authors>
     <owners>Philipp Spiegel</owners>
@@ -12,10 +12,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Material Design Extensions is based on Material Design in XAML Toolkit to provide additional controls and features for WPF apps. The controls might not be specified in the Material Design specification or would crash the scope of Material Design in XAML Toolkit.</description>
     <releaseNotes>https://spiegelp.github.io/MaterialDesignExtensions/#releasenotes</releaseNotes>
-    <copyright>Copyright (c) 2017-2018 Spiegel Philipp</copyright>
-    <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog</tags>
+    <copyright>Copyright (c) 2017-2019 Spiegel Philipp</copyright>
+    <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner</tags>
     <dependencies>
-      <dependency id="MaterialDesignThemes" version="2.3.1.953" />
+      <dependency id="MaterialDesignThemes" version="2.5.0.1205" />
     </dependencies>
   </metadata>
   <files>

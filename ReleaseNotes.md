@@ -87,7 +87,7 @@
 * New interface `IAutocompleteSourceChangingItems` to propagate source changes to `Autocomplete`
 #### Fixes
 * Handle `PathTooLongException`
-### vX.X.X (upcoming release)
+### v2.5.0 (upcoming release)
 #### Features
 * New control `StepTitleHeaderControl` to use bindings in a XAML defined step
 * `TabControl` styles to render it in [Material Design](https://material.io/design/components/tabs.html)
