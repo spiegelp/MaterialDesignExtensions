@@ -91,6 +91,7 @@
 #### Features
 * New control `StepTitleHeaderControl` to use bindings in a XAML defined step
 * `TabControl` styles to render it in [Material Design](https://material.io/design/components/tabs.html)
+* New icons for file system controls
 #### Fixes
 * Handle broken image files in `BitmapImageHelper`
 * Handle issues if MaterialDesignThemes version 2.5.0.1205 is used
