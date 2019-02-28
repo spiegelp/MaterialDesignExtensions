@@ -179,7 +179,7 @@ namespace MaterialDesignExtensions.Controllers
 
                         if (driveInfo.DriveType == DriveType.CDRom)
                         {
-                            icon = PackIconKind.Disk;
+                            icon = PackIconKind.Disc;
                         }
                         else if (driveInfo.DriveType == DriveType.Removable)
                         {
