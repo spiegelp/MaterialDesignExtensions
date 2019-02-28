@@ -2,9 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls">
 
-    <Style TargetType="{x:Type TabControl}">
+    <Style x:Key="MaterialDesignTabControl" TargetType="{x:Type TabControl}">
         <Setter Property="controls:TabControlAssist.TabHeaderAlignment" Value="Left" />
         <Setter Property="controls:TabControlAssist.TabHeaderHighlightBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="controls:TabControlAssist.TabHeaderInactiveBrush" Value="{DynamicResource MaterialDesignBodyLight}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -72,6 +74,9 @@
                                                 <ContentPresenter.Style>
                                                     <Style TargetType="{x:Type ContentPresenter}">
                                                         <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                                                <Setter Property="TextBlock.Foreground" Value="{Binding Path=(controls:TabControlAssist.TabHeaderInactiveBrush), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}" />
+                                                            </DataTrigger>
                                                             <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
                                                                 <Setter Property="TextBlock.Foreground" Value="{Binding Path=(controls:TabControlAssist.TabHeaderHighlightBrush), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}" />
                                                             </DataTrigger>
@@ -115,7 +120,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Border Background="Transparent" HorizontalAlignment="Stretch">
+                        <Border Background="{TemplateBinding Background}" HorizontalAlignment="Stretch">
                             <!--<TabPanel x:Name="HeaderPanel" Panel.ZIndex="1" Margin="0,0,4,-1" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="Transparent"
                                       HorizontalAlignment="{Binding Path=(controls:TabControlAssist.TabHeaderAlignment), RelativeSource={RelativeSource TemplatedParent}}" />-->
                             <!-- do not use a TabPanel because its behavior is different to the Material Design specs -->
@@ -130,6 +135,20 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource MaterialDesignTabControl}"></Style>
+
+    <Style x:Key="MaterialDesignAppBarTabControl" TargetType="{x:Type TabControl}" BasedOn="{StaticResource MaterialDesignTabControl}">
+        <Setter Property="controls:TabControlAssist.TabHeaderHighlightBrush" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        <Setter Property="controls:TabControlAssist.TabHeaderInactiveBrush" Value="{DynamicResource PrimaryHueLightForegroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
+    </Style>
+
+    <Style x:Key="MaterialDesignAppBarAccentTabControl" TargetType="{x:Type TabControl}" BasedOn="{StaticResource MaterialDesignTabControl}">
+        <Setter Property="controls:TabControlAssist.TabHeaderHighlightBrush" Value="{DynamicResource SecondaryAccentBrush}" />
+        <Setter Property="controls:TabControlAssist.TabHeaderInactiveBrush" Value="{DynamicResource PrimaryHueLightForegroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
     </Style>
 
 </ResourceDictionary>

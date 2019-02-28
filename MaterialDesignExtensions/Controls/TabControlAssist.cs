@@ -44,6 +44,36 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// The brush for not selected tab headers.
+        /// </summary>
+        public static readonly DependencyProperty TabHeaderInactiveBrushProperty = DependencyProperty.RegisterAttached(
+            "TabHeaderInactiveBrush",
+            typeof(Brush),
+            typeof(TabControlAssist),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits, null)
+        );
+
+        /// <summary>
+        /// Gets the brush for not selected tab headers.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static Brush GetTabHeaderInactiveBrush(DependencyObject element)
+        {
+            return (Brush)element.GetValue(TabHeaderInactiveBrushProperty);
+        }
+
+        /// <summary>
+        /// Sets the brush for not selected tab headers.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="value"></param>
+        public static void SetTabHeaderInactiveBrush(DependencyObject element, Brush value)
+        {
+            element.SetValue(TabHeaderInactiveBrushProperty, value);
+        }
+
+        /// <summary>
         /// The highlight color of the selected tab item header.
         /// </summary>
         public static readonly DependencyProperty TabHeaderHighlightBrushProperty = DependencyProperty.RegisterAttached(
