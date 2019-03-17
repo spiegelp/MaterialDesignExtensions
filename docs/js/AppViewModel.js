@@ -22,6 +22,7 @@ function AppViewModel(contentDivId, drawer) {
         new DocumentationItem('oversizednumberspinner', 'Oversized number spinner', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/OversizedNumberSpinner.png', 'snippets/documentation/oversizednumberspinner.html'),
         new DocumentationItem('search', 'Search', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/PersistentSearch.png', 'snippets/documentation/search.html'),
         new DocumentationItem('stepper', 'Stepper', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/HorizontalStepper.png', 'snippets/documentation/stepper.html'),
+        new DocumentationItem('tabs', 'Tabs', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/TabControl1.png', 'snippets/documentation/tabs.html'),
         new DocumentationItem('textboxsuggestions', 'Text box suggestions', null, 'snippets/documentation/textboxsuggestions.html')
     ];
 
