@@ -74,6 +74,36 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// The opacity for not selected tab headers.
+        /// </summary>
+        public static readonly DependencyProperty TabHeaderInactiveOpacityProperty = DependencyProperty.RegisterAttached(
+            "TabHeaderInactiveOpacity",
+            typeof(double),
+            typeof(TabControlAssist),
+            new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.Inherits, null)
+        );
+
+        /// <summary>
+        /// Gets the opacity for not selected tab headers.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static double GetTabHeaderInactiveOpacity(DependencyObject element)
+        {
+            return (double)element.GetValue(TabHeaderInactiveOpacityProperty);
+        }
+
+        /// <summary>
+        /// Sets the ppacity for not selected tab headers.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="value"></param>
+        public static void SetTabHeaderInactiveOpacity(DependencyObject element, double value)
+        {
+            element.SetValue(TabHeaderInactiveOpacityProperty, value);
+        }
+
+        /// <summary>
         /// The highlight color of the selected tab item header.
         /// </summary>
         public static readonly DependencyProperty TabHeaderHighlightBrushProperty = DependencyProperty.RegisterAttached(
@@ -101,6 +131,36 @@ namespace MaterialDesignExtensions.Controls
         public static void SetTabHeaderHighlightBrush(DependencyObject element, Brush value)
         {
             element.SetValue(TabHeaderHighlightBrushProperty, value);
+        }
+
+        /// <summary>
+        /// The current color of the tab item header. Intended to be read-only.
+        /// </summary>
+        public static readonly DependencyProperty TabHeaderForegroundProperty = DependencyProperty.RegisterAttached(
+            "TabHeaderForeground",
+            typeof(Brush),
+            typeof(TabControlAssist),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.Inherits, null)
+        );
+
+        /// <summary>
+        /// Gets the current color of the tab item header.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static Brush GetTabHeaderForeground(DependencyObject element)
+        {
+            return (Brush)element.GetValue(TabHeaderForegroundProperty);
+        }
+
+        /// <summary>
+        /// Sets the current color of the tab item header.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="value"></param>
+        public static void SetTabHeaderForeground(DependencyObject element, Brush value)
+        {
+            element.SetValue(TabHeaderForegroundProperty, value);
         }
     }
 }

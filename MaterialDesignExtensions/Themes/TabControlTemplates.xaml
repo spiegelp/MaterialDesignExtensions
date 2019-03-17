@@ -6,6 +6,7 @@
         <Setter Property="controls:TabControlAssist.TabHeaderAlignment" Value="Left" />
         <Setter Property="controls:TabControlAssist.TabHeaderHighlightBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
         <Setter Property="controls:TabControlAssist.TabHeaderInactiveBrush" Value="{DynamicResource MaterialDesignBodyLight}" />
+        <Setter Property="controls:TabControlAssist.TabHeaderInactiveOpacity" Value="1" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
@@ -70,15 +71,16 @@
                                             </Border>
                                             <ContentPresenter x:Name="headerContent" ContentSource="Header" RecognizesAccessKey="True"
                                                               Margin="24,12,24,12" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                              TextBlock.FontSize="14" TextBlock.FontWeight="Medium">
+                                                              TextBlock.FontSize="14" TextBlock.FontWeight="Medium"
+                                                              TextBlock.Foreground="{Binding Path=(controls:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource TemplatedParent}}">
                                                 <ContentPresenter.Style>
-                                                    <Style TargetType="{x:Type ContentPresenter}">
+                                                    <Style TargetType="ContentPresenter">
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
-                                                                <Setter Property="TextBlock.Foreground" Value="{Binding Path=(controls:TabControlAssist.TabHeaderInactiveBrush), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}" />
+                                                                <Setter Property="Opacity" Value="{Binding Path=(controls:TabControlAssist.TabHeaderInactiveOpacity), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}" />
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
-                                                                <Setter Property="TextBlock.Foreground" Value="{Binding Path=(controls:TabControlAssist.TabHeaderHighlightBrush), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}" />
+                                                                <Setter Property="Opacity" Value="1" />
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
@@ -99,12 +101,16 @@
                                         </Grid>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="controls:TabControlAssist.TabHeaderForeground" Value="{Binding Path=(controls:TabControlAssist.TabHeaderHighlightBrush), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}" />
                                                 <Trigger.EnterActions>
                                                     <BeginStoryboard Storyboard="{StaticResource OnSelected}" />
                                                 </Trigger.EnterActions>
                                                 <Trigger.ExitActions>
                                                     <BeginStoryboard Storyboard="{StaticResource OnDeselected}" />
                                                 </Trigger.ExitActions>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="False">
+                                                <Setter Property="controls:TabControlAssist.TabHeaderForeground" Value="{Binding Path=(controls:TabControlAssist.TabHeaderInactiveBrush), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}" />
                                             </Trigger>
                                             <Trigger Property="IsEnabled" Value="False">
                                                 <Setter Property="Opacity" Value="0.23" />
@@ -120,7 +126,10 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Border Background="{TemplateBinding Background}" HorizontalAlignment="Stretch">
+                        <Border Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        <Border Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                BorderThickness="0,0,0,1" BorderBrush="{Binding Path=(controls:TabControlAssist.TabHeaderInactiveBrush), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}}" Opacity="0.12" />
+                        <Border Background="Transparent" HorizontalAlignment="Stretch">
                             <!--<TabPanel x:Name="HeaderPanel" Panel.ZIndex="1" Margin="0,0,4,-1" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="Transparent"
                                       HorizontalAlignment="{Binding Path=(controls:TabControlAssist.TabHeaderAlignment), RelativeSource={RelativeSource TemplatedParent}}" />-->
                             <!-- do not use a TabPanel because its behavior is different to the Material Design specs -->
@@ -137,17 +146,20 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource MaterialDesignTabControl}"></Style>
+    <!-- do not apply as default style, to prevent side effects with styles of other libraries -->
+    <!--<Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource MaterialDesignTabControl}"></Style>-->
 
     <Style x:Key="MaterialDesignAppBarTabControl" TargetType="{x:Type TabControl}" BasedOn="{StaticResource MaterialDesignTabControl}">
         <Setter Property="controls:TabControlAssist.TabHeaderHighlightBrush" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
-        <Setter Property="controls:TabControlAssist.TabHeaderInactiveBrush" Value="{DynamicResource PrimaryHueLightForegroundBrush}" />
+        <Setter Property="controls:TabControlAssist.TabHeaderInactiveBrush" Value="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        <Setter Property="controls:TabControlAssist.TabHeaderInactiveOpacity" Value="0.8" />
         <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
     </Style>
 
     <Style x:Key="MaterialDesignAppBarAccentTabControl" TargetType="{x:Type TabControl}" BasedOn="{StaticResource MaterialDesignTabControl}">
         <Setter Property="controls:TabControlAssist.TabHeaderHighlightBrush" Value="{DynamicResource SecondaryAccentBrush}" />
-        <Setter Property="controls:TabControlAssist.TabHeaderInactiveBrush" Value="{DynamicResource PrimaryHueLightForegroundBrush}" />
+        <Setter Property="controls:TabControlAssist.TabHeaderInactiveBrush" Value="{DynamicResource SecondaryAccentBrush}" />
+        <Setter Property="controls:TabControlAssist.TabHeaderInactiveOpacity" Value="0.8" />
         <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
     </Style>
 

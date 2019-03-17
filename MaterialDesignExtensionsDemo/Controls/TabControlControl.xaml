@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="Transparent">
     <Grid>
-        <TabControl>
+        <TabControl Style="{StaticResource MaterialDesignTabControl}">
             <TabItem Header="ANIMALS">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="16">
                     <Grid>
@@ -67,7 +67,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
                         <TextBlock Text="Default" Margin="0,0,0,8" />
                         <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
-                            <TabControl>
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}">
                                 <TabItem Header="ANIMALS"></TabItem>
                                 <TabItem Header="PLANTS"></TabItem>
                                 <TabItem Header="VEHICLES"></TabItem>
@@ -75,7 +75,7 @@
                         </Border>
                         <TextBlock Text="Right aligned" Margin="0,32,0,8" />
                         <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
-                            <TabControl mde:TabControlAssist.TabHeaderAlignment="Right">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderAlignment="Right">
                                 <TabItem Header="ANIMALS"></TabItem>
                                 <TabItem Header="PLANTS"></TabItem>
                                 <TabItem Header="VEHICLES"></TabItem>
@@ -83,7 +83,7 @@
                         </Border>
                         <TextBlock Text="Centered" Margin="0,32,0,8" />
                         <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
-                            <TabControl mde:TabControlAssist.TabHeaderAlignment="Center">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderAlignment="Center">
                                 <TabItem Header="ANIMALS"></TabItem>
                                 <TabItem Header="PLANTS"></TabItem>
                                 <TabItem Header="VEHICLES"></TabItem>
@@ -91,7 +91,7 @@
                         </Border>
                         <TextBlock Text="Stretched" Margin="0,32,0,8" />
                         <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
-                            <TabControl mde:TabControlAssist.TabHeaderAlignment="Stretch">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderAlignment="Stretch">
                                 <TabItem Header="ANIMALS"></TabItem>
                                 <TabItem Header="PLANTS"></TabItem>
                                 <TabItem Header="VEHICLES"></TabItem>
@@ -99,17 +99,52 @@
                         </Border>
                         <TextBlock Text="Integrated into an app bar" Margin="0,32,0,8" />
                         <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
-                            <TabControl Style="{DynamicResource MaterialDesignAppBarTabControl}" mde:TabControlAssist.TabHeaderAlignment="Stretch">
+                            <TabControl Style="{StaticResource MaterialDesignAppBarTabControl}" mde:TabControlAssist.TabHeaderAlignment="Stretch">
                                 <TabItem Header="ANIMALS"></TabItem>
                                 <TabItem Header="PLANTS"></TabItem>
                                 <TabItem Header="VEHICLES"></TabItem>
                             </TabControl>
                         </Border>
                         <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True" Margin="0,16,0,0">
-                            <TabControl Style="{DynamicResource MaterialDesignAppBarAccentTabControl}" mde:TabControlAssist.TabHeaderAlignment="Stretch">
+                            <TabControl Style="{StaticResource MaterialDesignAppBarAccentTabControl}" mde:TabControlAssist.TabHeaderAlignment="Stretch">
                                 <TabItem Header="ANIMALS"></TabItem>
                                 <TabItem Header="PLANTS"></TabItem>
                                 <TabItem Header="VEHICLES"></TabItem>
+                            </TabControl>
+                        </Border>
+                        <TextBlock Text="More complex headers" Margin="0,32,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderAlignment="Center">
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <md:PackIcon Kind="Owl" Width="24" Height="24" HorizontalAlignment="Center"
+                                                         Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                            <TextBlock FontSize="14" FontWeight="Medium" Text="ANIMALS" Margin="0,8,0,0" HorizontalAlignment="Center"
+                                                       Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                        </StackPanel>
+                                    </TabItem.Header>
+                                </TabItem>
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <md:PackIcon Kind="Tree" Width="24" Height="24" HorizontalAlignment="Center"
+                                                         Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                            <TextBlock FontSize="14" FontWeight="Medium" Text="PLANTS" Margin="0,8,0,0" HorizontalAlignment="Center"
+                                                       Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                        </StackPanel>
+                                    </TabItem.Header>
+                                </TabItem>
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <md:PackIcon Kind="Car" Width="24" Height="24" HorizontalAlignment="Center"
+                                                         Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                            <TextBlock FontSize="14" FontWeight="Medium" Text="VEHICLES" Margin="0,8,0,0" HorizontalAlignment="Center"
+                                                       Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                        </StackPanel>
+                                    </TabItem.Header>
+                                </TabItem>
                             </TabControl>
                         </Border>
                     </StackPanel>
