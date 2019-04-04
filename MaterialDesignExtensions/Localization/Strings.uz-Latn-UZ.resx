@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccessToDirectoryXDenied" xml:space="preserve">
-    <value>'{0}' jildiga kirish rad etildi</value>
+    <value>'{0}' papkaga kirish rad etildi</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Bekor qilish</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Yoping</value>
+    <value>Yopish</value>
   </data>
   <data name="Created" xml:space="preserve">
     <value>Yaratildi</value>
@@ -133,7 +133,7 @@
     <value>Ish stoli</value>
   </data>
   <data name="DirectoryXNotFound" xml:space="preserve">
-    <value>'{0}' jildi topilmadi</value>
+    <value>'{0}' papka topilmadi</value>
   </data>
   <data name="Documents" xml:space="preserve">
     <value>Hujjatlar</value>
@@ -151,22 +151,22 @@
     <value>Fayl hajmi</value>
   </data>
   <data name="Folders" xml:space="preserve">
-    <value>Folders</value>
+    <value>Papkalar</value>
   </data>
   <data name="LastAccess" xml:space="preserve">
     <value>So'nggi kirish</value>
   </data>
   <data name="LastModified" xml:space="preserve">
-    <value>So'nggi o'zgartirilgan</value>
+    <value>Oxirgi o'zgartirishlar kiritilgan</value>
   </data>
   <data name="LocalDrive" xml:space="preserve">
-    <value>Mahalliy haydovchi</value>
+    <value>Mahalliy draiver</value>
   </data>
   <data name="Music" xml:space="preserve">
     <value>Musiqa</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Ochiq</value>
+    <value>Ochish</value>
   </data>
   <data name="OpenFile" xml:space="preserve">
     <value>Faylni ochish</value>
@@ -178,13 +178,13 @@
     <value>Saqlash</value>
   </data>
   <data name="SaveFile" xml:space="preserve">
-    <value>Faylni saqlang</value>
+    <value>Faylni saqlash</value>
   </data>
   <data name="Select" xml:space="preserve">
-    <value>Tanlang</value>
+    <value>Tanlash</value>
   </data>
   <data name="SelectDirectory" xml:space="preserve">
-    <value>Jildni tanlang</value>
+    <value>Papkani tanlash</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Foydalanuvchi</value>
@@ -193,9 +193,9 @@
     <value>Videolar</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Qidirmoq</value>
+    <value>Qidirish</value>
   </data>
   <data name="LongPathsAreNotSupported" xml:space="preserve">
-    <value>Uzoq yo'llar qo'llab-quvvatlanmaydi</value>
+    <value>Fayl joylashgan joyga yo'l juda uzun bo'lsa, qo'llab-quvvatlanmaydi</value>
   </data>
 </root>
