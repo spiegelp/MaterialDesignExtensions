@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Globalization;
+using System.Threading;
 using System.Windows;
 
 namespace MaterialDesignExtensionsDemo
@@ -13,5 +9,10 @@ namespace MaterialDesignExtensionsDemo
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            // Change CurrentUICulture to uz-Latn-UZ
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("uz-Latn-UZ");
+        }
     }
 }

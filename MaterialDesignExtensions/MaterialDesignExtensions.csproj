@@ -176,6 +176,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Localization\Strings.uz-Latn-UZ.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.uz-Latn-UZ.resx</DependentUpon>
+    </Compile>
     <Compile Include="Model\IAutocompleteSource.cs" />
     <Compile Include="Model\BaseNavigationItem.cs" />
     <Compile Include="Model\DirectoryInfoItem.cs" />
@@ -225,6 +230,10 @@
     <EmbeddedResource Include="Localization\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Strings.uz-Latn-UZ.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.uz-Latn-UZ.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
