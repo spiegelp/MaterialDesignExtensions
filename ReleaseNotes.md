@@ -87,12 +87,12 @@
 * New interface `IAutocompleteSourceChangingItems` to propagate source changes to `Autocomplete`
 #### Fixes
 * Handle `PathTooLongException`
-### v2.5.0 (upcoming release)
+### v2.5.0
 #### Features
 * New control `StepTitleHeaderControl` to use bindings in a XAML defined step
 * `TabControl` styles to render it in [Material Design](https://material.io/design/components/tabs.html)
 * New icons for file system controls
 #### Fixes
 * Handle broken image files in `BitmapImageHelper`
-* Handle issues if MaterialDesignThemes version 2.5.0.1205 is used
+* Updated dependency to MaterialDesignThemes version 2.5.1 to bypass a bug in version 2.5.0.1205
 * Use `Dispatcher` in `Autocomplete.AutocompleteSourceItemsChangedHandler()`
