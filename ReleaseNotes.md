@@ -96,3 +96,6 @@
 * Handle broken image files in `BitmapImageHelper`
 * Updated dependency to MaterialDesignThemes version 2.5.1 to bypass a bug in version 2.5.0.1205
 * Use `Dispatcher` in `Autocomplete.AutocompleteSourceItemsChangedHandler()`
+### vX.X.X (upcoming release)
+#### Features
+* Localization for Uzbekistan
