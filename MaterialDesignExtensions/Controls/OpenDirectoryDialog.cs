@@ -89,7 +89,7 @@ namespace MaterialDesignExtensions.Controls
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
             DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
         {
-            OpenDirectoryDialog dialog = InitDialog(width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            OpenDirectoryDialog dialog = InitDialog(width, height, currentDirectory, false, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
 
             return await DialogHost.Show(dialog, dialogHostName, openedHandler, closingHandler) as OpenDirectoryDialogResult;
         }
@@ -106,6 +106,7 @@ namespace MaterialDesignExtensions.Controls
                 args.Width,
                 args.Height,
                 args.CurrentDirectory,
+                args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
                 args.ShowSystemFilesAndDirectories
             );
@@ -131,7 +132,7 @@ namespace MaterialDesignExtensions.Controls
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
             DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
         {
-            OpenDirectoryDialog dialog = InitDialog(width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            OpenDirectoryDialog dialog = InitDialog(width, height, currentDirectory, false, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
 
             return await dialogHost.ShowDialog(dialog, openedHandler, closingHandler) as OpenDirectoryDialogResult;
         }
@@ -148,6 +149,7 @@ namespace MaterialDesignExtensions.Controls
                 args.Width,
                 args.Height,
                 args.CurrentDirectory,
+                args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
                 args.ShowSystemFilesAndDirectories
             );
@@ -157,10 +159,11 @@ namespace MaterialDesignExtensions.Controls
 
         private static OpenDirectoryDialog InitDialog(double? width, double? height,
             string currentDirectory,
+            bool createNewDirectoryEnabled,
             bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
         {
             OpenDirectoryDialog dialog = new OpenDirectoryDialog();
-            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, createNewDirectoryEnabled);
 
             return dialog;
         }

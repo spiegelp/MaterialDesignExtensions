@@ -600,7 +600,22 @@
                                 <ContentControl Content="{TemplateBinding FileSystemInfoToShow}" ContentTemplateSelector="{StaticResource fileSystemEntryInfoTemplateSelector}" Width="256" />
                             </wpfLib:DrawerHost.LeftDrawerContent>
                             <wpfLib:DrawerHost.BottomDrawerContent>
-                                <ContentControl Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type controls:OpenDirectoryControl}}}" ContentTemplate="{StaticResource createNewDirectoryTemplate}" />
+                                <!--<ContentControl Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type controls:OpenDirectoryControl}}}" ContentTemplate="{StaticResource createNewDirectoryTemplate}" />-->
+                                <!-- we need some duplicate code unfortunately, because the binding will cause problems in dialogs -->
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                                    <TextBox HorizontalAlignment="Stretch" Margin="16"
+                                             Text="{Binding Path=NewDirectoryName, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                             wpfLib:HintAssist.Hint="{Binding Source={x:Static localization:Strings.NewDirectoryName}}" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="8,0,8,8">
+                                        <Button Style="{DynamicResource MaterialDesignFlatButton}"
+                                                Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
+                                                Command="{x:Static controls:FileSystemControl.CancelNewDirectoryCommand}" />
+                                        <Button Style="{DynamicResource MaterialDesignFlatButton}"
+                                                Content="{Binding Source={x:Static localization:Strings.Create}, Converter={StaticResource upperCaseConverter}}"
+                                                Margin="8,0,0,0"
+                                                Command="{x:Static controls:FileSystemControl.CreateNewDirectoryCommand}" />
+                                    </StackPanel>
+                                </StackPanel>
                             </wpfLib:DrawerHost.BottomDrawerContent>
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -754,7 +769,22 @@
                                 <ContentControl Content="{TemplateBinding FileSystemInfoToShow}" ContentTemplateSelector="{StaticResource fileSystemEntryInfoTemplateSelector}" Width="256" />
                             </wpfLib:DrawerHost.LeftDrawerContent>
                             <wpfLib:DrawerHost.BottomDrawerContent>
-                                <ContentControl Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type controls:SaveFileControl}}}" ContentTemplate="{StaticResource createNewDirectoryTemplate}" />
+                                <!--<ContentControl Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type controls:SaveFileControl}}}" ContentTemplate="{StaticResource createNewDirectoryTemplate}" />-->
+                                <!-- we need some duplicate code unfortunately, because the binding will cause problems in dialogs -->
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                                    <TextBox HorizontalAlignment="Stretch" Margin="16"
+                                             Text="{Binding Path=NewDirectoryName, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                             wpfLib:HintAssist.Hint="{Binding Source={x:Static localization:Strings.NewDirectoryName}}" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="8,0,8,8">
+                                        <Button Style="{DynamicResource MaterialDesignFlatButton}"
+                                                Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
+                                                Command="{x:Static controls:FileSystemControl.CancelNewDirectoryCommand}" />
+                                        <Button Style="{DynamicResource MaterialDesignFlatButton}"
+                                                Content="{Binding Source={x:Static localization:Strings.Create}, Converter={StaticResource upperCaseConverter}}"
+                                                Margin="8,0,0,0"
+                                                Command="{x:Static controls:FileSystemControl.CreateNewDirectoryCommand}" />
+                                    </StackPanel>
+                                </StackPanel>
                             </wpfLib:DrawerHost.BottomDrawerContent>
                             <Grid>
                                 <Grid.RowDefinitions>
