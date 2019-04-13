@@ -62,6 +62,11 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
         /// </summary>
+        public static readonly RoutedCommand CancelNewDirectoryCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
         public static readonly RoutedCommand CreateNewDirectoryCommand = new RoutedCommand();
 
         /// <summary>
@@ -333,6 +338,7 @@ namespace MaterialDesignExtensions.Controls
             CommandBindings.Add(new CommandBinding(ShowInfoCommand, ShowInfoCommandHandler));
             CommandBindings.Add(new CommandBinding(CancelCommand, CancelCommandHandler));
             CommandBindings.Add(new CommandBinding(ShowCreateNewDirectoryCommand, ShowCreateNewDirectoryCommandHandler));
+            CommandBindings.Add(new CommandBinding(CancelNewDirectoryCommand, CancelNewDirectoryCommandHandler));
             CommandBindings.Add(new CommandBinding(CreateNewDirectoryCommand, CreateNewDirectoryCommandHandler));
 
             m_pathPartsScrollViewer = null;
@@ -434,6 +440,16 @@ namespace MaterialDesignExtensions.Controls
 
             DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
             drawerHost.IsBottomDrawerOpen = true;
+        }
+
+        protected void CancelNewDirectoryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
+
+            if (drawerHost.IsBottomDrawerOpen)
+            {
+                drawerHost.IsBottomDrawerOpen = false;
+            }
         }
 
         protected void CreateNewDirectoryCommandHandler(object sender, ExecutedRoutedEventArgs args)

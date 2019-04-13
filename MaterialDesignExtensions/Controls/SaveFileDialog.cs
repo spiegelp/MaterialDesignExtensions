@@ -82,7 +82,7 @@ namespace MaterialDesignExtensions.Controls
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
             DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
         {
-            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, false, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
 
             return await DialogHost.Show(dialog, dialogHostName, openedHandler, closingHandler) as SaveFileDialogResult;
         }
@@ -102,6 +102,7 @@ namespace MaterialDesignExtensions.Controls
                 args.Filename,
                 args.Filters,
                 args.FilterIndex,
+                args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
                 args.ShowSystemFilesAndDirectories
             );
@@ -128,7 +129,7 @@ namespace MaterialDesignExtensions.Controls
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
             DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
         {
-            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, false, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
 
             return await dialogHost.ShowDialog(dialog, openedHandler, closingHandler) as SaveFileDialogResult;
         }
@@ -148,6 +149,7 @@ namespace MaterialDesignExtensions.Controls
                 args.Filename,
                 args.Filters,
                 args.FilterIndex,
+                args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
                 args.ShowSystemFilesAndDirectories
             );
@@ -158,10 +160,11 @@ namespace MaterialDesignExtensions.Controls
         private static SaveFileDialog InitDialog(double? width, double? height,
             string currentDirectory, string filename,
             string filters, int filterIndex,
+            bool createNewDirectoryEnabled,
             bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, createNewDirectoryEnabled);
             dialog.Filename = filename;
             dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<IFileFilter>;
             dialog.FilterIndex = filterIndex;

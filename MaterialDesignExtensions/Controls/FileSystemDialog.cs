@@ -140,7 +140,8 @@ namespace MaterialDesignExtensions.Controls
 
         protected static void InitDialog(FileSystemDialog dialog, double? width, double? height,
             string currentDirectory,
-            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
+            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories,
+            bool createNewDirectoryEnabled = false)
         {
             if (width != null)
             {
@@ -157,6 +158,7 @@ namespace MaterialDesignExtensions.Controls
                 dialog.CurrentDirectory = currentDirectory;
             }
 
+            dialog.CreateNewDirectoryEnabled = createNewDirectoryEnabled;
             dialog.ShowHiddenFilesAndDirectories = showHiddenFilesAndDirectories;
             dialog.ShowSystemFilesAndDirectories = showSystemFilesAndDirectories;
         }
