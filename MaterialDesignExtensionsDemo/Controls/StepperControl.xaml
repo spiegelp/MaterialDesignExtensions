@@ -97,7 +97,16 @@
                               BlockNavigationOnValidationErrors="{Binding Path=BlockNavigationOnValidationErrors}"
                               ContentAnimationsEnabled="{Binding Path=ContentAnimationsEnabled}"
                               Steps="{Binding Path=Steps, Mode=OneTime}"
-                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <!-- example for using different colors than the default application theme -->
+                <!--<controls:Stepper.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignDarkTheme.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </controls:Stepper.Resources>-->
+            </controls:Stepper>
             <!-- example for defining the Stepper in XAML -->
             <!--<controls:Stepper x:Name="stepper" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <model:Step>
