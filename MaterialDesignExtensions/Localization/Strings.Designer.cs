@@ -88,6 +88,15 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create ähnelt.
+        /// </summary>
+        public static string Create {
+            get {
+                return ResourceManager.GetString("Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Created ähnelt.
         /// </summary>
         public static string Created {
@@ -214,6 +223,15 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New directory name ähnelt.
+        /// </summary>
+        public static string NewDirectoryName {
+            get {
+                return ResourceManager.GetString("NewDirectoryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Open ähnelt.
         /// </summary>
         public static string Open {
@@ -282,6 +300,33 @@ namespace MaterialDesignExtensions.Localization {
         public static string SelectDirectory {
             get {
                 return ResourceManager.GetString("SelectDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The directory name is invalid ähnelt.
+        /// </summary>
+        public static string TheDirectoryNameIsInvalid {
+            get {
+                return ResourceManager.GetString("TheDirectoryNameIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The directory name must not be empty ähnelt.
+        /// </summary>
+        public static string TheDirectoryNameMustNotBeEmpty {
+            get {
+                return ResourceManager.GetString("TheDirectoryNameMustNotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The directory &apos;{0}&apos; already exists ähnelt.
+        /// </summary>
+        public static string TheDirectoryXAlreadyExists {
+            get {
+                return ResourceManager.GetString("TheDirectoryXAlreadyExists", resourceCulture);
             }
         }
         

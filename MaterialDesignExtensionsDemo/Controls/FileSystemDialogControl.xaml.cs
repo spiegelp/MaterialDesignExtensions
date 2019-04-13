@@ -32,7 +32,8 @@ namespace MaterialDesignExtensionsDemo.Controls
             OpenDirectoryDialogArguments dialogArgs = new OpenDirectoryDialogArguments()
             {
                 Width = 600,
-                Height = 400
+                Height = 400,
+                CreateNewDirectoryEnabled = true
             };
 
             OpenDirectoryDialogResult result = await OpenDirectoryDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
@@ -80,7 +81,8 @@ namespace MaterialDesignExtensionsDemo.Controls
             {
                 Width = 600,
                 Height = 400,
-                Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml"
+                Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml",
+                CreateNewDirectoryEnabled = true
             };
 
             SaveFileDialogResult result = await SaveFileDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);

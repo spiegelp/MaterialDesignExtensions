@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="FileFiltersTypeConverterTest.cs" />
     <Compile Include="FileFilterTest.cs" />
+    <Compile Include="FileNameTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

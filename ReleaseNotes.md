@@ -99,3 +99,4 @@
 ### vX.X.X (upcoming release)
 #### Features
 * Localization for Uzbekistan
+* Create new directories inside `OpenDirectoryControl` and `SaveFileControl`

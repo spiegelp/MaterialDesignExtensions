@@ -117,6 +117,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AutocompleteController.cs" />
     <Compile Include="Controllers\BitmapImageHelper.cs" />
+    <Compile Include="Controllers\FileNameHelper.cs" />
     <Compile Include="Controllers\FileSystemController.cs" />
     <Compile Include="Controllers\FileFilterHelper.cs" />
     <Compile Include="Controllers\SearchSuggestionsController.cs" />

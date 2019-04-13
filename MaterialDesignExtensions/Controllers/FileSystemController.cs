@@ -546,6 +546,37 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// Creates a new directory with the specified name.
+        /// </summary>
+        /// <param name="newDirectoryName">The name of the new directory</param>
+        public void CreateNewDirectory(string newDirectoryName)
+        {
+            if (string.IsNullOrWhiteSpace(newDirectoryName))
+            {
+                throw new ArgumentException(Localization.Strings.TheDirectoryNameMustNotBeEmpty);
+            }
+
+            if (!FileNameHelper.CheckFileName(newDirectoryName))
+            {
+                throw new ArgumentException(Localization.Strings.TheDirectoryNameIsInvalid);
+            }
+
+            string fullDirectoryName = CurrentDirectory.FullName + @"\" + newDirectoryName;
+            DirectoryInfo newDirectory = new DirectoryInfo(fullDirectoryName);
+
+            if (newDirectory.Exists)
+            {
+                throw new ArgumentException(string.Format(Localization.Strings.TheDirectoryXAlreadyExists, newDirectoryName));
+            }
+            
+            // create directory and select it
+            newDirectory.Create();
+
+            // important: create a new DirectoryInfo instance, because the Exists property will not be updated by the Create() method
+            SelectDirectory(new DirectoryInfo(fullDirectoryName));
+        }
+
         private bool AreObjectsEqual(object o1, object o2)
         {
             if (o1 == o2)

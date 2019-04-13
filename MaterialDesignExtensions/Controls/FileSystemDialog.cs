@@ -17,6 +17,31 @@ namespace MaterialDesignExtensions.Controls
     public abstract class FileSystemDialog : Control
     {
         /// <summary>
+        /// Enables the feature to create new directories.
+        /// </summary>
+        public static readonly DependencyProperty CreateNewDirectoryEnabledProperty = DependencyProperty.Register(
+            nameof(CreateNewDirectoryEnabled),
+            typeof(bool),
+            typeof(FileSystemDialog),
+            new PropertyMetadata(false));
+
+        /// <summary>
+        /// Enables the feature to create new directories.
+        /// </summary>
+        public bool CreateNewDirectoryEnabled
+        {
+            get
+            {
+                return (bool)GetValue(CreateNewDirectoryEnabledProperty);
+            }
+
+            set
+            {
+                SetValue(CreateNewDirectoryEnabledProperty, value);
+            }
+        }
+
+        /// <summary>
         /// The current directory of the dialog.
         /// </summary>
         public static readonly DependencyProperty CurrentDirectoryProperty = DependencyProperty.Register(
@@ -158,6 +183,11 @@ namespace MaterialDesignExtensions.Controls
         public string CurrentDirectory { get; set; }
 
         /// <summary>
+        /// Enables the feature to create new directories.
+        /// </summary>
+        public bool CreateNewDirectoryEnabled { get; set; }
+
+        /// <summary>
         /// Shows or hides hidden directories and files.
         /// </summary>
         public bool ShowHiddenFilesAndDirectories { get; set; }
@@ -185,6 +215,7 @@ namespace MaterialDesignExtensions.Controls
             Width = null;
             Height = null;
             CurrentDirectory = null;
+            CreateNewDirectoryEnabled = false;
             ShowHiddenFilesAndDirectories = false;
             ShowSystemFilesAndDirectories = false;
             OpenedHandler = null;

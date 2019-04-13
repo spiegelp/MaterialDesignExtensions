@@ -55,6 +55,16 @@ namespace MaterialDesignExtensions.Controls
         public static readonly RoutedCommand CancelCommand = new RoutedCommand();
 
         /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand ShowCreateNewDirectoryCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand CreateNewDirectoryCommand = new RoutedCommand();
+
+        /// <summary>
         /// An event raised by canceling the operation.
         /// </summary>
         public static readonly RoutedEvent CancelEvent = EventManager.RegisterRoutedEvent(
@@ -84,6 +94,31 @@ namespace MaterialDesignExtensions.Controls
             get
             {
                 return m_controller;
+            }
+        }
+
+        /// <summary>
+        /// Enables the feature to create new directories.
+        /// </summary>
+        public static readonly DependencyProperty CreateNewDirectoryEnabledProperty = DependencyProperty.Register(
+            nameof(CreateNewDirectoryEnabled),
+            typeof(bool),
+            typeof(FileSystemControl),
+            new PropertyMetadata(false));
+
+        /// <summary>
+        /// Enables the feature to create new directories.
+        /// </summary>
+        public bool CreateNewDirectoryEnabled
+        {
+            get
+            {
+                return (bool)GetValue(CreateNewDirectoryEnabledProperty);
+            }
+
+            set
+            {
+                SetValue(CreateNewDirectoryEnabledProperty, value);
             }
         }
 
@@ -167,6 +202,31 @@ namespace MaterialDesignExtensions.Controls
                 }
 
                 return m_fileSystemEntryItemsScrollViewer;
+            }
+        }
+
+        /// <summary>
+        /// The name for the new directory.
+        /// </summary>
+        public static readonly DependencyProperty NewDirectoryNameProperty = DependencyProperty.Register(
+                nameof(NewDirectoryName),
+                typeof(string),
+                typeof(FileSystemControl),
+                new PropertyMetadata(null));
+
+        /// <summary>
+        /// The name for the new directory.
+        /// </summary>
+        public string NewDirectoryName
+        {
+            get
+            {
+                return (string)GetValue(NewDirectoryNameProperty);
+            }
+
+            set
+            {
+                SetValue(NewDirectoryNameProperty, value);
             }
         }
 
@@ -272,6 +332,8 @@ namespace MaterialDesignExtensions.Controls
             CommandBindings.Add(new CommandBinding(SelectFileSystemEntryCommand, SelectFileSystemEntryCommandHandler));
             CommandBindings.Add(new CommandBinding(ShowInfoCommand, ShowInfoCommandHandler));
             CommandBindings.Add(new CommandBinding(CancelCommand, CancelCommandHandler));
+            CommandBindings.Add(new CommandBinding(ShowCreateNewDirectoryCommand, ShowCreateNewDirectoryCommandHandler));
+            CommandBindings.Add(new CommandBinding(CreateNewDirectoryCommand, CreateNewDirectoryCommandHandler));
 
             m_pathPartsScrollViewer = null;
             m_pathPartsItemsControl = null;
@@ -364,6 +426,33 @@ namespace MaterialDesignExtensions.Controls
         {
             RoutedEventArgs eventArgs = new RoutedEventArgs(CancelEvent, this);
             RaiseEvent(eventArgs);
+        }
+
+        protected void ShowCreateNewDirectoryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            NewDirectoryName = null;
+
+            DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
+            drawerHost.IsBottomDrawerOpen = true;
+        }
+
+        protected void CreateNewDirectoryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            try
+            {
+                m_controller.CreateNewDirectory(NewDirectoryName);
+
+                DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
+
+                if (drawerHost.IsBottomDrawerOpen)
+                {
+                    drawerHost.IsBottomDrawerOpen = false;
+                }
+            }
+            catch (Exception exc)
+            {
+                SnackbarMessageQueue.Enqueue(exc.Message);
+            }
         }
 
         protected static void CurrentDirectoryChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)

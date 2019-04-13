@@ -198,4 +198,19 @@
   <data name="LongPathsAreNotSupported" xml:space="preserve">
     <value>Lange Pfade werden nicht unterstützt</value>
   </data>
+  <data name="TheDirectoryNameIsInvalid" xml:space="preserve">
+    <value>Der Ordnername ist ungültig</value>
+  </data>
+  <data name="TheDirectoryNameMustNotBeEmpty" xml:space="preserve">
+    <value>Der Ordername darf nicht leer sein</value>
+  </data>
+  <data name="TheDirectoryXAlreadyExists" xml:space="preserve">
+    <value>Der Ordner "{0}" existiert bereits</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Erstellen</value>
+  </data>
+  <data name="NewDirectoryName" xml:space="preserve">
+    <value>Neuer Ordnername</value>
+  </data>
 </root>
