@@ -18,6 +18,10 @@ Assemblies are compiled for .NET Framework 4.5
 4. Add the namespace `xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"` to your XAML 
 5. You are ready to use the controls
 
+# Important notice
+The configuration of Material Design Extensions v2.6.0 changed in order to enable changing the theme at runtime.
+Please change your configuration according to [App.xaml](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/MaterialDesignExtensionsDemo/App.xaml) of the demo.
+
 # Controls
 Material Design Extensions features the following controls:
 
