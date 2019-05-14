@@ -105,6 +105,9 @@
     <Compile Include="Controls\TextBoxSuggestionsControl.xaml.cs">
       <DependentUpon>TextBoxSuggestionsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ThemesControl.xaml.cs">
+      <DependentUpon>ThemesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\AlertDialogViewModel.cs" />
     <Compile Include="ViewModel\AppBarViewModel.cs" />
     <Compile Include="ViewModel\AutocompleteInTabControlViewModel.cs" />
@@ -123,6 +126,7 @@
     <Compile Include="ViewModel\TabControlStepperViewModel.cs" />
     <Compile Include="ViewModel\TabControlViewModel.cs" />
     <Compile Include="ViewModel\TextBoxSuggestionsViewModel.cs" />
+    <Compile Include="ViewModel\ThemesViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Page Include="Controls\AppBarControl.xaml">
       <SubType>Designer</SubType>
@@ -173,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TextBoxSuggestionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ThemesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

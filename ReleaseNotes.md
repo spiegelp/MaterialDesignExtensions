@@ -100,3 +100,7 @@
 #### Features
 * Localization for Uzbekistan
 * Create new directories inside `OpenDirectoryControl` and `SaveFileControl`
+* Helper `PaletteHelper` for changing the theme at runtime
+#### Important notice
+The configuration of Material Design Extensions changed in order to enable changing the theme at runtime.
+Please change your configuration according to [App.xaml](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/MaterialDesignExtensionsDemo/App.xaml) of the demo.

@@ -70,6 +70,9 @@
         <DataTemplate DataType="{x:Type viewModel:SearchViewModel}">
             <controls:SearchControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:ThemesViewModel}">
+            <controls:ThemesControl />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <wpfLib:DialogHost Identifier="dialogHost">
