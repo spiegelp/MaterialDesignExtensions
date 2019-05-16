@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <Style x:Key="MaterialDesignTabControl" TargetType="{x:Type TabControl}">
         <Setter Property="controls:TabControlAssist.TabHeaderAlignment" Value="Left" />
         <Setter Property="controls:TabControlAssist.TabHeaderHighlightBrush" Value="{DynamicResource PrimaryHueMidBrush}" />

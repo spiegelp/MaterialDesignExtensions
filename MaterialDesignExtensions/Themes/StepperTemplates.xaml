@@ -7,6 +7,10 @@
                     xmlns:model="clr-namespace:MaterialDesignExtensions.Model"
                     xmlns:templateSelectors="clr-namespace:MaterialDesignExtensions.TemplateSelectors">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <converters:BooleanOrConverter x:Key="booleanOrConverter" />
     <convertersLib:NullableToVisibilityConverter x:Key="nullableToVisibilityConverter" />
 

@@ -5,6 +5,10 @@
                     xmlns:model="clr-namespace:MaterialDesignExtensions.Model"
                     xmlns:templateSelectors="clr-namespace:MaterialDesignExtensions.TemplateSelectors">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <templateSelectors:NavigationItemKindTemplateSelector x:Key="navigationItemKindTemplateSelector" />
 
     <Style x:Key="navigationItemBackgroundBorderStyle" TargetType="{x:Type Border}">

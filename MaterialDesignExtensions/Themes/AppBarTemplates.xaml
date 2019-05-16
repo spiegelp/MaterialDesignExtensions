@@ -6,6 +6,10 @@
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
                     xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" FalseValue="Collapsed" />
     <converters:NotNullToVisibilityConverter x:Key="notNullToVisibilityConverter" NullValue="Collapsed" />
     <converters:ObjectCollectionToVisibilityConverter x:Key="objectCollectionToVisibilityConverter" EmptyValue="Collapsed" />
