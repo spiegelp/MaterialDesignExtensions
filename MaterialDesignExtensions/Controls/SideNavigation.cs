@@ -394,24 +394,27 @@ namespace MaterialDesignExtensions.Controls
 
         private void InitItems(IList values)
         {
-            IList<INavigationItem> navigationItems = new List<INavigationItem>();
-
-            if (values != null)
+            if (m_navigationItemsControl != null)
             {
-                foreach (object item in values)
+                IList<INavigationItem> navigationItems = new List<INavigationItem>();
+
+                if (values != null)
                 {
-                    if (item is INavigationItem navigationItem)
+                    foreach (object item in values)
                     {
-                        navigationItems.Add(navigationItem);
+                        if (item is INavigationItem navigationItem)
+                        {
+                            navigationItems.Add(navigationItem);
+                        }
                     }
                 }
-            }
 
-            m_navigationItemsControl.ItemsSource = navigationItems;
+                m_navigationItemsControl.ItemsSource = navigationItems;
 
-            if (SelectedItem != null && !navigationItems.Contains(SelectedItem))
-            {
-                SelectedItem = null;
+                if (SelectedItem != null && !navigationItems.Contains(SelectedItem))
+                {
+                    SelectedItem = null;
+                }
             }
         }
     }

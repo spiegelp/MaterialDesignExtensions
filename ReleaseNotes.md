@@ -103,6 +103,7 @@
 * Helper `PaletteHelper` for changing the theme at runtime
 #### Fixes
 * List used resources explicitly in the XAML files containing the templates
+* Prevent `NullReferenceException` in `SideNavigation` before the template will be applied
 #### Important notice
 The configuration of Material Design Extensions changed in order to enable changing the theme at runtime.
 Please change your configuration according to [App.xaml](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/MaterialDesignExtensionsDemo/App.xaml) of the demo.
