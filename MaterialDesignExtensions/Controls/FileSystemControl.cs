@@ -16,6 +16,11 @@ using MaterialDesignThemes.Wpf;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
+#if LONG_PATH
+using FileSystemInfo = Pri.LongPath.FileSystemInfo;
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+#endif
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>

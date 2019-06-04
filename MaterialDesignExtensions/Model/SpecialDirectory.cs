@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 using MaterialDesignThemes.Wpf;
 
+#if LONG_PATH
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+#endif
+
 namespace MaterialDesignExtensions.Model
 {
     public class SpecialDirectory

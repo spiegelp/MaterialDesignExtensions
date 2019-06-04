@@ -6,6 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#if LONG_PATH
+using FileSystemInfo = Pri.LongPath.FileSystemInfo;
+#endif
+
 namespace MaterialDesignExtensions.Model
 {
     public abstract class FileSystemEntryItem<T> : INotifyPropertyChanged where T : FileSystemInfo

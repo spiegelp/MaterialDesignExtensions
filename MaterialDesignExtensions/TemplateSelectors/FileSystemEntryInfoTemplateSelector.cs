@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
+#if LONG_PATH
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+using FileInfo = Pri.LongPath.FileInfo;
+#endif
+
 namespace MaterialDesignExtensions.TemplateSelectors
 {
     internal class FileSystemEntryInfoTemplateSelector : DataTemplateSelector

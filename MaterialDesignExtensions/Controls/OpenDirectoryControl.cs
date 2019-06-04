@@ -12,6 +12,10 @@ using System.Windows.Input;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
+#if LONG_PATH
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+#endif
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>

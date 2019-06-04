@@ -8,6 +8,10 @@ using System.Windows;
 
 using MaterialDesignThemes.Wpf;
 
+#if LONG_PATH
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+#endif
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>

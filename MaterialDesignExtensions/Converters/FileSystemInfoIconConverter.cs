@@ -11,6 +11,11 @@ using MaterialDesignThemes.Wpf;
 
 using MaterialDesignExtensions.Controllers;
 
+#if LONG_PATH
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+using FileInfo = Pri.LongPath.FileInfo;
+#endif
+
 namespace MaterialDesignExtensions.Converters
 {
     public class FileSystemInfoIconConverter : IValueConverter

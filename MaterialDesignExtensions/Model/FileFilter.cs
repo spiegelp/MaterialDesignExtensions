@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 using MaterialDesignExtensions.Controllers;
 
+#if LONG_PATH
+using FileInfo = Pri.LongPath.FileInfo;
+#endif
+
 namespace MaterialDesignExtensions.Model
 {
     /// <summary>

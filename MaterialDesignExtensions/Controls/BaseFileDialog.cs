@@ -7,10 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-using MaterialDesignThemes.Wpf;
-
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
+
+#if LONG_PATH
+using FileInfo = Pri.LongPath.FileInfo;
+#endif
 
 namespace MaterialDesignExtensions.Controls
 {

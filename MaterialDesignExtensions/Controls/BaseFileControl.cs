@@ -14,6 +14,12 @@ using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
 
+#if LONG_PATH
+using FileSystemInfo = Pri.LongPath.FileSystemInfo;
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+using FileInfo = Pri.LongPath.FileInfo;
+#endif
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
