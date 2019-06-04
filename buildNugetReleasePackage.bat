@@ -1,1 +1,1 @@
-"MaterialDesignExtensionsBuildUtility\bin\Debug\MaterialDesignExtensionsBuildUtility.exe" -buildConfiguration Release
+"MaterialDesignExtensionsBuildUtility\bin\Debug\MaterialDesignExtensionsBuildUtility.exe" -buildConfiguration Release;ReleaseLongPath

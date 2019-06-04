@@ -25,7 +25,7 @@ namespace MaterialDesignExtensionsBuildUtility
 
                     foreach (BuildConfiguration buildConfiguration in configuration.BuildConfigurations)
                     {
-                        if (buildConfiguration.NuspecFilename != null)
+                        if (!string.IsNullOrWhiteSpace(buildConfiguration.NuspecFilename))
                         {
                             Package(configuration, buildConfiguration);
                         }
