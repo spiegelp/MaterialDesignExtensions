@@ -12,6 +12,7 @@ using System.Windows.Input;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
 #if LONG_PATH
 using DirectoryInfo = Pri.LongPath.DirectoryInfo;
 #endif
@@ -135,7 +136,7 @@ namespace MaterialDesignExtensions.Controls
     public class DirectorySelectedEventArgs : RoutedEventArgs
     {
         /// <summary>
-        /// The selected directory as <see cref="DirectoryInfo" />
+        /// The selected directory as <see cref="DirectoryInfo" />.
         /// </summary>
         public DirectoryInfo DirectoryInfo { get; private set; }
 

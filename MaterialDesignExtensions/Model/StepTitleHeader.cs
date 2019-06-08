@@ -57,6 +57,9 @@ namespace MaterialDesignExtensions.Model
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="StepTitleHeader" />.
+        /// </summary>
         public StepTitleHeader()
         {
             m_firstLevelTitle = null;

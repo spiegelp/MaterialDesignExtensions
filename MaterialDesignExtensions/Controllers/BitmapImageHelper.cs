@@ -109,6 +109,9 @@ namespace MaterialDesignExtensions.Controllers
             return string.Format("{0}_{1}_file://{2}", targetWidth, targetHeight, imageFilename);
         }
 
+        /// <summary>
+        /// Clears the cache of loaded images.
+        /// </summary>
         public static void ClearCache()
         {
             lock (m_staticLockObject)

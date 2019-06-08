@@ -11,10 +11,16 @@ using MaterialDesignThemes.Wpf;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Converts a <see cref="PackIcon" /> to a special color for displaying it.
+    /// </summary>
     public class FileSystemInfoPackIconColorConverter : IValueConverter
     {
         private IDictionary<PackIconKind, Brush> m_brushesForPackIcon;
 
+        /// <summary>
+        /// Creates a new <see cref="FileSystemInfoPackIconColorConverter" />.
+        /// </summary>
         public FileSystemInfoPackIconColorConverter()
         {
             m_brushesForPackIcon = new Dictionary<PackIconKind, Brush>()

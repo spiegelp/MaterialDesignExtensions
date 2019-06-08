@@ -8,8 +8,14 @@ using System.Windows.Data;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Converter for displaying a past <see cref="DateTime" />.
+    /// </summary>
     public class DateTimeAgoConverter : IValueConverter
     {
+        /// <summary>
+        /// Creates a new <see cref="DateTimeAgoConverter" />.
+        /// </summary>
         public DateTimeAgoConverter() { }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

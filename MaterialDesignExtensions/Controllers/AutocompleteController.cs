@@ -9,6 +9,9 @@ using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controllers
 {
+    /// <summary>
+    /// The controller with the technical logic for autocomplete controls.
+    /// </summary>
     public class AutocompleteController
     {
         private readonly object m_lockObject = new object();

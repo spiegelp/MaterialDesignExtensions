@@ -31,9 +31,15 @@ namespace MaterialDesignExtensions.Controls
         /// </summary>
         public static readonly RoutedCommand PlusCommand = new RoutedCommand();
 
+        /// <summary>
+        /// True, if the editing mode with the textbox is active.
+        /// </summary>
         public static readonly DependencyProperty IsEditingProperty = DependencyProperty.Register(
             nameof(IsEditing), typeof(bool), typeof(OversizedNumberSpinner), new PropertyMetadata(false));
 
+        /// <summary>
+        /// True, if the editing mode with the textbox is active.
+        /// </summary>
         private bool IsEditing
         {
             get
@@ -47,9 +53,15 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The minimum value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public static readonly DependencyProperty MinProperty = DependencyProperty.Register(
             nameof(Min), typeof(int), typeof(OversizedNumberSpinner), new PropertyMetadata(0));
 
+        /// <summary>
+        /// The minimum value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public int Min
         {
             get
@@ -63,9 +75,15 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The maximum value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public static readonly DependencyProperty MaxProperty = DependencyProperty.Register(
             nameof(Max), typeof(int), typeof(OversizedNumberSpinner), new PropertyMetadata(5));
 
+        /// <summary>
+        /// The maximum value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public int Max
         {
             get
@@ -79,9 +97,15 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The current value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
             nameof(Value), typeof(int), typeof(OversizedNumberSpinner), new PropertyMetadata(1, ValuePropertyChangedCallback));
 
+        /// <summary>
+        /// The current value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public int Value
         {
             get
@@ -102,6 +126,9 @@ namespace MaterialDesignExtensions.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(OversizedNumberSpinner), new FrameworkPropertyMetadata(typeof(OversizedNumberSpinner)));
         }
 
+        /// <summary>
+        /// Creates a new <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public OversizedNumberSpinner()
             : base()
         {

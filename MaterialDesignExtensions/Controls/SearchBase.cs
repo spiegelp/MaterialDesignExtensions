@@ -170,6 +170,9 @@ namespace MaterialDesignExtensions.Controls
 
         private SearchSuggestionsController m_searchSuggestionsController;
 
+        /// <summary>
+        /// Creates a new <see cref="SearchBase" />.
+        /// </summary>
         public SearchBase()
             : base()
         {

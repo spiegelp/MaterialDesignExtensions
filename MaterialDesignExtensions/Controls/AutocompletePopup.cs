@@ -10,6 +10,9 @@ using System.Windows.Controls.Primitives;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// Another implementation of <see cref="Popup" /> to add a better behavior while moving or resizing the window.
+    /// </summary>
     public class AutocompletePopup : Popup
     {
         private Window m_window;
