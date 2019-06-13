@@ -110,3 +110,4 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 ### v2.7.0 (upcoming release)
 #### Features
 * New package `MaterialDesignExtensions.LongPath` for supporting long file system paths on older Windows and .NET versions
+* Improved loading of preview images in file system controls
