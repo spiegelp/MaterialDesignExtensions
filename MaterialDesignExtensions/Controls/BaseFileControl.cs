@@ -14,6 +14,7 @@ using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
 #if LONG_PATH
 using FileSystemInfo = Pri.LongPath.FileSystemInfo;
 using DirectoryInfo = Pri.LongPath.DirectoryInfo;
@@ -210,6 +211,9 @@ namespace MaterialDesignExtensions.Controls
 
         protected ComboBox m_fileFiltersComboBox;
 
+        /// <summary>
+        /// Creates a new <see cref="BaseFileControl" />.
+        /// </summary>
         public BaseFileControl()
             : base()
         {
@@ -432,7 +436,7 @@ namespace MaterialDesignExtensions.Controls
     public class FileSelectedEventArgs : RoutedEventArgs
     {
         /// <summary>
-        /// The selected file as <see cref="FileInfo" />
+        /// The selected file as <see cref="FileInfo" />.
         /// </summary>
         public FileInfo FileInfo { get; private set; }
 

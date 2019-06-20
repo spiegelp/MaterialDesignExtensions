@@ -11,6 +11,7 @@ using MaterialDesignThemes.Wpf;
 
 using MaterialDesignExtensions.Controllers;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
 #if LONG_PATH
 using DirectoryInfo = Pri.LongPath.DirectoryInfo;
 using FileInfo = Pri.LongPath.FileInfo;
@@ -18,19 +19,37 @@ using FileInfo = Pri.LongPath.FileInfo;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Converts a file extension to a content related icon.
+    /// </summary>
     public class FileSystemInfoIconConverter : IValueConverter
     {
         private ISet<string> m_imageFileExtensions;
         private IDictionary<string, object> m_contentForFileExtension;
 
+        /// <summary>
+        /// The content mode to control the type of icons or thumbnails for image file types.
+        /// </summary>
         public FileSystemInfoIconConverterImageMode ImageMode { get; set; }
 
+        /// <summary>
+        /// The width of a loaded thumbnail image.
+        /// </summary>
         public int ImageTargetWidth { get; set; }
 
+        /// <summary>
+        /// The height of a loaded thumbnail image.
+        /// </summary>
         public int ImageTargetHeight { get; set; }
 
+        /// <summary>
+        /// True to use a cache for loaded images.
+        /// </summary>
         public bool UseCache { get; set; }
 
+        /// <summary>
+        /// Creates a new <see cref="FileSystemInfoIconConverter" />.
+        /// </summary>
         public FileSystemInfoIconConverter()
         {
             ImageMode = FileSystemInfoIconConverterImageMode.Icon;
@@ -203,10 +222,24 @@ namespace MaterialDesignExtensions.Converters
         }
     }
 
+    /// <summary>
+    /// The content mode to control the type of icons or thumbnails for image file types.
+    /// </summary>
     public enum FileSystemInfoIconConverterImageMode : byte
     {
+        /// <summary>
+        /// Only use icons
+        /// </summary>
         Icon,
+
+        /// <summary>
+        /// Use thumbnails for images
+        /// </summary>
         Image,
+
+        /// <summary>
+        /// Use async task to load thumbnail images
+        /// </summary>
         AsyncImageTask
     }
 }

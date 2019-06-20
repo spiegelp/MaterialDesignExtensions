@@ -16,6 +16,7 @@ using MaterialDesignThemes.Wpf;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
 #if LONG_PATH
 using FileSystemInfo = Pri.LongPath.FileSystemInfo;
 using DirectoryInfo = Pri.LongPath.DirectoryInfo;
@@ -331,6 +332,9 @@ namespace MaterialDesignExtensions.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FileSystemControl), new FrameworkPropertyMetadata(typeof(FileSystemControl)));
         }
 
+        /// <summary>
+        /// Creates a new <see cref="FileSystemControl" />.
+        /// </summary>
         public FileSystemControl()
             : base()
         {

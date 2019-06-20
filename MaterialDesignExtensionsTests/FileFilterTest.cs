@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using MaterialDesignExtensions.Controllers;
@@ -84,6 +86,23 @@ namespace MaterialDesignExtensionsTests
             string filename = "Test.cs";
 
             Assert.AreEqual(true, fileFilter.IsMatch(filename));
+        }
+
+        [TestMethod]
+        public void TestGetFileExtensionsFromFilter()
+        {
+            IFileFilter fileFilter = FileFilterHelper.ParseFileFilter("Test", "*.cs;file.*;cs*.*;*.xaml;test;*.txt.bak");
+            IEnumerable<string> fileExtensions = FileFilterHelper.GetFileExtensionsFromFilter(fileFilter);
+
+            Assert.IsNotNull(fileExtensions);
+            Assert.AreEqual(3, fileExtensions.Count());
+            Assert.IsTrue(fileExtensions.Any(fileExtension => fileExtension == "cs"));
+            Assert.IsTrue(fileExtensions.Any(fileExtension => fileExtension == "xaml"));
+            Assert.IsTrue(fileExtensions.Any(fileExtension => fileExtension == "bak"));
+
+            fileExtensions = FileFilterHelper.GetFileExtensionsFromFilter(null);
+
+            Assert.IsTrue(fileExtensions == null || !fileExtensions.Any());
         }
     }
 }

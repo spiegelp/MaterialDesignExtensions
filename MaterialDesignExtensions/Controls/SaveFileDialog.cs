@@ -11,6 +11,7 @@ using MaterialDesignThemes.Wpf;
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
 #if LONG_PATH
 using FileInfo = Pri.LongPath.FileInfo;
 #endif
@@ -186,6 +187,11 @@ namespace MaterialDesignExtensions.Controls
         /// The name of the file itself without the full path.
         /// </summary>
         public string Filename { get; set; }
+
+        /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public bool ForceFileExtensionOfFileFilter { get; set; }
 
         /// <summary>
         /// Creates a new <see cref="SaveFileDialogArguments" />.

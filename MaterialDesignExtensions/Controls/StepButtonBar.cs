@@ -37,6 +37,7 @@ namespace MaterialDesignExtensions.Controls
                 SetValue(BackProperty, value);
             }
         }
+
         /// <summary>
         /// The interal back command of the parent stepper.
         /// </summary>
@@ -80,6 +81,7 @@ namespace MaterialDesignExtensions.Controls
                 SetValue(CancelProperty, value);
             }
         }
+
         /// <summary>
         /// The interal cancel command of the parent stepper.
         /// </summary>
@@ -239,6 +241,9 @@ namespace MaterialDesignExtensions.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(StepButtonBar), new FrameworkPropertyMetadata(typeof(StepButtonBar)));
         }
 
+        /// <summary>
+        /// Creates a new <see cref="StepButtonBar" />.
+        /// </summary>
         public StepButtonBar() : base() { }
 
         public override void OnApplyTemplate()

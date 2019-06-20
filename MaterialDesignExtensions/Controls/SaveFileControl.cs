@@ -11,6 +11,7 @@ using System.Windows.Input;
 
 using MaterialDesignExtensions.Controllers;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
 #if LONG_PATH
 using DirectoryInfo = Pri.LongPath.DirectoryInfo;
 using FileInfo = Pri.LongPath.FileInfo;
@@ -45,6 +46,31 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(FilenameProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public static readonly DependencyProperty ForceFileExtensionOfFileFilterProperty = DependencyProperty.Register(
+            nameof(ForceFileExtensionOfFileFilter),
+            typeof(bool),
+            typeof(SaveFileControl),
+            new PropertyMetadata(false, ForceFileExtensionOfFileFilterChangedHandler));
+
+        /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public bool ForceFileExtensionOfFileFilter
+        {
+            get
+            {
+                return (bool)GetValue(ForceFileExtensionOfFileFilterProperty);
+            }
+
+            set
+            {
+                SetValue(ForceFileExtensionOfFileFilterProperty, value);
             }
         }
 
@@ -87,7 +113,7 @@ namespace MaterialDesignExtensions.Controls
         {
             try
             {
-                m_controller.SelectFile(BuildFullFilename(newFilename));
+                m_controller.SelectFile(m_controller.BuildFullFileNameForInCurrentDirectory(newFilename));
             }
             catch (PathTooLongException)
             {
@@ -137,7 +163,7 @@ namespace MaterialDesignExtensions.Controls
 
                     if (Filename != null && CurrentDirectory != null)
                     {
-                        CurrentFile = BuildFullFilename(Filename);
+                        CurrentFile = m_controller.BuildFullFileNameForInCurrentDirectory(Filename);
                     }
                     else
                     {
@@ -151,23 +177,12 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private string BuildFullFilename(string newFilename)
+        protected static void ForceFileExtensionOfFileFilterChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            string filename = null;
-
-            if (!string.IsNullOrWhiteSpace(newFilename))
+            if (obj is SaveFileControl saveFileControl)
             {
-                string directory = CurrentDirectory;
-
-                if (CurrentDirectory != null && !directory.EndsWith(@"\") && !directory.EndsWith("/"))
-                {
-                    directory = directory + @"\";
-                }
-
-                filename = directory + newFilename.Trim();
+                saveFileControl.m_controller.ForceFileExtensionOfFileFilter = (bool)args.NewValue;
             }
-
-            return filename;
         }
     }
 }

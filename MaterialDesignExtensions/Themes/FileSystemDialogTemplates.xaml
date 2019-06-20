@@ -58,7 +58,8 @@
                                               FilterIndex="{Binding Path=FilterIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               CreateNewDirectoryEnabled="{Binding Path=CreateNewDirectoryEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                              ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                              ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              ForceFileExtensionOfFileFilter="{Binding Path=ForceFileExtensionOfFileFilter, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
