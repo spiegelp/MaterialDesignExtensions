@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MaterialDesignExtensions</id>
-    <version>2.6.0</version>
+    <version>2.7.0-a01</version>
     <title>Material Design Extensions</title>
     <authors>Philipp Spiegel</authors>
     <owners>Philipp Spiegel</owners>
@@ -32,9 +32,9 @@ Important notice: The configuration of Material Design Extensions changed in ord
     <file src="bin\Release\de\MaterialDesignExtensions.resources.dll" target="lib\net45\de" />
     <file src="bin\Release\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\net45\uz-Latn-UZ" />
     <file src="bin\Release\MaterialDesignExtensions.xml" target="lib\net45" />
-    <file src="..\LICENSE" />
-    <!--<file src="..\LICENSE" target="License.txt" />
-    <file src="..\PackageReadme.md" target="Readme.md" />
-    <file src="..\icon\icon.png" target="icon.png" />-->
+    <file src="..\additionalPackageFiles\License.txt" />
+    <file src="..\additionalPackageFiles\Notice.txt" />
+    <file src="..\additionalPackageFiles\PackageReadme.md" target="Readme.md" />
+    <!--<file src="..\icon\icon.png" target="icon.png" />-->
   </files>
 </package>
