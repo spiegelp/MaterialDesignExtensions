@@ -189,6 +189,11 @@ namespace MaterialDesignExtensions.Controls
         public string Filename { get; set; }
 
         /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public bool ForceFileExtensionOfFileFilter { get; set; }
+
+        /// <summary>
         /// Creates a new <see cref="SaveFileDialogArguments" />.
         /// </summary>
         public SaveFileDialogArguments() : base() { }

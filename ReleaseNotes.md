@@ -113,3 +113,4 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Improvements for file system controls
   * Improved loading of preview images
   * Smoother scrolling in directories and files list
+* New `SaveFileControl.ForceFileExtensionOfFileFilter` property to enforce a file extensions of the selected filter
