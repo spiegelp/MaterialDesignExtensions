@@ -48,6 +48,31 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public static readonly DependencyProperty ForceFileExtensionOfFileFilterProperty = DependencyProperty.Register(
+            nameof(ForceFileExtensionOfFileFilter),
+            typeof(bool),
+            typeof(SaveFileDialog),
+            new PropertyMetadata(false));
+
+        /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public bool ForceFileExtensionOfFileFilter
+        {
+            get
+            {
+                return (bool)GetValue(ForceFileExtensionOfFileFilterProperty);
+            }
+
+            set
+            {
+                SetValue(ForceFileExtensionOfFileFilterProperty, value);
+            }
+        }
+
         static SaveFileDialog()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SaveFileDialog), new FrameworkPropertyMetadata(typeof(SaveFileDialog)));
@@ -87,7 +112,7 @@ namespace MaterialDesignExtensions.Controls
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
             DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
         {
-            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, false, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, false, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, false);
 
             return await DialogHost.Show(dialog, dialogHostName, openedHandler, closingHandler) as SaveFileDialogResult;
         }
@@ -109,7 +134,8 @@ namespace MaterialDesignExtensions.Controls
                 args.FilterIndex,
                 args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
-                args.ShowSystemFilesAndDirectories
+                args.ShowSystemFilesAndDirectories,
+                args.ForceFileExtensionOfFileFilter
             );
 
             return await DialogHost.Show(dialog, dialogHostName, args.OpenedHandler, args.ClosingHandler) as SaveFileDialogResult;
@@ -134,7 +160,7 @@ namespace MaterialDesignExtensions.Controls
             bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
             DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
         {
-            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, false, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, false, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, false);
 
             return await dialogHost.ShowDialog(dialog, openedHandler, closingHandler) as SaveFileDialogResult;
         }
@@ -156,7 +182,8 @@ namespace MaterialDesignExtensions.Controls
                 args.FilterIndex,
                 args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
-                args.ShowSystemFilesAndDirectories
+                args.ShowSystemFilesAndDirectories,
+                args.ForceFileExtensionOfFileFilter
             );
 
             return await dialogHost.ShowDialog(dialog, args.OpenedHandler, args.ClosingHandler) as SaveFileDialogResult;
@@ -166,11 +193,13 @@ namespace MaterialDesignExtensions.Controls
             string currentDirectory, string filename,
             string filters, int filterIndex,
             bool createNewDirectoryEnabled,
-            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
+            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories,
+            bool forceFileExtensionOfFileFilter)
         {
             SaveFileDialog dialog = new SaveFileDialog();
             InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, createNewDirectoryEnabled);
             dialog.Filename = filename;
+            dialog.ForceFileExtensionOfFileFilter = forceFileExtensionOfFileFilter;
             dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<IFileFilter>;
             dialog.FilterIndex = filterIndex;
 
