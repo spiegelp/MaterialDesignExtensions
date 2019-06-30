@@ -12,7 +12,7 @@
         <TabControl Style="{StaticResource MaterialDesignTabControl}">
             <TabItem Header="ANIMALS">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="16">
-                    <Grid>
+                    <Grid TextElement.Foreground="{DynamicResource MaterialDesignBody}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="100" />
@@ -38,7 +38,7 @@
             </TabItem>
             <TabItem Header="VEHICLES">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="16">
-                    <Grid>
+                    <Grid TextElement.Foreground="{DynamicResource MaterialDesignBody}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="100" />
@@ -64,7 +64,7 @@
             </TabItem>
             <TabItem Header="TABCONTROL STYLES">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="16">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" TextElement.Foreground="{DynamicResource MaterialDesignBody}">
                         <TextBlock Text="Default" Margin="0,0,0,8" />
                         <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
                             <TabControl Style="{StaticResource MaterialDesignTabControl}">

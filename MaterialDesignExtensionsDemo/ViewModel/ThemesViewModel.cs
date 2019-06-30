@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 using MaterialDesignExtensions.Themes;
 
@@ -29,7 +30,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
 
                     OnPropertyChanged(nameof(IsDarkTheme));
 
-                    m_paletteHelper.SetLightDark(m_isDarkTheme);
+                    SetTheme(m_isDarkTheme);
                 }
             }
         }
@@ -40,6 +41,13 @@ namespace MaterialDesignExtensionsDemo.ViewModel
             m_paletteHelper = new PaletteHelper();
 
             m_isDarkTheme = m_paletteHelper.IsDarkTheme();
+        }
+
+        private void SetTheme(bool isDarkTheme)
+        {
+            m_paletteHelper.SetLightDark(m_isDarkTheme);
+
+            ((MainWindow)Application.Current.MainWindow).DialogHost.DialogTheme = isDarkTheme ? MaterialDesignThemes.Wpf.BaseTheme.Dark : MaterialDesignThemes.Wpf.BaseTheme.Light;
         }
     }
 }

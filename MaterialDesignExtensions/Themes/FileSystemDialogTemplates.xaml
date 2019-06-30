@@ -11,7 +11,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:OpenDirectoryDialog}">
-                    <controls:OpenDirectoryControl x:Name="openDirectoryControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    <controls:OpenDirectoryControl x:Name="openDirectoryControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignCardBackground}"
                                                    CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                    CreateNewDirectoryEnabled="{Binding Path=CreateNewDirectoryEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                    ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
@@ -30,7 +30,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:OpenFileDialog}">
                     <!-- opening a file does not require the feature to create a new directory -->
-                    <controls:OpenFileControl x:Name="fileControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    <controls:OpenFileControl x:Name="fileControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignCardBackground}"
                                               CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               CurrentFile="{Binding Path=CurrentFile, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               Filters="{Binding Path=Filters, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
@@ -50,7 +50,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SaveFileDialog}">
-                    <controls:SaveFileControl x:Name="fileControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    <controls:SaveFileControl x:Name="fileControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignCardBackground}"
                                               CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               CurrentFile="{Binding Path=CurrentFile, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               Filename="{Binding Path=Filename, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"

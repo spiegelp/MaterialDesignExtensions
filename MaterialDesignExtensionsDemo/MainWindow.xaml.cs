@@ -29,6 +29,14 @@ namespace MaterialDesignExtensionsDemo
 
         private List<INavigationItem> m_navigationItems;
 
+        public DialogHost DialogHost
+        {
+            get
+            {
+                return m_dialogHost;
+            }
+        }
+
         public List<INavigationItem> NavigationItems
         {
             get

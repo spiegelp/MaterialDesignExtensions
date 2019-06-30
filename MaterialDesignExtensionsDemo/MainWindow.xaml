@@ -75,7 +75,7 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <wpfLib:DialogHost Identifier="dialogHost">
+        <wpfLib:DialogHost x:Name="m_dialogHost" Identifier="dialogHost" DialogTheme="Light">
             <wpfLib:DrawerHost IsLeftDrawerOpen="{Binding Path=IsNavigationDrawerOpen, ElementName=appBar}" LeftDrawerBackground="{DynamicResource MaterialDesignBackground}">
                 <wpfLib:DrawerHost.LeftDrawerContent>
                     <controlsLib:SideNavigation x:Name="navigationDrawerNav" Items="{Binding Path=NavigationItems, Mode=OneTime}" Width="280"
