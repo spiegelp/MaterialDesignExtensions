@@ -26,7 +26,7 @@ namespace MaterialDesignExtensions.Controls
             new PropertyMetadata(false));
 
         /// <summary>
-        /// Enables the feature to create new directories.
+        /// Enables the feature to create new directories. Notice: It does not have any effects for <see cref="OpenFileDialog" />.
         /// </summary>
         public bool CreateNewDirectoryEnabled
         {
@@ -185,7 +185,7 @@ namespace MaterialDesignExtensions.Controls
         public string CurrentDirectory { get; set; }
 
         /// <summary>
-        /// Enables the feature to create new directories.
+        /// Enables the feature to create new directories. Notice: It does not have any effects for <see cref="OpenFileDialog" />.
         /// </summary>
         public bool CreateNewDirectoryEnabled { get; set; }
 
