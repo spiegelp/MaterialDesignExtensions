@@ -115,3 +115,4 @@ Please change your configuration according to [App.xaml](https://github.com/spie
   * Smoother scrolling in directories and files list
 * New `SaveFileControl.ForceFileExtensionOfFileFilter` property to enforce a file extension of the selected filter
 * Better support of dark theme in file system dialogs
+* Localization for Russian
