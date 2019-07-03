@@ -25,7 +25,7 @@ namespace MaterialDesignExtensions.Converters
                 DateTime now = DateTime.Now;
                 TimeSpan timeSpan = now - dateTime;
 
-                if (timeSpan.TotalHours < 24)
+                if (now.Date == dateTime.Date && timeSpan.TotalHours < 24)
                 {
                     return dateTime.ToShortTimeString();
                 }

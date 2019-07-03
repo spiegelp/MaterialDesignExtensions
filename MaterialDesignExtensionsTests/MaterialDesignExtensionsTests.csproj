@@ -69,6 +69,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeAgoConverterTest.cs" />
     <Compile Include="FileFiltersTypeConverterTest.cs" />
     <Compile Include="FileFilterTest.cs" />
     <Compile Include="FileNameTest.cs" />
