@@ -368,4 +368,72 @@
             </tbody>
         </table>
     </p>
+    <h2>Code example</h2>
+    <h3>Controls</h3>
+    <p>
+        Add the control versions to any container control.
+    </p>
+    <pre class="language-markup"><code class="language-markup">&lt;!-- import namespaces -->
+xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+
+&lt;!-- open directory -->
+&lt;mde:OpenDirectoryControl ShowHiddenFilesAndDirectories="False"
+                          ShowSystemFilesAndDirectories="False"
+                          CreateNewDirectoryEnabled="True"
+                          DirectorySelected="OpenDirectoryControl_DirectorySelected"
+                          Cancel="OpenDirectoryControl_Cancel" />
+
+&lt;!-- open file -->
+&lt;mde:OpenFileControl ShowHiddenFilesAndDirectories="False"
+                     ShowSystemFilesAndDirectories="False"
+                     Filters="All files|*.*|C# files|*.cs|XAML files|*.xaml"
+                     FileSelected="OpenFileControl_FileSelected"
+                     Cancel="OpenFileControl_Cancel" />
+
+&lt;!-- save file -->
+&lt;mde:SaveFileControl ShowHiddenFilesAndDirectories="False"
+                     ShowSystemFilesAndDirectories="False"
+                     CreateNewDirectoryEnabled="True"
+                     Filters="All files|*.*|C# files|*.cs|XAML files|*.xaml"
+                     FileSelected="SaveFileControl_FileSelected"
+                     Cancel="SaveFileControl_Cancel" /></code></pre>
+    <h3>Dialogs</h3>
+    <p>
+        To open a dialog, use the according helper method as shown below.
+    </p>
+    <pre class="language-csharp"><code class="language-csharp">using MaterialDesignExtensions.Controls;
+
+// open directory
+OpenDirectoryDialogArguments dialogArgs = new OpenDirectoryDialogArguments()
+{
+    Width = 600,
+    Height = 400,
+    CreateNewDirectoryEnabled = true
+};
+
+OpenDirectoryDialogResult result = await OpenDirectoryDialog.ShowDialogAsync("DialogHostName", dialogArgs);
+
+// open file
+OpenFileDialogArguments dialogArgs = new OpenFileDialogArguments()
+{
+    Width = 600,
+    Height = 400,
+    Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml"
+};
+
+OpenFileDialogResult result = await OpenFileDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
+
+// save file
+SaveFileDialogArguments dialogArgs = new SaveFileDialogArguments()
+{
+    Width = 600,
+    Height = 400,
+    Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml",
+    CreateNewDirectoryEnabled = true
+};
+
+SaveFileDialogResult result = await SaveFileDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);</code></pre>
+    <script type="text/javascript">
+        appViewModel.prepareCodeSnippets();
+    </script>
 </div>
