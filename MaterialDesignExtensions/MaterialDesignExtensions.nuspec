@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MaterialDesignExtensions</id>
-    <version>2.7.0-a01</version>
+    <version>2.7.0</version>
     <title>Material Design Extensions</title>
     <authors>Philipp Spiegel</authors>
     <owners>Philipp Spiegel</owners>
@@ -24,7 +24,8 @@ Important notice: The configuration of Material Design Extensions changed in ord
     <copyright>Copyright (c) 2017-2019 Spiegel Philipp</copyright>
     <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner</tags>
     <dependencies>
-      <dependency id="MaterialDesignThemes" version="2.5.1" />
+      <dependency id="MaterialDesignColors" version="1.2.0" />
+      <dependency id="MaterialDesignThemes" version="2.6.0" />
     </dependencies>
   </metadata>
   <files>

@@ -81,7 +81,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
                 new OperatingSystemItem() { Icon = PackIconKind.Android, Name = "Android Nougat" },
                 new OperatingSystemItem() { Icon = PackIconKind.Linux, Name = "Debian" },
                 new OperatingSystemItem() { Icon = PackIconKind.DesktopMac, Name = "Mac OSX" },
-                new OperatingSystemItem() { Icon = PackIconKind.Raspberrypi, Name = "Raspbian" },
+                new OperatingSystemItem() { Icon = PackIconKind.DeveloperBoard, Name = "Raspbian" },
                 new OperatingSystemItem() { Icon = PackIconKind.Ubuntu, Name = "Ubuntu Wily Werewolf" },
                 new OperatingSystemItem() { Icon = PackIconKind.Ubuntu, Name = "Ubuntu Xenial Xerus" },
                 new OperatingSystemItem() { Icon = PackIconKind.Ubuntu, Name = "Ubuntu Yakkety Yak" },

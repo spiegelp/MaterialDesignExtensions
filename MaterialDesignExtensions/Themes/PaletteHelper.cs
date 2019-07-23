@@ -22,6 +22,7 @@ namespace MaterialDesignExtensions.Themes
         /// Replaces the current theme with the light or dark theme. The implementation is based on MaterialDesignThemes.Wpf.PaletteHelper.SetLightDark(bool isDark).
         /// </summary>
         /// <param name="isDark"></param>
+        [Obsolete]
         public override void SetLightDark(bool isDark)
         {
             // this method is a copy of MaterialDesignThemes.Wpf.PaletteHelper.SetLightDark(bool isDark) with changed resource names/strings

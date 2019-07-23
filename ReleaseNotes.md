@@ -107,7 +107,7 @@
 #### Important notice
 The configuration of Material Design Extensions changed in order to enable changing the theme at runtime.
 Please change your configuration according to [App.xaml](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/MaterialDesignExtensionsDemo/App.xaml) of the demo.
-### v2.7.0 (upcoming release)
+### v2.7.0
 #### Features
 * New package `MaterialDesignExtensions.LongPath` for supporting long file system paths on older Windows and .NET versions
 * Improvements for file system controls
@@ -116,5 +116,6 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * New `SaveFileControl.ForceFileExtensionOfFileFilter` property to enforce a file extension of the selected filter
 * Better support of dark theme in file system dialogs
 * Localization for Russian
+* Updated dependency to MaterialDesignThemes version 2.6.0
 #### Fixes
 * Fixed `DateTime` conversion inside `DateTimeAgoConverter`
