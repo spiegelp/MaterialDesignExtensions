@@ -119,3 +119,6 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Updated dependency to MaterialDesignThemes version 2.6.0
 #### Fixes
 * Fixed `DateTime` conversion inside `DateTimeAgoConverter`
+### vX.X.X (upcoming release)
+#### Fixes
+* Fixed content layout of horizontal steppers
