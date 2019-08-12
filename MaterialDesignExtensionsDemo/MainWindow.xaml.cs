@@ -23,7 +23,7 @@ using MaterialDesignExtensionsDemo.ViewModel;
 
 namespace MaterialDesignExtensionsDemo
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : MaterialWindow
     {
         public const string DialogHostName = "dialogHost";
 

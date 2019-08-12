@@ -213,4 +213,13 @@
   <data name="NewDirectoryName" xml:space="preserve">
     <value>Neuer Ordnername</value>
   </data>
+  <data name="Maximize" xml:space="preserve">
+    <value>Maximieren</value>
+  </data>
+  <data name="Minimize" xml:space="preserve">
+    <value>Minimieren</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Verkleinern</value>
+  </data>
 </root>

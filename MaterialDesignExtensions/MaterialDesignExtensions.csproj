@@ -111,6 +111,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\MaterialWindowTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\OversizedNumberSpinnerTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -153,6 +157,7 @@
     <Compile Include="Controls\FileSystemControl.cs" />
     <Compile Include="Controls\FileSystemDialog.cs" />
     <Compile Include="Controls\IStepper.cs" />
+    <Compile Include="Controls\MaterialWindow.cs" />
     <Compile Include="Controls\OpenDirectoryControl.cs" />
     <Compile Include="Controls\OpenDirectoryDialog.cs" />
     <Compile Include="Controls\OpenFileControl.cs" />
