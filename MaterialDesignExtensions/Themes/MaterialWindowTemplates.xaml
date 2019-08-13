@@ -50,6 +50,14 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="WindowResizeButtonStyle" BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type Button}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="NoResize">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="WindowButtonIconStyle" TargetType="{x:Type md:PackIcon}">
         <Setter Property="Width" Value="24" />
         <Setter Property="Height" Value="24" />
@@ -145,12 +153,12 @@
                                 
                                 <!-- caption buttons -->
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Stretch">
-                                    <Button x:Name="minimizeButton" Style="{StaticResource WindowButtonStyle}" ToolTip="{x:Static localization:Strings.Minimize}">
+                                    <Button x:Name="minimizeButton" Style="{StaticResource WindowResizeButtonStyle}" ToolTip="{x:Static localization:Strings.Minimize}">
                                         <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="WindowMinimize" />
                                     </Button>
                                     <Button x:Name="maximizeRestoreButton">
                                         <Button.Style>
-                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WindowButtonStyle}">
+                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WindowResizeButtonStyle}">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Normal">
                                                         <Setter Property="ToolTip" Value="{x:Static localization:Strings.Maximize}" />

@@ -9,18 +9,24 @@ using System.Windows.Media;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// Custom window class for a Material Design like styled window.
+    /// </summary>
     public class MaterialWindow : Window
     {
         private const string MinimizeButtonName = "minimizeButton";
         private const string MaximizeRestoreButtonName = "maximizeRestoreButton";
         private const string CloseButtonName = "closeButton";
 
+        /// <summary>
+        /// The color for the border and caption area background of the window.
+        /// </summary>
         public static readonly DependencyProperty BorderBackgroundBrushProperty = DependencyProperty.Register(
-            nameof(BorderBackgroundBrush),
-            typeof(Brush),
-            typeof(MaterialWindow),
-            new FrameworkPropertyMetadata(null, null));
+            nameof(BorderBackgroundBrush), typeof(Brush), typeof(MaterialWindow), new FrameworkPropertyMetadata(null, null));
 
+        /// <summary>
+        /// The color for the border and caption area background of the window.
+        /// </summary>
         public Brush BorderBackgroundBrush
         {
             get
@@ -34,12 +40,15 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The forground color for the caption area of the window.
+        /// </summary>
         public static readonly DependencyProperty BorderForegroundBrushProperty = DependencyProperty.Register(
-            nameof(BorderForegroundBrush),
-            typeof(Brush),
-            typeof(MaterialWindow),
-            new FrameworkPropertyMetadata(null, null));
+            nameof(BorderForegroundBrush), typeof(Brush), typeof(MaterialWindow), new FrameworkPropertyMetadata(null, null));
 
+        /// <summary>
+        /// The forground color for the caption area of the window.
+        /// </summary>
         public Brush BorderForegroundBrush
         {
             get
@@ -53,13 +62,17 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Lets the content of the window fade out if the window is inactive.
+        /// The default is true (enabled).
+        /// </summary>
         public static readonly DependencyProperty FadeContentIfInactiveProperty = DependencyProperty.Register(
-                nameof(FadeContentIfInactive),
-                typeof(bool),
-                typeof(MaterialWindow),
-                new FrameworkPropertyMetadata(false)
-        );
+                nameof(FadeContentIfInactive), typeof(bool), typeof(MaterialWindow), new FrameworkPropertyMetadata(true));
 
+        /// <summary>
+        /// Lets the content of the window fade out if the window is inactive.
+        /// The default is true (enabled).
+        /// </summary>
         public bool FadeContentIfInactive
         {
             get
@@ -82,6 +95,9 @@ namespace MaterialDesignExtensions.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MaterialWindow), new FrameworkPropertyMetadata(typeof(MaterialWindow)));
         }
 
+        /// <summary>
+        /// Creates a new <see cref="MaterialWindow" />.
+        /// </summary>
         public MaterialWindow() : base() { }
 
         public override void OnApplyTemplate()

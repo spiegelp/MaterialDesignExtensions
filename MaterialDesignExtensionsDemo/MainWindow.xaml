@@ -12,8 +12,7 @@
         mc:Ignorable="d"
         Title="Material Design Extensions - Demo" Height="800" Width="1300" WindowStartupLocation="CenterScreen"
         Background="{DynamicResource MaterialDesignBackground}" Foreground="{DynamicResource MaterialDesignBody}"
-        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-        FadeContentIfInactive="True">
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:AlertDialogViewModel}">
             <StackPanel Orientation="Vertical">
