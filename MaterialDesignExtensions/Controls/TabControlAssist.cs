@@ -14,7 +14,9 @@ namespace MaterialDesignExtensions.Controls
     public static class TabControlAssist
     {
         /// <summary>
-        /// The alignment of the tab headers in the <code>TabControl</code>.
+        /// The alignment of the horizontal tab headers in the <code>TabControl</code>.
+        /// 
+        /// Note: This should probably be called TabHeaderHorizontalAlignment, but I didn't want to make a breaking change
         /// </summary>
         public static readonly DependencyProperty TabHeaderAlignmentProperty = DependencyProperty.RegisterAttached(
             "TabHeaderAlignment",
@@ -24,7 +26,7 @@ namespace MaterialDesignExtensions.Controls
         );
 
         /// <summary>
-        /// Gets the alignment of the tab headers in the <code>TabControl</code>.
+        /// Gets the alignment of the horizontal tab headers in the <code>TabControl</code>.
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
@@ -32,15 +34,45 @@ namespace MaterialDesignExtensions.Controls
         {
             return (HorizontalAlignment)element.GetValue(TabHeaderAlignmentProperty);
         }
-
+        
         /// <summary>
-        /// Sets the alignment of the tab headers in the <code>TabControl</code>.
+        /// Sets the alignment of the horizontal tab headers in the <code>TabControl</code>.
         /// </summary>
         /// <param name="element"></param>
         /// <param name="value"></param>
         public static void SetTabHeaderAlignment(DependencyObject element, HorizontalAlignment value)
         {
             element.SetValue(TabHeaderAlignmentProperty, value);
+        }
+
+        /// <summary>
+        /// The alignment of the vertical tab headers in the <code>TabControl</code>.
+        /// </summary>
+        public static readonly DependencyProperty TabHeaderVerticalAlignmentProperty = DependencyProperty.RegisterAttached(
+            "TabHeaderVerticalAlignment",
+            typeof(VerticalAlignment),
+            typeof(TabControlAssist),
+            new FrameworkPropertyMetadata(VerticalAlignment.Top, FrameworkPropertyMetadataOptions.Inherits, null)
+        );
+
+        /// <summary>
+        /// Gets the alignment of the vertical tab headers in the <code>TabControl</code>.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static VerticalAlignment GetTabHeaderVerticalAlignment(DependencyObject element)
+        {
+            return (VerticalAlignment)element.GetValue(TabHeaderVerticalAlignmentProperty);
+        }
+
+        /// <summary>
+        /// Sets the alignment of the vertical tab headers in the <code>TabControl</code>.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="value"></param>
+        public static void SetTabHeaderVerticalAlignment(DependencyObject element, VerticalAlignment value)
+        {
+            element.SetValue(TabHeaderVerticalAlignmentProperty, value);
         }
 
         /// <summary>
