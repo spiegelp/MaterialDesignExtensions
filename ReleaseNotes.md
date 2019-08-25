@@ -120,5 +120,7 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 #### Fixes
 * Fixed `DateTime` conversion inside `DateTimeAgoConverter`
 ### vX.X.X (upcoming release)
+#### Features
+* New window class `MaterialWindow` for a Material Design like styled window
 #### Fixes
 * Fixed content layout of horizontal steppers
