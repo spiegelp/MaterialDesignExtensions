@@ -122,5 +122,8 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 ### vX.X.X (upcoming release)
 #### Features
 * New window class `MaterialWindow` for a Material Design like styled window
+* Support of `TabStripPlacement` in `TabControl` styles
 #### Fixes
 * Fixed content layout of horizontal steppers
+#### Obsolete
+* Attached property `TabControlAssist.TabHeaderAlignment` will be replaced by `TabControlAssist.TabHeaderHorizontalAlignment`

@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
     
     <Style x:Key="MaterialDesignTabControl" TargetType="{x:Type TabControl}">
-        <Setter Property="controls:TabControlAssist.TabHeaderAlignment" Value="Left" />
+        <Setter Property="controls:TabControlAssist.TabHeaderHorizontalAlignment" Value="Left" />
         <Setter Property="controls:TabControlAssist.TabHeaderHighlightBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
         <Setter Property="controls:TabControlAssist.TabHeaderInactiveBrush" Value="{DynamicResource MaterialDesignBodyLight}" />
         <Setter Property="controls:TabControlAssist.TabHeaderInactiveOpacity" Value="1" />
@@ -127,14 +127,14 @@
                                             <Trigger Property="TabStripPlacement" Value="Left">
                                                 <Setter Property="LayoutTransform" TargetName="ItemContent">
                                                     <Setter.Value>
-                                                        <RotateTransform Angle="270"/>
+                                                        <RotateTransform Angle="270" />
                                                     </Setter.Value>
                                                 </Setter>
                                             </Trigger>
                                             <Trigger Property="TabStripPlacement" Value="Right">
                                                 <Setter Property="LayoutTransform" TargetName="ItemContent">
                                                     <Setter.Value>
-                                                        <RotateTransform Angle="-270"/>
+                                                        <RotateTransform Angle="-270" />
                                                     </Setter.Value>
                                                 </Setter>
                                             </Trigger>
@@ -147,12 +147,12 @@
                     </ControlTemplate.Resources>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="ColumnDefinition0"/>
-                            <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
+                            <ColumnDefinition x:Name="ColumnDefinition0" />
+                            <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
-                            <RowDefinition x:Name="RowDefinition1" Height="*"/>
+                            <RowDefinition x:Name="RowDefinition0" Height="Auto" />
+                            <RowDefinition x:Name="RowDefinition1" Height="*" />
                         </Grid.RowDefinitions>
                         <Border Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                         
@@ -161,10 +161,10 @@
 
                         <Border x:Name="HeaderPanelBorder" Background="Transparent" HorizontalAlignment="Stretch">
                             <!--<TabPanel x:Name="HeaderPanel" Panel.ZIndex="1" Margin="0,0,4,-1" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="Transparent"
-                                      HorizontalAlignment="{Binding Path=(controls:TabControlAssist.TabHeaderAlignment), RelativeSource={RelativeSource TemplatedParent}}" />-->
+                                      HorizontalAlignment="{Binding Path=(controls:TabControlAssist.TabHeaderHorizontalAlignment), RelativeSource={RelativeSource TemplatedParent}}" />-->
                             <!-- do not use a TabPanel because its behavior is different to the Material Design specs -->
                             <UniformGrid x:Name="HeaderPanel" FlowDirection="LeftToRight" IsItemsHost="True" Rows="1" Background="Transparent"
-                                         HorizontalAlignment="{Binding Path=(controls:TabControlAssist.TabHeaderAlignment), RelativeSource={RelativeSource TemplatedParent}}"
+                                         HorizontalAlignment="{Binding Path=(controls:TabControlAssist.TabHeaderHorizontalAlignment), RelativeSource={RelativeSource TemplatedParent}}"
                                          VerticalAlignment="{Binding Path=(controls:TabControlAssist.TabHeaderVerticalAlignment), RelativeSource={RelativeSource TemplatedParent}}"
                                          Panel.ZIndex="1" KeyboardNavigation.TabIndex="1" />
                         </Border>
@@ -176,42 +176,42 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="TabStripPlacement" Value="Bottom">
-                            <Setter Property="Grid.Row" TargetName="HeaderPanelBorder" Value="1"/>
-                            <Setter Property="Grid.Row" TargetName="PART_SelectedContentHostBorder" Value="0"/>
-                            <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                            <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
-                            <Setter Property="Margin" TargetName="HeaderPanelBorder" Value="2,0,2,2"/>
-                            <Setter Property="Columns" TargetName="HeaderPanel" Value="0"/>
-                            <Setter Property="Rows" TargetName="HeaderPanel" Value="1"/>
-                            <Setter Property="BorderThickness" TargetName="HeaderSeparatorBorder" Value="0,0,0,1"/>
+                            <Setter Property="Grid.Row" TargetName="HeaderPanelBorder" Value="1" />
+                            <Setter Property="Grid.Row" TargetName="PART_SelectedContentHostBorder" Value="0" />
+                            <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
+                            <Setter Property="Height" TargetName="RowDefinition1" Value="Auto" />
+                            <Setter Property="Margin" TargetName="HeaderPanelBorder" Value="2,0,2,2" />
+                            <Setter Property="Columns" TargetName="HeaderPanel" Value="0" />
+                            <Setter Property="Rows" TargetName="HeaderPanel" Value="1" />
+                            <Setter Property="BorderThickness" TargetName="HeaderSeparatorBorder" Value="0,0,0,1" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
-                            <Setter Property="Grid.Row" TargetName="HeaderPanelBorder" Value="0"/>
-                            <Setter Property="Grid.Row" TargetName="PART_SelectedContentHostBorder" Value="0"/>
-                            <Setter Property="Grid.Column" TargetName="HeaderPanelBorder" Value="0"/>
-                            <Setter Property="Grid.Column" TargetName="PART_SelectedContentHostBorder" Value="1"/>
-                            <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto"/>
-                            <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
-                            <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                            <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                            <Setter Property="Margin" TargetName="HeaderPanelBorder" Value="2,2,0,2"/>
-                            <Setter Property="Columns" TargetName="HeaderPanel" Value="1"/>
-                            <Setter Property="Rows" TargetName="HeaderPanel" Value="0"/>
-                            <Setter Property="BorderThickness" TargetName="HeaderSeparatorBorder" Value="0,0,1,0"/>
+                            <Setter Property="Grid.Row" TargetName="HeaderPanelBorder" Value="0" />
+                            <Setter Property="Grid.Row" TargetName="PART_SelectedContentHostBorder" Value="0" />
+                            <Setter Property="Grid.Column" TargetName="HeaderPanelBorder" Value="0" />
+                            <Setter Property="Grid.Column" TargetName="PART_SelectedContentHostBorder" Value="1" />
+                            <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto" />
+                            <Setter Property="Width" TargetName="ColumnDefinition1" Value="*" />
+                            <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
+                            <Setter Property="Height" TargetName="RowDefinition1" Value="0" />
+                            <Setter Property="Margin" TargetName="HeaderPanelBorder" Value="2,2,0,2" />
+                            <Setter Property="Columns" TargetName="HeaderPanel" Value="1" />
+                            <Setter Property="Rows" TargetName="HeaderPanel" Value="0" />
+                            <Setter Property="BorderThickness" TargetName="HeaderSeparatorBorder" Value="0,0,1,0" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
-                            <Setter Property="Grid.Row" TargetName="HeaderPanelBorder" Value="0"/>
-                            <Setter Property="Grid.Row" TargetName="PART_SelectedContentHostBorder" Value="0"/>
-                            <Setter Property="Grid.Column" TargetName="HeaderPanelBorder" Value="1"/>
-                            <Setter Property="Grid.Column" TargetName="PART_SelectedContentHostBorder" Value="0"/>
-                            <Setter Property="Width" TargetName="ColumnDefinition0" Value="*"/>
-                            <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
-                            <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                            <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                            <Setter Property="Margin" TargetName="HeaderPanelBorder" Value="0,2,2,2"/>
-                            <Setter Property="Columns" TargetName="HeaderPanel" Value="1"/>
-                            <Setter Property="Rows" TargetName="HeaderPanel" Value="0"/>
-                            <Setter Property="BorderThickness" TargetName="HeaderSeparatorBorder" Value="0,0,1,0"/>
+                            <Setter Property="Grid.Row" TargetName="HeaderPanelBorder" Value="0" />
+                            <Setter Property="Grid.Row" TargetName="PART_SelectedContentHostBorder" Value="0" />
+                            <Setter Property="Grid.Column" TargetName="HeaderPanelBorder" Value="1" />
+                            <Setter Property="Grid.Column" TargetName="PART_SelectedContentHostBorder" Value="0" />
+                            <Setter Property="Width" TargetName="ColumnDefinition0" Value="*" />
+                            <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto" />
+                            <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
+                            <Setter Property="Height" TargetName="RowDefinition1" Value="0" />
+                            <Setter Property="Margin" TargetName="HeaderPanelBorder" Value="0,2,2,2" />
+                            <Setter Property="Columns" TargetName="HeaderPanel" Value="1" />
+                            <Setter Property="Rows" TargetName="HeaderPanel" Value="0" />
+                            <Setter Property="BorderThickness" TargetName="HeaderSeparatorBorder" Value="0,0,1,0" />
                         </Trigger>
                     </ControlTemplate.Triggers>
 

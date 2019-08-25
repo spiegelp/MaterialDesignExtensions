@@ -15,14 +15,56 @@ namespace MaterialDesignExtensions.Controls
     {
         /// <summary>
         /// The alignment of the horizontal tab headers in the <code>TabControl</code>.
-        /// 
-        /// Note: This should probably be called TabHeaderHorizontalAlignment, but I didn't want to make a breaking change
+        /// Obsolete: This property is going to be replaced by <see cref="TabHeaderHorizontalAlignment" /> in a future release
         /// </summary>
+        [Obsolete]
         public static readonly DependencyProperty TabHeaderAlignmentProperty = DependencyProperty.RegisterAttached(
             "TabHeaderAlignment",
             typeof(HorizontalAlignment),
             typeof(TabControlAssist),
-            new FrameworkPropertyMetadata(HorizontalAlignment.Left, FrameworkPropertyMetadataOptions.Inherits, null)
+            new FrameworkPropertyMetadata(HorizontalAlignment.Left, FrameworkPropertyMetadataOptions.Inherits, TabHeaderAlignmentPropertyChangedHandler)
+        );
+
+        /// <summary>
+        /// Gets the alignment of the horizontal tab headers in the <code>TabControl</code>.
+        /// Obsolete: This property is going to be replaced by <see cref="TabHeaderHorizontalAlignment" /> in a future release
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        [Obsolete]
+        public static HorizontalAlignment GetTabHeaderAlignment(DependencyObject element)
+        {
+            return (HorizontalAlignment)element.GetValue(TabHeaderAlignmentProperty);
+        }
+
+        /// <summary>
+        /// Sets the alignment of the horizontal tab headers in the <code>TabControl</code>.
+        /// Obsolete: This property is going to be replaced by <see cref="TabHeaderHorizontalAlignment" /> in a future release
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="value"></param>
+        [Obsolete]
+        public static void SetTabHeaderAlignment(DependencyObject element, HorizontalAlignment value)
+        {
+            element.SetValue(TabHeaderAlignmentProperty, value);
+        }
+
+        private static void TabHeaderAlignmentPropertyChangedHandler(DependencyObject element, DependencyPropertyChangedEventArgs args)
+        {
+            if ((HorizontalAlignment)args.NewValue != GetTabHeaderHorizontalAlignment(element))
+            {
+                SetTabHeaderHorizontalAlignment(element, (HorizontalAlignment)args.NewValue);
+            }
+        }
+
+        /// <summary>
+        /// The alignment of the horizontal tab headers in the <code>TabControl</code>.
+        /// </summary>
+        public static readonly DependencyProperty TabHeaderHorizontalAlignmentProperty = DependencyProperty.RegisterAttached(
+            "TabHeaderHorizontalAlignment",
+            typeof(HorizontalAlignment),
+            typeof(TabControlAssist),
+            new FrameworkPropertyMetadata(HorizontalAlignment.Left, FrameworkPropertyMetadataOptions.Inherits, TabHeaderHorizontalAlignmentPropertyChangedHandler)
         );
 
         /// <summary>
@@ -30,19 +72,28 @@ namespace MaterialDesignExtensions.Controls
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        public static HorizontalAlignment GetTabHeaderAlignment(DependencyObject element)
+        public static HorizontalAlignment GetTabHeaderHorizontalAlignment(DependencyObject element)
         {
-            return (HorizontalAlignment)element.GetValue(TabHeaderAlignmentProperty);
+            return (HorizontalAlignment)element.GetValue(TabHeaderHorizontalAlignmentProperty);
         }
-        
+
         /// <summary>
         /// Sets the alignment of the horizontal tab headers in the <code>TabControl</code>.
         /// </summary>
         /// <param name="element"></param>
         /// <param name="value"></param>
-        public static void SetTabHeaderAlignment(DependencyObject element, HorizontalAlignment value)
+        public static void SetTabHeaderHorizontalAlignment(DependencyObject element, HorizontalAlignment value)
         {
-            element.SetValue(TabHeaderAlignmentProperty, value);
+            element.SetValue(TabHeaderHorizontalAlignmentProperty, value);
+        }
+
+        private static void TabHeaderHorizontalAlignmentPropertyChangedHandler(DependencyObject element, DependencyPropertyChangedEventArgs args)
+        {
+            // hack to provide compatibility in the time before the breaking change of removing TabHeaderAlignmentProperty will be released
+            if ((HorizontalAlignment)args.NewValue != GetTabHeaderAlignment(element))
+            {
+                SetTabHeaderAlignment(element, (HorizontalAlignment)args.NewValue);
+            }
         }
 
         /// <summary>
