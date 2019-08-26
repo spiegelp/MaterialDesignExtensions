@@ -1,0 +1,73 @@
+﻿<div>
+    <h1>Material window</h1>
+    <p>
+        <code>MaterialWindow</code> is a custom window class featuring a Material Design like style.
+    </p>
+    <h2>Screenshots</h2>
+    <img src="https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/MaterialWindow.png" alt="Material window" />
+    <h2>API</h2>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>BorderBackgroundBrush</code>
+                    </td>
+                    <td>
+                        The color for the border and caption area background of the window.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>BorderForegroundBrush</code>
+                    </td>
+                    <td>
+                        The forground color for the caption area of the window.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>FadeContentIfInactive</code>
+                    </td>
+                    <td>
+                        Lets the content of the window fade out if the window is inactive. The default is <code>true</code> (enabled).
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <h2>Code example</h2>
+    <p>
+        To use the material window style, derive your windows class from <code>MaterialWindow</code>.
+    </p>
+    <pre class="language-csharp"><code class="language-csharp">using MaterialDesignExtensions.Controls;
+...
+namespace MaterialDesignExtensionsDemo
+{
+    public partial class MainWindow : MaterialWindow
+    {
+        ...
+    }
+}</code></pre>
+    <pre class="language-markup"><code class="language-markup">&lt;mde:MaterialWindow x:Class="MaterialDesignExtensionsDemo.MainWindow"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:system="clr-namespace:System;assembly=mscorlib"
+                            xmlns:local="clr-namespace:MaterialDesignExtensionsDemo"
+                            xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+                            mc:Ignorable="d"
+                            Title="Material Design Extensions - Demo" Height="800" Width="1300"&gt;
+    ...
+&lt;/mde:MaterialWindow&gt;</code></pre>
+    <script type="text/javascript">
+        appViewModel.prepareCodeSnippets();
+    </script>
+</div>

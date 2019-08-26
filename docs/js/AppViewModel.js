@@ -14,10 +14,11 @@ function AppViewModel(contentDivId, drawer) {
     ];
 
     self.documentationItems = [
-        new DocumentationItem('appbar', 'App bar', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/AppBar1.png', 'snippets/documentation/appbar.html'),
+        new DocumentationItem('appbar', 'App bar', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/MaterialWindow.png', 'snippets/documentation/appbar.html'),
         new DocumentationItem('autocomplete', 'Autocomplete', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/Autocomplete.png', 'snippets/documentation/autocomplete.html'),
         new DocumentationItem('filesystemcontrols', 'File system controls', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/OpenFileControl1.png', 'snippets/documentation/filesystemcontrols.html'),
         new DocumentationItem('gridlist', 'Grid list', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/GridList.png', 'snippets/documentation/gridlist.html'),
+        new DocumentationItem('materialwindow', 'Material window', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/MaterialWindow.png', 'snippets/documentation/materialwindow.html'),
         new DocumentationItem('navigation', 'Navigation', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/SideNavigation.png', 'snippets/documentation/navigation.html'),
         new DocumentationItem('oversizednumberspinner', 'Oversized number spinner', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/OversizedNumberSpinner.png', 'snippets/documentation/oversizednumberspinner.html'),
         new DocumentationItem('search', 'Search', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/PersistentSearch.png', 'snippets/documentation/search.html'),

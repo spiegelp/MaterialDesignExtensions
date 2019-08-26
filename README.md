@@ -39,6 +39,7 @@ Material Design Extensions features the following controls:
 | [Autocomplete](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/autocomplete) | Custom `Autocomplete` control | Done |
 | [Text box suggestions](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/textboxsuggestions) | Custom `TextBoxSuggestions` control | Done |
 | [Tabs](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/tabs) | Templates for `TabControl` ([specification](https://material.io/design/components/tabs.html)) | Done |
+| [Material window](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/materialwindow) | Custom `MaterialWindow` control | In development |
 
 # Screenshots
 ### Horizontal stepper
@@ -53,8 +54,8 @@ Material Design Extensions features the following controls:
 ### Tabs
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/TabControl1.png)
 
-### App bar
-![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/AppBar1.png)
+### Material window and app bar
+![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/MaterialWindow.png)
 
 ### Open directory
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/OpenDirectoryControl1.png)
