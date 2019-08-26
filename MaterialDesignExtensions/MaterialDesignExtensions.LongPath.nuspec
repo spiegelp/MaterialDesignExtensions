@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MaterialDesignExtensions.LongPath</id>
-    <version>2.7.0</version>
+    <version>2.8.0-a01</version>
     <title>MaterialDesignExtensions.LongPath</title>
     <authors>Philipp Spiegel</authors>
     <owners>Philipp Spiegel</owners>
@@ -22,7 +22,7 @@ If you do not need the long path support for older Windows and .NET version, ple
 Important notice: The configuration of Material Design Extensions changed in order to enable changing the theme at runtime. Please change your configuration according to App.xaml of the demo.</releaseNotes>
     <!--<readme>Readme.md</readme>-->
     <copyright>Copyright (c) 2017-2019 Spiegel Philipp</copyright>
-    <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner LongPath</tags>
+    <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window LongPath</tags>
     <dependencies>
       <dependency id="MaterialDesignColors" version="1.2.0" />
       <dependency id="MaterialDesignThemes" version="2.6.0" />

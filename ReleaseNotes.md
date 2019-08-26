@@ -119,7 +119,7 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Updated dependency to MaterialDesignThemes version 2.6.0
 #### Fixes
 * Fixed `DateTime` conversion inside `DateTimeAgoConverter`
-### vX.X.X (upcoming release)
+### v2.8.0 (upcoming release)
 #### Features
 * New window class `MaterialWindow` for a Material Design like styled window
 * Support of `TabStripPlacement` in `TabControl` styles
