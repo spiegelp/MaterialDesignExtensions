@@ -3,7 +3,10 @@
                     xmlns:local="clr-namespace:MaterialDesignExtensions.Themes"
                     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
+                    xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters"
                     xmlns:localization="clr-namespace:MaterialDesignExtensions.Localization">
+
+    <converters:NotNullToVisibilityConverter x:Key="notNullToVisibilityConverter" NullValue="Collapsed" />
 
     <Style x:Key="WindowButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Padding" Value="8,0,8,0" />
@@ -121,6 +124,7 @@
                             </Border.Style>
                             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="100*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
@@ -129,8 +133,11 @@
                                     <RowDefinition Height="100*" />
                                 </Grid.RowDefinitions>
                                 
+                                <!-- window icon -->
+                                <Image Source="{TemplateBinding Icon}" Width="24" Height="24" Margin="8,0,8,0" Visibility="{TemplateBinding Property=Icon, Converter={StaticResource notNullToVisibilityConverter}}" />
+
                                 <!-- window title -->
-                                <TextBlock Text="{TemplateBinding Title}" FontSize="14" Foreground="{TemplateBinding BorderForegroundBrush}" Margin="8,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" FontSize="14" Foreground="{TemplateBinding BorderForegroundBrush}" Margin="8,0,0,0" VerticalAlignment="Center">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Style.Triggers>
@@ -152,7 +159,7 @@
                                 </TextBlock>
                                 
                                 <!-- caption buttons -->
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Stretch">
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Stretch">
                                     <Button x:Name="minimizeButton" Style="{StaticResource WindowResizeButtonStyle}" ToolTip="{x:Static localization:Strings.Minimize}">
                                         <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="WindowMinimize" />
                                     </Button>
@@ -190,7 +197,7 @@
                                 </StackPanel>
                                 
                                 <!-- window content -->
-                                <Border Grid.ColumnSpan="2" Grid.Row="1" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Border Grid.ColumnSpan="3" Grid.Row="1" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                     <AdornerDecorator>
                                         <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}">
                                             <ContentPresenter.Style>
