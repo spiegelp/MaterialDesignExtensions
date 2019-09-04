@@ -53,12 +53,57 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="WindowResizeButtonStyle" BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type Button}">
+    <Style x:Key="WindowMinimizeButtonStyle" BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type Button}">
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="NoResize">
                 <Setter Property="Visibility" Value="Collapsed" />
+                <Setter Property="IsEnabled" Value="False" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanMinimize">
+                <Setter Property="Visibility" Value="Visible" />
+                <Setter Property="IsEnabled" Value="True" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanResize">
+                <Setter Property="Visibility" Value="Visible" />
+                <Setter Property="IsEnabled" Value="True" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanResizeWithGrip">
+                <Setter Property="Visibility" Value="Visible" />
+                <Setter Property="IsEnabled" Value="True" />
             </DataTrigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="WindowMaximizeRestoreButtonStyle" BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type Button}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="NoResize">
+                <Setter Property="Visibility" Value="Collapsed" />
+                <Setter Property="IsEnabled" Value="False" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanMinimize">
+                <Setter Property="Visibility" Value="Visible" />
+                <Setter Property="IsEnabled" Value="False" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanResize">
+                <Setter Property="Visibility" Value="Visible" />
+                <Setter Property="IsEnabled" Value="True" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanResizeWithGrip">
+                <Setter Property="Visibility" Value="Visible" />
+                <Setter Property="IsEnabled" Value="True" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Normal">
+                <Setter Property="ToolTip" Value="{x:Static localization:Strings.Maximize}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Maximized">
+                <Setter Property="ToolTip" Value="{x:Static localization:Strings.Restore}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="WindowCloseButtonStyle" BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type Button}">
+        <Setter Property="Visibility" Value="Visible" />
+        <Setter Property="IsEnabled" Value="True" />
     </Style>
 
     <Style x:Key="WindowButtonIconStyle" TargetType="{x:Type md:PackIcon}">
@@ -160,22 +205,10 @@
                                 
                                 <!-- caption buttons -->
                                 <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Stretch">
-                                    <Button x:Name="minimizeButton" Style="{StaticResource WindowResizeButtonStyle}" ToolTip="{x:Static localization:Strings.Minimize}">
+                                    <Button x:Name="minimizeButton" Style="{StaticResource WindowMinimizeButtonStyle}" ToolTip="{x:Static localization:Strings.Minimize}">
                                         <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="WindowMinimize" />
                                     </Button>
-                                    <Button x:Name="maximizeRestoreButton">
-                                        <Button.Style>
-                                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WindowResizeButtonStyle}">
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Normal">
-                                                        <Setter Property="ToolTip" Value="{x:Static localization:Strings.Maximize}" />
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Maximized">
-                                                        <Setter Property="ToolTip" Value="{x:Static localization:Strings.Restore}" />
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
+                                    <Button x:Name="maximizeRestoreButton" Style="{StaticResource WindowMaximizeRestoreButtonStyle}">
                                         <md:PackIcon>
                                             <md:PackIcon.Style>
                                                 <Style BasedOn="{StaticResource WindowButtonIconStyle}" TargetType="{x:Type md:PackIcon}">
@@ -191,7 +224,7 @@
                                             </md:PackIcon.Style>
                                         </md:PackIcon>
                                     </Button>
-                                    <Button x:Name="closeButton" Style="{StaticResource WindowButtonStyle}" ToolTip="{x:Static localization:Strings.Close}">
+                                    <Button x:Name="closeButton" Style="{StaticResource WindowCloseButtonStyle}" ToolTip="{x:Static localization:Strings.Close}">
                                         <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="WindowClose" />
                                     </Button>
                                 </StackPanel>
