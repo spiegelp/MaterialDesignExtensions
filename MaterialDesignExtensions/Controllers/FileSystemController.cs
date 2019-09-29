@@ -42,6 +42,8 @@ namespace MaterialDesignExtensions.Controllers
         private IFileFilter m_fileFilterToApply;
         private bool m_forceFileExtensionOfFileFilter;
 
+        private HashSet<DirectoryInfo> m_selectedDirectories;
+
         /// <summary>
         /// The current directory shown in the control.
         /// </summary>
@@ -307,6 +309,14 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        public HashSet<DirectoryInfo> SelectedDirectories
+        {
+            get
+            {
+                return m_selectedDirectories;
+            }
+        }
+
         /// <summary>
         /// The special directories (e.g. music directory) of the user.
         /// </summary>
@@ -344,7 +354,7 @@ namespace MaterialDesignExtensions.Controllers
 
             set
             {
-                if (!m_showHiddenFilesAndDirectories != value)
+                if (m_showHiddenFilesAndDirectories != value)
                 {
                     m_showHiddenFilesAndDirectories = value;
 
@@ -390,6 +400,8 @@ namespace MaterialDesignExtensions.Controllers
             m_fileFilters = null;
             m_fileFilterToApply = null;
             m_forceFileExtensionOfFileFilter = false;
+
+            m_selectedDirectories = new HashSet<DirectoryInfo>();
         }
 
         /// <summary>
@@ -465,6 +477,40 @@ namespace MaterialDesignExtensions.Controllers
             }
 
             UpdateCurrentDirectoryPathParts();
+        }
+
+        /// <summary>
+        /// Selects (not yetselected) or removes (already selected so remove it) a directory for the multiple selection feature.
+        /// </summary>
+        /// <param name="directory"></param>
+        public void SelectOrRemoveDirectoryForMultipleSelection(string directory)
+        {
+            SelectOrRemoveDirectoryForMultipleSelection(new DirectoryInfo(directory));
+        }
+
+        /// <summary>
+        /// Selects (not yetselected) or removes (already selected so remove it) a directory for the multiple selection feature.
+        /// </summary>
+        /// <param name="directory"></param>
+        public void SelectOrRemoveDirectoryForMultipleSelection(DirectoryInfo directory)
+        {
+            IEnumerable<DirectoryInfo> sameDirectories = m_selectedDirectories
+                .Where(directoryInfo => directoryInfo.FullName.ToLower() == directory.FullName.ToLower())
+                .ToList();
+
+            if (sameDirectories.Any())
+            {
+                foreach (DirectoryInfo sameDirectory in sameDirectories)
+                {
+                    m_selectedDirectories.Remove(sameDirectory);
+                }
+            }
+            else
+            {
+                m_selectedDirectories.Add(directory);
+            }
+
+            OnPropertyChanged(nameof(SelectedDirectories));
         }
 
         /// <summary>

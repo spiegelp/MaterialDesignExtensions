@@ -52,13 +52,13 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// An command called by by selecting a directory to open.
+        /// An command called by selecting a directory to open.
         /// </summary>
         public static readonly DependencyProperty DirectorySelectedCommandProperty = DependencyProperty.Register(
             nameof(DirectorySelectedCommand), typeof(ICommand), typeof(OpenDirectoryControl), new PropertyMetadata(null, null));
 
         /// <summary>
-        /// An command called by by selecting a directory to open.
+        /// An command called by selecting a directory to open.
         /// </summary>
         public ICommand DirectorySelectedCommand
         {

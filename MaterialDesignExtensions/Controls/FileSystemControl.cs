@@ -321,7 +321,7 @@ namespace MaterialDesignExtensions.Controls
         protected ScrollViewer m_pathPartsScrollViewer;
         protected ItemsControl m_pathPartsItemsControl;
         // use an ItemsControl instead of a ListBox, because the ListBox raises several selection changed events without an explicit user input
-        // another advantage; non selectable items such as headers can be added
+        // another advantage: non selectable items such as headers can be added
         protected ItemsControl m_fileSystemEntryItemsControl;
         // private to force the usage of the lazy getter, because it only works after applying the template
         private ScrollViewer m_fileSystemEntryItemsScrollViewer;
@@ -539,7 +539,7 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        protected void UpdateSelection()
+        protected virtual void UpdateSelection()
         {
             IEnumerable items = m_fileSystemEntryItemsControl?.ItemsSource;
 

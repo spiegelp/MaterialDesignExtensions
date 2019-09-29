@@ -65,4 +65,22 @@
         </Setter>
     </Style>
 
+    <Style TargetType="{x:Type controls:OpenMultipleDirectoriesDialog}">
+        <Setter Property="MinHeight" Value="350" />
+        <Setter Property="MaxHeight" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DialogHost}}}" />
+        <Setter Property="MinWidth" Value="350" />
+        <Setter Property="MaxWidth" Value="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DialogHost}}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:OpenMultipleDirectoriesDialog}">
+                    <controls:OpenMultipleDirectoriesControl x:Name="openMultipleDirectoriesControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignCardBackground}"
+                                                             CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             CreateNewDirectoryEnabled="{Binding Path=CreateNewDirectoryEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

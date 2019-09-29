@@ -115,6 +115,15 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Details ähnelt.
+        /// </summary>
+        public static string Details {
+            get {
+                return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Folder &apos;{0}&apos; not found ähnelt.
         /// </summary>
         public static string DirectoryXNotFound {
@@ -277,6 +286,15 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remove ähnelt.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Restore ähnelt.
         /// </summary>
         public static string Restore {
@@ -327,6 +345,15 @@ namespace MaterialDesignExtensions.Localization {
         public static string SelectDirectory {
             get {
                 return ResourceManager.GetString("SelectDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Selection ähnelt.
+        /// </summary>
+        public static string Selection {
+            get {
+                return ResourceManager.GetString("Selection", resourceCulture);
             }
         }
         

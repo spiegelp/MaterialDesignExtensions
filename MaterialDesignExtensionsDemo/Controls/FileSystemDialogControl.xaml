@@ -9,6 +9,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="100*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="8,16">
@@ -16,6 +17,9 @@
             <Button Content="OPEN FILE DIALOG" Margin="8,0" Click="OpenFileDialogButtonClickHandler" />
             <Button Content="SAVE FILE DIALOG" Margin="8,0" Click="SaveFileDialogButtonClickHandler" />
         </StackPanel>
-        <TextBlock Grid.Row="1" Text="{Binding Path=SelectedAction, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="8,16">
+            <Button Content="OPEN MULTIPLE DIRECTORIES DIALOG" Margin="8,0" Click="OpenMultipleDirectoriesDialogButtonClickHandler" />
+        </StackPanel>
+        <TextBlock Grid.Row="2" Text="{Binding Path=SelectedAction, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16" />
     </Grid>
 </UserControl>

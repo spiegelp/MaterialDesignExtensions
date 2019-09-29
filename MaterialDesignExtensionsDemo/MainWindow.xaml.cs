@@ -62,6 +62,7 @@ namespace MaterialDesignExtensionsDemo
                 new DividerNavigationItem(),
                 new SubheaderNavigationItem() { Subheader = "Directories and files" },
                 new FirstLevelNavigationItem() { Label = "Open directory", Icon = PackIconKind.Folder, NavigationItemSelectedCallback = item => new OpenDirectoryControlViewModel() },
+                new FirstLevelNavigationItem() { Label = "Open multiple directories", Icon = PackIconKind.Folder, NavigationItemSelectedCallback = item => new OpenMultipleDirectoriesControlViewModel() },
                 new FirstLevelNavigationItem() { Label = "Open file", Icon = PackIconKind.File, NavigationItemSelectedCallback = item => new OpenFileControlViewModel() },
                 new FirstLevelNavigationItem() { Label = "Save file", Icon = PackIconKind.File, NavigationItemSelectedCallback = item => new SaveFileControlViewModel() },
                 new FirstLevelNavigationItem() { Label = "Directory and file dialogs", NavigationItemSelectedCallback = item => new FileSystemDialogViewModel() },

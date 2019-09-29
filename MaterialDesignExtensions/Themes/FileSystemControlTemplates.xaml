@@ -134,7 +134,7 @@
     <DataTemplate x:Key="pathPartItemTemplate">
         <Border Padding="4">
             <Button Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                                                        Command="{x:Static controls:FileSystemControl.SelectDirectoryItemCommand}" CommandParameter="{Binding}">
+                    Command="{x:Static controls:FileSystemControl.SelectDirectoryItemCommand}" CommandParameter="{Binding}">
                 <DockPanel>
                     <wpfLib:PackIcon DockPanel.Dock="Right" Kind="ChevronRight" Height="24" Width="24" VerticalAlignment="Center" />
                     <TextBlock FontSize="14" Text="{Binding Path=Name}" Margin="0,0,4,0" VerticalAlignment="Center" />
@@ -335,6 +335,35 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="selectionItemsControlStyle" TargetType="{x:Type ItemsControl}">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="0,16,0,0" />
+        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                    <Border SnapsToDevicePixels="True">
+                        <ScrollViewer Focusable="False">
+                            <ItemsPresenter SnapsToDevicePixels="True" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="fileSystemEntryItemButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
@@ -518,6 +547,163 @@
                     </Button>
                 </Grid>
             </Button>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="directoryInfoItemMultipleTemplate">
+        <Grid Height="72" Background="Transparent" HorizontalAlignment="Stretch"
+              IsEnabled="{Binding Path=IsEnabled, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
+            <Border Background="{Binding Path=Foreground, Converter={StaticResource brushRoundConverter}, ElementName=itemButton}"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="True">
+                                <Setter Property="Opacity" Value="0.1" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="False">
+                                <Setter Property="Opacity" Value="0" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+            <Border Background="{Binding Path=Foreground, Converter={StaticResource brushRoundConverter}, ElementName=itemButton}"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                <Setter Property="Opacity" Value="0.1" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                                <Setter Property="Opacity" Value="0" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+            <Button x:Name="itemButton" Style="{StaticResource fileSystemEntryItemButtonStyle}"
+                    Command="{x:Static controls:FileSystemControl.SelectFileSystemEntryCommand}" CommandParameter="{Binding Path=Value}">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="72" />
+                        <ColumnDefinition Width="100*" />
+                        <ColumnDefinition Width="56" />
+                    </Grid.ColumnDefinitions>
+                    <ContentControl Content="{Binding Path=Value, Converter={StaticResource fileSystemInfoIconConverterThumbnail}}"
+                                    ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}" />
+                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock Foreground="{DynamicResource MaterialDesignBody}" FontSize="16"
+                                   Text="{Binding Path=Value.Name, Mode=OneTime}" ToolTip="{Binding Path=Value.Name, Mode=OneTime}" TextTrimming="CharacterEllipsis" />
+                        <TextBlock Foreground="{DynamicResource MaterialDesignBodyLight}" FontSize="12"
+                                   Text="{Binding Path=Value.LastWriteTime, Mode=OneTime, Converter={StaticResource dateTimeAgoConverter}}" Margin="0,4,0,0" />
+                    </StackPanel>
+                    <wpfLib:PopupBox Grid.Column="2" Foreground="{DynamicResource MaterialDesignDivider}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0"
+                                     Width="24" Height="24">
+                        <Border Padding="0,8,0,8">
+                            <StackPanel Orientation="Vertical">
+                                <Button Foreground="{DynamicResource MaterialDesignBody}"
+                                        Height="48" Margin="0" Padding="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                        Command="{x:Static controls:OpenMultipleDirectoriesControl.SelectDirectoryCommand}" CommandParameter="{Binding Path=Value}">
+                                    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                        <wpfLib:PackIcon DockPanel.Dock="Left" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                                         Margin="24,0,20,0" VerticalAlignment="Center">
+                                            <wpfLib:PackIcon.Style>
+                                                <Style TargetType="{x:Type wpfLib:PackIcon}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                                                            <Setter Property="Kind" Value="CheckboxBlankOutline" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                                            <Setter Property="Kind" Value="CheckboxMarked" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </wpfLib:PackIcon.Style>
+                                        </wpfLib:PackIcon>
+                                        <TextBlock Margin="0,0,24,0" VerticalAlignment="Center">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                                                            <Setter Property="Text" Value="{x:Static localization:Strings.Select}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                                            <Setter Property="Text" Value="{x:Static localization:Strings.Remove}" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </DockPanel>
+                                </Button>
+                                <Button Foreground="{DynamicResource MaterialDesignBody}"
+                                        Height="48" Margin="0" Padding="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                        Command="{x:Static controls:FileSystemControl.ShowInfoCommand}" CommandParameter="{Binding Path=Value}">
+                                    <DockPanel>
+                                        <wpfLib:PackIcon DockPanel.Dock="Left" Kind="Information" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                                         Margin="24,0,20,0" VerticalAlignment="Center" />
+                                        <TextBlock Text="{x:Static localization:Strings.Details}" Margin="0,0,24,0" VerticalAlignment="Center" />
+                                    </DockPanel>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </wpfLib:PopupBox>
+                </Grid>
+            </Button>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="directoryInfoMultipleSelectionTemplate">
+        <Grid Height="56" Background="Transparent" HorizontalAlignment="Stretch"
+              IsEnabled="{Binding Path=IsEnabled, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}">
+            <Border Background="{Binding Path=Foreground, Converter={StaticResource brushRoundConverter}, ElementName=nameTextBlock}"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="True">
+                                <Setter Property="Opacity" Value="0.1" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="False">
+                                <Setter Property="Opacity" Value="0" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="72" />
+                    <ColumnDefinition Width="100*" />
+                    <ColumnDefinition Width="56" />
+                </Grid.ColumnDefinitions>
+                <ContentControl Content="{Binding Converter={StaticResource fileSystemInfoIconConverterThumbnail}}"
+                                ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}" />
+                <TextBlock Grid.Column="1" x:Name="nameTextBlock" Foreground="{DynamicResource MaterialDesignBody}" FontSize="16"
+                            Text="{Binding Path=Name, Mode=OneTime}" ToolTip="{Binding Path=FullName, Mode=OneTime}" TextTrimming="CharacterEllipsis"
+                            VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                <Button Grid.Column="2" Cursor="Hand" ToolTip="{x:Static localization:Strings.Remove}"
+                        Command="{x:Static controls:OpenMultipleDirectoriesControl.SelectDirectoryCommand}" CommandParameter="{Binding}"
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="Transparent">
+                                            <ContentPresenter />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                    <wpfLib:PackIcon Grid.Column="2" Kind="Close" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        Foreground="{DynamicResource MaterialDesignDivider}" SnapsToDevicePixels="True" />
+                </Button>
+            </Grid>
         </Grid>
     </DataTemplate>
 
@@ -851,6 +1037,119 @@
                             </Grid>
                         </wpfLib:DrawerHost>
                         <wpfLib:Snackbar Grid.Row="2" Grid.RowSpan="3" MessageQueue="{TemplateBinding SnackbarMessageQueue}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:OpenMultipleDirectoriesControl}">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:OpenMultipleDirectoriesControl}">
+                    <Grid>
+                        <wpfLib:DrawerHost x:Name="drawerHost" LeftDrawerBackground="{TemplateBinding Background}" TopDrawerBackground="{TemplateBinding Background}"
+                                           BottomDrawerBackground="{TemplateBinding Background}" RightDrawerBackground="{TemplateBinding Background}"
+                                           HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                            <wpfLib:DrawerHost.TopDrawerContent>
+                                <ContentControl Content="{Binding Path=Controller, RelativeSource={RelativeSource TemplatedParent}, Mode=OneTime}"
+                                                ContentTemplate="{StaticResource specialDrivesOfControllerTemplate}" />
+                            </wpfLib:DrawerHost.TopDrawerContent>
+                            <wpfLib:DrawerHost.LeftDrawerContent>
+                                <ContentControl Content="{TemplateBinding FileSystemInfoToShow}" ContentTemplateSelector="{StaticResource fileSystemEntryInfoTemplateSelector}" Width="256" />
+                            </wpfLib:DrawerHost.LeftDrawerContent>
+                            <wpfLib:DrawerHost.BottomDrawerContent>
+                                <!--<ContentControl Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type controls:OpenDirectoryControl}}}" ContentTemplate="{StaticResource createNewDirectoryTemplate}" />-->
+                                <!-- we need some duplicate code unfortunately, because the binding will cause problems in dialogs -->
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                                    <TextBox HorizontalAlignment="Stretch" Margin="16"
+                                             Text="{Binding Path=NewDirectoryName, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                             wpfLib:HintAssist.Hint="{Binding Source={x:Static localization:Strings.NewDirectoryName}}" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="8,0,8,8">
+                                        <Button Style="{DynamicResource MaterialDesignFlatButton}"
+                                                Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
+                                                Command="{x:Static controls:FileSystemControl.CancelNewDirectoryCommand}" />
+                                        <Button Style="{DynamicResource MaterialDesignFlatButton}"
+                                                Content="{Binding Source={x:Static localization:Strings.Create}, Converter={StaticResource upperCaseConverter}}"
+                                                Margin="8,0,0,0"
+                                                Command="{x:Static controls:FileSystemControl.CreateNewDirectoryCommand}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </wpfLib:DrawerHost.BottomDrawerContent>
+                            <wpfLib:DrawerHost.RightDrawerContent>
+                                <Border MinWidth="300">
+                                    <StackPanel HorizontalAlignment="Stretch">
+                                        <TextBlock FontSize="14" FontWeight="Medium" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                                   Text="{x:Static localization:Strings.Selection}"
+                                                   Margin="72,16,0,0" />
+                                        <ItemsControl x:Name="selectionItemsControl" Style="{StaticResource selectionItemsControlStyle}"
+                                                      ItemTemplate="{StaticResource directoryInfoMultipleSelectionTemplate}" />
+                                    </StackPanel>
+                                </Border>
+                            </wpfLib:DrawerHost.RightDrawerContent>
+                            <Grid Background="{TemplateBinding Background}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="100*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <DockPanel Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
+                                           Height="64">
+                                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                        <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
+                                                ToolTip="{x:Static localization:Strings.Selection}"
+                                                Command="{x:Static controls:OpenMultipleDirectoriesControl.OpenSelectionDrawerCommand}">
+                                            <wpfLib:PackIcon Kind="FormatListBulletedSquare" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                             Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                                        </Button>
+                                        <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
+                                                Command="{x:Static controls:FileSystemControl.OpenSpecialDirectoriesDrawerCommand}">
+                                            <wpfLib:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                             Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                                        </Button>
+                                    </StackPanel>
+                                    <TextBlock FontSize="20" Margin="72,0,16,0"
+                                               Text="{x:Static localization:Strings.SelectDirectory}" VerticalAlignment="Center" />
+                                </DockPanel>
+                                <Border Grid.Row="1" MinHeight="64" MaxHeight="128"
+                                        Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                                    <ScrollViewer x:Name="pathPartsScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                        <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel Orientation="Horizontal" IsItemsHost="True" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Border>
+                                <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
+                                              ItemTemplate="{StaticResource directoryInfoItemMultipleTemplate}" />
+                                <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Text="{x:Static localization:Strings.EmptyDirectory}" TextWrapping="WrapWithOverflow"
+                                           FontSize="14" FontWeight="Medium"
+                                           Margin="16" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                <Border Grid.Row="3" MinHeight="52" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource MaterialDesignDivider}" SnapsToDevicePixels="True">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                        <Button Style="{DynamicResource MaterialDesignFlatButton}"
+                                                Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
+                                                Command="{x:Static controls:FileSystemControl.CancelCommand}"
+                                                Margin="0,0,8,0" />
+                                        <Button Style="{DynamicResource MaterialDesignFlatButton}"
+                                                IsEnabled="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notNullBooleanConverter}}"
+                                                Content="{Binding Source={x:Static localization:Strings.Select}, Converter={StaticResource upperCaseConverter}}"
+                                                Command="{x:Static controls:OpenMultipleDirectoriesControl.SelectMultipleDirectoriesCommand}"
+                                                Margin="0,0,8,0" />
+                                    </StackPanel>
+                                </Border>
+                                <Button Grid.Row="1" Style="{StaticResource showCreateNewDirectoryButtonStyle}" Command="{x:Static controls:FileSystemControl.ShowCreateNewDirectoryCommand}" />
+                            </Grid>
+                        </wpfLib:DrawerHost>
+                        <wpfLib:Snackbar Grid.Row="2" Grid.RowSpan="2" MessageQueue="{TemplateBinding SnackbarMessageQueue}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

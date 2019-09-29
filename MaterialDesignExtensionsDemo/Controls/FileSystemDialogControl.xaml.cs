@@ -98,5 +98,32 @@ namespace MaterialDesignExtensionsDemo.Controls
                 }
             }
         }
+
+        private async void OpenMultipleDirectoriesDialogButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            OpenMultipleDirectoriesDialogArguments dialogArgs = new OpenMultipleDirectoriesDialogArguments()
+            {
+                Width = 600,
+                Height = 400,
+                CreateNewDirectoryEnabled = true
+            };
+
+            OpenMultipleDirectoriesDialogResult result = await OpenMultipleDirectoriesDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
+
+            if (DataContext is FileSystemDialogViewModel viewModel)
+            {
+                if (!result.Canceled)
+                {
+                    StringBuilder sb = new StringBuilder("Selected directories: ");
+                    result.Directories.ForEach(directory => sb.Append($"{directory}; "));
+
+                    viewModel.SelectedAction = sb.ToString();
+                }
+                else
+                {
+                    viewModel.SelectedAction = "Cancel open directory";
+                }
+            }
+        }
     }
 }

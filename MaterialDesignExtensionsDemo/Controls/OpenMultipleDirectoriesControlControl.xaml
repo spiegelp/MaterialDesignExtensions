@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="MaterialDesignExtensionsDemo.Controls.OpenMultipleDirectoriesControlControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
+             xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="24" />
+            <RowDefinition Height="24" />
+            <RowDefinition Height="100*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Path=SelectedAction, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <CheckBox IsChecked="{Binding Path=ShowHiddenFilesAndDirectories, Mode=TwoWay}" VerticalAlignment="Center" />
+            <TextBlock Text="Show hidden directories" VerticalAlignment="Center" Margin="4,0,0,0" />
+            <CheckBox IsChecked="{Binding Path=ShowSystemFilesAndDirectories, Mode=TwoWay}" VerticalAlignment="Center" Margin="16,0,0,0" />
+            <TextBlock Text="Show system directories" VerticalAlignment="Center" Margin="4,0,0,0" />
+            <CheckBox IsChecked="{Binding Path=CreateNewDirectoryEnabled, Mode=TwoWay}" VerticalAlignment="Center" Margin="16,0,0,0" />
+            <TextBlock Text="Show create directory" VerticalAlignment="Center" Margin="4,0,0,0" />
+        </StackPanel>
+        <controls:OpenMultipleDirectoriesControl Grid.Row="2" Margin="16"
+                                                 ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, Mode=TwoWay}"
+                                                 ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, Mode=TwoWay}"
+                                                 CreateNewDirectoryEnabled="{Binding Path=CreateNewDirectoryEnabled, Mode=TwoWay}"
+                                                 DirectoriesSelected="OpenMultipleDirectoriesControl_DirectoriesSelected"
+                                                 Cancel="OpenMultipleDirectoriesControl_Cancel"/>
+    </Grid>
+</UserControl>

@@ -222,4 +222,13 @@
   <data name="Restore" xml:space="preserve">
     <value>Verkleinern</value>
   </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Auswahl</value>
+  </data>
 </root>

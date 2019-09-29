@@ -123,6 +123,7 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 #### Features
 * New window class `MaterialWindow` for a Material Design like styled window
 * Support of `TabStripPlacement` in `TabControl` styles
+* `OpenMultipleDirectoriesControl` and `OpenMultipleDirectoriesDialog` to select multiple directories
 #### Fixes
 * Fixed content layout of horizontal steppers
 #### Obsolete

@@ -162,6 +162,8 @@
     <Compile Include="Controls\OpenDirectoryDialog.cs" />
     <Compile Include="Controls\OpenFileControl.cs" />
     <Compile Include="Controls\OpenFileDialog.cs" />
+    <Compile Include="Controls\OpenMultipleDirectoriesControl.cs" />
+    <Compile Include="Controls\OpenMultipleDirectoriesDialog.cs" />
     <Compile Include="Controls\OversizedNumberSpinner.cs" />
     <Compile Include="Controls\PersistentSearch.cs" />
     <Compile Include="Controls\SaveFileControl.cs" />
