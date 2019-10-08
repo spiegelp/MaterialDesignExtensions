@@ -19,6 +19,7 @@
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="8,16">
             <Button Content="OPEN MULTIPLE DIRECTORIES DIALOG" Margin="8,0" Click="OpenMultipleDirectoriesDialogButtonClickHandler" />
+            <Button Content="OPEN MULTIPLE FILES DIALOG" Margin="8,0" Click="OpenMultipleFilesDialogButtonClickHandler" />
         </StackPanel>
         <TextBlock Grid.Row="2" Text="{Binding Path=SelectedAction, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16" />
     </Grid>

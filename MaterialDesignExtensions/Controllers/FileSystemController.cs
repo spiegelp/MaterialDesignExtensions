@@ -43,6 +43,7 @@ namespace MaterialDesignExtensions.Controllers
         private bool m_forceFileExtensionOfFileFilter;
 
         private HashSet<DirectoryInfo> m_selectedDirectories;
+        private HashSet<FileInfo> m_selectedFiles;
 
         /// <summary>
         /// The current directory shown in the control.
@@ -309,11 +310,25 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
+        /// <summary>
+        /// The selected directories for multiple selection controls.
+        /// </summary>
         public HashSet<DirectoryInfo> SelectedDirectories
         {
             get
             {
                 return m_selectedDirectories;
+            }
+        }
+
+        /// <summary>
+        /// The selected files for multiple selection controls.
+        /// </summary>
+        public HashSet<FileInfo> SelectedFiles
+        {
+            get
+            {
+                return m_selectedFiles;
             }
         }
 
@@ -402,6 +417,7 @@ namespace MaterialDesignExtensions.Controllers
             m_forceFileExtensionOfFileFilter = false;
 
             m_selectedDirectories = new HashSet<DirectoryInfo>();
+            m_selectedFiles = new HashSet<FileInfo>();
         }
 
         /// <summary>
@@ -511,6 +527,40 @@ namespace MaterialDesignExtensions.Controllers
             }
 
             OnPropertyChanged(nameof(SelectedDirectories));
+        }
+
+        /// <summary>
+        /// Selects (not yet selected) or removes (already selected so remove it) a file for the multiple selection feature.
+        /// </summary>
+        /// <param name="file"></param>
+        public void SelectOrRemoveFileForMultipleSelection(string file)
+        {
+            SelectOrRemoveFileForMultipleSelection(new FileInfo(file));
+        }
+
+        /// <summary>
+        /// Selects (not yet selected) or removes (already selected so remove it) a file for the multiple selection feature.
+        /// </summary>
+        /// <param name="file"></param>
+        public void SelectOrRemoveFileForMultipleSelection(FileInfo file)
+        {
+            IEnumerable<FileInfo> sameFiles = m_selectedFiles
+                .Where(fileInfo => fileInfo.FullName.ToLower() == file.FullName.ToLower())
+                .ToList();
+
+            if (sameFiles.Any())
+            {
+                foreach (FileInfo sameFile in sameFiles)
+                {
+                    m_selectedFiles.Remove(sameFile);
+                }
+            }
+            else
+            {
+                m_selectedFiles.Add(file);
+            }
+
+            OnPropertyChanged(nameof(SelectedFiles));
         }
 
         /// <summary>

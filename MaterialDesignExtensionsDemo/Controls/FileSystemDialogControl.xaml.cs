@@ -121,7 +121,34 @@ namespace MaterialDesignExtensionsDemo.Controls
                 }
                 else
                 {
-                    viewModel.SelectedAction = "Cancel open directory";
+                    viewModel.SelectedAction = "Cancel open multiple directories";
+                }
+            }
+        }
+
+        private async void OpenMultipleFilesDialogButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            OpenMultipleFilesDialogArguments dialogArgs = new OpenMultipleFilesDialogArguments()
+            {
+                Width = 600,
+                Height = 400,
+                Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml"
+            };
+
+            OpenMultipleFilesDialogResult result = await OpenMultipleFilesDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
+
+            if (DataContext is FileSystemDialogViewModel viewModel)
+            {
+                if (!result.Canceled)
+                {
+                    StringBuilder sb = new StringBuilder("Selected files: ");
+                    result.Files.ForEach(file => sb.Append($"{file}; "));
+
+                    viewModel.SelectedAction = sb.ToString();
+                }
+                else
+                {
+                    viewModel.SelectedAction = "Cancel open multiple files";
                 }
             }
         }

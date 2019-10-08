@@ -139,7 +139,7 @@ namespace MaterialDesignExtensions.Controls
             DirectoriesSelectedEventArgs eventArgs = new DirectoriesSelectedEventArgs(DirectoriesSelectedEvent, this, m_controller.SelectedDirectories.ToList());
             RaiseEvent(eventArgs);
 
-            if (DirectoriesSelectedCommand != null && DirectoriesSelectedCommand.CanExecute(m_controller.CurrentDirectory))
+            if (DirectoriesSelectedCommand != null && DirectoriesSelectedCommand.CanExecute(eventArgs.DirectoryInfoList))
             {
                 DirectoriesSelectedCommand.Execute(eventArgs.DirectoryInfoList);
             }

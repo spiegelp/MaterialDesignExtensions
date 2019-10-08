@@ -62,6 +62,9 @@
         <DataTemplate DataType="{x:Type viewModel:OpenFileControlViewModel}">
             <controls:OpenFileControlControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:OpenMultipleFilesControlViewModel}">
+            <controls:OpenMultipleFilesControlControl />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:SaveFileControlViewModel}">
             <controls:SaveFileControlControl />
         </DataTemplate>

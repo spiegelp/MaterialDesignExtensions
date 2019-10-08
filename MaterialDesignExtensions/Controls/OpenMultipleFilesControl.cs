@@ -10,6 +10,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+using MaterialDesignThemes.Wpf;
+
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
@@ -24,11 +26,17 @@ using FileInfo = Pri.LongPath.FileInfo;
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
-    /// The base control with common logic for <see cref="OpenFileControl" /> and <see cref="SaveFileControl" />.
+    /// A control for selecting multiple files.
     /// </summary>
-    public abstract class BaseFileControl : FileSystemControl
+    public class OpenMultipleFilesControl : FileSystemControl
     {
-        protected const string FileFiltersComboBoxName = "fileFiltersComboBox";
+        private const string FileFiltersComboBoxName = "fileFiltersComboBox";
+        private const string SelectionItemsControlName = "selectionItemsControl";
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand OpenSelectionDrawerCommand = new RoutedCommand();
 
         /// <summary>
         /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
@@ -36,24 +44,29 @@ namespace MaterialDesignExtensions.Controls
         public static readonly RoutedCommand SelectFileCommand = new RoutedCommand();
 
         /// <summary>
-        /// An event raised by selecting a file.
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
         /// </summary>
-        public static readonly RoutedEvent FileSelectedEvent = EventManager.RegisterRoutedEvent(
-            nameof(FileSelected), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(BaseFileControl));
+        public static readonly RoutedCommand SelectMultipleFilesCommand = new RoutedCommand();
 
         /// <summary>
-        /// An event raised by selecting a file.
+        /// An event raised by selecting files to open.
         /// </summary>
-        public event RoutedEventHandler FileSelected
+        public static readonly RoutedEvent FilesSelectedEvent = EventManager.RegisterRoutedEvent(
+            nameof(FilesSelected), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(OpenMultipleFilesControl));
+
+        /// <summary>
+        /// An event raised by selecting files to open.
+        /// </summary>
+        public event RoutedEventHandler FilesSelected
         {
             add
             {
-                AddHandler(FileSelectedEvent, value);
+                AddHandler(FilesSelectedEvent, value);
             }
 
             remove
             {
-                RemoveHandler(FileSelectedEvent, value);
+                RemoveHandler(FilesSelectedEvent, value);
             }
         }
 
@@ -61,10 +74,7 @@ namespace MaterialDesignExtensions.Controls
         /// True, to clear the cache during unloading the control.
         /// </summary>
         public static readonly DependencyProperty ClearCacheOnUnloadProperty = DependencyProperty.Register(
-                nameof(ClearCacheOnUnload),
-                typeof(bool),
-                typeof(BaseFileControl),
-                new PropertyMetadata(true));
+            nameof(ClearCacheOnUnload), typeof(bool), typeof(OpenMultipleFilesControl), new PropertyMetadata(true));
 
         /// <summary>
         /// True, to clear the cache during unloading the control.
@@ -83,49 +93,24 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// The current file of the control.
+        /// An command called by selecting files to open.
         /// </summary>
-        public static readonly DependencyProperty CurrentFileProperty = DependencyProperty.Register(
-                nameof(CurrentFile),
-                typeof(string),
-                typeof(BaseFileControl),
-                new PropertyMetadata(null, CurrentFileChangedHandler));
+        public static readonly DependencyProperty FilesSelectedCommandProperty = DependencyProperty.Register(
+            nameof(FilesSelectedCommand), typeof(ICommand), typeof(OpenMultipleFilesControl), new PropertyMetadata(null, null));
 
         /// <summary>
-        /// The current file of the control.
+        /// An command called by selecting files to open.
         /// </summary>
-        public string CurrentFile
+        public ICommand FilesSelectedCommand
         {
             get
             {
-                return (string)GetValue(CurrentFileProperty);
+                return (ICommand)GetValue(FilesSelectedCommandProperty);
             }
 
             set
             {
-                SetValue(CurrentFileProperty, value);
-            }
-        }
-
-        /// <summary>
-        /// An command called by selecting a file.
-        /// </summary>
-        public static readonly DependencyProperty FileSelectedCommandProperty = DependencyProperty.Register(
-            nameof(FileSelectedCommand), typeof(ICommand), typeof(BaseFileControl), new PropertyMetadata(null, null));
-
-        /// <summary>
-        /// An command called by selecting a file.
-        /// </summary>
-        public ICommand FileSelectedCommand
-        {
-            get
-            {
-                return (ICommand)GetValue(FileSelectedCommandProperty);
-            }
-
-            set
-            {
-                SetValue(FileSelectedCommandProperty, value);
+                SetValue(FilesSelectedCommandProperty, value);
             }
         }
 
@@ -135,10 +120,7 @@ namespace MaterialDesignExtensions.Controls
         /// (see https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter).
         /// </summary>
         public static readonly DependencyProperty FiltersProperty = DependencyProperty.Register(
-            nameof(Filters),
-            typeof(IList<IFileFilter>),
-            typeof(BaseFileControl),
-            new PropertyMetadata(null, FiltersChangedHandler));
+            nameof(Filters), typeof(IList<IFileFilter>), typeof(OpenMultipleFilesControl), new PropertyMetadata(null, FiltersChangedHandler));
 
         /// <summary>
         /// The possible file filters to select from for applying to the files inside the current directory.
@@ -163,10 +145,7 @@ namespace MaterialDesignExtensions.Controls
         /// The index of the file filter to apply to the files inside the current directory.
         /// </summary>
         public static readonly DependencyProperty FilterIndexProperty = DependencyProperty.Register(
-            nameof(FilterIndex),
-            typeof(int),
-            typeof(BaseFileControl),
-            new PropertyMetadata(0, FiltersChangedHandler));
+            nameof(FilterIndex), typeof(int), typeof(OpenMultipleFilesControl), new PropertyMetadata(0, FiltersChangedHandler));
 
         /// <summary>
         /// The index of the file filter to apply to the files inside the current directory.
@@ -188,10 +167,7 @@ namespace MaterialDesignExtensions.Controls
         /// Shows folders and files as a group with a header.
         /// </summary>
         public static readonly DependencyProperty GroupFoldersAndFilesProperty = DependencyProperty.Register(
-            nameof(GroupFoldersAndFiles),
-            typeof(bool),
-            typeof(BaseFileControl),
-            new PropertyMetadata(true));
+            nameof(GroupFoldersAndFiles), typeof(bool), typeof(OpenMultipleFilesControl), new PropertyMetadata(true));
 
         /// <summary>
         /// Shows folders and files as a group with a header.
@@ -209,17 +185,26 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        protected ComboBox m_fileFiltersComboBox;
+        private ComboBox m_fileFiltersComboBox;
+        private ItemsControl m_selectionItemsControl;
+
+        static OpenMultipleFilesControl()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(OpenMultipleFilesControl), new FrameworkPropertyMetadata(typeof(OpenMultipleFilesControl)));
+        }
 
         /// <summary>
-        /// Creates a new <see cref="BaseFileControl" />.
+        /// Creates a new <see cref="OpenMultipleFilesControl" />.
         /// </summary>
-        public BaseFileControl()
+        public OpenMultipleFilesControl()
             : base()
         {
             m_fileFiltersComboBox = null;
+            m_selectionItemsControl = null;
 
+            CommandBindings.Add(new CommandBinding(OpenSelectionDrawerCommand, OpenSelectionDrawerCommandHandler));
             CommandBindings.Add(new CommandBinding(SelectFileCommand, SelectFileCommandHandler));
+            CommandBindings.Add(new CommandBinding(SelectMultipleFilesCommand, SelectMultipleFilesCommandHandler, CanExecuteSelectMultipleFilesCommand));
         }
 
         public override void OnApplyTemplate()
@@ -229,7 +214,10 @@ namespace MaterialDesignExtensions.Controls
             m_fileFiltersComboBox = Template.FindName(FileFiltersComboBoxName, this) as ComboBox;
             m_fileFiltersComboBox.ItemsSource = Filters;
 
+            m_selectionItemsControl = Template.FindName(SelectionItemsControlName, this) as ItemsControl;
+
             UpdateFileFiltersVisibility();
+            UpdateSelectionList();
         }
 
         protected override void UnloadedHandler(object sender, RoutedEventArgs args)
@@ -242,16 +230,22 @@ namespace MaterialDesignExtensions.Controls
             base.UnloadedHandler(sender, args);
         }
 
-        protected virtual void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        private void OpenSelectionDrawerCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            DrawerHost drawerHost = (DrawerHost)Template.FindName(DrawerHostName, this);
+            drawerHost.IsRightDrawerOpen = true;
+        }
+
+        private void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
             try
             {
-                FileSelectedEventArgs eventArgs = new FileSelectedEventArgs(FileSelectedEvent, this, m_controller.CurrentFileFullName);
-                RaiseEvent(eventArgs);
-
-                if (FileSelectedCommand != null && FileSelectedCommand.CanExecute(m_controller.CurrentFileFullName))
+                if (args.Parameter != null)
                 {
-                    FileSelectedCommand.Execute(m_controller.CurrentFileFullName);
+                    if (args.Parameter is FileInfo fileInfo)
+                    {
+                        m_controller.SelectOrRemoveFileForMultipleSelection(fileInfo);
+                    }
                 }
             }
             catch (PathTooLongException)
@@ -260,22 +254,31 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private static void CurrentFileChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        private void SelectMultipleFilesCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            (obj as BaseFileControl)?.CurrentFileChangedHandler(args.NewValue as string);
+            FilesSelectedEventArgs eventArgs = new FilesSelectedEventArgs(FilesSelectedEvent, this, m_controller.SelectedFiles.ToList());
+            RaiseEvent(eventArgs);
+
+            if (FilesSelectedCommand != null && FilesSelectedCommand.CanExecute(eventArgs.FileInfoList))
+            {
+                FilesSelectedCommand.Execute(eventArgs.FileInfoList);
+            }
         }
 
-        protected abstract void CurrentFileChangedHandler(string newCurrentFile);
+        private void CanExecuteSelectMultipleFilesCommand(object sender, CanExecuteRoutedEventArgs args)
+        {
+            args.CanExecute = m_controller != null && m_controller.SelectedFiles != null && m_controller.SelectedFiles.Any();
+        }
 
         private static void FiltersChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             if (args.Property == FiltersProperty)
             {
-                (obj as BaseFileControl)?.FileFiltersChangedHandler(args.NewValue as IList<IFileFilter>);
+                (obj as OpenMultipleFilesControl)?.FileFiltersChangedHandler(args.NewValue as IList<IFileFilter>);
             }
             else if (args.Property == FilterIndexProperty)
             {
-                (obj as BaseFileControl)?.FileFiltersChangedHandler((int)args.NewValue);
+                (obj as OpenMultipleFilesControl)?.FileFiltersChangedHandler((int)args.NewValue);
             }
         }
 
@@ -308,7 +311,7 @@ namespace MaterialDesignExtensions.Controls
                 if (args.PropertyName == nameof(FileSystemController.DirectoriesAndFiles))
                 {
                     List<FileSystemInfo> items = m_controller.DirectoriesAndFiles;
-                    m_fileSystemEntryItemsControl.ItemsSource = GetFileSystemEntryItems(items);
+                    m_fileSystemEntryItemsControl.ItemsSource = GetFileSystemEntryItems();
 
                     if (items != null && items.Any())
                     {
@@ -316,19 +319,6 @@ namespace MaterialDesignExtensions.Controls
                     }
 
                     UpdateListVisibility();
-                }
-                else if (args.PropertyName == nameof(FileSystemController.CurrentFileFullName))
-                {
-                    if (m_controller.CurrentFileFullName != null)
-                    {
-                        CurrentFile = m_controller.CurrentFileFullName;
-                    }
-                    else
-                    {
-                        CurrentFile = null;
-                    }
-
-                    UpdateSelection();
                 }
                 else if (args.PropertyName == nameof(FileSystemController.FileFilters))
                 {
@@ -354,6 +344,11 @@ namespace MaterialDesignExtensions.Controls
 
                     FilterIndex = filterIndex;
                 }
+                else if (args.PropertyName == nameof(FileSystemController.SelectedFiles))
+                {
+                    UpdateSelection();
+                    UpdateSelectionList();
+                }
             }
 
             base.ControllerPropertyChangedHandler(sender, args);
@@ -361,16 +356,13 @@ namespace MaterialDesignExtensions.Controls
 
         protected override IEnumerable GetFileSystemEntryItems()
         {
-            return GetFileSystemEntryItems(m_controller.DirectoriesAndFiles);
-        }
+            ISet<string> fileNames = new HashSet<string>(m_controller.SelectedFiles.Select(fileInfo => fileInfo.FullName.ToLower()));
 
-        protected IEnumerable GetFileSystemEntryItems(List<FileSystemInfo> directoriesAndFiles)
-        {
             return FileControlHelper.GetFileSystemEntryItems(
-                directoriesAndFiles,
+                m_controller.DirectoriesAndFiles,
                 m_controller,
                 GroupFoldersAndFiles,
-                fileInfo => fileInfo.FullName == m_controller.CurrentFileFullName
+                fileInfo => fileNames.Contains(fileInfo.FullName.ToLower())
             );
         }
 
@@ -378,51 +370,68 @@ namespace MaterialDesignExtensions.Controls
         {
             FileControlHelper.UpdateFileFiltersVisibility(m_fileFiltersComboBox);
         }
+
+        protected override void UpdateSelection()
+        {
+            IEnumerable items = m_fileSystemEntryItemsControl?.ItemsSource;
+
+            if (items != null)
+            {
+                ISet<string> fileNames = new HashSet<string>(m_controller.SelectedFiles.Select(fileInfo => fileInfo.FullName.ToLower()));
+
+                foreach (object item in items)
+                {
+                    if (item is FileInfoItem fileInfoItem)
+                    {
+                        fileInfoItem.IsSelected = fileNames.Contains(fileInfoItem.Value.FullName.ToLower());
+                    }
+                }
+            }
+        }
+
+        private void UpdateSelectionList()
+        {
+            m_selectionItemsControl.ItemsSource = m_controller.SelectedFiles
+                .OrderBy(file => file.Name.ToLower())
+                .ThenBy(file => file.Directory.FullName.ToLower());
+        }
     }
 
     /// <summary>
-    /// The arguments for the <see cref="BaseFileControl.FileSelected" /> event.
+    /// The arguments for the <see cref="OpenMultipleFilesControl.FilesSelected" /> event.
     /// </summary>
-    public class FileSelectedEventArgs : RoutedEventArgs
+    public class FilesSelectedEventArgs : RoutedEventArgs
     {
         /// <summary>
-        /// The selected file as <see cref="FileInfo" />.
+        /// The selected files as <see cref="FileInfo" />.
         /// </summary>
-        public FileInfo FileInfo { get; private set; }
+        public List<FileInfo> FileInfoList { get; private set; }
 
         /// <summary>
-        /// The selected file as full filename string.
+        /// The selected files as full filename string.
         /// </summary>
-        public string File { get; private set; }
-
-        /// <summary>
-        /// Creates a new <see cref="FileSelectedEventArgs" />.
-        /// </summary>
-        /// <param name="routedEvent"></param>
-        /// <param name="source">The source object</param>
-        /// <param name="fileInfo">The selected file</param>
-        public FileSelectedEventArgs(RoutedEvent routedEvent, object source, FileInfo fileInfo)
-            : base(routedEvent, source)
+        public List<string> Files
         {
-            FileInfo = fileInfo;
-            File = fileInfo?.FullName;
+            get
+            {
+                return FileInfoList
+                    .Select(fileInfo => fileInfo.FullName)
+                    .ToList();
+            }
         }
 
         /// <summary>
-        /// Creates a new <see cref="FileSelectedEventArgs" />.
+        /// Creates a new <see cref="FilesSelectedEventArgs" />.
         /// </summary>
         /// <param name="routedEvent"></param>
         /// <param name="source">The source object</param>
-        /// <param name="file">The full filename of the selected file</param>
-        public FileSelectedEventArgs(RoutedEvent routedEvent, object source, string file)
+        /// <param name="fileInfoList">The list selected files</param>
+        public FilesSelectedEventArgs(RoutedEvent routedEvent, object source, List<FileInfo> fileInfoList)
             : base(routedEvent, source)
         {
-            File = file;
-
-            if (!string.IsNullOrWhiteSpace(file))
-            {
-                FileInfo = new FileInfo(file);
-            }
+            FileInfoList = fileInfoList
+                .OrderBy(directoryInfo => directoryInfo.FullName.ToLower())
+                .ToList();
         }
     }
 }

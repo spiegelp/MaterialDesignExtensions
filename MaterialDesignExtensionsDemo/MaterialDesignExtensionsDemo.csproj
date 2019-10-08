@@ -113,6 +113,9 @@
     <Compile Include="Controls\OpenMultipleDirectoriesControlControl.xaml.cs">
       <DependentUpon>OpenMultipleDirectoriesControlControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OpenMultipleFilesControlControl.xaml.cs">
+      <DependentUpon>OpenMultipleFilesControlControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OversizedNumberSpinnerControl.xaml.cs">
       <DependentUpon>OversizedNumberSpinnerControl.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,7 @@
     <Compile Include="ViewModel\OpenDirectoryControlViewModel.cs" />
     <Compile Include="ViewModel\OpenFileControlViewModel.cs" />
     <Compile Include="ViewModel\OpenMultipleDirectoriesControlViewModel.cs" />
+    <Compile Include="ViewModel\OpenMultipleFilesControlViewModel.cs" />
     <Compile Include="ViewModel\OversizedNumberSpinnerViewModel.cs" />
     <Compile Include="ViewModel\SaveFileControlViewModel.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />
@@ -191,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\OpenMultipleDirectoriesControlControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OpenMultipleFilesControlControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

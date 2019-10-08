@@ -143,6 +143,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AutocompleteController.cs" />
     <Compile Include="Controllers\BitmapImageHelper.cs" />
+    <Compile Include="Controllers\FileControlHelper.cs" />
     <Compile Include="Controllers\FileNameHelper.cs" />
     <Compile Include="Controllers\FileSystemController.cs" />
     <Compile Include="Controllers\FileFilterHelper.cs" />
@@ -164,6 +165,8 @@
     <Compile Include="Controls\OpenFileDialog.cs" />
     <Compile Include="Controls\OpenMultipleDirectoriesControl.cs" />
     <Compile Include="Controls\OpenMultipleDirectoriesDialog.cs" />
+    <Compile Include="Controls\OpenMultipleFilesControl.cs" />
+    <Compile Include="Controls\OpenMultipleFilesDialog.cs" />
     <Compile Include="Controls\OversizedNumberSpinner.cs" />
     <Compile Include="Controls\PersistentSearch.cs" />
     <Compile Include="Controls\SaveFileControl.cs" />
