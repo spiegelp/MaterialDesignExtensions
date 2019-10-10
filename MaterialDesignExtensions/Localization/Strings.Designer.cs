@@ -259,6 +259,24 @@ namespace MaterialDesignExtensions.Localization {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No selected directories ähnelt.
+        /// </summary>
+        public static string NoSelectedDirectories {
+            get {
+                return ResourceManager.GetString("NoSelectedDirectories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No selected files ähnelt.
+        /// </summary>
+        public static string NoSelectedFiles {
+            get {
+                return ResourceManager.GetString("NoSelectedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Open ähnelt.
         /// </summary>
         public static string Open {

@@ -34,6 +34,7 @@ Material Design Extensions features the following controls:
 | [Open file](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/filesystemcontrols) | Custom `OpenFileControl` and `OpenFileDialog` control | Done |
 | [Save file](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/filesystemcontrols) | Custom `SaveFileControl` and `SaveFileDialog` control | Done |
 | [Open multiple directories](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/filesystemcontrols) | Custom `OpenMultipleDirectoriesControl` and `OpenMultipleDirectoriesDialog` control | In development |
+| [Open multiple files](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/filesystemcontrols) | Custom `OpenMultipleFilesControl` and `OpenMultipleFilesDialog` control | In development |
 | [App bar](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/appbar) | Custom `AppBar` control ([specification](https://material.io/design/components/app-bars-top.html#usage)) | Done |
 | [Persistent search](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/search) | Custom `PersistentSearch` control ([specification](https://material.io/design/navigation/search.html)) | Done |
 | [Side navigation](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/navigation) | Custom `SideNavigation` control ([specification](https://material.io/design/components/navigation-drawer.html#usage)) | Done |

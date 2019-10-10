@@ -32,6 +32,7 @@ namespace MaterialDesignExtensions.Controls
     {
         private const string FileFiltersComboBoxName = "fileFiltersComboBox";
         private const string SelectionItemsControlName = "selectionItemsControl";
+        private const string EmptySelectionTextBlockName = "emptySelectionTextBlock";
 
         /// <summary>
         /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
@@ -187,6 +188,7 @@ namespace MaterialDesignExtensions.Controls
 
         private ComboBox m_fileFiltersComboBox;
         private ItemsControl m_selectionItemsControl;
+        private TextBlock m_emptySelectionTextBlock;
 
         static OpenMultipleFilesControl()
         {
@@ -201,6 +203,7 @@ namespace MaterialDesignExtensions.Controls
         {
             m_fileFiltersComboBox = null;
             m_selectionItemsControl = null;
+            m_emptySelectionTextBlock = null;
 
             CommandBindings.Add(new CommandBinding(OpenSelectionDrawerCommand, OpenSelectionDrawerCommandHandler));
             CommandBindings.Add(new CommandBinding(SelectFileCommand, SelectFileCommandHandler));
@@ -216,8 +219,12 @@ namespace MaterialDesignExtensions.Controls
 
             m_selectionItemsControl = Template.FindName(SelectionItemsControlName, this) as ItemsControl;
 
+            m_emptySelectionTextBlock = Template.FindName(EmptySelectionTextBlockName, this) as TextBlock;
+
             UpdateFileFiltersVisibility();
             UpdateSelectionList();
+
+            UpdateSelectionListVisibility();
         }
 
         protected override void UnloadedHandler(object sender, RoutedEventArgs args)
@@ -348,6 +355,7 @@ namespace MaterialDesignExtensions.Controls
                 {
                     UpdateSelection();
                     UpdateSelectionList();
+                    UpdateSelectionListVisibility();
                 }
             }
 
@@ -394,6 +402,25 @@ namespace MaterialDesignExtensions.Controls
             m_selectionItemsControl.ItemsSource = m_controller.SelectedFiles
                 .OrderBy(file => file.Name.ToLower())
                 .ThenBy(file => file.Directory.FullName.ToLower());
+        }
+
+        /// <summary>
+        /// Shows the list of the selected directories or hides it if it is empty. A message will be show instead of an empty list.
+        /// </summary>
+        protected void UpdateSelectionListVisibility()
+        {
+            if (m_selectionItemsControl != null
+                && m_selectionItemsControl.ItemsSource != null
+                && m_selectionItemsControl.ItemsSource.GetEnumerator().MoveNext())
+            {
+                m_selectionItemsControl.Visibility = Visibility.Visible;
+                m_emptySelectionTextBlock.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                m_selectionItemsControl.Visibility = Visibility.Collapsed;
+                m_emptySelectionTextBlock.Visibility = Visibility.Visible;
+            }
         }
     }
 

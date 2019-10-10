@@ -231,4 +231,10 @@
   <data name="Selection" xml:space="preserve">
     <value>Selection</value>
   </data>
+  <data name="NoSelectedDirectories" xml:space="preserve">
+    <value>No selected directories</value>
+  </data>
+  <data name="NoSelectedFiles" xml:space="preserve">
+    <value>No selected files</value>
+  </data>
 </root>
