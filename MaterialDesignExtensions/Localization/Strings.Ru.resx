@@ -135,6 +135,9 @@
   <data name="Desktop" xml:space="preserve">
     <value>Рабочий стол</value>
   </data>
+  <data name="Details" xml:space="preserve">
+    <value>Информация</value>
+  </data>
   <data name="DirectoryXNotFound" xml:space="preserve">
     <value>Папка '{0}' не найдена</value>
   </data>
@@ -168,11 +171,23 @@
   <data name="LongPathsAreNotSupported" xml:space="preserve">
     <value>Длинные пути не поддерживаются</value>
   </data>
+  <data name="Maximize" xml:space="preserve">
+    <value>Развернуть</value>
+  </data>
+  <data name="Minimize" xml:space="preserve">
+    <value>Свернуть</value>
+  </data>
   <data name="Music" xml:space="preserve">
     <value>Музыка</value>
   </data>
   <data name="NewDirectoryName" xml:space="preserve">
     <value>Название новой директории</value>
+  </data>
+  <data name="NoSelectedDirectories" xml:space="preserve">
+    <value>Не выбраны директории</value>
+  </data>
+  <data name="NoSelectedFiles" xml:space="preserve">
+    <value>Не выбраны файлы</value>
   </data>
   <data name="Open" xml:space="preserve">
     <value>Открыть</value>
@@ -182,6 +197,12 @@
   </data>
   <data name="Pictures" xml:space="preserve">
     <value>Изображения</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Восстановить</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
@@ -197,6 +218,9 @@
   </data>
   <data name="SelectDirectory" xml:space="preserve">
     <value>Выбрать папку</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Выбрано</value>
   </data>
   <data name="TheDirectoryNameIsInvalid" xml:space="preserve">
     <value>Некорректное наименование директории</value>
