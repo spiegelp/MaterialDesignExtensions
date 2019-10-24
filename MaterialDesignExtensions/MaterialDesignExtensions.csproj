@@ -199,8 +199,8 @@
     <Compile Include="Converters\ObjectHasTypeConverter.cs" />
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
     <Compile Include="Converters\UpperCaseConverter.cs" />
-    <Compile Include="Localization\Strings.Ru.Designer.cs">
-      <DependentUpon>Strings.Ru.resx</DependentUpon>
+    <Compile Include="Localization\Strings.ru-ru.Designer.cs">
+      <DependentUpon>Strings.ru-ru.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -262,9 +262,9 @@
     <Compile Include="TemplateSelectors\HorizontalStepperHeaderTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\NavigationItemKindTemplateSelector.cs" />
     <Compile Include="Themes\PaletteHelper.cs" />
-    <EmbeddedResource Include="Localization\Strings.Ru.resx">
+    <EmbeddedResource Include="Localization\Strings.ru-ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Ru.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings.ru-ru.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\Strings.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
