@@ -141,6 +141,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Internal\AutocompleteCommands.cs" />
+    <Compile Include="Commands\Internal\FileSystemControlCommands.cs" />
+    <Compile Include="Commands\Internal\OversizedNumberSpinnerCommands.cs" />
+    <Compile Include="Commands\Internal\SearchControlCommands.cs" />
+    <Compile Include="Commands\Internal\SideNavigationCommands.cs" />
+    <Compile Include="Commands\Internal\StepperCommands.cs" />
+    <Compile Include="Commands\Internal\TextBoxSuggestionsCommands.cs" />
     <Compile Include="Controllers\AutocompleteController.cs" />
     <Compile Include="Controllers\BitmapImageHelper.cs" />
     <Compile Include="Controllers\FileControlHelper.cs" />

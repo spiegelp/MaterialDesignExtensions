@@ -12,6 +12,7 @@ using System.Windows.Input;
 
 using MaterialDesignThemes.Wpf;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
@@ -33,21 +34,6 @@ namespace MaterialDesignExtensions.Controls
         private const string FileFiltersComboBoxName = "fileFiltersComboBox";
         private const string SelectionItemsControlName = "selectionItemsControl";
         private const string EmptySelectionTextBlockName = "emptySelectionTextBlock";
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand OpenSelectionDrawerCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectFileCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectMultipleFilesCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by selecting files to open.
@@ -205,9 +191,9 @@ namespace MaterialDesignExtensions.Controls
             m_selectionItemsControl = null;
             m_emptySelectionTextBlock = null;
 
-            CommandBindings.Add(new CommandBinding(OpenSelectionDrawerCommand, OpenSelectionDrawerCommandHandler));
-            CommandBindings.Add(new CommandBinding(SelectFileCommand, SelectFileCommandHandler));
-            CommandBindings.Add(new CommandBinding(SelectMultipleFilesCommand, SelectMultipleFilesCommandHandler, CanExecuteSelectMultipleFilesCommand));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.OpenSelectionDrawerCommand, OpenSelectionDrawerCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectFileCommand, SelectFileCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectMultipleFilesCommand, SelectMultipleFilesCommandHandler, CanExecuteSelectMultipleFilesCommand));
         }
 
         public override void OnApplyTemplate()

@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
-                    xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls">
+                    xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
+                    xmlns:internalCommands="clr-namespace:MaterialDesignExtensions.Commands.Internal">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
@@ -124,15 +125,7 @@
                         <Border Grid.Row="2" Background="{DynamicResource MaterialDesignSeperator}" SnapsToDevicePixels="True" HorizontalAlignment="Stretch" Height="1" />
                         <Button Grid.RowSpan="2" Style="{StaticResource MaterialDesignOverSizedNumberSpinnerPlusButton}"
                                 Background="{TemplateBinding Background}"
-                                Command="{x:Static controls:OversizedNumberSpinner.PlusCommand}">
-                            <!--<Viewbox>
-                                <Canvas Width="24" Height="35">
-                                    <Path Data="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" SnapsToDevicePixels="True"
-                                          Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
-                                          Stroke="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}">
-                                    </Path>
-                                </Canvas>
-                            </Viewbox>-->
+                                Command="{x:Static internalCommands:OversizedNumberSpinnerCommands.PlusCommand}">
                             <wpf:PackIcon Kind="ChevronUp" Foreground="{TemplateBinding Foreground}" Width="30" Height="30" />
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
@@ -142,18 +135,7 @@
                         </Button>
                         <Button Grid.Row="3" Grid.RowSpan="2" x:Name="PlusButton" Style="{StaticResource MaterialDesignOverSizedNumberSpinnerMinusButton}"
                                 Background="{TemplateBinding Background}"
-                                Command="{x:Static controls:OversizedNumberSpinner.MinusCommand}">
-                            <!--<Viewbox HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <Canvas Width="24" Height="35" RenderTransformOrigin="0.5, 0.5">
-                                    <Canvas.RenderTransform>
-                                        <RotateTransform Angle="180" />
-                                    </Canvas.RenderTransform>
-                                    <Path Data="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" SnapsToDevicePixels="True"
-                                          Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
-                                          Stroke="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}">
-                                    </Path>
-                                </Canvas>
-                            </Viewbox>-->
+                                Command="{x:Static internalCommands:OversizedNumberSpinnerCommands.MinusCommand}">
                             <wpf:PackIcon Kind="ChevronDown" Foreground="{TemplateBinding Foreground}" Width="30" Height="30" />
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
@@ -161,7 +143,7 @@
                                 </EventTrigger>
                             </Button.Triggers>
                         </Button>
-                        <Button Grid.Row="1" Grid.RowSpan="3" Command="{x:Static controls:OversizedNumberSpinner.EditValueCommand}">
+                        <Button Grid.Row="1" Grid.RowSpan="3" Command="{x:Static internalCommands:OversizedNumberSpinnerCommands.EditValueCommand}">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignOverSizedNumberSpinnerValueButton}">
                                     <Style.Triggers>

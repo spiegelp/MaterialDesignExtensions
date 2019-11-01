@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+using MaterialDesignExtensions.Commands.Internal;
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
@@ -15,21 +17,6 @@ namespace MaterialDesignExtensions.Controls
     public class OversizedNumberSpinner : Control
     {
         private const string ValueTextBoxName = "ValueTextBox";
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand EditValueCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand MinusCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand PlusCommand = new RoutedCommand();
 
         /// <summary>
         /// True, if the editing mode with the textbox is active.
@@ -132,9 +119,9 @@ namespace MaterialDesignExtensions.Controls
         public OversizedNumberSpinner()
             : base()
         {
-            CommandBindings.Add(new CommandBinding(EditValueCommand, EditValueCommandHandler));
-            CommandBindings.Add(new CommandBinding(MinusCommand, MinusCommandHandler));
-            CommandBindings.Add(new CommandBinding(PlusCommand, PlusCommandHandler));
+            CommandBindings.Add(new CommandBinding(OversizedNumberSpinnerCommands.EditValueCommand, EditValueCommandHandler));
+            CommandBindings.Add(new CommandBinding(OversizedNumberSpinnerCommands.MinusCommand, MinusCommandHandler));
+            CommandBindings.Add(new CommandBinding(OversizedNumberSpinnerCommands.PlusCommand, PlusCommandHandler));
 
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;

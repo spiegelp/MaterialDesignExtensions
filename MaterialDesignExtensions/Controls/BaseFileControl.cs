@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
@@ -29,11 +30,6 @@ namespace MaterialDesignExtensions.Controls
     public abstract class BaseFileControl : FileSystemControl
     {
         protected const string FileFiltersComboBoxName = "fileFiltersComboBox";
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectFileCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by selecting a file.
@@ -219,7 +215,7 @@ namespace MaterialDesignExtensions.Controls
         {
             m_fileFiltersComboBox = null;
 
-            CommandBindings.Add(new CommandBinding(SelectFileCommand, SelectFileCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectFileCommand, SelectFileCommandHandler));
         }
 
         public override void OnApplyTemplate()

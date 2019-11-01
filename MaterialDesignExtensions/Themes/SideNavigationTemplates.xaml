@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
+                    xmlns:internalCommands="clr-namespace:MaterialDesignExtensions.Commands.Internal"
                     xmlns:model="clr-namespace:MaterialDesignExtensions.Model"
                     xmlns:templateSelectors="clr-namespace:MaterialDesignExtensions.TemplateSelectors">
 
@@ -171,7 +172,7 @@
 
     <DataTemplate x:Key="selectableNavigationItemTemplate">
         <Button Style="{StaticResource navigationItemButtonStyle}" Content="{Binding}"
-                Command="{x:Static controls:SideNavigation.SelectNavigationItemCommand}" CommandParameter="{Binding}" />
+                Command="{x:Static internalCommands:SideNavigationCommands.SelectNavigationItemCommand}" CommandParameter="{Binding}" />
     </DataTemplate>
 
     <DataTemplate x:Key="notSelectableNavigationItemTemplate">

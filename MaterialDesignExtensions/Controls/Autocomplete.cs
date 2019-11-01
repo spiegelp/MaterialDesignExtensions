@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
@@ -23,11 +24,6 @@ namespace MaterialDesignExtensions.Controls
         private static readonly string AutocompleteItemsPopupName = "autocompleteItemsPopup";
         private static readonly string ClearButtonName = "clearButton";
         private static readonly string SearchTextBoxName = "searchTextBox";
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectAutocompleteItemCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by changing the selected item.
@@ -272,7 +268,7 @@ namespace MaterialDesignExtensions.Controls
 
             m_autocompleteController = new AutocompleteController() { AutocompleteSource = AutocompleteSource };
 
-            CommandBindings.Add(new CommandBinding(SelectAutocompleteItemCommand, SelectAutocompleteItemCommandHandler));
+            CommandBindings.Add(new CommandBinding(AutocompleteCommands.SelectAutocompleteItemCommand, SelectAutocompleteItemCommandHandler));
         }
 
         public override void OnApplyTemplate()

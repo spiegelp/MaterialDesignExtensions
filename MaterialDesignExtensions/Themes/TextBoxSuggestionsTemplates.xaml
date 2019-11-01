@@ -3,7 +3,8 @@
                     xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:convertersLib="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
-                    xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters">
+                    xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters"
+                    xmlns:internalCommands="clr-namespace:MaterialDesignExtensions.Commands.Internal">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
@@ -104,7 +105,7 @@
                                                         </Border.Style>
                                                     </Border>
                                                     <Button x:Name="itemButton" Padding="16,8,16,8"
-                                                            Command="{x:Static controls:TextBoxSuggestions.SelectSuggestionItemCommand}" CommandParameter="{Binding}">
+                                                            Command="{x:Static internalCommands:TextBoxSuggestionsCommands.SelectSuggestionItemCommand}" CommandParameter="{Binding}">
                                                         <Button.Style>
                                                             <Style TargetType="{x:Type Button}">
                                                                 <Setter Property="Background" Value="Transparent" />

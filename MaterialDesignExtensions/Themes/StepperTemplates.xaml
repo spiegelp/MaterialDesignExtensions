@@ -4,6 +4,7 @@
                     xmlns:convertersLib="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
                     xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
+                    xmlns:internalCommands="clr-namespace:MaterialDesignExtensions.Commands.Internal"
                     xmlns:model="clr-namespace:MaterialDesignExtensions.Model"
                     xmlns:templateSelectors="clr-namespace:MaterialDesignExtensions.TemplateSelectors">
 
@@ -267,7 +268,7 @@
                                         <ItemsControl.Resources>
                                             <DataTemplate x:Key="firstHorizontalStepHeaderTemplate" DataType="{x:Type model:StepperStepViewModel}">
                                                 <!-- header as button to switch steps in non-linear steppers -->
-                                                <Button Command="{x:Static controls:Stepper.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignStepButton}">
+                                                <Button Command="{x:Static internalCommands:StepperCommands.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignStepButton}">
                                                     <Grid HorizontalAlignment="Stretch">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="auto" />
@@ -288,7 +289,7 @@
                                             </DataTemplate>
                                             <DataTemplate x:Key="intermediateHorizontalStepHeaderTemplate" DataType="{x:Type model:StepperStepViewModel}">
                                                 <!-- header as button to switch steps in non-linear steppers -->
-                                                <Button Command="{x:Static controls:Stepper.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignStepButton}">
+                                                <Button Command="{x:Static internalCommands:StepperCommands.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignStepButton}">
                                                     <Grid HorizontalAlignment="Stretch">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="100*" />
@@ -311,7 +312,7 @@
                                             </DataTemplate>
                                             <DataTemplate x:Key="lastHorizontalStepHeaderTemplate" DataType="{x:Type model:StepperStepViewModel}">
                                                 <!-- header as button to switch steps in non-linear steppers -->
-                                                <Button Command="{x:Static controls:Stepper.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignStepButton}">
+                                                <Button Command="{x:Static internalCommands:StepperCommands.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignStepButton}">
                                                     <Grid HorizontalAlignment="Stretch">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="100*" />
@@ -379,7 +380,7 @@
                                                 <RowDefinition Height="100*" />
                                             </Grid.RowDefinitions>
                                             <!-- header as button to switch steps in non-linear steppers -->
-                                            <Button Grid.ColumnSpan="2" Command="{x:Static controls:Stepper.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignStepButton}">
+                                            <Button Grid.ColumnSpan="2" Command="{x:Static internalCommands:StepperCommands.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignStepButton}">
                                                 <Grid HorizontalAlignment="Stretch">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="24" />
@@ -595,7 +596,7 @@
                                         <ItemsControl.Resources>
                                             <DataTemplate x:Key="firstHorizontalStepHeaderTemplate" DataType="{x:Type model:StepperStepViewModel}">
                                                 <!-- header as button to switch steps in non-linear steppers -->
-                                                <Button Command="{x:Static controls:TabControlStepper.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignTabControlStepButton}">
+                                                <Button Command="{x:Static internalCommands:StepperCommands.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignTabControlStepButton}">
                                                     <Grid HorizontalAlignment="Stretch">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="auto" />
@@ -616,7 +617,7 @@
                                             </DataTemplate>
                                             <DataTemplate x:Key="intermediateHorizontalStepHeaderTemplate" DataType="{x:Type model:StepperStepViewModel}">
                                                 <!-- header as button to switch steps in non-linear steppers -->
-                                                <Button Command="{x:Static controls:TabControlStepper.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignTabControlStepButton}">
+                                                <Button Command="{x:Static internalCommands:StepperCommands.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignTabControlStepButton}">
                                                     <Grid HorizontalAlignment="Stretch">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="100*" />
@@ -639,7 +640,7 @@
                                             </DataTemplate>
                                             <DataTemplate x:Key="lastHorizontalStepHeaderTemplate" DataType="{x:Type model:StepperStepViewModel}">
                                                 <!-- header as button to switch steps in non-linear steppers -->
-                                                <Button Command="{x:Static controls:TabControlStepper.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignTabControlStepButton}">
+                                                <Button Command="{x:Static internalCommands:StepperCommands.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignTabControlStepButton}">
                                                     <Grid HorizontalAlignment="Stretch">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="100*" />
@@ -707,7 +708,7 @@
                                                 <RowDefinition Height="100*" />
                                             </Grid.RowDefinitions>
                                             <!-- header as button to switch steps in non-linear steppers -->
-                                            <Button Grid.ColumnSpan="2" Command="{x:Static controls:TabControlStepper.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignTabControlStepButton}">
+                                            <Button Grid.ColumnSpan="2" Command="{x:Static internalCommands:StepperCommands.StepSelectedCommand}" CommandParameter="{Binding}" Style="{StaticResource MaterialDesignTabControlStepButton}">
                                                 <Grid HorizontalAlignment="Stretch">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="24" />

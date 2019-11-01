@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
+using MaterialDesignExtensions.Commands.Internal;
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
@@ -255,18 +257,9 @@ namespace MaterialDesignExtensions.Controls
 
             if (stepper != null)
             {
-                if (stepper is TabControlStepper)
-                {
-                    BackCommand = TabControlStepper.BackCommand;
-                    CancelCommand = TabControlStepper.CancelCommand;
-                    ContinueCommand = TabControlStepper.ContinueCommand;
-                }
-                else
-                {
-                    BackCommand = Stepper.BackCommand;
-                    CancelCommand = Stepper.CancelCommand;
-                    ContinueCommand = Stepper.ContinueCommand;
-                }
+                BackCommand = StepperCommands.BackCommand;
+                CancelCommand = StepperCommands.CancelCommand;
+                ContinueCommand = StepperCommands.ContinueCommand;
             }
 
             base.OnApplyTemplate();

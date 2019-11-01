@@ -5,6 +5,7 @@
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
                     xmlns:controllers="clr-namespace:MaterialDesignExtensions.Controllers"
                     xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters"
+                    xmlns:internalCommands="clr-namespace:MaterialDesignExtensions.Commands.Internal"
                     xmlns:localization="clr-namespace:MaterialDesignExtensions.Localization"
                     xmlns:templateSelectors="clr-namespace:MaterialDesignExtensions.TemplateSelectors">
 
@@ -88,7 +89,7 @@
                 </Border.Style>
             </Border>
             <Button x:Name="specialDriveItemButton" Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                    Command="{x:Static controls:FileSystemControl.SelectDirectoryItemCommand}" CommandParameter="{Binding}"
+                    Command="{x:Static internalCommands:FileSystemControlCommands.SelectDirectoryItemCommand}" CommandParameter="{Binding}"
                     Height="36" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                 <DockPanel>
                     <wpfLib:PackIcon DockPanel.Dock="Left" Kind="{Binding Path=Icon, Mode=OneTime}" Height="24" Width="24" VerticalAlignment="Center" />
@@ -135,7 +136,7 @@
     <DataTemplate x:Key="pathPartItemTemplate">
         <Border Padding="4">
             <Button Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                    Command="{x:Static controls:FileSystemControl.SelectDirectoryItemCommand}" CommandParameter="{Binding}">
+                    Command="{x:Static internalCommands:FileSystemControlCommands.SelectDirectoryItemCommand}" CommandParameter="{Binding}">
                 <DockPanel>
                     <wpfLib:PackIcon DockPanel.Dock="Right" Kind="ChevronRight" Height="24" Width="24" VerticalAlignment="Center" />
                     <TextBlock FontSize="14" Text="{Binding Path=Name}" Margin="0,0,4,0" VerticalAlignment="Center" />
@@ -443,7 +444,7 @@
                 </Border.Style>
             </Border>
             <Button x:Name="itemButton" Style="{StaticResource fileSystemEntryItemButtonStyle}"
-                    Command="{x:Static controls:FileSystemControl.SelectFileSystemEntryCommand}" CommandParameter="{Binding Path=Value}">
+                    Command="{x:Static internalCommands:FileSystemControlCommands.SelectFileSystemEntryCommand}" CommandParameter="{Binding Path=Value}">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="72" />
@@ -459,7 +460,7 @@
                                    Text="{Binding Path=Value.LastWriteTime, Mode=OneTime, Converter={StaticResource dateTimeAgoConverter}}" Margin="0,4,0,0" />
                     </StackPanel>
                     <Button Grid.Column="2" Cursor="Hand"
-                            Command="{x:Static controls:FileSystemControl.ShowInfoCommand}" CommandParameter="{Binding Path=Value}"
+                            Command="{x:Static internalCommands:FileSystemControlCommands.ShowInfoCommand}" CommandParameter="{Binding Path=Value}"
                             HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
@@ -516,7 +517,7 @@
                 </Border.Style>
             </Border>
             <Button x:Name="itemButton" Style="{StaticResource fileSystemEntryItemButtonStyle}"
-                    Command="{x:Static controls:FileSystemControl.SelectFileSystemEntryCommand}" CommandParameter="{Binding Path=Value}">
+                    Command="{x:Static internalCommands:FileSystemControlCommands.SelectFileSystemEntryCommand}" CommandParameter="{Binding Path=Value}">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="72" />
@@ -532,7 +533,7 @@
                                    Text="{Binding Path=Value.LastWriteTime, Mode=OneTime, Converter={StaticResource dateTimeAgoConverter}}" Margin="0,4,0,0" />
                     </StackPanel>
                     <Button Grid.Column="2" Cursor="Hand"
-                            Command="{x:Static controls:FileSystemControl.ShowInfoCommand}" CommandParameter="{Binding Value}"
+                            Command="{x:Static internalCommands:FileSystemControlCommands.ShowInfoCommand}" CommandParameter="{Binding Value}"
                             HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
@@ -589,7 +590,7 @@
                 </Border.Style>
             </Border>
             <Button x:Name="itemButton" Style="{StaticResource fileSystemEntryItemButtonStyle}"
-                    Command="{x:Static controls:FileSystemControl.SelectFileSystemEntryCommand}" CommandParameter="{Binding Path=Value}">
+                    Command="{x:Static internalCommands:FileSystemControlCommands.SelectFileSystemEntryCommand}" CommandParameter="{Binding Path=Value}">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="72" />
@@ -610,7 +611,7 @@
                             <StackPanel Orientation="Vertical">
                                 <Button Foreground="{DynamicResource MaterialDesignBody}"
                                         Height="48" Margin="0" Padding="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                                        Command="{x:Static controls:OpenMultipleDirectoriesControl.SelectDirectoryCommand}" CommandParameter="{Binding Path=Value}">
+                                        Command="{x:Static internalCommands:FileSystemControlCommands.SelectDirectoryCommand}" CommandParameter="{Binding Path=Value}">
                                     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
                                         <wpfLib:PackIcon DockPanel.Dock="Left" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignBodyLight}"
                                                          Margin="24,0,20,0" VerticalAlignment="Center">
@@ -645,7 +646,7 @@
                                 </Button>
                                 <Button Foreground="{DynamicResource MaterialDesignBody}"
                                         Height="48" Margin="0" Padding="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                                        Command="{x:Static controls:FileSystemControl.ShowInfoCommand}" CommandParameter="{Binding Path=Value}">
+                                        Command="{x:Static internalCommands:FileSystemControlCommands.ShowInfoCommand}" CommandParameter="{Binding Path=Value}">
                                     <DockPanel>
                                         <wpfLib:PackIcon DockPanel.Dock="Left" Kind="Information" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignBodyLight}"
                                                          Margin="24,0,20,0" VerticalAlignment="Center" />
@@ -714,7 +715,7 @@
                             <StackPanel Orientation="Vertical">
                                 <Button Foreground="{DynamicResource MaterialDesignBody}"
                                         Height="48" Margin="0" Padding="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                                        Command="{x:Static controls:OpenMultipleFilesControl.SelectFileCommand}" CommandParameter="{Binding Path=Value}">
+                                        Command="{x:Static internalCommands:FileSystemControlCommands.SelectFileCommand}" CommandParameter="{Binding Path=Value}">
                                     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
                                         <wpfLib:PackIcon DockPanel.Dock="Left" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignBodyLight}"
                                                          Margin="24,0,20,0" VerticalAlignment="Center">
@@ -749,7 +750,7 @@
                                 </Button>
                                 <Button Foreground="{DynamicResource MaterialDesignBody}"
                                         Height="48" Margin="0" Padding="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                                        Command="{x:Static controls:FileSystemControl.ShowInfoCommand}" CommandParameter="{Binding Path=Value}">
+                                        Command="{x:Static internalCommands:FileSystemControlCommands.ShowInfoCommand}" CommandParameter="{Binding Path=Value}">
                                     <DockPanel>
                                         <wpfLib:PackIcon DockPanel.Dock="Left" Kind="Information" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignBodyLight}"
                                                          Margin="24,0,20,0" VerticalAlignment="Center" />
@@ -794,7 +795,7 @@
                            Text="{Binding Path=Name, Mode=OneTime}" ToolTip="{Binding Path=FullName, Mode=OneTime}" TextTrimming="CharacterEllipsis"
                            VerticalAlignment="Center" HorizontalAlignment="Stretch" />
                 <Button Grid.Column="2" Cursor="Hand" ToolTip="{x:Static localization:Strings.Remove}"
-                        Command="{x:Static controls:OpenMultipleDirectoriesControl.SelectDirectoryCommand}" CommandParameter="{Binding}"
+                        Command="{x:Static internalCommands:FileSystemControlCommands.SelectDirectoryCommand}" CommandParameter="{Binding}"
                         HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -846,7 +847,7 @@
                             Text="{Binding Path=Name, Mode=OneTime}" ToolTip="{Binding Path=FullName, Mode=OneTime}" TextTrimming="CharacterEllipsis"
                             VerticalAlignment="Center" HorizontalAlignment="Stretch" />
                 <Button Grid.Column="2" Cursor="Hand" ToolTip="{x:Static localization:Strings.Remove}"
-                        Command="{x:Static controls:OpenMultipleFilesControl.SelectFileCommand}" CommandParameter="{Binding}"
+                        Command="{x:Static internalCommands:FileSystemControlCommands.SelectFileCommand}" CommandParameter="{Binding}"
                         HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -929,7 +930,7 @@
             <Button Style="{DynamicResource MaterialDesignFlatButton}"
                     Content="{Binding Source={x:Static localization:Strings.Create}, Converter={StaticResource upperCaseConverter}}"
                     HorizontalAlignment="Right" Margin="0,0,8,8"
-                    Command="{x:Static controls:FileSystemControl.CreateNewDirectoryCommand}" />
+                    Command="{x:Static internalCommands:FileSystemControlCommands.CreateNewDirectoryCommand}" />
         </StackPanel>
     </DataTemplate>
 
@@ -970,11 +971,11 @@
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="8,0,8,8">
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:FileSystemControl.CancelNewDirectoryCommand}" />
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.CancelNewDirectoryCommand}" />
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 Content="{Binding Source={x:Static localization:Strings.Create}, Converter={StaticResource upperCaseConverter}}"
                                                 Margin="8,0,0,0"
-                                                Command="{x:Static controls:FileSystemControl.CreateNewDirectoryCommand}" />
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.CreateNewDirectoryCommand}" />
                                     </StackPanel>
                                 </StackPanel>
                             </wpfLib:DrawerHost.BottomDrawerContent>
@@ -988,7 +989,7 @@
                                 <DockPanel Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                                            Height="64">
                                     <Button DockPanel.Dock="Right" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
-                                            Command="{x:Static controls:FileSystemControl.OpenSpecialDirectoriesDrawerCommand}">
+                                            Command="{x:Static internalCommands:FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand}">
                                         <wpfLib:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                          Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
                                     </Button>
@@ -1015,16 +1016,16 @@
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:FileSystemControl.CancelCommand}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.CancelCommand}"
                                                 Margin="0,0,8,0" />
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 IsEnabled="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notNullBooleanConverter}}"
                                                 Content="{Binding Source={x:Static localization:Strings.Select}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:OpenDirectoryControl.SelectDirectoryCommand}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.SelectDirectoryCommand}"
                                                 Margin="0,0,8,0" />
                                     </StackPanel>
                                 </Border>
-                                <Button Grid.Row="1" Style="{StaticResource showCreateNewDirectoryButtonStyle}" Command="{x:Static controls:FileSystemControl.ShowCreateNewDirectoryCommand}" />
+                                <Button Grid.Row="1" Style="{StaticResource showCreateNewDirectoryButtonStyle}" Command="{x:Static internalCommands:FileSystemControlCommands.ShowCreateNewDirectoryCommand}" />
                             </Grid>
                         </wpfLib:DrawerHost>
                         <wpfLib:Snackbar Grid.Row="2" Grid.RowSpan="2" MessageQueue="{TemplateBinding SnackbarMessageQueue}" />
@@ -1063,7 +1064,7 @@
                                 <DockPanel Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                                            Height="64">
                                     <Button DockPanel.Dock="Right" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
-                                        Command="{x:Static controls:FileSystemControl.OpenSpecialDirectoriesDrawerCommand}">
+                                        Command="{x:Static internalCommands:FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand}">
                                         <wpfLib:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                          Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
                                     </Button>
@@ -1091,12 +1092,12 @@
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:FileSystemControl.CancelCommand}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.CancelCommand}"
                                                 Margin="0,0,8,0" />
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 IsEnabled="{Binding Path=CurrentFile, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notNullBooleanConverter}}"
                                                 Content="{Binding Source={x:Static localization:Strings.Open}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:BaseFileControl.SelectFileCommand}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.SelectFileCommand}"
                                                 Margin="0,0,8,0" />
                                     </StackPanel>
                                 </Border>
@@ -1137,11 +1138,11 @@
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="8,0,8,8">
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:FileSystemControl.CancelNewDirectoryCommand}" />
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.CancelNewDirectoryCommand}" />
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 Content="{Binding Source={x:Static localization:Strings.Create}, Converter={StaticResource upperCaseConverter}}"
                                                 Margin="8,0,0,0"
-                                                Command="{x:Static controls:FileSystemControl.CreateNewDirectoryCommand}" />
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.CreateNewDirectoryCommand}" />
                                     </StackPanel>
                                 </StackPanel>
                             </wpfLib:DrawerHost.BottomDrawerContent>
@@ -1156,7 +1157,7 @@
                                 <DockPanel Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                                            Height="64">
                                     <Button DockPanel.Dock="Right" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
-                                            Command="{x:Static controls:FileSystemControl.OpenSpecialDirectoriesDrawerCommand}">
+                                            Command="{x:Static internalCommands:FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand}">
                                         <wpfLib:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                          Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
                                     </Button>
@@ -1188,16 +1189,16 @@
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:FileSystemControl.CancelCommand}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.CancelCommand}"
                                                 Margin="0,0,8,0" />
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 IsEnabled="{Binding Path=CurrentFile, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notNullBooleanConverter}}"
                                                 Content="{Binding Source={x:Static localization:Strings.Save}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:BaseFileControl.SelectFileCommand}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.SelectFileCommand}"
                                                 Margin="0,0,8,0" />
                                     </StackPanel>
                                 </Border>
-                                <Button Grid.Row="1" Style="{StaticResource showCreateNewDirectoryButtonStyle}" Command="{x:Static controls:FileSystemControl.ShowCreateNewDirectoryCommand}" />
+                                <Button Grid.Row="1" Style="{StaticResource showCreateNewDirectoryButtonStyle}" Command="{x:Static internalCommands:FileSystemControlCommands.ShowCreateNewDirectoryCommand}" />
                             </Grid>
                         </wpfLib:DrawerHost>
                         <wpfLib:Snackbar Grid.Row="2" Grid.RowSpan="3" MessageQueue="{TemplateBinding SnackbarMessageQueue}" />
@@ -1235,11 +1236,11 @@
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="8,0,8,8">
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:FileSystemControl.CancelNewDirectoryCommand}" />
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.CancelNewDirectoryCommand}" />
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 Content="{Binding Source={x:Static localization:Strings.Create}, Converter={StaticResource upperCaseConverter}}"
                                                 Margin="8,0,0,0"
-                                                Command="{x:Static controls:FileSystemControl.CreateNewDirectoryCommand}" />
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.CreateNewDirectoryCommand}" />
                                     </StackPanel>
                                 </StackPanel>
                             </wpfLib:DrawerHost.BottomDrawerContent>
@@ -1267,12 +1268,12 @@
                                     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                                         <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
                                                 ToolTip="{x:Static localization:Strings.Selection}"
-                                                Command="{x:Static controls:OpenMultipleDirectoriesControl.OpenSelectionDrawerCommand}">
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.OpenSelectionDrawerCommand}">
                                             <wpfLib:PackIcon Kind="FormatListBulletedSquare" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                              Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
                                         </Button>
                                         <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
-                                                Command="{x:Static controls:FileSystemControl.OpenSpecialDirectoriesDrawerCommand}">
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand}">
                                             <wpfLib:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                              Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
                                         </Button>
@@ -1300,16 +1301,16 @@
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:FileSystemControl.CancelCommand}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.CancelCommand}"
                                                 Margin="0,0,8,0" />
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 IsEnabled="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notNullBooleanConverter}}"
                                                 Content="{Binding Source={x:Static localization:Strings.Select}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:OpenMultipleDirectoriesControl.SelectMultipleDirectoriesCommand}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.SelectMultipleDirectoriesCommand}"
                                                 Margin="0,0,8,0" />
                                     </StackPanel>
                                 </Border>
-                                <Button Grid.Row="1" Style="{StaticResource showCreateNewDirectoryButtonStyle}" Command="{x:Static controls:FileSystemControl.ShowCreateNewDirectoryCommand}" />
+                                <Button Grid.Row="1" Style="{StaticResource showCreateNewDirectoryButtonStyle}" Command="{x:Static internalCommands:FileSystemControlCommands.ShowCreateNewDirectoryCommand}" />
                             </Grid>
                         </wpfLib:DrawerHost>
                         <wpfLib:Snackbar Grid.Row="2" Grid.RowSpan="2" MessageQueue="{TemplateBinding SnackbarMessageQueue}" />
@@ -1363,12 +1364,12 @@
                                     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                                         <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
                                                 ToolTip="{x:Static localization:Strings.Selection}"
-                                                Command="{x:Static controls:OpenMultipleFilesControl.OpenSelectionDrawerCommand}">
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.OpenSelectionDrawerCommand}">
                                             <wpfLib:PackIcon Kind="FormatListBulletedSquare" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                              Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
                                         </Button>
                                         <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
-                                                Command="{x:Static controls:FileSystemControl.OpenSpecialDirectoriesDrawerCommand}">
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand}">
                                             <wpfLib:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                              Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
                                         </Button>
@@ -1397,12 +1398,12 @@
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 Content="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:FileSystemControl.CancelCommand}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.CancelCommand}"
                                                 Margin="0,0,8,0" />
                                         <Button Style="{DynamicResource MaterialDesignFlatButton}"
                                                 IsEnabled="{Binding Path=CurrentFile, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource notNullBooleanConverter}}"
                                                 Content="{Binding Source={x:Static localization:Strings.Open}, Converter={StaticResource upperCaseConverter}}"
-                                                Command="{x:Static controls:OpenMultipleFilesControl.SelectMultipleFilesCommand}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.SelectMultipleFilesCommand}"
                                                 Margin="0,0,8,0" />
                                     </StackPanel>
                                 </Border>

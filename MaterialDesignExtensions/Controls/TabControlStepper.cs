@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media.Animation;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
@@ -23,26 +24,6 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public class TabControlStepper : TabControl, IStepper
     {
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand BackCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand CancelCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand ContinueCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand StepSelectedCommand = new RoutedCommand();
-
         /// <summary>
         /// An event raised by navigating to the previous <see cref="IStep" /> in a linear order.
         /// </summary>
@@ -319,10 +300,10 @@ namespace MaterialDesignExtensions.Controls
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
 
-            CommandBindings.Add(new CommandBinding(BackCommand, BackHandler));
-            CommandBindings.Add(new CommandBinding(CancelCommand, CancelHandler));
-            CommandBindings.Add(new CommandBinding(ContinueCommand, ContinueHandler));
-            CommandBindings.Add(new CommandBinding(StepSelectedCommand, StepSelectedHandler, CanExecuteStepSelectedHandler));
+            CommandBindings.Add(new CommandBinding(StepperCommands.BackCommand, BackHandler));
+            CommandBindings.Add(new CommandBinding(StepperCommands.CancelCommand, CancelHandler));
+            CommandBindings.Add(new CommandBinding(StepperCommands.ContinueCommand, ContinueHandler));
+            CommandBindings.Add(new CommandBinding(StepperCommands.StepSelectedCommand, StepSelectedHandler, CanExecuteStepSelectedHandler));
         }
 
         private void LoadedHandler(object sender, RoutedEventArgs args)

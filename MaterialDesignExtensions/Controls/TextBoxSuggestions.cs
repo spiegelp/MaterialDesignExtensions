@@ -10,6 +10,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Markup;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
@@ -23,11 +24,6 @@ namespace MaterialDesignExtensions.Controls
     {
         private static readonly string SuggestionItemsControlName = "suggestionItemsControl";
         private static readonly string SuggestionItemsPopupName = "suggestionItemsPopup";
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectSuggestionItemCommand = new RoutedCommand();
 
         /// <summary>
         /// The TextBox to decorate.
@@ -92,7 +88,7 @@ namespace MaterialDesignExtensions.Controls
 
             m_autocompleteController = new AutocompleteController() { AutocompleteSource = TextBoxSuggestionsSource };
 
-            CommandBindings.Add(new CommandBinding(SelectSuggestionItemCommand, SelectSuggestionItemCommandHandler));
+            CommandBindings.Add(new CommandBinding(TextBoxSuggestionsCommands.SelectSuggestionItemCommand, SelectSuggestionItemCommandHandler));
 
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;

@@ -12,6 +12,7 @@ using System.Windows.Input;
 
 using MaterialDesignThemes.Wpf;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
@@ -29,21 +30,6 @@ namespace MaterialDesignExtensions.Controls
     {
         private const string SelectionItemsControlName = "selectionItemsControl";
         private const string EmptySelectionTextBlockName = "emptySelectionTextBlock";
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand OpenSelectionDrawerCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectDirectoryCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectMultipleDirectoriesCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by selecting directories to open.
@@ -107,9 +93,9 @@ namespace MaterialDesignExtensions.Controls
             m_selectionItemsControl = null;
             m_emptySelectionTextBlock = null;
 
-            CommandBindings.Add(new CommandBinding(OpenSelectionDrawerCommand, OpenSelectionDrawerCommandHandler));
-            CommandBindings.Add(new CommandBinding(SelectDirectoryCommand, SelectDirectoryCommandHandler));
-            CommandBindings.Add(new CommandBinding(SelectMultipleDirectoriesCommand, SelectMultipleDirectoriesCommandHandler, CanExecuteSelectMultipleDirectoriesCommand));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.OpenSelectionDrawerCommand, OpenSelectionDrawerCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectDirectoryCommand, SelectDirectoryCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectMultipleDirectoriesCommand, SelectMultipleDirectoriesCommandHandler, CanExecuteSelectMultipleDirectoriesCommand));
         }
 
         public override void OnApplyTemplate()

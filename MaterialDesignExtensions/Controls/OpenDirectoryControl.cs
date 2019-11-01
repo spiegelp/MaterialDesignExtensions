@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
@@ -24,11 +25,6 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public class OpenDirectoryControl : FileSystemControl
     {
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectDirectoryCommand = new RoutedCommand();
-
         /// <summary>
         /// An event raised by selecting a directory to open.
         /// </summary>
@@ -84,7 +80,7 @@ namespace MaterialDesignExtensions.Controls
         public OpenDirectoryControl()
             : base()
         {
-            CommandBindings.Add(new CommandBinding(SelectDirectoryCommand, SelectDirectoryCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectDirectoryCommand, SelectDirectoryCommandHandler));
         }
 
         private void SelectDirectoryCommandHandler(object sender, ExecutedRoutedEventArgs args)

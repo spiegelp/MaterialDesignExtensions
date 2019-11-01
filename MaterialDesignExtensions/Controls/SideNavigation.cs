@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
@@ -21,11 +22,6 @@ namespace MaterialDesignExtensions.Controls
     public class SideNavigation : Control
     {
         private const string NavigationItemsControlName = "navigationItemsControl";
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectNavigationItemCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by selecting an item.
@@ -296,7 +292,7 @@ namespace MaterialDesignExtensions.Controls
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
 
-            CommandBindings.Add(new CommandBinding(SelectNavigationItemCommand, SelectNavigationItemCommandHandlerAsync));
+            CommandBindings.Add(new CommandBinding(SideNavigationCommands.SelectNavigationItemCommand, SelectNavigationItemCommandHandlerAsync));
         }
 
         public override void OnApplyTemplate()

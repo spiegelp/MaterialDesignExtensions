@@ -3,7 +3,8 @@
                     xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:convertersLib="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
-                    xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters">
+                    xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters"
+                    xmlns:internalCommands="clr-namespace:MaterialDesignExtensions.Commands.Internal">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
@@ -167,7 +168,7 @@
                                                                     </Style>
                                                                 </Border.Style>
                                                             </Border>
-                                                            <Button x:Name="itemButton" Command="{x:Static controls:SearchBase.SelectSearchSuggestionCommand}"
+                                                            <Button x:Name="itemButton" Command="{x:Static internalCommands:SearchControlCommands.SelectSearchSuggestionCommand}"
                                                                     CommandParameter="{Binding Path=Suggestion}">
                                                                 <Button.Style>
                                                                     <Style TargetType="{x:Type Button}">
@@ -216,144 +217,6 @@
                             </Grid>
                         </Border>
                     </Grid>
-                    <!--<Border x:Name="rootBorder" Background="{TemplateBinding Background}" CornerRadius="2"
-                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="100*" />
-                            </Grid.ColumnDefinitions>
-                            <wpfLib:PackIcon Kind="Magnify" Width="24" Height="24"
-                                             HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <wpfLib:PackIcon.Visibility>
-                                    <MultiBinding Converter="{StaticResource orFalseAsVisibleConverter}">
-                                        <Binding Path="IsFocused" ElementName="searchTextBox" />
-                                        <Binding Path="SearchTerm" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource notNullBooleanConverter}" />
-                                    </MultiBinding>
-                                </wpfLib:PackIcon.Visibility>
-                            </wpfLib:PackIcon>
-                            <Button x:Name="cancelButton" DockPanel.Dock="Left" Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                                    Margin="8,0,8,0" VerticalAlignment="Center">
-                                <Button.Visibility>
-                                    <MultiBinding Converter="{StaticResource orTrueAsVisibleConverter}">
-                                        <Binding Path="IsFocused" ElementName="searchTextBox" />
-                                        <Binding Path="SearchTerm" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource notNullBooleanConverter}" />
-                                    </MultiBinding>
-                                </Button.Visibility>
-                                <wpfLib:PackIcon Kind="ArrowLeft" Width="24" Height="24" />
-                            </Button>
-                            <TextBox x:Name="searchTextBox" Grid.Column="1" wpfLib:HintAssist.Hint="{x:Static localization:Strings.Search}"
-                                     Text="{Binding Path=SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}}"
-                                     FontSize="20"
-                                     Margin="16,8,8,8" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                            <Popup x:Name="searchSuggestionsPopup"
-                                   PlacementTarget="{Binding ElementName=rootBorder}"
-                                   Placement="Bottom"
-                                   PopupAnimation="Fade" AllowsTransparency="True" Focusable="False"
-                                   SnapsToDevicePixels="True"
-                                   MaxHeight="300" Width="{Binding Path=ActualWidth, ElementName=rootBorder}">
-                                <Popup.Style>
-                                    <Style TargetType="{x:Type Popup}">
-                                        <Style.Triggers>
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding Path=ItemsSource, ElementName=searchSuggestionsItemsControl, Converter={StaticResource emptyEnumerableToFalseConverter}}" Value="True" />
-                                                    <Condition Binding="{Binding Path=IsFocused, Mode=OneWay, ElementName=searchTextBox}" Value="True" />
-                                                </MultiDataTrigger.Conditions>
-                                                <Setter Property="IsOpen" Value="True" />
-                                            </MultiDataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Popup.Style>
-                                <Border HorizontalAlignment="Stretch" Padding="4">
-                                    <Border Background="{TemplateBinding Background}" CornerRadius="4"
-                                            SnapsToDevicePixels="True"
-                                            Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpfLib:ShadowAssist.ShadowDepth), Converter={x:Static convertersLib:ShadowConverter.Instance}}"
-                                            HorizontalAlignment="Stretch">
-                                        <ItemsControl x:Name="searchSuggestionsItemsControl" IsEnabled="{TemplateBinding IsEnabled}"
-                                                      Margin="0,4,0,4"
-                                                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                      ScrollViewer.CanContentScroll="True"
-                                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                            <ItemsControl.Template>
-                                                <ControlTemplate TargetType="{x:Type ItemsControl}">
-                                                    <Border SnapsToDevicePixels="True">
-                                                        <ScrollViewer Focusable="False">
-                                                            <ItemsPresenter SnapsToDevicePixels="True" />
-                                                        </ScrollViewer>
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </ItemsControl.Template>
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel IsItemsHost="True" Orientation="Vertical" />
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid Background="Transparent" HorizontalAlignment="Stretch" Height="56">
-                                                        <Border Background="{Binding Path=Foreground, Converter={StaticResource brushRoundConverter}, ElementName=itemButton}"
-                                                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                                            <Border.Style>
-                                                                <Style TargetType="{x:Type Border}">
-                                                                    <Style.Triggers>
-                                                                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="True">
-                                                                            <Setter Property="Opacity" Value="0.1" />
-                                                                        </DataTrigger>
-                                                                        <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Value="False">
-                                                                            <Setter Property="Opacity" Value="0" />
-                                                                        </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                </Style>
-                                                            </Border.Style>
-                                                        </Border>
-                                                        <Button x:Name="itemButton" Command="{x:Static controls:SearchBase.SelectSearchSuggestionCommand}"
-                                                                CommandParameter="{Binding Path=Suggestion}">
-                                                            <Button.Style>
-                                                                <Style TargetType="{x:Type Button}">
-                                                                    <Setter Property="Background" Value="Transparent" />
-                                                                    <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
-                                                                    <Setter Property="BorderThickness" Value="0" />
-                                                                    <Setter Property="Padding" Value="8" />
-                                                                    <Setter Property="wpfLib:RippleAssist.Feedback" Value="{DynamicResource MaterialDesignFlatButtonRipple}" />
-                                                                    <Setter Property="wpfLib:RippleAssist.ClipToBounds" Value="True" />
-                                                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                                                                    <Setter Property="VerticalAlignment" Value="Stretch" />
-                                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                                                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                                                                    <Setter Property="SnapsToDevicePixels" Value="True" />
-                                                                    <Setter Property="Template">
-                                                                        <Setter.Value>
-                                                                            <ControlTemplate TargetType="Button">
-                                                                                <wpfLib:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                                                               Focusable="False"
-                                                                                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                                                               Padding="{TemplateBinding Padding}"
-                                                                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                                                            </ControlTemplate>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </Style>
-                                                            </Button.Style>
-                                                            <DockPanel>
-                                                                <wpfLib:PackIcon Kind="Clock" Height="24" Width="24"
-                                                                                 Foreground="{DynamicResource MaterialDesignDivider}"
-                                                                                 VerticalAlignment="Center" />
-                                                                <TextBlock Text="{Binding Path=Suggestion}" TextTrimming="CharacterEllipsis"
-                                                                           FontSize="16"
-                                                                           Margin="24,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                                                            </DockPanel>
-                                                        </Button>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-                                    </Border>
-                                </Border>
-                            </Popup>
-                        </Grid>
-                    </Border>-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

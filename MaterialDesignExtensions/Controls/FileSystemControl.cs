@@ -13,6 +13,7 @@ using System.Windows.Media;
 
 using MaterialDesignThemes.Wpf;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
@@ -34,46 +35,6 @@ namespace MaterialDesignExtensions.Controls
         protected const string PathPartsItemsControlName = "pathPartsItemsControl";
         protected const string FileSystemEntryItemsControlName = "fileSystemEntryItemsControl";
         protected const string EmptyDirectoryTextBlockName = "emptyDirectoryTextBlock";
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand OpenSpecialDirectoriesDrawerCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectDirectoryItemCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectFileSystemEntryCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand ShowInfoCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand CancelCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand ShowCreateNewDirectoryCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand CancelNewDirectoryCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand CreateNewDirectoryCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by canceling the operation.
@@ -341,14 +302,14 @@ namespace MaterialDesignExtensions.Controls
             m_controller = new FileSystemController();
             m_controller.SelectDirectory(CurrentDirectory);
 
-            CommandBindings.Add(new CommandBinding(OpenSpecialDirectoriesDrawerCommand, OpenSpecialDirectoriesDrawerCommandHandler));
-            CommandBindings.Add(new CommandBinding(SelectDirectoryItemCommand, SelectDirectoryItemCommandHandler));
-            CommandBindings.Add(new CommandBinding(SelectFileSystemEntryCommand, SelectFileSystemEntryCommandHandler));
-            CommandBindings.Add(new CommandBinding(ShowInfoCommand, ShowInfoCommandHandler));
-            CommandBindings.Add(new CommandBinding(CancelCommand, CancelCommandHandler));
-            CommandBindings.Add(new CommandBinding(ShowCreateNewDirectoryCommand, ShowCreateNewDirectoryCommandHandler));
-            CommandBindings.Add(new CommandBinding(CancelNewDirectoryCommand, CancelNewDirectoryCommandHandler));
-            CommandBindings.Add(new CommandBinding(CreateNewDirectoryCommand, CreateNewDirectoryCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand, OpenSpecialDirectoriesDrawerCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectDirectoryItemCommand, SelectDirectoryItemCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectFileSystemEntryCommand, SelectFileSystemEntryCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.ShowInfoCommand, ShowInfoCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.CancelCommand, CancelCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.ShowCreateNewDirectoryCommand, ShowCreateNewDirectoryCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.CancelNewDirectoryCommand, CancelNewDirectoryCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.CreateNewDirectoryCommand, CreateNewDirectoryCommandHandler));
 
             m_pathPartsScrollViewer = null;
             m_pathPartsItemsControl = null;
