@@ -216,6 +216,7 @@ namespace MaterialDesignExtensions.Controls
             m_fileFiltersComboBox = null;
 
             CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectFileCommand, SelectFileCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.FileSystemEntryDoubleClickCommand, FileDoubleClickCommandHandler));
         }
 
         public override void OnApplyTemplate()
@@ -238,7 +239,19 @@ namespace MaterialDesignExtensions.Controls
             base.UnloadedHandler(sender, args);
         }
 
+        protected override void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            SelectFileSystemEntry(args.Parameter as FileSystemInfo);
+        }
+
+        protected abstract void SelectFileSystemEntry(FileSystemInfo fileSystemInfo);
+
         protected virtual void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            SelectFile();
+        }
+
+        protected virtual void SelectFile()
         {
             try
             {
@@ -248,6 +261,22 @@ namespace MaterialDesignExtensions.Controls
                 if (FileSelectedCommand != null && FileSelectedCommand.CanExecute(m_controller.CurrentFileFullName))
                 {
                     FileSelectedCommand.Execute(m_controller.CurrentFileFullName);
+                }
+            }
+            catch (PathTooLongException)
+            {
+                SnackbarMessageQueue.Enqueue(Localization.Strings.LongPathsAreNotSupported);
+            }
+        }
+
+        protected virtual void FileDoubleClickCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            try
+            {
+                if (args.Parameter is FileInfo fileInfo)
+                {
+                    SelectFileSystemEntry(fileInfo);
+                    SelectFile();
                 }
             }
             catch (PathTooLongException)

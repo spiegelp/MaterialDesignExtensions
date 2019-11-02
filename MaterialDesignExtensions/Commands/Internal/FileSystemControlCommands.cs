@@ -33,6 +33,11 @@ namespace MaterialDesignExtensions.Commands.Internal
         /// <summary>
         /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
         /// </summary>
+        public static readonly RoutedCommand FileSystemEntryDoubleClickCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
         public static readonly RoutedCommand OpenSelectionDrawerCommand = new RoutedCommand();
 
         /// <summary>

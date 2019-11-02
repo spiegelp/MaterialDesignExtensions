@@ -129,3 +129,6 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Fixed content layout of horizontal steppers
 #### Obsolete
 * Attached property `TabControlAssist.TabHeaderAlignment` will be replaced by `TabControlAssist.TabHeaderHorizontalAlignment`
+### v3.0.0 (upcoming release)
+#### Features
+* Select file with double click in `OpenFileDialog` and `SaveFileDialog`

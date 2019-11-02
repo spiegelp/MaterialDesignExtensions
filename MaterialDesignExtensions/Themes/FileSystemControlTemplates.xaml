@@ -518,6 +518,10 @@
             </Border>
             <Button x:Name="itemButton" Style="{StaticResource fileSystemEntryItemButtonStyle}"
                     Command="{x:Static internalCommands:FileSystemControlCommands.SelectFileSystemEntryCommand}" CommandParameter="{Binding Path=Value}">
+                <Button.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick"
+                                  Command="{x:Static internalCommands:FileSystemControlCommands.FileSystemEntryDoubleClickCommand}" CommandParameter="{Binding Path=Value}" />
+                </Button.InputBindings>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="72" />

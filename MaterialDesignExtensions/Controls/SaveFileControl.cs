@@ -153,11 +153,11 @@ namespace MaterialDesignExtensions.Controls
             base.ControllerPropertyChangedHandler(sender, args);
         }
 
-        protected override void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        protected override void SelectFileSystemEntry(FileSystemInfo fileSystemInfo)
         {
-            if (args.Parameter != null)
+            if (fileSystemInfo != null)
             {
-                if (args.Parameter is DirectoryInfo directoryInfo)
+                if (fileSystemInfo is DirectoryInfo directoryInfo)
                 {
                     CurrentDirectory = directoryInfo.FullName;
 
@@ -170,7 +170,7 @@ namespace MaterialDesignExtensions.Controls
                         CurrentFile = null;
                     }
                 }
-                else if (args.Parameter is FileInfo fileInfo)
+                else if (fileSystemInfo is FileInfo fileInfo)
                 {
                     CurrentFile = fileInfo.FullName;
                 }
