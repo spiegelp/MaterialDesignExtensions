@@ -242,6 +242,8 @@ namespace MaterialDesignExtensions.Controls
         protected override void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
             SelectFileSystemEntry(args.Parameter as FileSystemInfo);
+
+            Keyboard.Focus(this);
         }
 
         protected abstract void SelectFileSystemEntry(FileSystemInfo fileSystemInfo);

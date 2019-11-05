@@ -311,6 +311,8 @@ namespace MaterialDesignExtensions.Controls
             CommandBindings.Add(new CommandBinding(FileSystemControlCommands.CancelNewDirectoryCommand, CancelNewDirectoryCommandHandler));
             CommandBindings.Add(new CommandBinding(FileSystemControlCommands.CreateNewDirectoryCommand, CreateNewDirectoryCommandHandler));
 
+            InputBindings.Add(new KeyBinding(FileSystemControlCommands.CancelCommand, new KeyGesture(Key.Escape)));
+
             m_pathPartsScrollViewer = null;
             m_pathPartsItemsControl = null;
             m_fileSystemEntryItemsScrollViewer = null;
@@ -340,6 +342,9 @@ namespace MaterialDesignExtensions.Controls
         protected virtual void LoadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged += ControllerPropertyChangedHandler;
+
+            // not sure if the control should get keyboard focus on loading
+            //Keyboard.Focus(this);
         }
 
         protected virtual void UnloadedHandler(object sender, RoutedEventArgs args)
@@ -377,6 +382,8 @@ namespace MaterialDesignExtensions.Controls
                     drawerHost.IsTopDrawerOpen = false;
                 }
             }
+
+            Keyboard.Focus(this);
         }
 
         protected virtual void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
@@ -388,6 +395,8 @@ namespace MaterialDesignExtensions.Controls
                     CurrentDirectory = directoryInfo.FullName;
                 }
             }
+
+            Keyboard.Focus(this);
         }
 
         protected void ShowInfoCommandHandler(object sender, ExecutedRoutedEventArgs args)

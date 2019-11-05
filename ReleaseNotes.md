@@ -132,3 +132,4 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 ### v3.0.0 (upcoming release)
 #### Features
 * Select file with double click in `OpenFileDialog` and `SaveFileDialog`
+* Improved keyboard navigation for file system controls

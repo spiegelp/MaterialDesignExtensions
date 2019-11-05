@@ -452,7 +452,8 @@
                         <ColumnDefinition Width="56" />
                     </Grid.ColumnDefinitions>
                     <ContentControl Content="{Binding Path=Value, Converter={StaticResource fileSystemInfoIconConverterThumbnail}}"
-                                    ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}" />
+                                    ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}"
+                                    Focusable="False" />
                     <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                         <TextBlock Foreground="{DynamicResource MaterialDesignBody}" FontSize="16"
                                    Text="{Binding Path=Value.Name, Mode=OneTime}" ToolTip="{Binding Path=Value.Name, Mode=OneTime}" TextTrimming="CharacterEllipsis" />
@@ -521,6 +522,8 @@
                 <Button.InputBindings>
                     <MouseBinding Gesture="LeftDoubleClick"
                                   Command="{x:Static internalCommands:FileSystemControlCommands.FileSystemEntryDoubleClickCommand}" CommandParameter="{Binding Path=Value}" />
+                    <KeyBinding Key="Enter"
+                                Command="{x:Static internalCommands:FileSystemControlCommands.FileSystemEntryDoubleClickCommand}" CommandParameter="{Binding Path=Value}" />
                 </Button.InputBindings>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -529,7 +532,8 @@
                         <ColumnDefinition Width="56" />
                     </Grid.ColumnDefinitions>
                     <ContentControl Content="{Binding Path=Value, Converter={StaticResource fileSystemInfoIconConverterThumbnail}}"
-                                    ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}" />
+                                    ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}"
+                                    Focusable="False" />
                     <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                         <TextBlock Foreground="{DynamicResource MaterialDesignBody}" FontSize="16"
                                    Text="{Binding Path=Value.Name, Mode=OneTime}" ToolTip="{Binding Path=Value.Name, Mode=OneTime}" TextTrimming="CharacterEllipsis" />
@@ -602,7 +606,8 @@
                         <ColumnDefinition Width="56" />
                     </Grid.ColumnDefinitions>
                     <ContentControl Content="{Binding Path=Value, Converter={StaticResource fileSystemInfoIconConverterThumbnail}}"
-                                    ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}" />
+                                    ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}"
+                                    Focusable="False" />
                     <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                         <TextBlock Foreground="{DynamicResource MaterialDesignBody}" FontSize="16"
                                    Text="{Binding Path=Value.Name, Mode=OneTime}" ToolTip="{Binding Path=Value.Name, Mode=OneTime}" TextTrimming="CharacterEllipsis" />
@@ -706,7 +711,8 @@
                         <ColumnDefinition Width="56" />
                     </Grid.ColumnDefinitions>
                     <ContentControl Content="{Binding Path=Value, Converter={StaticResource fileSystemInfoIconConverterThumbnail}}"
-                                    ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}" />
+                                    ContentTemplateSelector="{StaticResource fileSystemEntryItemIconTemplateSelector}"
+                                    Focusable="False" />
                     <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
                         <TextBlock Foreground="{DynamicResource MaterialDesignBody}" FontSize="16"
                                    Text="{Binding Path=Value.Name, Mode=OneTime}" ToolTip="{Binding Path=Value.Name, Mode=OneTime}" TextTrimming="CharacterEllipsis" />
