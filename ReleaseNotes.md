@@ -133,3 +133,9 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 #### Features
 * Select file with double click in `OpenFileDialog` and `SaveFileDialog`
 * Improved keyboard navigation for file system controls
+#### Breaking API
+* Removed obsolete members
+  * `TabControlAssist.TabHeaderAlignment` attached property
+  * `OpenDirectoryDialog.ShowDialogAsync` methods
+  * `OpenFileDialog.ShowDialogAsync` methods
+  * `SaveFileDialog.ShowDialogAsync` methods
