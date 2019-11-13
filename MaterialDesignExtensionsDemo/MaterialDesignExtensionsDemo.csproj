@@ -101,6 +101,9 @@
     <Compile Include="Controls\GridListControl.xaml.cs">
       <DependentUpon>GridListControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LanguageControl.xaml.cs">
+      <DependentUpon>LanguageControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NavigationControl.xaml.cs">
       <DependentUpon>NavigationControl.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,7 @@
     <Compile Include="Controls\ThemesControl.xaml.cs">
       <DependentUpon>ThemesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="ViewModel\AlertDialogViewModel.cs" />
     <Compile Include="ViewModel\AppBarViewModel.cs" />
     <Compile Include="ViewModel\AutocompleteInTabControlViewModel.cs" />
@@ -147,6 +151,7 @@
     <Compile Include="ViewModel\FileSystemControlViewModel.cs" />
     <Compile Include="ViewModel\FileSystemDialogViewModel.cs" />
     <Compile Include="ViewModel\GridListViewModel.cs" />
+    <Compile Include="ViewModel\LanguageViewModel.cs" />
     <Compile Include="ViewModel\NavigationViewModel.cs" />
     <Compile Include="ViewModel\OpenDirectoryControlViewModel.cs" />
     <Compile Include="ViewModel\OpenFileControlViewModel.cs" />
@@ -179,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\GridListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LanguageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -73,7 +73,10 @@ namespace MaterialDesignExtensionsDemo
                 new FirstLevelNavigationItem() { Label = "Search", Icon = PackIconKind.Magnify, NavigationItemSelectedCallback = item => new SearchViewModel() },
                 new DividerNavigationItem(),
                 new SubheaderNavigationItem() { Subheader = "Themes" },
-                new FirstLevelNavigationItem() { Label = "Themes", Icon = PackIconKind.Palette, NavigationItemSelectedCallback = item => new ThemesViewModel() }
+                new FirstLevelNavigationItem() { Label = "Themes", Icon = PackIconKind.Palette, NavigationItemSelectedCallback = item => new ThemesViewModel() },
+                new DividerNavigationItem(),
+                new SubheaderNavigationItem() { Subheader = "i18n" },
+                new FirstLevelNavigationItem() { Label = "Language", Icon = PackIconKind.Translate, NavigationItemSelectedCallback = item => new LanguageViewModel() }
             };
 
             InitializeComponent();
