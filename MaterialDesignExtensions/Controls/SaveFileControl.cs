@@ -15,6 +15,7 @@ using MaterialDesignExtensions.Controllers;
 #if LONG_PATH
 using DirectoryInfo = Pri.LongPath.DirectoryInfo;
 using FileInfo = Pri.LongPath.FileInfo;
+using FileSystemInfo = Pri.LongPath.FileSystemInfo;
 #endif
 
 namespace MaterialDesignExtensions.Controls
