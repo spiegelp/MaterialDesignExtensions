@@ -14,6 +14,7 @@
     
     <converters:BooleanOrConverter x:Key="booleanOrConverter" />
     <convertersLib:NullableToVisibilityConverter x:Key="nullableToVisibilityConverter" />
+    <converters:StepIconTemplateConverter x:Key="stepIconTemplateConverter" />
 
     <templateSelectors:HorizontalStepperHeaderTemplateSelector x:Key="horizontalStepperHeaderTemplateSelector" />
 
@@ -89,6 +90,25 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="MaterialDesignStepIconContentControl" TargetType="ContentControl">
+        <Setter Property="Height" Value="24" />
+        <Setter Property="Width" Value="24" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Content" Value="{Binding}" />
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource stepIconTemplateConverter}">
+                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type controls:IStepper}}" />
+                    <Binding RelativeSource="{RelativeSource Self}" />
+                    <Binding Path="Content" RelativeSource="{RelativeSource Self}" />
+                    <Binding Path="IsActive" />
+                    <Binding Path="Step.HasValidationErrors" />
+                    <Binding Path="Controller.ActiveStep" />
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="MaterialDesignStepperCircle" TargetType="{x:Type Border}">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CornerRadius" Value="12" />
@@ -147,6 +167,27 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+
+    <DataTemplate x:Key="MaterialDesignStepNumberIconTemplate">
+        <Border VerticalAlignment="Center" Style="{StaticResource MaterialDesignStepperCircle}">
+            <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MaterialDesignStepDoneIconTemplate">
+        <Border VerticalAlignment="Center" Style="{StaticResource MaterialDesignStepperCircle}"
+                Background="{DynamicResource PrimaryHueMidBrush}">
+            <wpfLib:PackIcon Kind="Done" Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center"
+                             Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="MaterialDesignStepValidationErrorIconTemplate">
+        <Grid SnapsToDevicePixels="True" Width="24" Height="24">
+            <wpfLib:PackIcon Kind="Triangle" Width="24" Height="24" Foreground="Red" />
+            <TextBlock Text="!" FontSize="12" FontWeight="Medium" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,4,0,0" />
+        </Grid>
+    </DataTemplate>
 
     <Style TargetType="{x:Type controls:Stepper}">
         <Style.Resources>
@@ -275,10 +316,8 @@
                                                             <ColumnDefinition Width="100*" />
                                                         </Grid.ColumnDefinitions>
                                                         <StackPanel Margin="8,24,8,24" Orientation="Horizontal">
-                                                            <!-- circle -->
-                                                            <Border VerticalAlignment="Center" Style="{StaticResource MaterialDesignStepperCircle}">
-                                                                <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
-                                                            </Border>
+                                                            <!-- icon -->
+                                                            <ContentControl Style="{StaticResource MaterialDesignStepIconContentControl}" />
                                                             <!-- header -->
                                                             <ContentControl Style="{StaticResource headerContentControlStyle}" Focusable="False"
                                                                             Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" />
@@ -298,10 +337,8 @@
                                                         </Grid.ColumnDefinitions>
                                                         <Border Style="{StaticResource MaterialDesignHorizontalStepperSpaceLine}" />
                                                         <StackPanel Grid.Column="1" Margin="8,24,8,24" Orientation="Horizontal">
-                                                            <!-- circle -->
-                                                            <Border VerticalAlignment="Center" Style="{StaticResource MaterialDesignStepperCircle}">
-                                                                <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
-                                                            </Border>
+                                                            <!-- icon -->
+                                                            <ContentControl Style="{StaticResource MaterialDesignStepIconContentControl}" />
                                                             <!-- header -->
                                                             <ContentControl Style="{StaticResource headerContentControlStyle}" Focusable="False"
                                                                             Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" />
@@ -320,10 +357,8 @@
                                                         </Grid.ColumnDefinitions>
                                                         <Border Style="{StaticResource MaterialDesignHorizontalStepperSpaceLine}" />
                                                         <StackPanel Grid.Column="1" Margin="8,24,8,24" Orientation="Horizontal">
-                                                            <!-- circle -->
-                                                            <Border VerticalAlignment="Center" Style="{StaticResource MaterialDesignStepperCircle}">
-                                                                <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
-                                                            </Border>
+                                                            <!-- icon -->
+                                                            <ContentControl Style="{StaticResource MaterialDesignStepIconContentControl}" />
                                                             <!-- header -->
                                                             <ContentControl Style="{StaticResource headerContentControlStyle}" Focusable="False"
                                                                             Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" />
@@ -409,10 +444,8 @@
                                                             </Style>
                                                         </Border.Style>
                                                     </Border>
-                                                    <!-- circle -->
-                                                    <Border Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Style="{StaticResource MaterialDesignStepperCircle}">
-                                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
-                                                    </Border>
+                                                    <!-- icon -->
+                                                    <ContentControl Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Style="{StaticResource MaterialDesignStepIconContentControl}" />
                                                     <!-- vertical line after the circle -->
                                                     <Border Grid.Column="1" Grid.Row="3" Style="{StaticResource MaterialDesignVerticalStepperSpaceLine}" Margin="0,8,0,0" Padding="0" />
                                                     <!-- header -->
@@ -603,10 +636,8 @@
                                                             <ColumnDefinition Width="100*" />
                                                         </Grid.ColumnDefinitions>
                                                         <StackPanel Margin="8,24,8,24" Orientation="Horizontal">
-                                                            <!-- circle -->
-                                                            <Border VerticalAlignment="Center" Style="{StaticResource MaterialDesignStepperCircle}">
-                                                                <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
-                                                            </Border>
+                                                            <!-- icon -->
+                                                            <ContentControl Style="{StaticResource MaterialDesignStepIconContentControl}" />
                                                             <!-- header -->
                                                             <ContentControl Style="{StaticResource headerContentControlStyle}" Focusable="False"
                                                                             Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" />
@@ -626,10 +657,8 @@
                                                         </Grid.ColumnDefinitions>
                                                         <Border Style="{StaticResource MaterialDesignHorizontalStepperSpaceLine}" />
                                                         <StackPanel Grid.Column="1" Margin="8,24,8,24" Orientation="Horizontal">
-                                                            <!-- circle -->
-                                                            <Border VerticalAlignment="Center" Style="{StaticResource MaterialDesignStepperCircle}">
-                                                                <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
-                                                            </Border>
+                                                            <!-- icon -->
+                                                            <ContentControl Style="{StaticResource MaterialDesignStepIconContentControl}" />
                                                             <!-- header -->
                                                             <ContentControl Style="{StaticResource headerContentControlStyle}" Focusable="False"
                                                                             Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" />
@@ -648,10 +677,8 @@
                                                         </Grid.ColumnDefinitions>
                                                         <Border Style="{StaticResource MaterialDesignHorizontalStepperSpaceLine}" />
                                                         <StackPanel Grid.Column="1" Margin="8,24,8,24" Orientation="Horizontal">
-                                                            <!-- circle -->
-                                                            <Border VerticalAlignment="Center" Style="{StaticResource MaterialDesignStepperCircle}">
-                                                                <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
-                                                            </Border>
+                                                            <!-- icon -->
+                                                            <ContentControl Style="{StaticResource MaterialDesignStepIconContentControl}" />
                                                             <!-- header -->
                                                             <ContentControl Style="{StaticResource headerContentControlStyle}" Focusable="False"
                                                                             Content="{Binding Path=Step.Header}" Margin="8,0,0,0" VerticalAlignment="Center" />
@@ -737,10 +764,8 @@
                                                             </Style>
                                                         </Border.Style>
                                                     </Border>
-                                                    <!-- circle -->
-                                                    <Border Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Style="{StaticResource MaterialDesignStepperCircle}">
-                                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Number}" VerticalAlignment="Center" />
-                                                    </Border>
+                                                    <!-- icon -->
+                                                    <ContentControl Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Style="{StaticResource MaterialDesignStepIconContentControl}" />
                                                     <!-- vertical line after the circle -->
                                                     <Border Grid.Column="1" Grid.Row="3" Style="{StaticResource MaterialDesignVerticalStepperSpaceLine}" Margin="0,8,0,0" Padding="0" />
                                                     <!-- header -->

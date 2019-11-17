@@ -134,9 +134,11 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Select file with double click in `OpenFileDialog` and `SaveFileDialog`
 * Improved keyboard navigation for file system controls
 * Dense style for `PersistentSearch`
+* Optional icon templates for steps inside a stepper
 #### Breaking API
 * Removed obsolete members
   * `TabControlAssist.TabHeaderAlignment` attached property
   * `OpenDirectoryDialog.ShowDialogAsync` methods
   * `OpenFileDialog.ShowDialogAsync` methods
   * `SaveFileDialog.ShowDialogAsync` methods
+* Extendend `IStepper` interface to implement new features for steppers

@@ -97,7 +97,9 @@
                               BlockNavigationOnValidationErrors="{Binding Path=BlockNavigationOnValidationErrors}"
                               ContentAnimationsEnabled="{Binding Path=ContentAnimationsEnabled}"
                               Steps="{Binding Path=Steps, Mode=OneTime}"
-                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              DoneIconTemplate="{DynamicResource MaterialDesignStepDoneIconTemplate}"
+                              ValidationErrorIconTemplate="{DynamicResource MaterialDesignStepValidationErrorIconTemplate}">
                 <!-- example for using different colors than the default application theme -->
                 <!--<controls:Stepper.Resources>
                     <ResourceDictionary>

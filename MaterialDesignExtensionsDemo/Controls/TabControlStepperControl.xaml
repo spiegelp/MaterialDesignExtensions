@@ -23,7 +23,9 @@
             <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
                 <controls:TabControlStepper IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}"
                                             ContentAnimationsEnabled="{Binding Path=ContentAnimationsEnabled}"
-                                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                            DoneIconTemplate="{DynamicResource MaterialDesignStepDoneIconTemplate}"
+                                            ValidationErrorIconTemplate="{DynamicResource MaterialDesignStepValidationErrorIconTemplate}">
                     <TabItem>
                         <TabItem.Header>
                             <model:StepTitleHeader FirstLevelTitle="What is a Stepper?" />

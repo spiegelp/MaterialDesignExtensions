@@ -205,6 +205,7 @@
     <Compile Include="Converters\ObjectCollectionToVisibilityConverter.cs" />
     <Compile Include="Converters\ObjectHasTypeConverter.cs" />
     <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
+    <Compile Include="Converters\StepIconTemplateConverter.cs" />
     <Compile Include="Converters\UpperCaseConverter.cs" />
     <Compile Include="Localization\Strings.ru-ru.Designer.cs">
       <DependentUpon>Strings.ru-ru.resx</DependentUpon>
@@ -268,6 +269,7 @@
     <Compile Include="TemplateSelectors\FileSystemInfoIconTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\HorizontalStepperHeaderTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\NavigationItemKindTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\StepIconTemplateSelector.cs" />
     <Compile Include="Themes\PaletteHelper.cs" />
     <EmbeddedResource Include="Localization\Strings.ru-ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
