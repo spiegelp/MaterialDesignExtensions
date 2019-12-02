@@ -142,3 +142,4 @@ Please change your configuration according to [App.xaml](https://github.com/spie
   * `OpenFileDialog.ShowDialogAsync` methods
   * `SaveFileDialog.ShowDialogAsync` methods
 * Extendend `IStepper` interface to implement new features for steppers
+* Extendend `IStep` interface to implement new features for steppers

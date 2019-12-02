@@ -103,6 +103,7 @@
                     <Binding Path="Content" RelativeSource="{RelativeSource Self}" />
                     <Binding Path="IsActive" />
                     <Binding Path="Step.HasValidationErrors" />
+                    <Binding Path="Step.IconTemplate" />
                     <Binding Path="Controller.ActiveStep" />
                 </MultiBinding>
             </Setter.Value>

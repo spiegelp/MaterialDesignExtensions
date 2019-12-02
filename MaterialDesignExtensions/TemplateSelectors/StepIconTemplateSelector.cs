@@ -64,7 +64,11 @@ namespace MaterialDesignExtensions.TemplateSelectors
         {
             if (stepper != null && stepViewModel != null && element != null)
             {
-                if (stepViewModel.Step.HasValidationErrors && stepper.ValidationErrorIconTemplate != null)
+                if (stepViewModel.Step.IconTemplate != null)
+                {
+                    return stepViewModel.Step.IconTemplate;
+                }
+                else if (stepViewModel.Step.HasValidationErrors && stepper.ValidationErrorIconTemplate != null)
                 {
                     return stepper.ValidationErrorIconTemplate;
                 }

@@ -76,6 +76,13 @@
                 <controls:StepButtonBar Back="BACK" Continue="FINISH" Cancel="CANCEL" />
             </StackPanel>
         </DataTemplate>
+
+        <DataTemplate x:Key="CustomStepIconTemplate">
+            <Grid Width="24" Height=" 24">
+                <Rectangle Fill="Lime" Width="24" Height="24" SnapsToDevicePixels="True" />
+                <TextBlock Text="{Binding Path=Number}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid Margin="16">
         <Grid.RowDefinitions>
