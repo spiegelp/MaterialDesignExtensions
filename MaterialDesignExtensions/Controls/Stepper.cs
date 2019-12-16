@@ -621,7 +621,11 @@ namespace MaterialDesignExtensions.Controls
             {
                 bool isValid = ValidateActiveStep();
 
-                if (BlockNavigationOnValidationErrors && !isValid)
+                StepperStepViewModel activeStepViewModel = Controller.ActiveStepViewModel;
+                StepperStepViewModel nextStepViewModel = Controller.InternalSteps.FirstOrDefault(stepViewModel => stepViewModel.Step == step);
+
+                if (BlockNavigationOnValidationErrors && !isValid
+                    && (nextStepViewModel == null || nextStepViewModel.Number > activeStepViewModel.Number))
                 {
                     RaiseNavigationCanceledByValidation();
 
@@ -703,14 +707,7 @@ namespace MaterialDesignExtensions.Controls
 
         private void BackHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            bool isValid = ValidateActiveStep();
-
-            if (BlockNavigationOnValidationErrors && !isValid)
-            {
-                RaiseNavigationCanceledByValidation();
-
-                return;
-            }
+            ValidateActiveStep();
 
             StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(BackNavigationEvent, this, Controller.ActiveStep, Controller.PreviousStep, false);
             RaiseEvent(navigationArgs);
