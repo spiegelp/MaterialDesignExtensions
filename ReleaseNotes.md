@@ -136,6 +136,7 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Dense style for `PersistentSearch`
 * Optional icon templates for steps inside a stepper
 * Improved stepper navigation
+* Added `MaterialWindow.TitleBarIcon` property
 #### Breaking API
 * Removed obsolete members
   * `TabControlAssist.TabHeaderAlignment` attached property

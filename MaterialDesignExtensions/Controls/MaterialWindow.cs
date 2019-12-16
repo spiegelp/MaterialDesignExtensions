@@ -86,6 +86,28 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The icon inside the window's title bar.
+        /// </summary>
+        public static readonly DependencyProperty TitleBarIconProperty = DependencyProperty.Register(
+            nameof(TitleBarIcon), typeof(ImageSource), typeof(MaterialWindow), new FrameworkPropertyMetadata(null, null));
+
+        /// <summary>
+        /// The icon inside the window's title bar.
+        /// </summary>
+        public ImageSource TitleBarIcon
+        {
+            get
+            {
+                return (ImageSource)GetValue(TitleBarIconProperty);
+            }
+
+            set
+            {
+                SetValue(TitleBarIconProperty, value);
+            }
+        }
+
         private Button m_minimizeButton;
         private Button m_maximizeRestoreButton;
         private Button m_closeButton;

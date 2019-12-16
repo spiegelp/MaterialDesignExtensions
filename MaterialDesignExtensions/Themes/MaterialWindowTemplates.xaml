@@ -121,6 +121,7 @@
         <Setter Property="FadeContentIfInactive" Value="True" />
         <Setter Property="MinWidth" Value="128" />
         <Setter Property="MinHeight" Value="128" />
+        <Setter Property="TitleBarIcon" Value="{Binding Path=Icon, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:MaterialWindow}">
@@ -179,7 +180,7 @@
                                 </Grid.RowDefinitions>
                                 
                                 <!-- window icon -->
-                                <Image Source="{TemplateBinding Icon}" Width="24" Height="24" Margin="8,0,8,0" Visibility="{TemplateBinding Property=Icon, Converter={StaticResource notNullToVisibilityConverter}}" />
+                                <Image Source="{TemplateBinding TitleBarIcon}" Width="24" Height="24" Margin="8,0,8,0" Visibility="{TemplateBinding Property=TitleBarIcon, Converter={StaticResource notNullToVisibilityConverter}}" />
 
                                 <!-- window title -->
                                 <TextBlock Grid.Column="1" Text="{TemplateBinding Title}" FontSize="14" Foreground="{TemplateBinding BorderForegroundBrush}" Margin="8,0,0,0" VerticalAlignment="Center">
