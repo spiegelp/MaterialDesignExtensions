@@ -6,6 +6,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
+using MaterialDesignThemes.Wpf;
+
 namespace MaterialDesignExtensions.Themes
 {
     /// <summary>
@@ -18,12 +20,47 @@ namespace MaterialDesignExtensions.Themes
         /// </summary>
         public PaletteHelper() : base() { }
 
+        public override ITheme GetTheme()
+        {
+            if (Application.Current == null)
+            {
+                throw new InvalidOperationException("Cannot get theme outside of a WPF application. Use ResourceDictionaryExtensions.GetTheme on the appropriate resource dictionary instead.");
+            }
+
+            return Application.Current.Resources.GetExtendedTheme();
+        }
+
+        public IExtendedTheme GetExtendedTheme()
+        {
+            return (IExtendedTheme)GetTheme();
+        }
+
+        public override void SetTheme(ITheme theme)
+        {
+            if (theme == null)
+            {
+                throw new ArgumentNullException(nameof(theme));
+            }
+
+            if (Application.Current == null)
+            {
+                throw new InvalidOperationException("Cannot set theme outside of a WPF application. Use ResourceDictionaryExtensions.SetTheme on the appropriate resource dictionary instead.");
+            }
+
+            Application.Current.Resources.SetExtendedTheme((IExtendedTheme)theme);
+        }
+
+        public void SetExtendedTheme(IExtendedTheme theme)
+        {
+            SetTheme(theme);
+        }
+
         /// <summary>
         /// Replaces the current theme with the light or dark theme. The implementation is based on MaterialDesignThemes.Wpf.PaletteHelper.SetLightDark(bool isDark).
         /// </summary>
         /// <param name="isDark"></param>
         [Obsolete]
-        public override void SetLightDark(bool isDark)
+        public void SetLightDark(bool isDark)
         {
             // this method is a copy of MaterialDesignThemes.Wpf.PaletteHelper.SetLightDark(bool isDark) with changed resource names/strings
 
