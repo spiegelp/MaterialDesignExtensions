@@ -29,12 +29,18 @@ Important notice: The configuration of Material Design Extensions changed in ord
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\MaterialDesignExtensions.dll" target="lib\net45" />
-    <file src="bin\Release\de\MaterialDesignExtensions.resources.dll" target="lib\net45\de" />
-    <file src="bin\Release\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net45\Ru" />
-    <file src="bin\Release\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net45\ru-ru" />
-    <file src="bin\Release\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\net45\uz-Latn-UZ" />
-    <file src="bin\Release\MaterialDesignExtensions.xml" target="lib\net45" />
+    <file src="bin\net45\Release\MaterialDesignExtensions.dll" target="lib\net45" />
+    <file src="bin\net45\Release\de\MaterialDesignExtensions.resources.dll" target="lib\net45\de" />
+    <file src="bin\net45\Release\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net45\Ru" />
+    <file src="bin\net45\Release\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net45\ru-ru" />
+    <file src="bin\net45\Release\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\net45\uz-Latn-UZ" />
+    <file src="bin\net45\Release\MaterialDesignExtensions.xml" target="lib\net45" />
+    <file src="bin\netcoreapp3.0\Release\MaterialDesignExtensions.dll" target="lib\netcoreapp3.0" />
+    <file src="bin\netcoreapp3.0\Release\de\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.0\de" />
+    <file src="bin\netcoreapp3.0\Release\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.0\Ru" />
+    <file src="bin\netcoreapp3.0\Release\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.0\ru-ru" />
+    <file src="bin\netcoreapp3.0\Release\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.0\uz-Latn-UZ" />
+    <file src="bin\netcoreapp3.0\Release\MaterialDesignExtensions.xml" target="lib\netcoreapp3.0" />
     <file src="..\additionalPackageFiles\License.txt" />
     <file src="..\additionalPackageFiles\Notice.txt" />
     <file src="..\additionalPackageFiles\PackageReadme.md" target="Readme.md" />

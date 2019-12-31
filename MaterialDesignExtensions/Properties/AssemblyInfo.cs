@@ -7,14 +7,14 @@ using System.Windows;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("Material Design Extensions")]
+/*[assembly: AssemblyTitle("Material Design Extensions")]
 [assembly: AssemblyDescription("Material Design Extensions is based on Material Design in XAML Toolkit to provide additional controls and features for WPF apps")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Philipp Spiegel")]
 [assembly: AssemblyProduct("Material Design Extensions")]
 [assembly: AssemblyCopyright("Copyright © 2017-2019")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyCulture("")]*/
 
 // Durch Festlegen von ComVisible auf "false" werden die Typen in dieser Assembly unsichtbar 
 // für COM-Komponenten.  Wenn Sie auf einen Typ in dieser Assembly von 
@@ -51,5 +51,5 @@ using System.Windows;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.0.0.0")]
-[assembly: AssemblyFileVersion("3.0.0.0")]
+/*[assembly: AssemblyVersion("3.0.0.0")]
+[assembly: AssemblyFileVersion("3.0.0.0")]*/

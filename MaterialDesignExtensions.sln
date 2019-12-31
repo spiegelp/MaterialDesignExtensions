@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialDesignExtensions", "MaterialDesignExtensions\MaterialDesignExtensions.csproj", "{809632DA-5EB8-4EE8-AD71-57239701550C}"
 EndProject
@@ -21,12 +21,12 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{809632DA-5EB8-4EE8-AD71-57239701550C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{809632DA-5EB8-4EE8-AD71-57239701550C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{809632DA-5EB8-4EE8-AD71-57239701550C}.DebugLongPath|Any CPU.ActiveCfg = DebugLongPath|Any CPU
-		{809632DA-5EB8-4EE8-AD71-57239701550C}.DebugLongPath|Any CPU.Build.0 = DebugLongPath|Any CPU
+		{809632DA-5EB8-4EE8-AD71-57239701550C}.DebugLongPath|Any CPU.ActiveCfg = Debug|Any CPU
+		{809632DA-5EB8-4EE8-AD71-57239701550C}.DebugLongPath|Any CPU.Build.0 = Debug|Any CPU
 		{809632DA-5EB8-4EE8-AD71-57239701550C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{809632DA-5EB8-4EE8-AD71-57239701550C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{809632DA-5EB8-4EE8-AD71-57239701550C}.ReleaseLongPath|Any CPU.ActiveCfg = ReleaseLongPath|Any CPU
-		{809632DA-5EB8-4EE8-AD71-57239701550C}.ReleaseLongPath|Any CPU.Build.0 = ReleaseLongPath|Any CPU
+		{809632DA-5EB8-4EE8-AD71-57239701550C}.ReleaseLongPath|Any CPU.ActiveCfg = Release|Any CPU
+		{809632DA-5EB8-4EE8-AD71-57239701550C}.ReleaseLongPath|Any CPU.Build.0 = Release|Any CPU
 		{279D7E62-1206-4928-890E-00F51CD0181C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{279D7E62-1206-4928-890E-00F51CD0181C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{279D7E62-1206-4928-890E-00F51CD0181C}.DebugLongPath|Any CPU.ActiveCfg = DebugLongPath|Any CPU
