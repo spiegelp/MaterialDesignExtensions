@@ -1,283 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{279D7E62-1206-4928-890E-00F51CD0181C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MaterialDesignExtensionsDemo</RootNamespace>
-    <AssemblyName>MaterialDesignExtensionsDemo</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;DEFAULT</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;DEFAULT</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugLongPath|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\DebugLongPath\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;LONG_PATH</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseLongPath|AnyCPU'">
-    <OutputPath>bin\ReleaseLongPath\</OutputPath>
-    <DefineConstants>TRACE;LONG_PATH</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyVersion>1.0.0.46</AssemblyVersion>
+    <FileVersion>1.0.0.46</FileVersion>
     <ApplicationIcon>icon_on_background.ico</ApplicationIcon>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DefineConstants>TRACE</DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <None Remove="icon_on_background.ico" />
+    <None Remove="icon_white.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Controls\AppBarControl.xaml.cs">
-      <DependentUpon>AppBarControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\AutocompleteControl.xaml.cs">
-      <DependentUpon>AutocompleteControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\AutocompleteInTabControlControl.xaml.cs">
-      <DependentUpon>AutocompleteInTabControlControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FileSystemDialogControl.xaml.cs">
-      <DependentUpon>FileSystemDialogControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\GridListControl.xaml.cs">
-      <DependentUpon>GridListControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\LanguageControl.xaml.cs">
-      <DependentUpon>LanguageControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NavigationControl.xaml.cs">
-      <DependentUpon>NavigationControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OpenDirectoryControlControl.xaml.cs">
-      <DependentUpon>OpenDirectoryControlControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OpenFileControlControl.xaml.cs">
-      <DependentUpon>OpenFileControlControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OpenMultipleDirectoriesControlControl.xaml.cs">
-      <DependentUpon>OpenMultipleDirectoriesControlControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OpenMultipleFilesControlControl.xaml.cs">
-      <DependentUpon>OpenMultipleFilesControlControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\OversizedNumberSpinnerControl.xaml.cs">
-      <DependentUpon>OversizedNumberSpinnerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SearchControl.xaml.cs">
-      <DependentUpon>SearchControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\StepperControl.xaml.cs">
-      <DependentUpon>StepperControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SaveFileControlControl.xaml.cs">
-      <DependentUpon>SaveFileControlControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TabControlControl.xaml.cs">
-      <DependentUpon>TabControlControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TabControlStepperControl.xaml.cs">
-      <DependentUpon>TabControlStepperControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TextBoxSuggestionsControl.xaml.cs">
-      <DependentUpon>TextBoxSuggestionsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ThemesControl.xaml.cs">
-      <DependentUpon>ThemesControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DelegateCommand.cs" />
-    <Compile Include="ViewModel\AlertDialogViewModel.cs" />
-    <Compile Include="ViewModel\AppBarViewModel.cs" />
-    <Compile Include="ViewModel\AutocompleteInTabControlViewModel.cs" />
-    <Compile Include="ViewModel\AutocompleteViewModel.cs" />
-    <Compile Include="ViewModel\FileSystemControlViewModel.cs" />
-    <Compile Include="ViewModel\FileSystemDialogViewModel.cs" />
-    <Compile Include="ViewModel\GridListViewModel.cs" />
-    <Compile Include="ViewModel\LanguageViewModel.cs" />
-    <Compile Include="ViewModel\NavigationViewModel.cs" />
-    <Compile Include="ViewModel\OpenDirectoryControlViewModel.cs" />
-    <Compile Include="ViewModel\OpenFileControlViewModel.cs" />
-    <Compile Include="ViewModel\OpenMultipleDirectoriesControlViewModel.cs" />
-    <Compile Include="ViewModel\OpenMultipleFilesControlViewModel.cs" />
-    <Compile Include="ViewModel\OversizedNumberSpinnerViewModel.cs" />
-    <Compile Include="ViewModel\SaveFileControlViewModel.cs" />
-    <Compile Include="ViewModel\SearchViewModel.cs" />
-    <Compile Include="ViewModel\StepperBaseViewModel.cs" />
-    <Compile Include="ViewModel\StepperViewModel.cs" />
-    <Compile Include="ViewModel\TabControlStepperViewModel.cs" />
-    <Compile Include="ViewModel\TabControlViewModel.cs" />
-    <Compile Include="ViewModel\TextBoxSuggestionsViewModel.cs" />
-    <Compile Include="ViewModel\ThemesViewModel.cs" />
-    <Compile Include="ViewModel\ViewModel.cs" />
-    <Page Include="Controls\AppBarControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\AutocompleteControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\AutocompleteInTabControlControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\FileSystemDialogControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\GridListControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\LanguageControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\NavigationControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OpenDirectoryControlControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OpenFileControlControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OpenMultipleDirectoriesControlControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\OpenMultipleFilesControlControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\SearchControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\StepperControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\TabControlControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\TabControlStepperControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\TextBoxSuggestionsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ThemesControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Controls\OversizedNumberSpinnerControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\SaveFileControlControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="NavigationItem.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MaterialDesignExtensions\MaterialDesignExtensions.csproj">
-      <Project>{809632da-5eb8-4ee8-ad71-57239701550c}</Project>
-      <Name>MaterialDesignExtensions</Name>
-    </ProjectReference>
-  </ItemGroup>
+
   <ItemGroup>
     <Content Include="icon_on_background.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -286,5 +33,148 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\MaterialDesignExtensions\MaterialDesignExtensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="App.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\AppBarControl.xaml.cs">
+      <DependentUpon>AppBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\AutocompleteControl.xaml.cs">
+      <DependentUpon>AutocompleteControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\AutocompleteInTabControlControl.xaml.cs">
+      <DependentUpon>AutocompleteInTabControlControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\FileSystemDialogControl.xaml.cs">
+      <DependentUpon>FileSystemDialogControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\GridListControl.xaml.cs">
+      <DependentUpon>GridListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\LanguageControl.xaml.cs">
+      <DependentUpon>LanguageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\NavigationControl.xaml.cs">
+      <DependentUpon>NavigationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\OpenDirectoryControlControl.xaml.cs">
+      <DependentUpon>OpenDirectoryControlControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\OpenFileControlControl.xaml.cs">
+      <DependentUpon>OpenFileControlControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\OpenMultipleDirectoriesControlControl.xaml.cs">
+      <DependentUpon>OpenMultipleDirectoriesControlControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\OpenMultipleFilesControlControl.xaml.cs">
+      <DependentUpon>OpenMultipleFilesControlControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\OversizedNumberSpinnerControl.xaml.cs">
+      <DependentUpon>OversizedNumberSpinnerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\SaveFileControlControl.xaml.cs">
+      <DependentUpon>SaveFileControlControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\SearchControl.xaml.cs">
+      <DependentUpon>SearchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\StepperControl.xaml.cs">
+      <DependentUpon>StepperControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\TabControlControl.xaml.cs">
+      <DependentUpon>TabControlControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\TabControlStepperControl.xaml.cs">
+      <DependentUpon>TabControlStepperControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\TextBoxSuggestionsControl.xaml.cs">
+      <DependentUpon>TextBoxSuggestionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\ThemesControl.xaml.cs">
+      <DependentUpon>ThemesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\AppBarControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\AutocompleteControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\AutocompleteInTabControlControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\FileSystemDialogControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\GridListControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\LanguageControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\NavigationControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\OpenDirectoryControlControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\OpenFileControlControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\OpenMultipleDirectoriesControlControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\OpenMultipleFilesControlControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\OversizedNumberSpinnerControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\SaveFileControlControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\SearchControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\StepperControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\TabControlControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\TabControlStepperControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\TextBoxSuggestionsControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\ThemesControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
 </Project>

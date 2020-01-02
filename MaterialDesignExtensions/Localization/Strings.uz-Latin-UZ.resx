@@ -162,6 +162,9 @@
   <data name="LocalDrive" xml:space="preserve">
     <value>Mahalliy draiver</value>
   </data>
+  <data name="LongPathsAreNotSupported" xml:space="preserve">
+    <value>Fayl joylashgan joyga yo'l juda uzun bo'lsa, qo'llab-quvvatlanmaydi</value>
+  </data>
   <data name="Music" xml:space="preserve">
     <value>Musiqa</value>
   </data>
@@ -180,6 +183,9 @@
   <data name="SaveFile" xml:space="preserve">
     <value>Faylni saqlash</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Qidirish</value>
+  </data>
   <data name="Select" xml:space="preserve">
     <value>Tanlash</value>
   </data>
@@ -191,11 +197,5 @@
   </data>
   <data name="Videos" xml:space="preserve">
     <value>Videolar</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Qidirish</value>
-  </data>
-  <data name="LongPathsAreNotSupported" xml:space="preserve">
-    <value>Fayl joylashgan joyga yo'l juda uzun bo'lsa, qo'llab-quvvatlanmaydi</value>
   </data>
 </root>

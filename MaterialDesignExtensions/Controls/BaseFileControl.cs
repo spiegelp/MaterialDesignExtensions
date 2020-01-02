@@ -12,13 +12,6 @@ using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
 
-// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
-#if LONG_PATH
-using FileSystemInfo = Pri.LongPath.FileSystemInfo;
-using DirectoryInfo = Pri.LongPath.DirectoryInfo;
-using FileInfo = Pri.LongPath.FileInfo;
-#endif
-
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
