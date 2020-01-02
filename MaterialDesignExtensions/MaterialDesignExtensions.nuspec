@@ -24,8 +24,8 @@ Important notice: The configuration of Material Design Extensions changed in ord
     <copyright>Copyright (c) 2017-2019 Spiegel Philipp</copyright>
     <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window</tags>
     <dependencies>
-      <dependency id="MaterialDesignColors" version="1.2.1" />
-      <dependency id="MaterialDesignThemes" version="3.0.0" />
+      <dependency id="MaterialDesignColors" version="1.2.2" />
+      <dependency id="MaterialDesignThemes" version="3.0.1" />
     </dependencies>
   </metadata>
   <files>

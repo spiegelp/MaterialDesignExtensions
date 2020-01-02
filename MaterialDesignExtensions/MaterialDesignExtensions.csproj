@@ -31,8 +31,8 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="MaterialDesignColors" Version="1.2.1" />
-    <PackageReference Include="MaterialDesignThemes" Version="3.0.0" />
+    <PackageReference Include="MaterialDesignColors" Version="1.2.2" />
+    <PackageReference Include="MaterialDesignThemes" Version="3.0.1" />
   </ItemGroup>
   
 </Project>
