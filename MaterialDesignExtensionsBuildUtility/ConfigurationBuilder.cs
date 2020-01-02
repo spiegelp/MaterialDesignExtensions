@@ -27,9 +27,10 @@ namespace MaterialDesignExtensionsBuildUtility
         private static readonly ISet<BuildConfiguration> AllBuildConfigurations = new HashSet<BuildConfiguration>()
         {
             new BuildConfiguration("Release", @"bin\Release", "MaterialDesignExtensions.nuspec"),
-            new BuildConfiguration("Debug", @"bin\Debug", null),
-            new BuildConfiguration("ReleaseLongPath", @"bin\ReleaseLongPath", "MaterialDesignExtensions.LongPath.nuspec"),
-            new BuildConfiguration("DebugLongPath", @"bin\Debug", null)
+            new BuildConfiguration("Debug", @"bin\Debug", null)
+            // MaterialDesignExtensions.LongPath since v3.0.0 not supported anymore
+            /*new BuildConfiguration("ReleaseLongPath", @"bin\ReleaseLongPath", "MaterialDesignExtensions.LongPath.nuspec"),
+            new BuildConfiguration("DebugLongPath", @"bin\Debug", null)*/
         };
 
         public static Configuration CreateConfiguration(string[] args)
