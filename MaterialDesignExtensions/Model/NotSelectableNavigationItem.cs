@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MaterialDesignExtensions.Model
+﻿namespace MaterialDesignExtensions.Model
 {
     /// <summary>
     /// The base class for not selectable items (headers, dividers) in a <see cref="Controls.SideNavigation" />.
