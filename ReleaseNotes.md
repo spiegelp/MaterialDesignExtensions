@@ -131,6 +131,7 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Attached property `TabControlAssist.TabHeaderAlignment` will be replaced by `TabControlAssist.TabHeaderHorizontalAlignment`
 ### v3.0.0 (upcoming release)
 #### Features
+* Support for .NET Core 3
 * Select file with double click in `OpenFileDialog` and `SaveFileDialog`
 * Improved keyboard navigation for file system controls
 * Dense style for `PersistentSearch`
