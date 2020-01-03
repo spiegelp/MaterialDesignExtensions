@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Linq;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using MaterialDesignExtensions.Controllers;
 
-namespace MaterialDesignExtensionsTests
+namespace MaterialDesignExtensionsTests.Controllers
 {
-    [TestClass]
     public class FileSystemControllerTest
     {
         private readonly string m_directory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-        [TestMethod]
+        [Fact]
         public void TestBuildFullFileNameForInCurrentDirectory()
         {
             FileSystemController fileSystemController = new FileSystemController()
@@ -25,10 +24,10 @@ namespace MaterialDesignExtensionsTests
 
             string filename = fileSystemController.BuildFullFileNameForInCurrentDirectory("test.xaml");
 
-            Assert.AreEqual($@"{m_directory}\test.xaml", filename);
+            Assert.Equal($@"{m_directory}\test.xaml", filename);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestBuildFullFileNameForInCurrentDirectoryWithForcedFileExtension()
         {
             FileSystemController fileSystemController = new FileSystemController()
@@ -41,10 +40,10 @@ namespace MaterialDesignExtensionsTests
 
             string filename = fileSystemController.BuildFullFileNameForInCurrentDirectory("test.txt");
 
-            Assert.AreEqual($@"{m_directory}\test.txt.cs", filename);
+            Assert.Equal($@"{m_directory}\test.txt.cs", filename);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestBuildFullFileNameForInCurrentDirectoryWithoutForcedFileExtension()
         {
             FileSystemController fileSystemController = new FileSystemController()
@@ -57,10 +56,10 @@ namespace MaterialDesignExtensionsTests
 
             string filename = fileSystemController.BuildFullFileNameForInCurrentDirectory("test.txt");
 
-            Assert.AreEqual($@"{m_directory}\test.txt", filename);
+            Assert.Equal($@"{m_directory}\test.txt", filename);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestSelectOrRemoveDirectoryForMultipleSelection()
         {
             string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -69,39 +68,39 @@ namespace MaterialDesignExtensionsTests
 
             FileSystemController fileSystemController = new FileSystemController();
 
-            Assert.IsFalse(fileSystemController.SelectedDirectories.Any());
+            Assert.False(fileSystemController.SelectedDirectories.Any());
 
             fileSystemController.SelectOrRemoveDirectoryForMultipleSelection(myDocuments);
             fileSystemController.SelectOrRemoveDirectoryForMultipleSelection(myPictures);
             fileSystemController.SelectOrRemoveDirectoryForMultipleSelection(myMusic);
 
-            Assert.IsTrue(fileSystemController.SelectedDirectories.Any(directory => directory.FullName == myDocuments));
-            Assert.IsTrue(fileSystemController.SelectedDirectories.Any(directory => directory.FullName == myPictures));
-            Assert.IsTrue(fileSystemController.SelectedDirectories.Any(directory => directory.FullName == myMusic));
+            Assert.Contains(fileSystemController.SelectedDirectories, directory => directory.FullName == myDocuments);
+            Assert.Contains(fileSystemController.SelectedDirectories, directory => directory.FullName == myPictures);
+            Assert.Contains(fileSystemController.SelectedDirectories, directory => directory.FullName == myMusic);
 
             fileSystemController.SelectOrRemoveDirectoryForMultipleSelection(myMusic);
 
-            Assert.IsTrue(fileSystemController.SelectedDirectories.Any(directory => directory.FullName == myDocuments));
-            Assert.IsTrue(fileSystemController.SelectedDirectories.Any(directory => directory.FullName == myPictures));
-            Assert.IsFalse(fileSystemController.SelectedDirectories.Any(directory => directory.FullName == myMusic));
+            Assert.Contains(fileSystemController.SelectedDirectories, directory => directory.FullName == myDocuments);
+            Assert.Contains(fileSystemController.SelectedDirectories, directory => directory.FullName == myPictures);
+            Assert.DoesNotContain(fileSystemController.SelectedDirectories, directory => directory.FullName == myMusic);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestSelectOrRemoveFileForMultipleSelection()
         {
             string gitconfigFile = $@"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\.gitconfig";
 
             FileSystemController fileSystemController = new FileSystemController();
 
-            Assert.IsFalse(fileSystemController.SelectedFiles.Any());
+            Assert.False(fileSystemController.SelectedFiles.Any());
 
             fileSystemController.SelectOrRemoveFileForMultipleSelection(gitconfigFile);
 
-            Assert.IsTrue(fileSystemController.SelectedFiles.Any(file => file.FullName == gitconfigFile));
+            Assert.Contains(fileSystemController.SelectedFiles, file => file.FullName == gitconfigFile);
 
             fileSystemController.SelectOrRemoveFileForMultipleSelection(gitconfigFile);
 
-            Assert.IsFalse(fileSystemController.SelectedFiles.Any(file => file.FullName == gitconfigFile));
+            Assert.DoesNotContain(fileSystemController.SelectedFiles, file => file.FullName == gitconfigFile);
         }
     }
 }

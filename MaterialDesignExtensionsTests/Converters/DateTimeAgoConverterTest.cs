@@ -2,13 +2,12 @@
 using System.Globalization;
 using System.Threading;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using MaterialDesignExtensions.Converters;
 
-namespace MaterialDesignExtensionsTests
+namespace MaterialDesignExtensionsTests.Converters
 {
-    [TestClass]
     public class DateTimeAgoConverterTest
     {
         private void SetThreadCulture(string cultureString = "de-at")
@@ -17,7 +16,7 @@ namespace MaterialDesignExtensionsTests
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureString);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestArgumentOfSameDay()
         {
             SetThreadCulture();
@@ -26,10 +25,10 @@ namespace MaterialDesignExtensionsTests
 
             string result = new DateTimeAgoConverter().Convert(dateTime, typeof(string), null, Thread.CurrentThread.CurrentCulture) as string;
 
-            Assert.AreEqual(result, dateTime.ToShortTimeString());
+            Assert.Equal(result, dateTime.ToShortTimeString());
         }
 
-        [TestMethod]
+        [Fact]
         public void TestArgumentOfYesterday()
         {
             SetThreadCulture();
@@ -38,17 +37,17 @@ namespace MaterialDesignExtensionsTests
 
             string result = new DateTimeAgoConverter().Convert(dateTime, typeof(string), null, Thread.CurrentThread.CurrentCulture) as string;
 
-            Assert.AreEqual(result, dateTime.ToShortDateString());
+            Assert.Equal(result, dateTime.ToShortDateString());
         }
 
-        [TestMethod]
+        [Fact]
         public void TestArgumentNotOfTypeDateTime()
         {
             SetThreadCulture();
 
             string result = new DateTimeAgoConverter().Convert(4, typeof(string), null, Thread.CurrentThread.CurrentCulture) as string;
             
-            Assert.AreEqual(result, string.Empty);
+            Assert.Equal(result, string.Empty);
         }
     }
 }

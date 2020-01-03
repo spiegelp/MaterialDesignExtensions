@@ -2,28 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
-namespace MaterialDesignExtensionsTests
+namespace MaterialDesignExtensionsTests.Controllers
 {
-    [TestClass]
     public class FileFilterTest
     {
-        [TestMethod]
+        [Fact]
         public void TestConvertFileFilterToString()
         {
             IFileFilter fileFilter = FileFilter.Create("Test", "*.cs");
             string filterStr1 = FileFilterHelper.ConvertFileFilterToString(fileFilter);
             string filterStr2 = filterStr1.ToString();
 
-            Assert.AreEqual("Test|*.cs", filterStr1);
-            Assert.AreEqual("Test|*.cs", filterStr2);
+            Assert.Equal("Test|*.cs", filterStr1);
+            Assert.Equal("Test|*.cs", filterStr2);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestConvertFileFiltersToString()
         {
             IList<IFileFilter> fileFilters = new List<IFileFilter>()
@@ -34,31 +33,31 @@ namespace MaterialDesignExtensionsTests
 
             string filtersStr = FileFilterHelper.ConvertFileFiltersToString(fileFilters);
 
-            Assert.AreEqual("Test|*.cs|Web|*.html;*.js", filtersStr);
+            Assert.Equal("Test|*.cs|Web|*.html;*.js", filtersStr);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestParseFileFilter()
         {
             IFileFilter fileFilter = FileFilterHelper.ParseFileFilter("Test", "*.cs");
 
-            Assert.AreEqual("Test", fileFilter.Label);
-            Assert.AreEqual("*.cs", fileFilter.Filters);
+            Assert.Equal("Test", fileFilter.Label);
+            Assert.Equal("*.cs", fileFilter.Filters);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestParseFileFilters()
         {
             IList<IFileFilter> fileFilters = FileFilterHelper.ParseFileFilters("Test|*.cs|Web|*.html;*.js");
 
-            Assert.AreEqual("Test", fileFilters[0].Label);
-            Assert.AreEqual("*.cs", fileFilters[0].Filters);
+            Assert.Equal("Test", fileFilters[0].Label);
+            Assert.Equal("*.cs", fileFilters[0].Filters);
 
-            Assert.AreEqual("Web", fileFilters[1].Label);
-            Assert.AreEqual("*.html;*.js", fileFilters[1].Filters);
+            Assert.Equal("Web", fileFilters[1].Label);
+            Assert.Equal("*.html;*.js", fileFilters[1].Filters);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestRegularExpression()
         {
             IFileFilter fileFilter = FileFilterHelper.ParseFileFilter("Test", "*.cs;*.xaml;file.*;cs*.*");
@@ -70,39 +69,39 @@ namespace MaterialDesignExtensionsTests
             string filename6 = "csfile1_2.js";
             string filename7 = "cs.js";
 
-            Assert.AreEqual(true, fileFilter.IsMatch(filename1));
-            Assert.AreEqual(true, fileFilter.IsMatch(filename2));
-            Assert.AreEqual(false, fileFilter.IsMatch(filename3));
-            Assert.AreEqual(false, fileFilter.IsMatch(filename4));
-            Assert.AreEqual(true, fileFilter.IsMatch(filename5));
-            Assert.AreEqual(true, fileFilter.IsMatch(filename6));
-            Assert.AreEqual(true, fileFilter.IsMatch(filename7));
+            Assert.True(fileFilter.IsMatch(filename1));
+            Assert.True(fileFilter.IsMatch(filename2));
+            Assert.False(fileFilter.IsMatch(filename3));
+            Assert.False(fileFilter.IsMatch(filename4));
+            Assert.True(fileFilter.IsMatch(filename5));
+            Assert.True(fileFilter.IsMatch(filename6));
+            Assert.True(fileFilter.IsMatch(filename7));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestRegularExpressionAny()
         {
             IFileFilter fileFilter = FileFilterHelper.ParseFileFilter("Test", "*.*");
             string filename = "Test.cs";
 
-            Assert.AreEqual(true, fileFilter.IsMatch(filename));
+            Assert.True(fileFilter.IsMatch(filename));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetFileExtensionsFromFilter()
         {
             IFileFilter fileFilter = FileFilterHelper.ParseFileFilter("Test", "*.cs;file.*;cs*.*;*.xaml;test;*.txt.bak");
             IEnumerable<string> fileExtensions = FileFilterHelper.GetFileExtensionsFromFilter(fileFilter);
 
-            Assert.IsNotNull(fileExtensions);
-            Assert.AreEqual(3, fileExtensions.Count());
-            Assert.IsTrue(fileExtensions.Any(fileExtension => fileExtension == "cs"));
-            Assert.IsTrue(fileExtensions.Any(fileExtension => fileExtension == "xaml"));
-            Assert.IsTrue(fileExtensions.Any(fileExtension => fileExtension == "bak"));
+            Assert.NotNull(fileExtensions);
+            Assert.Equal(3, fileExtensions.Count());
+            Assert.Contains(fileExtensions, fileExtension => fileExtension == "cs");
+            Assert.Contains(fileExtensions, fileExtension => fileExtension == "xaml");
+            Assert.Contains(fileExtensions, fileExtension => fileExtension == "bak");
 
             fileExtensions = FileFilterHelper.GetFileExtensionsFromFilter(null);
 
-            Assert.IsTrue(fileExtensions == null || !fileExtensions.Any());
+            Assert.True(fileExtensions == null || !fileExtensions.Any());
         }
     }
 }
