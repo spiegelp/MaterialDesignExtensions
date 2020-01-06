@@ -9,7 +9,7 @@ Material Design Extensions is based on [Material Design in XAML Toolkit](https:/
 
 Install NuGet package. `PM> Install-Package MaterialDesignExtensions`
 
-Assemblies are compiled for .NET Framework 4.5
+Assemblies are compiled for .NET Core 3.0 (in preview) and .NET Framework 4.5
 
 # Getting started
 1. Create a WPF desktop application
