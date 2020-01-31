@@ -1,9 +1,12 @@
-<img src="https://github.com/spiegelp/MaterialDesignExtensions/raw/master/icon/icon.png" width="128px" />
-
 # Material Design Extensions
+<p align="center">
+  <img src="https://github.com/spiegelp/MaterialDesignExtensions/raw/master/icon/icon.png" alt="Material Design Extensions icon" width="128px" />
+</p>
+<p>
 Material Design Extensions is based on [Material Design in XAML Toolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit) to provide additional controls and features for WPF apps. The controls might not be specified in the [Material Design specification](https://material.io/guidelines/material-design/introduction.html) or would crash the scope of [Material Design in XAML Toolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit).
+</p>
 
-# NuGet
+## NuGet
 
 [![NuGet Status](http://img.shields.io/nuget/v/MaterialDesignExtensions.svg?style=flat&label=MaterialDesignExtensions)](https://www.nuget.org/packages/MaterialDesignExtensions/)
 
@@ -11,18 +14,18 @@ Install NuGet package. `PM> Install-Package MaterialDesignExtensions`
 
 Assemblies are compiled for .NET Core 3.0 and .NET Framework 4.5
 
-# Getting started
+## Getting started
 1. Create a WPF desktop application
 2. Install Material Design Extensions via [NuGet](https://www.nuget.org/packages/MaterialDesignExtensions/)
 3. Add the styles to your App.xaml (see [App.xaml](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/MaterialDesignExtensionsDemo/App.xaml) in the demo)
 4. Add the namespace `xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"` to your XAML 
 5. You are ready to use the controls
 
-# Important notice
+## Important notice
 The configuration of Material Design Extensions v2.6.0 changed in order to enable changing the theme at runtime.
 Please change your configuration according to [App.xaml](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/MaterialDesignExtensionsDemo/App.xaml) of the demo.
 
-# Controls
+## Controls
 Material Design Extensions features the following controls:
 
 | Control | Details | Status |
@@ -43,7 +46,7 @@ Material Design Extensions features the following controls:
 | [Tabs](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/tabs) | Templates for `TabControl` ([specification](https://material.io/design/components/tabs.html)) | Done |
 | [Material window](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/materialwindow) | Custom `MaterialWindow` control | Done |
 
-# Screenshots
+## Screenshots
 ### Horizontal stepper
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/HorizontalStepper.png)
 
@@ -80,8 +83,8 @@ Material Design Extensions features the following controls:
 ### Oversized number spinner
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/OversizedNumberSpinner.png)
 
-# Documentation
+## Documentation
 You will find the API documentation on the [website](https://spiegelp.github.io/MaterialDesignExtensions/#documentation).
 
-# License
+## License
 Material Design Extensions is licensed under the [MIT](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/LICENSE) license.
