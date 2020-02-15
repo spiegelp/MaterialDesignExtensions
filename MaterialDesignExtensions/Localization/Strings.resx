@@ -237,4 +237,7 @@
   <data name="NoSelectedFiles" xml:space="preserve">
     <value>No selected files</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
 </root>

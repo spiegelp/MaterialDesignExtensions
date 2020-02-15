@@ -10,6 +10,7 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/FileSystemControlTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/FileSystemDialogTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialWindowTemplates.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MessageDialogTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/OversizedNumberSpinnerTemplate.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/SearchTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/SideNavigationTemplates.xaml" />

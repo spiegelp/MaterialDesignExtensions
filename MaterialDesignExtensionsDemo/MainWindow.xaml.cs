@@ -59,6 +59,7 @@ namespace MaterialDesignExtensionsDemo
                 new FirstLevelNavigationItem() { Label = "Autocomplete", NavigationItemSelectedCallback = item => new AutocompleteViewModel() },
                 //new FirstLevelNavigationItem() { Label = "Autocomplete", NavigationItemSelectedCallback = item => new AutocompleteInTabControlViewModel() },
                 new FirstLevelNavigationItem() { Label = "TextBoxSuggestions", NavigationItemSelectedCallback = item => new TextBoxSuggestionsViewModel() },
+                new FirstLevelNavigationItem() { Label = "Message dialogs", NavigationItemSelectedCallback = item => new MessageDialogViewModel() },
                 new DividerNavigationItem(),
                 new SubheaderNavigationItem() { Subheader = "Directories and files" },
                 new FirstLevelNavigationItem() { Label = "Open directory", Icon = PackIconKind.Folder, NavigationItemSelectedCallback = item => new OpenDirectoryControlViewModel() },

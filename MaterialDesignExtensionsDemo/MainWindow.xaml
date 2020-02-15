@@ -54,6 +54,9 @@
         <DataTemplate DataType="{x:Type viewModel:TextBoxSuggestionsViewModel}">
             <controls:TextBoxSuggestionsControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MessageDialogViewModel}">
+            <controls:MessageDialogControl />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:OpenDirectoryControlViewModel}">
             <controls:OpenDirectoryControlControl />
         </DataTemplate>
