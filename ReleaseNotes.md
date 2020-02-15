@@ -149,3 +149,4 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 ### v3.1.0 (upcoming release)
 #### Features
 * Controls for simple alert and confirmation dialogs
+* New `TextBoxSuggestions.KeepFocusOnSelection` property to control the focus after selecting a suggestion

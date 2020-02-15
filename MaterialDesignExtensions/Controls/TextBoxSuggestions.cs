@@ -26,6 +26,28 @@ namespace MaterialDesignExtensions.Controls
         private static readonly string SuggestionItemsPopupName = "suggestionItemsPopup";
 
         /// <summary>
+        /// True to keep the focus on the text box after selecting a suggestion.
+        /// </summary>
+        public static readonly DependencyProperty KeepFocusOnSelectionProperty = DependencyProperty.Register(
+            nameof(KeepFocusOnSelection), typeof(bool), typeof(TextBoxSuggestions), new PropertyMetadata(false));
+
+        /// <summary>
+        /// True to keep the focus on the text box after selecting a suggestion.
+        /// </summary>
+        public bool KeepFocusOnSelection
+        {
+            get
+            {
+                return (bool)GetValue(KeepFocusOnSelectionProperty);
+            }
+
+            set
+            {
+                SetValue(KeepFocusOnSelectionProperty, value);
+            }
+        }
+
+        /// <summary>
         /// The TextBox to decorate.
         /// </summary>
         public static readonly DependencyProperty TextBoxProperty = DependencyProperty.Register(
@@ -144,7 +166,13 @@ namespace MaterialDesignExtensions.Controls
         {
             if (TextBox != null)
             {
-                TextBox.Text = args.Parameter as string;
+                TextBox.Text = args.Parameter as string ?? "";
+
+                if (KeepFocusOnSelection)
+                {
+                    Keyboard.Focus(TextBox);
+                    TextBox.CaretIndex = TextBox.Text.Length;
+                }
             }
         }
 
