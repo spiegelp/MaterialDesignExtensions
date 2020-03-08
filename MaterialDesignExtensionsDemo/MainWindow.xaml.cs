@@ -68,6 +68,7 @@ namespace MaterialDesignExtensionsDemo
                 new FirstLevelNavigationItem() { Label = "Open multiple files", Icon = PackIconKind.File, NavigationItemSelectedCallback = item => new OpenMultipleFilesControlViewModel() },
                 new FirstLevelNavigationItem() { Label = "Save file", Icon = PackIconKind.File, NavigationItemSelectedCallback = item => new SaveFileControlViewModel() },
                 new FirstLevelNavigationItem() { Label = "Directory and file dialogs", NavigationItemSelectedCallback = item => new FileSystemDialogViewModel() },
+                new FirstLevelNavigationItem() { Label = "Text boxes with path", NavigationItemSelectedCallback = item => new TextBoxFileSystemPathsViewModel() },
                 new DividerNavigationItem(),
                 new SubheaderNavigationItem() { Subheader = "Navigation and searching" },
                 new FirstLevelNavigationItem() { Label = "Navigation", Icon = PackIconKind.Menu, NavigationItemSelectedCallback = item => new NavigationViewModel() },

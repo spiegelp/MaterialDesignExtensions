@@ -137,6 +137,13 @@ namespace MaterialDesignExtensions.Controls
         /// Creates a new <see cref="OpenDirectoryDialogArguments" />.
         /// </summary>
         public OpenDirectoryDialogArguments() : base() { }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="args"></param>
+        public OpenDirectoryDialogArguments(OpenDirectoryDialogArguments args)
+            : base(args) { }
     }
 
     /// <summary>

@@ -175,7 +175,7 @@ namespace MaterialDesignExtensions.Controls
         public double? Width { get; set; }
 
         /// <summary>
-        /// The fixed heigth of the dialog (nullable).
+        /// The fixed height of the dialog (nullable).
         /// </summary>
         public double? Height { get; set; }
 
@@ -223,6 +223,22 @@ namespace MaterialDesignExtensions.Controls
             OpenedHandler = null;
             ClosingHandler = null;
         }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="args"></param>
+        public FileSystemDialogArguments(FileSystemDialogArguments args)
+        {
+            Width = args.Width;
+            Height = args.Height;
+            CurrentDirectory = args.CurrentDirectory;
+            CreateNewDirectoryEnabled = args.CreateNewDirectoryEnabled;
+            ShowHiddenFilesAndDirectories = args.ShowHiddenFilesAndDirectories;
+            ShowSystemFilesAndDirectories = args.ShowSystemFilesAndDirectories;
+            OpenedHandler = args.OpenedHandler;
+            ClosingHandler = args.ClosingHandler;
+        }
     }
 
     /// <summary>
@@ -234,6 +250,17 @@ namespace MaterialDesignExtensions.Controls
         /// true, if the dialog was canceled
         /// </summary>
         public bool Canceled { get; protected set; }
+
+        /// <summary>
+        /// true, if the dialog was confirmed
+        /// </summary>
+        public bool Confirmed
+        {
+            get
+            {
+                return !Canceled;
+            }
+        }
 
         /// <summary>
         /// Creates a new <see cref="FileSystemDialogResult" />.

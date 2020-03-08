@@ -75,6 +75,9 @@
         <DataTemplate DataType="{x:Type viewModel:FileSystemDialogViewModel}">
             <controls:FileSystemDialogControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:TextBoxFileSystemPathsViewModel}">
+            <controls:TextBoxFileSystemPathsControl />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:NavigationViewModel}">
             <controls:NavigationControl />
         </DataTemplate>

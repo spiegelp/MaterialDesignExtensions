@@ -150,3 +150,5 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 #### Features
 * Controls for simple alert and confirmation dialogs
 * New `TextBoxSuggestions.KeepFocusOnSelection` property to control the focus after selecting a suggestion
+* New controls combining a `TextBox` and a `FileSystemDialog`
+  * `TextBoxOpenDirectory`
