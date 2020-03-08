@@ -87,6 +87,28 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// The template for the title bar. The default shows a <see cref="TextBlock" /> with the title.
+        /// </summary>
+        public static readonly DependencyProperty TitleTemplateProperty = DependencyProperty.Register(
+            nameof(TitleTemplate), typeof(DataTemplate), typeof(MaterialWindow));
+
+        /// <summary>
+        /// The template for the title bar. The default shows a <see cref="TextBlock" /> with the title.
+        /// </summary>
+        public DataTemplate TitleTemplate
+        {
+            get
+            {
+                return (DataTemplate)GetValue(TitleTemplateProperty);
+            }
+
+            set
+            {
+                SetValue(TitleTemplateProperty, value);
+            }
+        }
+
+        /// <summary>
         /// The icon inside the window's title bar.
         /// </summary>
         public static readonly DependencyProperty TitleBarIconProperty = DependencyProperty.Register(

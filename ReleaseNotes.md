@@ -152,3 +152,4 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * New `TextBoxSuggestions.KeepFocusOnSelection` property to control the focus after selecting a suggestion
 * New controls combining a `TextBox` and a `FileSystemDialog`
   * `TextBoxOpenDirectory`
+* New `MaterialWindow.TitleTemplate` property to customize the window title bar

@@ -115,7 +115,7 @@ namespace MaterialDesignExtensionsDemo
 
         private void GoToGitHubButtonClickHandler(object sender, RoutedEventArgs args)
         {
-            Process.Start("https://github.com/spiegelp/MaterialDesignExtensions");
+            OpenLink("https://github.com/spiegelp/MaterialDesignExtensions");
         }
 
         private void GoToDocumentation(object sender, RoutedEventArgs args)
@@ -123,8 +123,19 @@ namespace MaterialDesignExtensionsDemo
 
             if (contentControl.Content is ViewModel.ViewModel viewModel && !string.IsNullOrWhiteSpace(viewModel.DocumentationUrl))
             {
-                Process.Start(viewModel.DocumentationUrl);
+                OpenLink(viewModel.DocumentationUrl);
             }
+        }
+
+        private void OpenLink(string url)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            };
+
+            Process.Start(psi);
         }
     }
 }
