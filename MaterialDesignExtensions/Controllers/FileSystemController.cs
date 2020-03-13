@@ -208,7 +208,15 @@ namespace MaterialDesignExtensions.Controllers
                             label = label.Substring(0, label.Length - 1);
                         }
 
-                        string volumeLabel = driveInfo.IsReady ? driveInfo.VolumeLabel : null;
+                        string volumeLabel = null;
+                        try
+                        {
+                            volumeLabel = driveInfo.IsReady ? driveInfo.VolumeLabel : null;
+                        }
+                        catch (IOException exception) when (exception.Message.StartsWith("An unexpected network error occurred"))
+                        {
+                            return new SpecialDrive { Info = driveInfo, Icon = icon };
+                        }
 
                         if (string.IsNullOrWhiteSpace(volumeLabel) && driveInfo.DriveType == DriveType.Fixed)
                         {
@@ -610,7 +618,7 @@ namespace MaterialDesignExtensions.Controllers
                     currentDirectoryPathParts.Add(directoryInfo);
                     directoryInfo = directoryInfo.Parent;
                 }
-                
+
                 currentDirectoryPathParts.Sort((directoryInfo1, directoryInfo2) => directoryInfo1.FullName.CompareTo(directoryInfo2.FullName));
             }
 
@@ -695,7 +703,7 @@ namespace MaterialDesignExtensions.Controllers
             {
                 throw new ArgumentException(string.Format(Localization.Strings.TheDirectoryXAlreadyExists, newDirectoryName));
             }
-            
+
             // create directory and select it
             newDirectory.Create();
 
