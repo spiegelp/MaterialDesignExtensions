@@ -81,6 +81,9 @@
         <DataTemplate DataType="{x:Type viewModel:NavigationViewModel}">
             <controls:NavigationControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:NavigationRailViewModel}">
+            <controls:NavigationRailControl />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:SearchViewModel}">
             <controls:SearchControl />
         </DataTemplate>

@@ -72,6 +72,7 @@ namespace MaterialDesignExtensionsDemo
                 new DividerNavigationItem(),
                 new SubheaderNavigationItem() { Subheader = "Navigation and searching" },
                 new FirstLevelNavigationItem() { Label = "Navigation", Icon = PackIconKind.Menu, NavigationItemSelectedCallback = item => new NavigationViewModel() },
+                new FirstLevelNavigationItem() { Label = "Navigation rail", Icon = PackIconKind.DotsVertical, NavigationItemSelectedCallback = item => new NavigationRailViewModel() },
                 new FirstLevelNavigationItem() { Label = "Search", Icon = PackIconKind.Magnify, NavigationItemSelectedCallback = item => new SearchViewModel() },
                 new DividerNavigationItem(),
                 new SubheaderNavigationItem() { Subheader = "Themes" },

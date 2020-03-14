@@ -17,7 +17,7 @@ using MaterialDesignExtensions.Model;
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
-    /// A control to be used as side navigation or inside a navigation drawer.
+    /// A navigation control to be used as side navigation or inside a navigation drawer.
     /// </summary>
     public class SideNavigation : Control
     {
@@ -64,6 +64,50 @@ namespace MaterialDesignExtensions.Controls
             remove
             {
                 RemoveHandler(WillSelectNavigationItemEvent, value);
+            }
+        }
+
+        /// <summary>
+        /// The foreground color of the icon of not selected items.
+        /// </summary>
+        public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(
+            nameof(IconForeground), typeof(Brush), typeof(SideNavigation), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// The foreground color of the icon of not selected items.
+        /// </summary>
+        public Brush IconForeground
+        {
+            get
+            {
+                return (Brush)GetValue(IconForegroundProperty);
+            }
+
+            set
+            {
+                SetValue(IconForegroundProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The foreground color of the label of not selected items.
+        /// </summary>
+        public static readonly DependencyProperty LabelForegroundProperty = DependencyProperty.Register(
+            nameof(LabelForeground), typeof(Brush), typeof(SideNavigation), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// The foreground color of the label of not selected items.
+        /// </summary>
+        public Brush LabelForeground
+        {
+            get
+            {
+                return (Brush)GetValue(LabelForegroundProperty);
+            }
+
+            set
+            {
+                SetValue(LabelForegroundProperty, value);
             }
         }
 
@@ -276,7 +320,7 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private ItemsControl m_navigationItemsControl;
+        protected ItemsControl m_navigationItemsControl;
 
         static SideNavigation()
         {
@@ -388,7 +432,7 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private void InitItems(IList values)
+        protected virtual void InitItems(IList values)
         {
             if (m_navigationItemsControl != null)
             {
@@ -407,7 +451,16 @@ namespace MaterialDesignExtensions.Controls
 
                 m_navigationItemsControl.ItemsSource = navigationItems;
 
-                if (SelectedItem != null && !navigationItems.Contains(SelectedItem))
+                INavigationItem selectedItem = navigationItems.FirstOrDefault(item => item.IsSelected);
+
+                if (selectedItem != null)
+                {
+                    if (SelectedItem != selectedItem)
+                    {
+                        SelectedItem = selectedItem;
+                    }
+                }
+                else
                 {
                     SelectedItem = null;
                 }
