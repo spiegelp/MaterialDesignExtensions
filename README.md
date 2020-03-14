@@ -41,6 +41,7 @@ Material Design Extensions features the following controls:
 | [App bar](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/appbar) | Custom `AppBar` control ([specification](https://material.io/design/components/app-bars-top.html#usage)) | Done |
 | [Persistent search](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/search) | Custom `PersistentSearch` control ([specification](https://material.io/design/navigation/search.html)) | Done |
 | [Side navigation](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/navigation) | Custom `SideNavigation` control ([specification](https://material.io/design/components/navigation-drawer.html#usage)) | Done |
+| [Navigation rail](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/navigation) | Custom `NavigationRail` control ([specification](https://material.io/components/navigation-rail/)) | In development |
 | [Autocomplete](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/autocomplete) | Custom `Autocomplete` control | Done |
 | [Text box suggestions](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/textboxsuggestions) | Custom `TextBoxSuggestions` control | Done |
 | [Tabs](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/tabs) | Templates for `TabControl` ([specification](https://material.io/design/components/tabs.html)) | Done |
@@ -55,6 +56,9 @@ Material Design Extensions features the following controls:
 
 ### Side navigation
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/SideNavigation.png)
+
+### Navigation rail
+![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/NavigationRail1.png)
 
 ### Tabs
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/TabControl1.png)
