@@ -213,7 +213,7 @@ namespace MaterialDesignExtensions.Controllers
                         {
                             volumeLabel = driveInfo.IsReady ? driveInfo.VolumeLabel : null;
                         }
-                        catch (IOException exception) when (exception.Message.StartsWith("An unexpected network error occurred"))
+                        catch (Exception exception)
                         {
                             return new SpecialDrive { Info = driveInfo, Icon = icon };
                         }
