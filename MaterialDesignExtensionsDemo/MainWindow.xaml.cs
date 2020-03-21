@@ -77,6 +77,7 @@ namespace MaterialDesignExtensionsDemo
                 new DividerNavigationItem(),
                 new SubheaderNavigationItem() { Subheader = "Themes" },
                 new FirstLevelNavigationItem() { Label = "Themes", Icon = PackIconKind.Palette, NavigationItemSelectedCallback = item => new ThemesViewModel() },
+                new FirstLevelNavigationItem() { Label = "Material window", Icon = PackIconKind.WindowMaximize, NavigationItemSelectedCallback = item => new WindowStyleViewModel() },
                 new DividerNavigationItem(),
                 new SubheaderNavigationItem() { Subheader = "i18n" },
                 new FirstLevelNavigationItem() { Label = "Language", Icon = PackIconKind.Translate, NavigationItemSelectedCallback = item => new LanguageViewModel() }

@@ -7,6 +7,9 @@
                     xmlns:localization="clr-namespace:MaterialDesignExtensions.Localization">
 
     <converters:NotNullToVisibilityConverter x:Key="notNullToVisibilityConverter" NullValue="Collapsed" />
+    <converters:WindowTitleBarIconVisibilityConverter x:Key="windowTitleBarIconVisibilityConverter" />
+    <converters:WindowTitleVisibilityConverter x:Key="windowTitleVisibilityConverter" />
+    <converters:WindowCaptionButtonVisibilityConverter x:Key="windowCaptionButtonVisibilityConverter" />
 
     <Style x:Key="WindowButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Padding" Value="8,0,8,0" />
@@ -189,15 +192,27 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="32" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="100*" />
                                 </Grid.RowDefinitions>
                                 
                                 <!-- window icon -->
-                                <Image Source="{TemplateBinding TitleBarIcon}" Width="24" Height="24" Margin="8,0,8,0" Visibility="{TemplateBinding Property=TitleBarIcon, Converter={StaticResource notNullToVisibilityConverter}}" />
+                                <Image Source="{TemplateBinding TitleBarIcon}" Width="24" Height="24" Margin="8,0,8,0" VerticalAlignment="Center">
+                                    <Image.Visibility>
+                                        <MultiBinding Converter="{StaticResource windowTitleBarIconVisibilityConverter}">
+                                            <Binding Path="TitleBarIcon" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </Image.Visibility>
+                                </Image>
 
                                 <!-- window title -->
-                                <Border Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Border Grid.Column="1" Height="32" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Border.Visibility>
+                                        <MultiBinding Converter="{StaticResource windowTitleVisibilityConverter}">
+                                            <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </Border.Visibility>
                                     <Border.Style>
                                         <Style TargetType="Border">
                                             <Style.Triggers>
@@ -220,11 +235,28 @@
                                 </Border>
 
                                 <!-- caption buttons -->
-                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Stretch">
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Height="32" VerticalAlignment="Stretch">
+                                    <StackPanel.Visibility>
+                                        <MultiBinding Converter="{StaticResource windowTitleVisibilityConverter}">
+                                            <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </StackPanel.Visibility>
                                     <Button x:Name="minimizeButton" Style="{StaticResource WindowMinimizeButtonStyle}" ToolTip="{x:Static localization:Strings.Minimize}">
+                                        <Button.Visibility>
+                                            <MultiBinding Converter="{StaticResource windowCaptionButtonVisibilityConverter}">
+                                                <Binding Path="MinimizeButtonName" Source="{StaticResource windowCaptionButtonVisibilityConverter}" Mode="OneTime" />
+                                                <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Button.Visibility>
                                         <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="WindowMinimize" />
                                     </Button>
                                     <Button x:Name="maximizeRestoreButton" Style="{StaticResource WindowMaximizeRestoreButtonStyle}">
+                                        <Button.Visibility>
+                                            <MultiBinding Converter="{StaticResource windowCaptionButtonVisibilityConverter}">
+                                                <Binding Path="MaximizeRestoreButtonName" Source="{StaticResource windowCaptionButtonVisibilityConverter}" Mode="OneTime" />
+                                                <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Button.Visibility>
                                         <md:PackIcon>
                                             <md:PackIcon.Style>
                                                 <Style BasedOn="{StaticResource WindowButtonIconStyle}" TargetType="{x:Type md:PackIcon}">
@@ -241,6 +273,12 @@
                                         </md:PackIcon>
                                     </Button>
                                     <Button x:Name="closeButton" Style="{StaticResource WindowCloseButtonStyle}" ToolTip="{x:Static localization:Strings.Close}">
+                                        <Button.Visibility>
+                                            <MultiBinding Converter="{StaticResource windowCaptionButtonVisibilityConverter}">
+                                                <Binding Path="CloseButtonName" Source="{StaticResource windowCaptionButtonVisibilityConverter}" Mode="OneTime" />
+                                                <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Button.Visibility>
                                         <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="WindowClose" />
                                     </Button>
                                 </StackPanel>

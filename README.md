@@ -64,7 +64,7 @@ Material Design Extensions features the following controls:
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/TabControl1.png)
 
 ### Material window and app bar
-![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/MaterialWindow.png)
+![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/MaterialWindow1.png)
 
 ### Open directory
 ![](https://github.com/spiegelp/MaterialDesignExtensions/raw/master/screenshots/OpenDirectoryControl1.png)
