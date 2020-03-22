@@ -156,3 +156,5 @@ Please change your configuration according to [App.xaml](https://github.com/spie
   * New `MaterialWindow.TitleTemplate` property to customize the window title bar
   * Different looks according to `Window.WindowStyle` property
 * New control `NavigationRail`
+#### Fixes
+* Catch exception if network drive is not accessible
