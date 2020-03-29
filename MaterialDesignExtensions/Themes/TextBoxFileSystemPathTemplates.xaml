@@ -72,4 +72,46 @@
         </Setter>
     </Style>
 
+    <Style TargetType="{x:Type controls:TextBoxOpenFile}" BasedOn="{StaticResource textBoxFileSystemPathStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:TextBoxOpenFile}">
+                    <Grid ToolTip="{TemplateBinding File}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.ColumnSpan="2" Padding="0,0,12,0" VerticalAlignment="Center"
+                                 Text="{Binding Path=File, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type controls:TextBoxOpenFile}}}"
+                                 IsEnabled="{TemplateBinding IsEnabled}" />
+                        <Button Grid.Column="1" x:Name="showButtonDialog" Style="{StaticResource showButtonDialogStyle}" IsEnabled="{TemplateBinding IsEnabled}">
+                            <md:PackIcon Kind="Folder" Width="18" Height="18" />
+                        </Button>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:TextBoxSaveFile}" BasedOn="{StaticResource textBoxFileSystemPathStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:TextBoxSaveFile}">
+                    <Grid ToolTip="{TemplateBinding File}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.ColumnSpan="2" Padding="0,0,12,0" VerticalAlignment="Center"
+                                 Text="{Binding Path=File, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type controls:TextBoxSaveFile}}}"
+                                 IsEnabled="{TemplateBinding IsEnabled}" />
+                        <Button Grid.Column="1" x:Name="showButtonDialog" Style="{StaticResource showButtonDialogStyle}" IsEnabled="{TemplateBinding IsEnabled}">
+                            <md:PackIcon Kind="Folder" Width="18" Height="18" />
+                        </Button>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

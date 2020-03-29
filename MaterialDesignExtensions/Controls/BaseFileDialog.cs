@@ -179,6 +179,17 @@ namespace MaterialDesignExtensions.Controls
             Filters = null;
             FilterIndex = 0;
         }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="args"></param>
+        public FileDialogArguments(FileDialogArguments args)
+            : base(args)
+        {
+            Filters = args.Filters;
+            FilterIndex = args.FilterIndex;
+        }
     }
 
     /// <summary>

@@ -108,6 +108,13 @@ namespace MaterialDesignExtensions.Controls
         /// Creates a new <see cref="OpenFileDialogArguments" />.
         /// </summary>
         public OpenFileDialogArguments() : base() { }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="args"></param>
+        public OpenFileDialogArguments(OpenFileDialogArguments args)
+            : base(args) { }
     }
 
     /// <summary>
