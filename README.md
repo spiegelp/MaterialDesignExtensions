@@ -8,7 +8,7 @@ Material Design Extensions is based on <a href="https://github.com/MaterialDesig
 
 ## NuGet
 
-[![NuGet Status](http://img.shields.io/nuget/v/MaterialDesignExtensions.svg?style=flat&label=MaterialDesignExtensions)](https://www.nuget.org/packages/MaterialDesignExtensions/)
+[![NuGet Status](https://img.shields.io/nuget/v/MaterialDesignExtensions.svg?style=flat&label=MaterialDesignExtensions&logo=nuget&color=blue)](https://www.nuget.org/packages/MaterialDesignExtensions/)
 
 Install NuGet package. `PM> Install-Package MaterialDesignExtensions`
 
