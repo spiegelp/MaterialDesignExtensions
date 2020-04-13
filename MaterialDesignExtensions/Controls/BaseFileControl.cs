@@ -29,6 +29,9 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public abstract class BaseFileControl : FileSystemControl
     {
+        /// <summary>
+        /// The name of the combo box inside the template.
+        /// </summary>
         protected const string FileFiltersComboBoxName = "fileFiltersComboBox";
 
         /// <summary>

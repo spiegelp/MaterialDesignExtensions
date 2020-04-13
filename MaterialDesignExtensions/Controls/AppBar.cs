@@ -348,6 +348,9 @@ namespace MaterialDesignExtensions.Controls
             Children = new ObservableCollection<object>();
         }
 
+        /// <summary>
+        /// OnApplyTemplate
+        /// </summary>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();

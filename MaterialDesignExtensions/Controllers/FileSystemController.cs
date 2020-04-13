@@ -209,11 +209,12 @@ namespace MaterialDesignExtensions.Controllers
                         }
 
                         string volumeLabel = null;
+
                         try
                         {
                             volumeLabel = driveInfo.IsReady ? driveInfo.VolumeLabel : null;
                         }
-                        catch (Exception exception)
+                        catch (Exception)
                         {
                             return new SpecialDrive { Info = driveInfo, Icon = icon };
                         }

@@ -80,7 +80,7 @@ namespace MaterialDesignExtensions.Controllers
         }
 
         /// <summary>
-        /// Starts a new task for the autocomplete and propagates the result via the <see cref="AutocompleteChanged" /> event.
+        /// Starts a new task for the autocomplete and propagates the result via the <see cref="AutocompleteItemsChanged" /> event.
         /// This method does some technical stuff and delegates the actual search to the <see cref="IAutocompleteSource" />.
         /// </summary>
         /// <param name="searchTerm">The term to search for</param>
