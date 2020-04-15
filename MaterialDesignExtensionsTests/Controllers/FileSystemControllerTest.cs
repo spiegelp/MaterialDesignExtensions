@@ -7,6 +7,7 @@ using MaterialDesignExtensions.Controllers;
 
 namespace MaterialDesignExtensionsTests.Controllers
 {
+    [Trait("Category", "SkipCI")]
     public class FileSystemControllerTest
     {
         private readonly string m_directory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);

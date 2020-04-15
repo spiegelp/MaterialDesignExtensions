@@ -271,9 +271,6 @@ namespace MaterialDesignExtensions.Controls
             CommandBindings.Add(new CommandBinding(AutocompleteCommands.SelectAutocompleteItemCommand, SelectAutocompleteItemCommandHandler));
         }
 
-        /// <summary>
-        /// OnApplyTemplate
-        /// </summary>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -303,11 +300,6 @@ namespace MaterialDesignExtensions.Controls
             UpdateClearButtonVisibility();
         }
 
-        /// <summary>
-        /// LoadedHandler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         protected override void LoadedHandler(object sender, RoutedEventArgs args)
         {
             base.LoadedHandler(sender, args);
@@ -327,11 +319,6 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        /// <summary>
-        /// UnloadedHandler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         protected override void UnloadedHandler(object sender, RoutedEventArgs args)
         {
             base.UnloadedHandler(sender, args);

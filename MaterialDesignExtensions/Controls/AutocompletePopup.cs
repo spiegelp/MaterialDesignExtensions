@@ -29,11 +29,6 @@ namespace MaterialDesignExtensions.Controls
             Unloaded += UnloadedHandler;
         }
 
-        /// <summary>
-        /// LoadedHandler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         protected virtual void LoadedHandler(object sender, RoutedEventArgs args)
         {
             m_window = Window.GetWindow(this);
@@ -45,11 +40,6 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        /// <summary>
-        /// UnloadedHandler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         protected virtual void UnloadedHandler(object sender, RoutedEventArgs args)
         {
             if (m_window != null)
