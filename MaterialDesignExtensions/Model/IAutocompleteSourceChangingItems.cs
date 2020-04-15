@@ -36,7 +36,7 @@ namespace MaterialDesignExtensions.Model
         public event AutocompleteSourceItemsChangedEventHandler AutocompleteSourceItemsChanged;
 
         /// <summary>
-        /// Creates a new <see cref="AutocompleteSourceChangingItems" />.
+        /// Creates a new <see cref="AutocompleteSourceChangingItems{T}" />.
         /// </summary>
         public AutocompleteSourceChangingItems() : base() { }
 

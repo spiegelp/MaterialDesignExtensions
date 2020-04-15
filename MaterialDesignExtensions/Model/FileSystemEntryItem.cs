@@ -66,7 +66,7 @@ namespace MaterialDesignExtensions.Model
         }
 
         /// <summary>
-        /// Creates a new <see cref="FileSystemEntryItem" />.
+        /// Creates a new <see cref="FileSystemEntryItem{T}" />.
         /// </summary>
         public FileSystemEntryItem()
         {

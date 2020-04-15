@@ -232,7 +232,7 @@ namespace MaterialDesignExtensions.Controls
     }
 
     /// <summary>
-    /// The arguments for the <see cref="OpenDirectoryControl.DirectoriesSelected" /> event.
+    /// The arguments for the <see cref="OpenMultipleDirectoriesControl.DirectoriesSelected" /> event.
     /// </summary>
     public class DirectoriesSelectedEventArgs : RoutedEventArgs
     {
