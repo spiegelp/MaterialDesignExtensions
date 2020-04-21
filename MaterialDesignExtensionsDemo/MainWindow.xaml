@@ -107,7 +107,7 @@
                 <TextBlock Style="{StaticResource WindowTitleTextBlockStyle}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType={x:Type controlsLib:MaterialWindow}}}" Margin="8,0,0,0" />
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Stretch">
                     <Button Style="{StaticResource WindowButtonStyle}" Click="GoToGitHubButtonClickHandler">
-                        <wpfLib:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="GithubCircle" />
+                        <wpfLib:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="Github" />
                     </Button>
                     <Button Style="{StaticResource WindowButtonStyle}" Click="GoToDocumentation">
                         <wpfLib:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="HelpCircle" />
@@ -136,7 +136,7 @@
                     </Grid.RowDefinitions>
                     <controlsLib:AppBar x:Name="appBar" Grid.ColumnSpan="2" Title="Material Design Extensions" ShowNavigationDrawerButton="True">
                         <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="8,0" ToolTip="Material Design Exentions on GitHub" Click="GoToGitHubButtonClickHandler">
-                            <wpfLib:PackIcon Kind="GithubCircle" Height="24" Width="24" />
+                            <wpfLib:PackIcon Kind="Github" Height="24" Width="24" />
                         </Button>
                         <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="8,0" ToolTip="Documentation" Click="GoToDocumentation">
                             <wpfLib:PackIcon Kind="HelpCircle" Height="24" Width="24" />

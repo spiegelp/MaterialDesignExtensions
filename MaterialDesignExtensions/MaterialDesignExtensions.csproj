@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   
   <PropertyGroup>
-    <TargetFrameworks>net45;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <AssemblyTitle>Material Design Extensions</AssemblyTitle>
     <Summary>Material Design Extensions is based on Material Design in XAML Toolkit to provide additional controls and features for WPF apps. The controls might not be specified in the Material Design specification or would crash the scope of Material Design in XAML Toolkit.</Summary>
@@ -31,8 +31,8 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="MaterialDesignColors" Version="1.2.2" />
-    <PackageReference Include="MaterialDesignThemes" Version="3.0.1" />
+    <PackageReference Include="MaterialDesignColors" Version="1.2.3" />
+    <PackageReference Include="MaterialDesignThemes" Version="3.1.0" />
   </ItemGroup>
 
   <ItemGroup>

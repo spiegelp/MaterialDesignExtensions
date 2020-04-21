@@ -148,6 +148,7 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Extendend `IStep` interface to implement new features for steppers
 ### v3.1.0 (upcoming release)
 #### Features
+* Update to .NET Core 3.1
 * Controls for simple alert and confirmation dialogs
 * New `TextBoxSuggestions.KeepFocusOnSelection` property to control the focus after selecting a suggestion
 * New controls combining a `TextBox` and a `FileSystemDialog`
