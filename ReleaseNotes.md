@@ -146,7 +146,7 @@ Please change your configuration according to [App.xaml](https://github.com/spie
   * `SaveFileDialog.ShowDialogAsync` methods
 * Extendend `IStepper` interface to implement new features for steppers
 * Extendend `IStep` interface to implement new features for steppers
-### v3.1.0 (upcoming release)
+### v3.1.0
 #### Features
 * Update to .NET Core 3.1
 * Controls for simple alert and confirmation dialogs
