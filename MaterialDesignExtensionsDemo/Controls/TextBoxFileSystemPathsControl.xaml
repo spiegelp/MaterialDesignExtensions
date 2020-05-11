@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
              xmlns:root="clr-namespace:MaterialDesignExtensionsDemo"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="700">
@@ -30,6 +31,17 @@
                         <controls:SaveFileDialogArguments Width="600" Height="500" />
                     </controls:TextBoxSaveFile.DialogArgs>
                 </controls:TextBoxSaveFile>
+                <TextBlock Text="Open directory with different style" Width="200" Margin="0,32,0,0" />
+                <controls:TextBoxOpenDirectory DialogHost="{Binding Path=DialogHost, RelativeSource={RelativeSource AncestorType=root:MainWindow}}" Width="200" Margin="0,8,0,0">
+                    <controls:TextBoxOpenDirectory.DialogArgs>
+                        <controls:OpenDirectoryDialogArguments Width="600" Height="500" />
+                    </controls:TextBoxOpenDirectory.DialogArgs>
+                    <controls:TextBoxOpenDirectory.TextBoxStyle>
+                        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            <Setter Property="md:HintAssist.Hint" Value="Choose a directory" />
+                        </Style>
+                    </controls:TextBoxOpenDirectory.TextBoxStyle>
+                </controls:TextBoxOpenDirectory>
             </StackPanel>
         </ScrollViewer>
     </Grid>

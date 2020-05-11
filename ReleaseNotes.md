@@ -164,3 +164,4 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 ### v3.2.0
 #### Features
 * New control `BusyOverlay`
+* New `TextBoxFileSystemPath.TextBoxStyle` property to enable custom styles for the embedded `TextBox`
