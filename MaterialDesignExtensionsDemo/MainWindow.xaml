@@ -57,6 +57,9 @@
         <DataTemplate DataType="{x:Type viewModel:MessageDialogViewModel}">
             <controls:MessageDialogControl />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:BusyOverlayViewModel}">
+            <controls:BusyOverlayControl />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:OpenDirectoryControlViewModel}">
             <controls:OpenDirectoryControlControl />
         </DataTemplate>
