@@ -213,21 +213,6 @@ namespace MaterialDesignExtensions.Controls
             m_searchSuggestionsItemsControl = Template.FindName(SearchSuggestionsItemsControlName, this) as ItemsControl;
         }
 
-        /// <summary>
-        /// Selects all the text in the autocomplete text box
-        /// </summary>
-        public void SelectAll()
-        {
-            m_searchTextBox.Focus();
-            m_searchTextBox.SelectAll();
-        }
-
-        /// <summary>
-        /// Attemps to set focus to the autocomplete text box
-        /// </summary>
-        public new void Focus()
-            => m_searchTextBox.Focus();
-
         protected override void LoadedHandler(object sender, RoutedEventArgs args)
         {
             base.LoadedHandler(sender, args);
