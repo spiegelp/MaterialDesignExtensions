@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
-
-using MaterialDesignThemes.Wpf;
-
-using MaterialDesignExtensions.Commands.Internal;
+﻿using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
+using MaterialDesignThemes.Wpf;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MaterialDesignExtensions.Controls
 {
@@ -218,6 +212,21 @@ namespace MaterialDesignExtensions.Controls
 
             m_searchSuggestionsItemsControl = Template.FindName(SearchSuggestionsItemsControlName, this) as ItemsControl;
         }
+
+        /// <summary>
+        /// Selects all the text in the autocomplete text box
+        /// </summary>
+        public void SelectAll()
+        {
+            m_searchTextBox.Focus();
+            m_searchTextBox.SelectAll();
+        }
+
+        /// <summary>
+        /// Attemps to set focus to the autocomplete text box
+        /// </summary>
+        public new void Focus()
+            => m_searchTextBox.Focus();
 
         protected override void LoadedHandler(object sender, RoutedEventArgs args)
         {
