@@ -138,6 +138,10 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <controlsLib:AppBar x:Name="appBar" Grid.ColumnSpan="2" Title="Material Design Extensions" ShowNavigationDrawerButton="True">
+                        <!-- demo for app bar icon -->
+                        <!--<controlsLib:AppBar.AppIcon>
+                            <wpfLib:PackIcon Kind="Volleyball" Foreground="White" Width="24" Height="24" />
+                        </controlsLib:AppBar.AppIcon>-->
                         <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="8,0" ToolTip="Material Design Exentions on GitHub" Click="GoToGitHubButtonClickHandler">
                             <wpfLib:PackIcon Kind="Github" Height="24" Width="24" />
                         </Button>
