@@ -56,6 +56,11 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
       <AutoGen>True</AutoGen>
       <DependentUpon>Strings.uz-Latn-UZ.resx</DependentUpon>
     </Compile>
+  <Compile Update="Localization\Strings.cs-cz.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.cs-cz.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -74,6 +79,10 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
     <EmbeddedResource Update="Localization\Strings.uz-Latn-UZ.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.uz-Latn-UZ.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  <EmbeddedResource Update="Localization\Strings.cs-cz.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.cs-cz.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   
