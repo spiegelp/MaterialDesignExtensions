@@ -168,5 +168,6 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * New localizations
   * Czech
   * Portuguese
+* Save file in `SaveFileControl` and `SaveFileDialog` by hitting enter
 #### Fixes
 * Fixed exception in `Stepper` events

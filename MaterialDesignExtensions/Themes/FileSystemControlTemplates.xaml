@@ -1192,7 +1192,7 @@
                                 <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Style="{StaticResource emptyHintTextBlockStyle}" Text="{x:Static localization:Strings.EmptyDirectory}" />
                                 <DockPanel Grid.Row="3" HorizontalAlignment="Stretch">
                                     <ComboBox x:Name="fileFiltersComboBox" DockPanel.Dock="Right" Style="{StaticResource fileFiltersComboBoxStyle}" Margin="0,16,16,16" />
-                                    <TextBox HorizontalAlignment="Stretch" Margin="16"
+                                    <TextBox x:Name="filenameTextBox" HorizontalAlignment="Stretch" Margin="16"
                                              Text="{Binding Path=Filename, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </DockPanel>
                                 <Border Grid.Row="4" MinHeight="52" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource MaterialDesignDivider}" SnapsToDevicePixels="True">
