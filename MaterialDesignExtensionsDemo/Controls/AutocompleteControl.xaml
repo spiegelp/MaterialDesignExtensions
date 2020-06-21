@@ -43,6 +43,8 @@
                 <StackPanel Orientation="Vertical" Margin="0,32,0,0" Visibility="{Binding Path=SelectedItem, Converter={StaticResource notNullToVisibleConverter}}">
                     <TextBlock Text="Your selection:" Margin="0,0,0,8" />
                     <ContentControl Content="{Binding Path=SelectedItem}" ContentTemplate="{StaticResource itemTemplate}" />
+                    <Button Style="{StaticResource MaterialDesignFlatButton}" Content="CLEAR SELECTION" Margin="0,8,0,0" HorizontalAlignment="Left"
+                            Click="ClearSelectionButtonClickHandler"/>
                 </StackPanel>
                 <TextBlock Text="Dense variant with the style MaterialDesignAutocompleteDense:" Margin="0,64,0,0" />
                 <controls:Autocomplete Style="{StaticResource MaterialDesignAutocompleteDense}" AutocompleteSource="{Binding Path=AutocompleteSource}" Hint="Which OS?"

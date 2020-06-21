@@ -359,8 +359,7 @@ namespace MaterialDesignExtensions.Controls
 
         private void ClearClickHandler(object sender, RoutedEventArgs args)
         {
-            SelectedItem = null;
-            SearchTerm = null;
+            ClearSelection();
 
             m_searchTextBox.Focus();
         }
@@ -487,6 +486,15 @@ namespace MaterialDesignExtensions.Controls
                     m_clearButton.Visibility = Visibility.Collapsed;
                 }
             }
+        }
+
+        /// <summary>
+        /// Clears the selection.
+        /// </summary>
+        public void ClearSelection()
+        {
+            SelectedItem = null;
+            SearchTerm = null;
         }
     }
 

@@ -169,5 +169,6 @@ Please change your configuration according to [App.xaml](https://github.com/spie
   * Czech
   * Portuguese
 * Save file in `SaveFileControl` and `SaveFileDialog` by hitting enter
+* New `ClearSelection` method for `Autocomplete`
 #### Fixes
 * Fixed exception in `Stepper` events
