@@ -66,6 +66,16 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
       <AutoGen>True</AutoGen>
       <DependentUpon>Strings.pt-BR.resx</DependentUpon>
     </Compile>
+    <Compile Update="Localization\Strings.fr-FR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\Strings.ar-DZ.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.ar-DZ.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

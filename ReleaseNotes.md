@@ -166,7 +166,9 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * New control `BusyOverlay`
 * New `TextBoxFileSystemPath.TextBoxStyle` property to enable custom styles for the embedded `TextBox`
 * New localizations
+  * Arabic
   * Czech
+  * French
   * Portuguese
 * Save file in `SaveFileControl` and `SaveFileDialog` by hitting enter
 * New `ClearSelection` method for `Autocomplete`
