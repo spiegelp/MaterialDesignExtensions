@@ -161,7 +161,7 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * New control `NavigationRail`
 #### Fixes
 * Catch exception if network drive is not accessible
-### v3.2.0 (upcoming release)
+### v3.2.0
 #### Features
 * New control `BusyOverlay`
 * New `TextBoxFileSystemPath.TextBoxStyle` property to enable custom styles for the embedded `TextBox`
