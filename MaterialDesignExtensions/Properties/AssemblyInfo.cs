@@ -3,6 +3,7 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Markup;
 
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
@@ -53,3 +54,8 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 /*[assembly: AssemblyVersion("3.0.0.0")]
 [assembly: AssemblyFileVersion("3.0.0.0")]*/
+
+[assembly: XmlnsPrefix("https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml", "mde")]
+[assembly: XmlnsDefinition("https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml", "MaterialDesignExtensions.Controls")]
+[assembly: XmlnsDefinition("https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml", "MaterialDesignExtensions.Converters")]
+[assembly: XmlnsDefinition("https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml", "MaterialDesignExtensions.Model")]

@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
-             xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
-             xmlns:model="clr-namespace:MaterialDesignExtensions.Model;assembly=MaterialDesignExtensions"
+             xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
     <Grid>
@@ -21,41 +20,41 @@
                 <CheckBox Margin="48,0,0,0" IsChecked="{Binding Path=ContentAnimationsEnabled, Mode=TwoWay}" VerticalAlignment="Center">Animations enabled</CheckBox>
             </WrapPanel>
             <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
-                <controls:TabControlStepper IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}"
-                                            ContentAnimationsEnabled="{Binding Path=ContentAnimationsEnabled}"
-                                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                            DoneIconTemplate="{DynamicResource MaterialDesignStepDoneIconTemplate}"
-                                            ValidationErrorIconTemplate="{DynamicResource MaterialDesignStepValidationErrorIconTemplate}">
+                <mde:TabControlStepper IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}"
+                                       ContentAnimationsEnabled="{Binding Path=ContentAnimationsEnabled}"
+                                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                       DoneIconTemplate="{DynamicResource MaterialDesignStepDoneIconTemplate}"
+                                       ValidationErrorIconTemplate="{DynamicResource MaterialDesignStepValidationErrorIconTemplate}">
                     <TabItem>
                         <TabItem.Header>
-                            <model:StepTitleHeader FirstLevelTitle="What is a Stepper?" />
+                            <mde:StepTitleHeader FirstLevelTitle="What is a Stepper?" />
                         </TabItem.Header>
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="Steppers are handy to break a big task into smaller parts. These are so called steps. It displays the progress of the full task as a numbered sequence of steps." TextWrapping="WrapWithOverflow" />
-                            <controls:StepButtonBar Continue="CONTINUE" Cancel="CANCEL" />
+                            <mde:StepButtonBar Continue="CONTINUE" Cancel="CANCEL" />
                         </StackPanel>
                     </TabItem>
                     <TabItem>
                         <TabItem.Header>
-                            <model:StepTitleHeader FirstLevelTitle="Layout and navigation" />
+                            <mde:StepTitleHeader FirstLevelTitle="Layout and navigation" />
                         </TabItem.Header>
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="There a two layouts for a Stepper, namely horizontal and vertical. It can be set by using the Layout property." TextWrapping="WrapWithOverflow" />
                             <TextBlock Margin="0,16,0,0" Text="Additionally the Stepper will be in linear mode by setting the IsLinear property to true. This means that the user can only edit the steps in their fixed order. A non-linear Stepper allows the user to edit the steps in any order." TextWrapping="WrapWithOverflow" />
                             <TextBlock Margin="0,16,0,0" Text="The basic navigation inside a stepper will be accomplished by using simple back and continue buttons. They allow the user to browse through the steps in their order. Just use the StepButtonBar like this tutorial to avoid the nasty reimplementation on your own. The user may also switch the steps of a non-linear Stepper by clicking on the headers. " TextWrapping="WrapWithOverflow" />
-                            <controls:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
+                            <mde:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
                         </StackPanel>
                     </TabItem>
                     <TabItem>
                         <TabItem.Header>
-                            <model:StepTitleHeader FirstLevelTitle="Conclusion" />
+                            <mde:StepTitleHeader FirstLevelTitle="Conclusion" />
                         </TabItem.Header>
                         <StackPanel>
                             <TextBlock Text="Well, that's all to say about this simple stepper version." />
-                            <controls:StepButtonBar Back="BACK" Continue="FINISH" Cancel="CANCEL" />
+                            <mde:StepButtonBar Back="BACK" Continue="FINISH" Cancel="CANCEL" />
                         </StackPanel>
                     </TabItem>
-                </controls:TabControlStepper>
+                </mde:TabControlStepper>
             </ScrollViewer>
         </Grid>
     </Grid>

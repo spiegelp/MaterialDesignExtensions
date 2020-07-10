@@ -1,26 +1,26 @@
-﻿<controlsLib:MaterialWindow x:Class="MaterialDesignExtensionsDemo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
-        xmlns:local="clr-namespace:MaterialDesignExtensionsDemo"
-        xmlns:controls="clr-namespace:MaterialDesignExtensionsDemo.Controls"
-        xmlns:viewModel="clr-namespace:MaterialDesignExtensionsDemo.ViewModel"
-        xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:controlsLib="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
-        mc:Ignorable="d"
-        Title="Material Design Extensions - Demo" Height="800" Width="1300" WindowStartupLocation="CenterScreen"
-        Background="{DynamicResource MaterialDesignBackground}" Foreground="{DynamicResource MaterialDesignBody}"
-        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-        Icon="pack://application:,,,/MaterialDesignExtensionsDemo;component/icon_on_background.ico"
-        TitleBarIcon="pack://application:,,,/MaterialDesignExtensionsDemo;component/icon_white.ico">
+﻿<mde:MaterialWindow x:Class="MaterialDesignExtensionsDemo.MainWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:MaterialDesignExtensionsDemo"
+                    xmlns:controls="clr-namespace:MaterialDesignExtensionsDemo.Controls"
+                    xmlns:viewModel="clr-namespace:MaterialDesignExtensionsDemo.ViewModel"
+                    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
+                    mc:Ignorable="d"
+                    Title="Material Design Extensions - Demo" Height="800" Width="1300" WindowStartupLocation="CenterScreen"
+                    Background="{DynamicResource MaterialDesignBackground}" Foreground="{DynamicResource MaterialDesignBody}"
+                    FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+                    Icon="pack://application:,,,/MaterialDesignExtensionsDemo;component/icon_on_background.ico"
+                    TitleBarIcon="pack://application:,,,/MaterialDesignExtensionsDemo;component/icon_white.ico">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:AlertDialogViewModel}">
             <StackPanel Orientation="Vertical">
                 <TextBlock Margin="24" Text="{Binding Path=Message}"></TextBlock>
                 <Button Style="{DynamicResource MaterialDesignFlatButton}" Content="OK" Margin="8" HorizontalAlignment="Right"
-                        Command="wpfLib:DialogHost.CloseDialogCommand">
+                        Command="md:DialogHost.CloseDialogCommand">
                     <Button.CommandParameter>
                         <system:Boolean>False</system:Boolean>
                     </Button.CommandParameter>
@@ -100,34 +100,34 @@
             <controls:LanguageControl />
         </DataTemplate>
     </Window.Resources>
-    <controlsLib:MaterialWindow.TitleTemplate>
+    <mde:MaterialWindow.TitleTemplate>
         <DataTemplate>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Style="{StaticResource WindowTitleTextBlockStyle}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType={x:Type controlsLib:MaterialWindow}}}" Margin="8,0,0,0" />
+                <TextBlock Style="{StaticResource WindowTitleTextBlockStyle}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType={x:Type mde:MaterialWindow}}}" Margin="8,0,0,0" />
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Stretch">
                     <Button Style="{StaticResource WindowButtonStyle}" Click="GoToGitHubButtonClickHandler">
-                        <wpfLib:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="Github" />
+                        <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="Github" />
                     </Button>
                     <Button Style="{StaticResource WindowButtonStyle}" Click="GoToDocumentation">
-                        <wpfLib:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="HelpCircle" />
+                        <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="HelpCircle" />
                     </Button>
                     <Border Width="1" VerticalAlignment="Stretch" SnapsToDevicePixels="True" Margin="0,4,8,4"
-                            Background="{Binding Path=BorderForegroundBrush, RelativeSource={RelativeSource AncestorType={x:Type controlsLib:MaterialWindow}}}" />
+                            Background="{Binding Path=BorderForegroundBrush, RelativeSource={RelativeSource AncestorType={x:Type mde:MaterialWindow}}}" />
                 </StackPanel>
             </Grid>
         </DataTemplate>
-    </controlsLib:MaterialWindow.TitleTemplate>
+    </mde:MaterialWindow.TitleTemplate>
     <Grid>
-        <wpfLib:DialogHost x:Name="m_dialogHost" Identifier="dialogHost" DialogTheme="Light">
-            <wpfLib:DrawerHost IsLeftDrawerOpen="{Binding Path=IsNavigationDrawerOpen, ElementName=appBar}" LeftDrawerBackground="{DynamicResource MaterialDesignBackground}">
-                <wpfLib:DrawerHost.LeftDrawerContent>
-                    <controlsLib:SideNavigation x:Name="navigationDrawerNav" Items="{Binding Path=NavigationItems, Mode=OneTime}" Width="280"
-                                                NavigationItemSelected="NavigationItemSelectedHandler" />
-                </wpfLib:DrawerHost.LeftDrawerContent>
+        <md:DialogHost x:Name="m_dialogHost" Identifier="dialogHost" DialogTheme="Light">
+            <md:DrawerHost IsLeftDrawerOpen="{Binding Path=IsNavigationDrawerOpen, ElementName=appBar}" LeftDrawerBackground="{DynamicResource MaterialDesignBackground}">
+                <md:DrawerHost.LeftDrawerContent>
+                    <mde:SideNavigation x:Name="navigationDrawerNav" Items="{Binding Path=NavigationItems, Mode=OneTime}" Width="280"
+                                        NavigationItemSelected="NavigationItemSelectedHandler" />
+                </md:DrawerHost.LeftDrawerContent>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="280" />
@@ -137,25 +137,25 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <controlsLib:AppBar x:Name="appBar" Grid.ColumnSpan="2" Title="Material Design Extensions" ShowNavigationDrawerButton="True">
+                    <mde:AppBar x:Name="appBar" Grid.ColumnSpan="2" Title="Material Design Extensions" ShowNavigationDrawerButton="True">
                         <!-- demo for app bar icon -->
-                        <!--<controlsLib:AppBar.AppIcon>
-                            <wpfLib:PackIcon Kind="Volleyball" Foreground="White" Width="24" Height="24" />
-                        </controlsLib:AppBar.AppIcon>-->
+                        <!--<mde:AppBar.AppIcon>
+                            <md:PackIcon Kind="Volleyball" Foreground="White" Width="24" Height="24" />
+                        </mde:AppBar.AppIcon>-->
                         <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="8,0" ToolTip="Material Design Exentions on GitHub" Click="GoToGitHubButtonClickHandler">
-                            <wpfLib:PackIcon Kind="Github" Height="24" Width="24" />
+                            <md:PackIcon Kind="Github" Height="24" Width="24" />
                         </Button>
                         <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="8,0" ToolTip="Documentation" Click="GoToDocumentation">
-                            <wpfLib:PackIcon Kind="HelpCircle" Height="24" Width="24" />
+                            <md:PackIcon Kind="HelpCircle" Height="24" Width="24" />
                         </Button>
-                    </controlsLib:AppBar>
+                    </mde:AppBar>
                     <Border Grid.Row="1" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource MaterialDesignDivider}">
-                        <controlsLib:SideNavigation x:Name="sideNav" Items="{Binding Path=NavigationItems, Mode=OneTime}"
-                                                    NavigationItemSelected="NavigationItemSelectedHandler" />
+                        <mde:SideNavigation x:Name="sideNav" Items="{Binding Path=NavigationItems, Mode=OneTime}"
+                                            NavigationItemSelected="NavigationItemSelectedHandler" />
                     </Border>
                     <ContentControl x:Name="contentControl" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></ContentControl>
                 </Grid>
-            </wpfLib:DrawerHost>
-        </wpfLib:DialogHost>
+            </md:DrawerHost>
+        </md:DialogHost>
     </Grid>
-</controlsLib:MaterialWindow>
+</mde:MaterialWindow>

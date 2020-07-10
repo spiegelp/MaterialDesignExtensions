@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
-             xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+             xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="700">
     <Grid>
@@ -14,13 +14,13 @@
                 <TextBlock Text="Persistent search" />
                 <Border BorderThickness="1" BorderBrush="Black" Height="200" Background="{DynamicResource MaterialDesignPaper}" SnapsToDevicePixels="True" Margin="0,8,0,0">
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <controls:PersistentSearch VerticalAlignment="Top" Margin="8" SearchSuggestionsSource="{Binding Path=SearchSuggestionsSource}" Search="SearchHandler1" />
+                        <mde:PersistentSearch VerticalAlignment="Top" Margin="8" SearchSuggestionsSource="{Binding Path=SearchSuggestionsSource}" Search="SearchHandler1" />
                         <TextBlock x:Name="searchResultTextBlock1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,128,0,0" />
                     </Grid>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="Black" Height="200" Background="{DynamicResource MaterialDesignPaper}" SnapsToDevicePixels="True" Margin="0,24,0,0">
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <controls:PersistentSearch Style="{StaticResource MaterialDesignPersistentSearchDense}" VerticalAlignment="Top" Margin="8" SearchSuggestionsSource="{Binding Path=SearchSuggestionsSource}" Search="SearchHandler1" />
+                        <mde:PersistentSearch Style="{StaticResource MaterialDesignPersistentSearchDense}" VerticalAlignment="Top" Margin="8" SearchSuggestionsSource="{Binding Path=SearchSuggestionsSource}" Search="SearchHandler1" />
                         <TextBlock x:Name="searchResultTextBlock2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,128,0,0" />
                     </Grid>
                 </Border>
