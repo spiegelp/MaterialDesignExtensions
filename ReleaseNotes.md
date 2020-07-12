@@ -175,6 +175,6 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * `TabControl` style supports `FlowDirection = RightToLeft`
 #### Fixes
 * Fixed exception in `Stepper` events
-### v3.3.0
+### v3.3.0 (upcoming release)
 #### Features
 * Added `XmlnsDefinition` `https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml`
