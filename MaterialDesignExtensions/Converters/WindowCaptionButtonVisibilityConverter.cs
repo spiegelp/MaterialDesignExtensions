@@ -5,43 +5,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 
 namespace MaterialDesignExtensions.Converters
 {
     /// <summary>
-    /// Converts a <see cref="WindowStyle" /> of a window into a <see cref="Visibility" /> of an according caption button.
+    /// Converts a <see cref="WindowStyle" /> and a <see cref="ResizeMode" /> of a window into a <see cref="Visibility" /> of an according caption button.
     /// </summary>
-    public class WindowCaptionButtonVisibilityConverter : IMultiValueConverter
+    public class WindowCaptionButtonVisibilityConverter : WindowCaptionButtonBaseConverter
     {
-        /// <summary>
-        /// Identifier for the minimize caption button.
-        /// </summary>
-        public string MinimizeButtonName => "minimizeButton";
-
-        /// <summary>
-        /// Identifier for the maximize/restore caption button.
-        /// </summary>
-        public string MaximizeRestoreButtonName => "maximizeRestoreButton";
-
-        /// <summary>
-        /// Identifier for the close caption button.
-        /// </summary>
-        public string CloseButtonName => "closeButton";
-
         /// <summary>
         /// Creates a new <see cref="WindowCaptionButtonVisibilityConverter" />.
         /// </summary>
-        public WindowCaptionButtonVisibilityConverter() { }
+        public WindowCaptionButtonVisibilityConverter() : base() { }
 
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
-                if (values != null && values.Length == 2)
+                if (values != null && values.Length == 3)
                 {
                     string buttonName = (string)values[0];
                     WindowStyle windowStyle = (WindowStyle)values[1];
+                    ResizeMode resizeMode = (ResizeMode)values[2];
 
                     if (buttonName == CloseButtonName)
                     {
@@ -56,7 +41,8 @@ namespace MaterialDesignExtensions.Converters
                     }
                     else
                     {
-                        if (windowStyle == WindowStyle.SingleBorderWindow || windowStyle == WindowStyle.ThreeDBorderWindow)
+                        if (resizeMode != ResizeMode.NoResize
+                            && (windowStyle == WindowStyle.SingleBorderWindow || windowStyle == WindowStyle.ThreeDBorderWindow))
                         {
                             return Visibility.Visible;
                         }
@@ -73,11 +59,6 @@ namespace MaterialDesignExtensions.Converters
             }
 
             return Visibility.Visible;
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
     }
 }

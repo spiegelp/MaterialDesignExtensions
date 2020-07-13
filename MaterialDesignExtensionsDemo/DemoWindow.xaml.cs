@@ -16,6 +16,14 @@ namespace MaterialDesignExtensionsDemo
 {
     public partial class DemoWindow : MaterialWindow
     {
+        public ResizeMode[] ResizeModes
+        {
+            get
+            {
+                return new ResizeMode[] { ResizeMode.NoResize, ResizeMode.CanMinimize, ResizeMode.CanResize, ResizeMode.CanResizeWithGrip };
+            }
+        }
+
         public DemoWindow()
         {
             InitializeComponent();

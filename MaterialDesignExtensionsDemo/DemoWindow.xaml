@@ -8,14 +8,22 @@
                     mc:Ignorable="d"
                     Title="Material Design Extensions - Demo"
                     WindowStartupLocation="CenterScreen"
-                    Height="150" Width="400"
+                    Height="180" Width="400"
                     Background="{DynamicResource MaterialDesignBackground}"
                     Foreground="{DynamicResource MaterialDesignBody}"
                     FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
                     Icon="pack://application:,,,/MaterialDesignExtensionsDemo;component/icon_on_background.ico"
                     TitleBarIcon="pack://application:,,,/MaterialDesignExtensionsDemo;component/icon_white.ico">
     <Grid>
-        <Button Content="CLOSE" Margin="0,16" HorizontalAlignment="Center" VerticalAlignment="Top"
+        <StackPanel Orientation="Vertical" Margin="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,16" HorizontalAlignment="Center">
+                <TextBlock Text="ResizeMode" VerticalAlignment="Center" />
+                <ComboBox SelectedItem="{Binding Path=ResizeMode, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=mde:MaterialWindow}}"
+                          ItemsSource="{Binding Path=ResizeModes, Mode=OneTime, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=mde:MaterialWindow}}"
+                          Width="120" Margin="8,0,0,0" VerticalAlignment="Center" />
+            </StackPanel>
+            <Button Content="CLOSE" HorizontalAlignment="Center"
                 Click="CloseButtonClickHandler" />
+        </StackPanel>
     </Grid>
 </mde:MaterialWindow>
