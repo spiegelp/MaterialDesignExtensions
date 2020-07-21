@@ -122,7 +122,50 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
-    
+
+    <Style x:Key="ResizeGripStyle" TargetType="{x:Type ResizeGrip}">
+        <Setter Property="Height" Value="18" />
+        <Setter Property="Width" Value="18" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Opacity" Value="0.75" />
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ResizeGrip}">
+                    <Grid Height="18" Width="18" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <Grid.Resources>
+                            <Style TargetType="Rectangle">
+                                <Setter Property="Height" Value="2" />
+                                <Setter Property="Width" Value="2" />
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                                <Setter Property="VerticalAlignment" Value="Top" />
+                                <Setter Property="Fill" Value="{Binding BorderBackgroundBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MaterialWindow}}" />
+                                <Setter Property="SnapsToDevicePixels" Value="True" />
+                            </Style>
+                        </Grid.Resources>
+                        <Rectangle Margin="14,2,0,0" />
+                        <Rectangle Margin="14,6,0,0" />
+                        <Rectangle Margin="14,10,0,0" />
+                        <Rectangle Margin="14,14,0,0" />
+                        <Rectangle Margin="10,6,0,0" />
+                        <Rectangle Margin="10,10,0,0" />
+                        <Rectangle Margin="10,14,0,0" />
+                        <Rectangle Margin="6,10,0,0" />
+                        <Rectangle Margin="6,14,0,0" />
+                        <Rectangle Margin="2,14,0,0" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource TemplatedParent}}" Value="CanResizeWithGrip">
+                <Setter Property="Visibility" Value="Visible" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <Style TargetType="{x:Type controls:MaterialWindow}">
         <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
@@ -196,7 +239,7 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="100*" />
                                 </Grid.RowDefinitions>
-                                
+
                                 <!-- window icon -->
                                 <Image Source="{TemplateBinding TitleBarIcon}" Width="24" Height="24" Margin="8,0,8,0" VerticalAlignment="Center">
                                     <Image.Visibility>
@@ -304,7 +347,7 @@
                                         <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="WindowClose" />
                                     </Button>
                                 </StackPanel>
-                                
+
                                 <!-- window content -->
                                 <Border Grid.ColumnSpan="3" Grid.Row="1" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                     <AdornerDecorator>
@@ -330,6 +373,9 @@
                                         </ContentPresenter>
                                     </AdornerDecorator>
                                 </Border>
+
+                                <!-- resize grip -->
+                                <ResizeGrip x:Name="resizeGrip" Grid.Column="2" Grid.Row="1" Style="{StaticResource ResizeGripStyle}" />
                             </Grid>
                         </Border>
                     </Border>
@@ -351,7 +397,14 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="WindowChrome.WindowChrome">
+                    <Setter.Value>
+                        <WindowChrome ResizeBorderThickness="4,4,18,18" UseAeroCaptionButtons="False" CaptionHeight="28" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
         </Style.Triggers>
     </Style>
-    
+
 </ResourceDictionary>
