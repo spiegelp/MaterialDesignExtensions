@@ -180,3 +180,5 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Added `XmlnsDefinition` `https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml`
 * Consider `ResizeMode` for the window caption buttons
 * `ResizeGrip` in `MaterialWindow`
+### Fixes
+* Fixed reflection code in `ResourceDictionaryExtensions`
