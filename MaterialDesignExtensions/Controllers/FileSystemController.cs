@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
+using System.Windows;
 using MaterialDesignThemes.Wpf;
 
 using MaterialDesignExtensions.Model;
@@ -768,10 +768,18 @@ namespace MaterialDesignExtensions.Controllers
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null && !string.IsNullOrWhiteSpace(propertyName))
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            if (!string.IsNullOrWhiteSpace(propertyName))
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+                else
+                {
+                    Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                    });
+                }
         }
     }
 }
