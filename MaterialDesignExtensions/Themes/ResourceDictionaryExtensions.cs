@@ -25,8 +25,8 @@ namespace MaterialDesignExtensions.Themes
         {
             Type type = typeof(MaterialDesignThemes.Wpf.ResourceDictionaryExtensions);
 
-            CurrentThemeKey = (Guid)type.GetProperty(nameof(CurrentThemeKey)).GetValue(null);
-            ThemeManagerKey = (Guid)type.GetProperty(nameof(ThemeManagerKey)).GetValue(null);
+            CurrentThemeKey = (Guid)type.GetProperty(nameof(CurrentThemeKey), BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+            ThemeManagerKey = (Guid)type.GetProperty(nameof(ThemeManagerKey), BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
         }
 
         /// <summary>

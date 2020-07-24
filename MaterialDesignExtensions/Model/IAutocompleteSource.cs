@@ -41,7 +41,7 @@ namespace MaterialDesignExtensions.Model
     public abstract class AutocompleteSource<T> : IAutocompleteSource<T>
     {
         /// <summary>
-        /// Creates a new <see cref="AutocompleteSource" />.
+        /// Creates a new <see cref="AutocompleteSource{T}" />.
         /// </summary>
         public AutocompleteSource() { }
 

@@ -29,8 +29,14 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public abstract class BaseFileControl : FileSystemControl
     {
+        /// <summary>
+        /// An event-handler for the FileSelected event.
+        /// </summary>
         public delegate void FileSelectedRoutedEventHandler(object sender, FileSelectedEventArgs fileSelectedEventArgs);
 
+        /// <summary>
+        /// The name of the combo box inside the template.
+        /// </summary>
         protected const string FileFiltersComboBoxName = "fileFiltersComboBox";
 
         /// <summary>

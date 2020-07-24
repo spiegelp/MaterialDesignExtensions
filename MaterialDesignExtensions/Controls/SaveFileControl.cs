@@ -25,6 +25,8 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public class SaveFileControl : BaseFileControl
     {
+        private const string FilenameTextBoxName = "filenameTextBox";
+
         /// <summary>
         /// The name of the file itself without the full path.
         /// </summary>
@@ -75,6 +77,8 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        private TextBox m_filenameTextBox;
+
         static SaveFileControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SaveFileControl), new FrameworkPropertyMetadata(typeof(SaveFileControl)));
@@ -83,7 +87,46 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// Creates a new <see cref="SaveFileControl" />.
         /// </summary>
-        public SaveFileControl() : base() { }
+        public SaveFileControl()
+            : base()
+        {
+            m_filenameTextBox = null;
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (m_filenameTextBox != null)
+            {
+                m_filenameTextBox.KeyUp -= FilenameTextBoxKeyUpHandler;
+            }
+
+            m_filenameTextBox = Template.FindName(FilenameTextBoxName, this) as TextBox;
+        }
+
+        protected override void LoadedHandler(object sender, RoutedEventArgs args)
+        {
+            base.LoadedHandler(sender, args);
+
+            m_filenameTextBox.KeyUp -= FilenameTextBoxKeyUpHandler;
+            m_filenameTextBox.KeyUp += FilenameTextBoxKeyUpHandler;
+        }
+
+        protected override void UnloadedHandler(object sender, RoutedEventArgs args)
+        {
+            m_filenameTextBox.KeyUp -= FilenameTextBoxKeyUpHandler;
+
+            base.UnloadedHandler(sender, args);
+        }
+
+        private void FilenameTextBoxKeyUpHandler(object sender, KeyEventArgs args)
+        {
+            if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(CurrentFile))
+            {
+                SelectFile();
+            }
+        }
 
         protected override void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {

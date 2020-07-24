@@ -98,7 +98,7 @@ namespace MaterialDesignExtensions.Converters
                 ["htm"] = PackIconKind.Xml,
                 ["css"] = PackIconKind.CodeTags,
                 ["xml"] = PackIconKind.Xml,
-                ["json"] = PackIconKind.Json,
+                ["json"] = PackIconKind.CodeJson,
                 ["xsl"] = PackIconKind.Xml,
                 ["xslt"] = PackIconKind.Xml,
                 ["sql"] = PackIconKind.Database,

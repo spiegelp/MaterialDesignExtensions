@@ -60,6 +60,7 @@ namespace MaterialDesignExtensions.Converters
         /// <param name="imageFilename">The full filename of the image</param>
         /// <param name="targetWidth">The target width of the image</param>
         /// <param name="targetHeight">The target height of the image</param>
+        /// <param name="useCache">True to enable caching</param>
         public AsyncImageTask(string imageFilename, int targetWidth = 40, int targetHeight = 40, bool useCache = false)
         {
             m_image = PackIconKind.FileImage;

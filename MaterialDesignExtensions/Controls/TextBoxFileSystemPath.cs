@@ -61,7 +61,29 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        protected Button m__showButtonDialog;
+        /// <summary>
+        /// The <see cref="Style" /> for the <see cref="TextBox" /> inside the template.
+        /// </summary>
+        public static readonly DependencyProperty TextBoxStyleProperty = DependencyProperty.Register(
+            nameof(TextBoxStyle), typeof(Style), typeof(TextBoxFileSystemPath));
+
+        /// <summary>
+        /// The <see cref="Style" /> for the <see cref="TextBox" /> inside the template.
+        /// </summary>
+        public Style TextBoxStyle
+        {
+            get
+            {
+                return (Style)GetValue(TextBoxStyleProperty);
+            }
+
+            set
+            {
+                SetValue(TextBoxStyleProperty, value);
+            }
+        }
+
+        protected Button m_showButtonDialog;
 
         static TextBoxFileSystemPath()
         {
@@ -74,20 +96,20 @@ namespace MaterialDesignExtensions.Controls
         public TextBoxFileSystemPath()
             : base()
         {
-            m__showButtonDialog = null;
+            m_showButtonDialog = null;
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            if (m__showButtonDialog != null)
+            if (m_showButtonDialog != null)
             {
-                m__showButtonDialog.Click -= ShowDialogButtonClickHandler;
+                m_showButtonDialog.Click -= ShowDialogButtonClickHandler;
             }
 
-            m__showButtonDialog = Template.FindName(ShowDialogButtonName, this) as Button;
-            m__showButtonDialog.Click += ShowDialogButtonClickHandler;
+            m_showButtonDialog = Template.FindName(ShowDialogButtonName, this) as Button;
+            m_showButtonDialog.Click += ShowDialogButtonClickHandler;
         }
 
         private async void ShowDialogButtonClickHandler(object sender, RoutedEventArgs args)

@@ -1,4 +1,44 @@
 ﻿<div>
-    <h1>Side navivation</h1>
+    <h1>Side navigation and navigation rail</h1>
     Documentation under construction
+
+    <h2>Code example</h2>
+    <p>
+        We begin by defining the items for our navigation as a property of our view model or data context:
+    </p>
+    <pre class="language-csharp"><code class="language-csharp">public List<INavigationItem> NavigationItems
+{
+    get
+    {
+        return new List<INavigationItem>
+        {
+            new SubheaderNavigationItem() { Subheader = "Documents" },
+            new FirstLevelNavigationItem() { Label = "Files", Icon = PackIconKind.FileDocument, IsSelected = true },
+            new DividerNavigationItem(),
+            new SubheaderNavigationItem() { Subheader = "Media" },
+            new FirstLevelNavigationItem() { Label = "Images", Icon = PackIconKind.Image },
+            new SecondLevelNavigationItem() { Label = "Camera", Icon = PackIconKind.Camera }
+            new FirstLevelNavigationItem() { Label = "Music", Icon = PackIconKind.Music },
+            new FirstLevelNavigationItem() { Label = "Videos", Icon = PackIconKind.Video }
+        };
+    }
+}</code></pre>
+    <p>
+        Then we can add a side navigation control to our user interface and set the items via binding:
+    </p>
+    <pre class="language-markup"><code class="language-markup">&lt;!-- import namespaces -->
+xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+
+&lt;mde:SideNavigation Items="{Binding Path=NavigationItems, Mode=OneTime}"
+                    NavigationItemSelected="NavigationItemSelectedHandler" /></code></pre>
+    <p>
+        Finally we can implement the navigation logic using an event handler:
+    </p>
+    <pre class="language-csharp"><code class="language-csharp">private void NavigationItemSelectedHandler(object sender, NavigationItemSelectedEventArgs args)
+{
+    // do navigation according to the selected item in args.NavigationItem
+}</code></pre>
+    <script type="text/javascript">
+        appViewModel.prepareCodeSnippets();
+    </script>
 </div>

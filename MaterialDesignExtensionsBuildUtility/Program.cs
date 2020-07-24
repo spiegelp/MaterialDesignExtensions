@@ -46,7 +46,7 @@ namespace MaterialDesignExtensionsBuildUtility
             }
 
             Console.WriteLine("Press any key to exit...");
-            Console.Read();
+            Console.ReadKey();
         }
 
         private static Configuration Init(string[] args)

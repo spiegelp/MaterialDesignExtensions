@@ -40,7 +40,6 @@ namespace MaterialDesignExtensions.Model
         /// <summary>
         /// The delegate for a <see cref="INavigationItem.NavigationItemSelectedCallback"/> method.
         /// </summary>
-        /// <param name="navigationItem"></param>
         /// <returns></returns>
         public override NavigationItemSelectedCallback NavigationItemSelectedCallback
         {

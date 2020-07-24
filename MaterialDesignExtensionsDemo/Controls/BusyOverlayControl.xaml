@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="MaterialDesignExtensionsDemo.Controls.BusyOverlayControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="700">
+    <Grid>
+        <Grid Margin="16" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="50*" />
+                <RowDefinition Height="8" />
+                <RowDefinition Height="50*" />
+            </Grid.RowDefinitions>
+            <Button Grid.ColumnSpan="3" Content="BE BUSY" Margin="0,0,0,16" HorizontalAlignment="Center" Click="BeBusyButtonClickHandler" />
+            <Grid Grid.Row="1">
+                <TextBlock Text="Style MaterialBusyOverlayCircular" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <mde:BusyOverlay Grid.Row="1" IsBusy="{Binding Path=IsBusy}" Progress="{Binding Path=Progress}" Style="{StaticResource MaterialBusyOverlayCircular}" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="2">
+                <TextBlock Text="Style MaterialBusyOverlayCircularProgress" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <mde:BusyOverlay Grid.Row="1" IsBusy="{Binding Path=IsBusy}" Progress="{Binding Path=Progress}" Style="{StaticResource MaterialBusyOverlayCircularProgress}" />
+            </Grid>
+            <Grid Grid.Row="3">
+                <TextBlock Text="Style MaterialBusyOverlayLinear" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <mde:BusyOverlay Grid.Row="1" IsBusy="{Binding Path=IsBusy}" Progress="{Binding Path=Progress}" Style="{StaticResource MaterialBusyOverlayLinear}" />
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="2">
+                <TextBlock Text="Style MaterialBusyOverlayLinearProgress" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <mde:BusyOverlay Grid.Row="1" IsBusy="{Binding Path=IsBusy}" Progress="{Binding Path=Progress}" Style="{StaticResource MaterialBusyOverlayLinearProgress}" />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MaterialDesignExtensions</id>
-    <version>3.1.0-a01</version>
+    <version>3.2.0</version>
     <title>Material Design Extensions</title>
     <authors>Philipp Spiegel</authors>
     <owners>Philipp Spiegel</owners>
@@ -22,10 +22,10 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
 Important notice: The configuration of Material Design Extensions changed in order to enable changing the theme at runtime. Please change your configuration according to App.xaml of the demo.</releaseNotes>
     <!--<readme>Readme.md</readme>-->
     <copyright>Copyright (c) 2017-2020 Spiegel Philipp</copyright>
-    <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window</tags>
+    <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window NavigationRail</tags>
     <dependencies>
-      <dependency id="MaterialDesignColors" version="1.2.2" />
-      <dependency id="MaterialDesignThemes" version="3.0.1" />
+      <dependency id="MaterialDesignColors" version="1.2.6" />
+      <dependency id="MaterialDesignThemes" version="3.1.3" />
     </dependencies>
   </metadata>
   <files>
@@ -34,13 +34,27 @@ Important notice: The configuration of Material Design Extensions changed in ord
     <file src="bin\Release\net45\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net45\Ru" />
     <file src="bin\Release\net45\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net45\ru-ru" />
     <file src="bin\Release\net45\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\net45\uz-Latn-UZ" />
+    <file src="bin\Release\net45\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\net45\cs" />
+    <file src="bin\Release\net45\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\net45\cs-CZ" />
+    <file src="bin\Release\net45\pt-BR\MaterialDesignExtensions.resources.dll" target="lib\net45\pt" />
+    <file src="bin\Release\net45\pt-BR\MaterialDesignExtensions.resources.dll" target="lib\net45\pt-BR" />
+    <file src="bin\Release\net45\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\net45\fr" />
+    <file src="bin\Release\net45\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\net45\fr-FR" />
+    <file src="bin\Release\net45\ar-DZ\MaterialDesignExtensions.resources.dll" target="lib\net45\ar-DZ" />
     <file src="bin\Release\net45\MaterialDesignExtensions.xml" target="lib\net45" />
-    <file src="bin\Release\netcoreapp3.0\MaterialDesignExtensions.dll" target="lib\netcoreapp3.0" />
-    <file src="bin\Release\netcoreapp3.0\de\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.0\de" />
-    <file src="bin\Release\netcoreapp3.0\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.0\Ru" />
-    <file src="bin\Release\netcoreapp3.0\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.0\ru-ru" />
-    <file src="bin\Release\netcoreapp3.0\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.0\uz-Latn-UZ" />
-    <file src="bin\Release\netcoreapp3.0\MaterialDesignExtensions.xml" target="lib\netcoreapp3.0" />
+    <file src="bin\Release\netcoreapp3.1\MaterialDesignExtensions.dll" target="lib\netcoreapp3.1" />
+    <file src="bin\Release\netcoreapp3.1\de\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\de" />
+    <file src="bin\Release\netcoreapp3.1\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\Ru" />
+    <file src="bin\Release\netcoreapp3.1\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\ru-ru" />
+    <file src="bin\Release\netcoreapp3.1\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\uz-Latn-UZ" />
+    <file src="bin\Release\netcoreapp3.1\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\cs" />
+    <file src="bin\Release\netcoreapp3.1\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\cs-CZ" />
+    <file src="bin\Release\netcoreapp3.1\pt-BR\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\pt" />
+    <file src="bin\Release\netcoreapp3.1\pt-BR\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\pt-BR" />
+    <file src="bin\Release\netcoreapp3.1\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\fr" />
+    <file src="bin\Release\netcoreapp3.1\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\fr-FR" />
+    <file src="bin\Release\netcoreapp3.1\ar-DZ\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\ar-DZ" />
+    <file src="bin\Release\netcoreapp3.1\MaterialDesignExtensions.xml" target="lib\netcoreapp3.1" />
     <file src="..\additionalPackageFiles\License.txt" />
     <file src="..\additionalPackageFiles\Notice.txt" />
     <file src="..\additionalPackageFiles\PackageReadme.md" target="Readme.md" />

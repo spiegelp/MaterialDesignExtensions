@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
-             xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+             xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
     <Grid>
@@ -15,8 +15,8 @@
                     <ColumnDefinition Width="32" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <controls:OversizedNumberSpinner Value="{Binding Path=Value, Mode=TwoWay}" Min="{Binding Path=Min}" Max="{Binding Path=Max}" />
-                <controls:OversizedNumberSpinner Grid.Column="2" IsEnabled="False" Value="{Binding Path=Value, Mode=TwoWay}" Min="{Binding Path=Min}" Max="{Binding Path=Max}" />
+                <mde:OversizedNumberSpinner Value="{Binding Path=Value, Mode=TwoWay}" Min="{Binding Path=Min}" Max="{Binding Path=Max}" />
+                <mde:OversizedNumberSpinner Grid.Column="2" IsEnabled="False" Value="{Binding Path=Value, Mode=TwoWay}" Min="{Binding Path=Min}" Max="{Binding Path=Max}" />
             </Grid>
         </ScrollViewer>
     </Grid>

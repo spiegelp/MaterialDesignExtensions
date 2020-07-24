@@ -17,6 +17,9 @@ namespace MaterialDesignExtensions.Controls
     {
         private Window m_window;
 
+        /// <summary>
+        /// Creates a new <see cref="AutocompletePopup" />.
+        /// </summary>
         public AutocompletePopup()
             : base()
         {

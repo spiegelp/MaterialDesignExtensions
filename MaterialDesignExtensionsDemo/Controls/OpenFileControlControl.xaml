@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
-             xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+             xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700">
     <Grid>
@@ -20,10 +20,10 @@
             <CheckBox IsChecked="{Binding Path=ShowSystemFilesAndDirectories, Mode=TwoWay}" VerticalAlignment="Center" Margin="16,0,0,0" />
             <TextBlock Text="Show system directories" VerticalAlignment="Center" Margin="4,0,0,0" />
         </StackPanel>
-        <controls:OpenFileControl Grid.Row="2" Margin="16"
-                                  ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, Mode=TwoWay}"
-                                  ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, Mode=TwoWay}"
-                                  Filters="All files|*.*|C# files|*.cs|XAML files|*.xaml"
-                                  FileSelected="OpenFileControl_FileSelected" Cancel="OpenFileControl_Cancel" />
+        <mde:OpenFileControl Grid.Row="2" Margin="16"
+                             ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, Mode=TwoWay}"
+                             ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, Mode=TwoWay}"
+                             Filters="All files|*.*|C# files|*.cs|XAML files|*.xaml"
+                             FileSelected="OpenFileControl_FileSelected" Cancel="OpenFileControl_Cancel" />
     </Grid>
 </UserControl>

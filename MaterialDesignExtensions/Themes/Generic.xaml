@@ -6,6 +6,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/AppBarTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/AutocompleteTemplates.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/BusyOverlayTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/GridListTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/FileSystemControlTemplates.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/FileSystemDialogTemplates.xaml" />

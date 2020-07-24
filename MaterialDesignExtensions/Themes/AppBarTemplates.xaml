@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
-                    xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
-                    xmlns:convertersLib="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+                    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
                     xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters">
 
@@ -35,7 +34,7 @@
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=OpaqueMode, RelativeSource={RelativeSource TemplatedParent}}" Value="Opaque">
                                         <Setter Property="Background" Value="{Binding Path=Background, RelativeSource={RelativeSource TemplatedParent}}" />
-                                        <Setter Property="Effect" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpfLib:ShadowAssist.ShadowDepth), Converter={x:Static convertersLib:ShadowConverter.Instance}}" />
+                                        <Setter Property="Effect" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(md:ShadowAssist.ShadowDepth), Converter={x:Static md:ShadowConverter.Instance}}" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=OpaqueMode, RelativeSource={RelativeSource TemplatedParent}}" Value="Transparent">
                                         <Setter Property="Background" Value="Transparent" />
@@ -109,7 +108,7 @@
                                         Foreground="{TemplateBinding Foreground}" Cursor="Hand"
                                         Margin="18,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
                                         Visibility="{TemplateBinding ShowBackButton, Converter={StaticResource boolToVisibilityConverter}}">
-                                    <wpfLib:PackIcon Kind="ArrowLeft" Height="24" Width="24" />
+                                    <md:PackIcon Kind="ArrowLeft" Height="24" Width="24" />
                                 </Button>
 
                                 <!-- title -->
@@ -176,7 +175,7 @@
         </Setter>
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=ShowShadow, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="wpfLib:ShadowAssist.ShadowDepth" Value="Depth2" />
+                <Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth2" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="Default">
                 <Setter Property="Height" Value="{x:Static controls:AppBar.DefaultHeight}" />

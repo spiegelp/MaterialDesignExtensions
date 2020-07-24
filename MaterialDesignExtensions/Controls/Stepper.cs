@@ -784,7 +784,7 @@ namespace MaterialDesignExtensions.Controls
                     ActiveStep = Controller.ActiveStep;
 
                     // raise the event and call the command
-                    ActiveStepChangedEventArgs eventArgs = new ActiveStepChangedEventArgs(StepValidationEvent, this, ActiveStep);
+                    ActiveStepChangedEventArgs eventArgs = new ActiveStepChangedEventArgs(ActiveStepChangedEvent, this, ActiveStep);
                     RaiseEvent(eventArgs);
 
                     if (ActiveStepChangedCommand != null && ActiveStepChangedCommand.CanExecute(ActiveStep))

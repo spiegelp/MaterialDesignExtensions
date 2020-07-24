@@ -9,7 +9,7 @@ using System.Windows;
 namespace MaterialDesignExtensions.Model
 {
     /// <summary>
-    /// Represents a step inside a <see cref="Stepper"/>.
+    /// Represents a step inside a <see cref="Controls.Stepper"/>.
     /// </summary>
     public interface IStep : INotifyPropertyChanged
     {

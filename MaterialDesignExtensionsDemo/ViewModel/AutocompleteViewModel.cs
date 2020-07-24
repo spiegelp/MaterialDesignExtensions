@@ -86,12 +86,12 @@ namespace MaterialDesignExtensionsDemo.ViewModel
                 new OperatingSystemItem() { Icon = PackIconKind.Ubuntu, Name = "Ubuntu Xenial Xerus" },
                 new OperatingSystemItem() { Icon = PackIconKind.Ubuntu, Name = "Ubuntu Yakkety Yak" },
                 new OperatingSystemItem() { Icon = PackIconKind.Ubuntu, Name = "Ubuntu Zesty Zapus" },
-                new OperatingSystemItem() { Icon = PackIconKind.Windows, Name = "Windows 7" },
-                new OperatingSystemItem() { Icon = PackIconKind.Windows, Name = "Windows 8" },
-                new OperatingSystemItem() { Icon = PackIconKind.Windows, Name = "Windows 8.1" },
-                new OperatingSystemItem() { Icon = PackIconKind.Windows, Name = "Windows 10" },
-                new OperatingSystemItem() { Icon = PackIconKind.Windows, Name = "Windows Vista" },
-                new OperatingSystemItem() { Icon = PackIconKind.Windows, Name = "Windows XP" }
+                new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 7" },
+                new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 8" },
+                new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 8.1" },
+                new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 10" },
+                new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows Vista" },
+                new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows XP" }
             };
         }
 

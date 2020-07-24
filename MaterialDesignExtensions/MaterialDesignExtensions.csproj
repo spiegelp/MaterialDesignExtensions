@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   
   <PropertyGroup>
-    <TargetFrameworks>net45;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net45;netcoreapp3.1</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <AssemblyTitle>Material Design Extensions</AssemblyTitle>
     <Summary>Material Design Extensions is based on Material Design in XAML Toolkit to provide additional controls and features for WPF apps. The controls might not be specified in the Material Design specification or would crash the scope of Material Design in XAML Toolkit.</Summary>
@@ -13,26 +13,26 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
     <Company>Philipp Spiegel</Company>
     <Product>Material Design Extensions</Product>
     <Copyright>Copyright © 2017-2020</Copyright>
-    <AssemblyVersion>3.1.0.0</AssemblyVersion>
-    <FileVersion>3.1.0.0</FileVersion>
-    <Version>3.1.0-a01</Version>
+    <AssemblyVersion>3.2.0.0</AssemblyVersion>
+    <FileVersion>3.2.0.0</FileVersion>
+    <Version>3.2.0</Version>
     <PackageProjectUrl>https://spiegelp.github.io/MaterialDesignExtensions/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/spiegelp/MaterialDesignExtensions</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window</PackageTags>
+    <PackageTags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window NavigationRail</PackageTags>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\MaterialDesignExtensions.xml</DocumentationFile>
   </PropertyGroup>
   
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.0|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\MaterialDesignExtensions.xml</DocumentationFile>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="MaterialDesignColors" Version="1.2.2" />
-    <PackageReference Include="MaterialDesignThemes" Version="3.0.1" />
+    <PackageReference Include="MaterialDesignColors" Version="1.2.6" />
+    <PackageReference Include="MaterialDesignThemes" Version="3.1.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,6 +56,26 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
       <AutoGen>True</AutoGen>
       <DependentUpon>Strings.uz-Latn-UZ.resx</DependentUpon>
     </Compile>
+    <Compile Update="Localization\Strings.cs-cz.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.cs-cz.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\Strings.pt-BR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.pt-BR.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\Strings.fr-FR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\Strings.ar-DZ.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.ar-DZ.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -74,6 +94,14 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
     <EmbeddedResource Update="Localization\Strings.uz-Latn-UZ.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.uz-Latn-UZ.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.cs-cz.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.cs-cz.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.pt-BR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.pt-BR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   

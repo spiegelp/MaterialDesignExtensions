@@ -1,17 +1,64 @@
 ﻿<div>
     <h1>Release notes</h1>
-    <h2>v3.1.0 (upcoming release)</h2>
+    <h2>v3.3.0 (upcoming release)</h2>
     <h3>Features</h3>
     <ul>
+        <li>Added <code>XmlnsDefinition</code> <code>https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml</code></li>
+        <li>Consider <code>ResizeMode</code> for the window caption buttons</li>
+        <li><code>ResizeGrip</code> in <code>MaterialWindow</code></li>
+    </ul>
+    <h3>Fixes</h3>
+    <ul>
+        <li>Fixed reflection code in <code>ResourceDictionaryExtensions</code></li>
+    </ul>
+    <h2>v3.2.0</h2>
+    <h3>Features</h3>
+    <ul>
+        <li>New control <code>BusyOverlay</code></li>
+        <li>New <code>TextBoxFileSystemPath.TextBoxStyle</code> property to enable custom styles for the embedded <code>TextBox</code></li>
+        <li>
+            New localizations
+            <ul>
+                <li>Arabic</li>
+                <li>Czech</li>
+                <li>French</li>
+                <li>Portuguese</li>
+            </ul>
+        </li>
+        <li>Save file in <code>SaveFileControl</code> and <code>SaveFileDialog</code> by hitting enter</li>
+        <li>New <code>ClearSelection</code> method for <code>Autocomplete</code></li>
+        <li><code>TabControl</code> style supports <code>FlowDirection = RightToLeft</code></li>
+    </ul>
+    <h3>Fixes</h3>
+    <ul>
+        <li>Fixed exception in <code>Stepper</code> events</li>
+    </ul>
+    <h2>v3.1.0</h2>
+    <h3>Features</h3>
+    <ul>
+        <li>Update to .NET Core 3.1</li>
         <li>Controls for simple alert and confirmation dialogs</li>
         <li>New <code>TextBoxSuggestions.KeepFocusOnSelection</code> property to control the focus after selecting a suggestion</li>
         <li>
             New controls combining a <code>TextBox</code> and a <code>FileSystemDialog</code>
             <ul>
                 <li><code>TextBoxOpenDirectory</code></li>
+                <li><code>TextBoxOpenFile</code></li>
+                <li><code>TextBoxSaveFile</code></li>
             </ul>
         </li>
-        <li>New <code>MaterialWindow.TitleTemplate</code> property to customize the window title bar</li>
+        <li>
+            Improvements for <code>MaterialWindow</code>
+            <ul>
+                <li>New <code>MaterialWindow.TitleTemplate</code> property to customize the window title bar</li>
+                <li>Different looks according to <code>Window.WindowStyle</code> property</li>
+            </ul>
+        </li>
+        <li>New control <code>NavigationRail</code></li>
+    </ul>
+    <h3>Fixes</h3>
+    <ul>
+        <li>Catch exception if network drive is not accessible</li>
     </ul>
     <h2>v3.0.0</h2>
     <h3>Features</h3>

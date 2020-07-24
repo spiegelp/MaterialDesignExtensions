@@ -178,6 +178,13 @@ namespace MaterialDesignExtensions.Controls
         /// Creates a new <see cref="SaveFileDialogArguments" />.
         /// </summary>
         public SaveFileDialogArguments() : base() { }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="args"></param>
+        public SaveFileDialogArguments(SaveFileDialogArguments args)
+            : base(args) { }
     }
 
     /// <summary>

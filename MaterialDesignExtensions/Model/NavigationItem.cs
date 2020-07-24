@@ -15,7 +15,7 @@ namespace MaterialDesignExtensions.Model
         private string m_label;
 
         /// <summary>
-        /// The label of this navigation item.
+        /// The icon of this navigation item.
         /// </summary>
         public object Icon
         {

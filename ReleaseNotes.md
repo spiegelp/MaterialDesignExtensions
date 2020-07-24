@@ -146,10 +146,39 @@ Please change your configuration according to [App.xaml](https://github.com/spie
   * `SaveFileDialog.ShowDialogAsync` methods
 * Extendend `IStepper` interface to implement new features for steppers
 * Extendend `IStep` interface to implement new features for steppers
-### v3.1.0 (upcoming release)
+### v3.1.0
 #### Features
+* Update to .NET Core 3.1
 * Controls for simple alert and confirmation dialogs
 * New `TextBoxSuggestions.KeepFocusOnSelection` property to control the focus after selecting a suggestion
 * New controls combining a `TextBox` and a `FileSystemDialog`
   * `TextBoxOpenDirectory`
-* New `MaterialWindow.TitleTemplate` property to customize the window title bar
+  * `TextBoxOpenFile`
+  * `TextBoxSaveFile`
+* Improvements for `MaterialWindow`
+  * New `MaterialWindow.TitleTemplate` property to customize the window title bar
+  * Different looks according to `Window.WindowStyle` property
+* New control `NavigationRail`
+#### Fixes
+* Catch exception if network drive is not accessible
+### v3.2.0
+#### Features
+* New control `BusyOverlay`
+* New `TextBoxFileSystemPath.TextBoxStyle` property to enable custom styles for the embedded `TextBox`
+* New localizations
+  * Arabic
+  * Czech
+  * French
+  * Portuguese
+* Save file in `SaveFileControl` and `SaveFileDialog` by hitting enter
+* New `ClearSelection` method for `Autocomplete`
+* `TabControl` style supports `FlowDirection = RightToLeft`
+#### Fixes
+* Fixed exception in `Stepper` events
+### v3.3.0 (upcoming release)
+#### Features
+* Added `XmlnsDefinition` `https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml`
+* Consider `ResizeMode` for the window caption buttons
+* `ResizeGrip` in `MaterialWindow`
+### Fixes
+* Fixed reflection code in `ResourceDictionaryExtensions`
