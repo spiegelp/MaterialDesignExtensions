@@ -115,7 +115,7 @@
                     <Button Style="{StaticResource WindowButtonStyle}" Click="GoToDocumentation">
                         <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="HelpCircle" />
                     </Button>
-                    <Border Width="1" VerticalAlignment="Stretch" SnapsToDevicePixels="True" Margin="0,4,8,4"
+                    <Border Width="1" VerticalAlignment="Stretch" SnapsToDevicePixels="True" Margin="8,4,8,4"
                             Background="{Binding Path=BorderForegroundBrush, RelativeSource={RelativeSource AncestorType={x:Type mde:MaterialWindow}}}" />
                 </StackPanel>
             </Grid>
