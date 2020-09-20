@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="700">
+             d:DesignHeight="500" d:DesignWidth="700" Background="{DynamicResource MaterialDesignBackground}">
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="8,16">
             <Button Content="SHOW ALERT DIALOG" HorizontalAlignment="Center" Click="ShowAlertDialogButtonClickHandler" />

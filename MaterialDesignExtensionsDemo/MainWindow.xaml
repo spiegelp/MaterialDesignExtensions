@@ -153,7 +153,8 @@
                         <mde:SideNavigation x:Name="sideNav" Items="{Binding Path=NavigationItems, Mode=OneTime}"
                                             NavigationItemSelected="NavigationItemSelectedHandler" />
                     </Border>
-                    <ContentControl x:Name="contentControl" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></ContentControl>
+                    <!--<ContentControl x:Name="contentControl" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></ContentControl>-->
+                    <mde:TransitionContentControl x:Name="contentControl" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </Grid>
             </md:DrawerHost>
         </md:DialogHost>

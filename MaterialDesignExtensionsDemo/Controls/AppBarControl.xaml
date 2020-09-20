@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
              xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
+             d:DesignHeight="300" d:DesignWidth="500" Background="{DynamicResource MaterialDesignBackground}">
     <UserControl.Resources>
         <Viewbox x:Key="materialDesignExtensionsIcon" Stretch="Uniform" x:Shared="False">
             <Canvas Width="135.46666" Height="135.46667">

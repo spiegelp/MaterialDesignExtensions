@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
              xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="Transparent">
+             d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource MaterialDesignBackground}">
     <Grid>
         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="16" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Top">

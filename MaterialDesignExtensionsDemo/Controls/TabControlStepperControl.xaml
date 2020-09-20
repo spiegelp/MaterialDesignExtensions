@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
              xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
+             d:DesignHeight="300" d:DesignWidth="500" Background="{DynamicResource MaterialDesignBackground}">
     <Grid>
         <Grid Margin="16">
             <Grid.RowDefinitions>

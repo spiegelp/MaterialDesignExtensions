@@ -7,7 +7,7 @@
              xmlns:viewModel="clr-namespace:MaterialDesignExtensionsDemo.ViewModel"
              xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
+             d:DesignHeight="300" d:DesignWidth="500" Background="{DynamicResource MaterialDesignBackground}">
     <UserControl.Resources>
         <!-- hide the seperator of the horizontal Stepper by setting the resource to "Transparent" -->
         <!--<SolidColorBrush x:Key="MaterialDesignStepperSeparator" Color="Transparent" />-->

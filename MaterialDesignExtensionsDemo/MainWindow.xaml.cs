@@ -86,12 +86,17 @@ namespace MaterialDesignExtensionsDemo
 
             InitializeComponent();
 
+            sideNav.DataContext = this;
+            navigationDrawerNav.DataContext = this;
+
+            Loaded += LoadedHandler;
+        }
+
+        private void LoadedHandler(object sender, RoutedEventArgs args)
+        {
             navigationDrawerNav.SelectedItem = m_navigationItems[1];
             sideNav.SelectedItem = m_navigationItems[1];
             m_navigationItems[1].IsSelected = true;
-
-            sideNav.DataContext = this;
-            navigationDrawerNav.DataContext = this;
         }
 
         private void NavigationItemSelectedHandler(object sender, NavigationItemSelectedEventArgs args)
@@ -103,7 +108,12 @@ namespace MaterialDesignExtensionsDemo
         {
             if (navigationItem != null)
             {
-                contentControl.Content = navigationItem.NavigationItemSelectedCallback(navigationItem);
+                object newContent = navigationItem.NavigationItemSelectedCallback(navigationItem);
+
+                if (contentControl.Content == null || contentControl.Content.GetType() != newContent.GetType())
+                {
+                    contentControl.Content = newContent;
+                }
             }
             else
             {

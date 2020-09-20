@@ -7,7 +7,7 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="Transparent">
+             d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource MaterialDesignBackground}">
     <Grid>
         <TabControl Style="{StaticResource MaterialDesignTabControl}">
             <TabItem Header="ANIMALS">

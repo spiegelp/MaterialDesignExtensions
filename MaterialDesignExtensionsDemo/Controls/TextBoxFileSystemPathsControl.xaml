@@ -8,7 +8,7 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="700">
+             d:DesignHeight="450" d:DesignWidth="700" Background="{DynamicResource MaterialDesignBackground}">
     <Grid>
         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="16"
                       HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
