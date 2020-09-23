@@ -32,11 +32,7 @@ namespace MaterialDesignExtensions.Controls
         /// <returns></returns>
         public static async Task ShowDialogAsync(string dialogHostName, AlertDialogArguments args)
         {
-            AlertDialog dialog = InitDialog(
-                args.Title,
-                args.Message,
-                args.OkButtonLabel
-            );
+            AlertDialog dialog = InitDialog(args);
 
             await DialogHost.Show(dialog, dialogHostName, args.OpenedHandler, args.ClosingHandler);
         }
@@ -49,26 +45,24 @@ namespace MaterialDesignExtensions.Controls
         /// <returns></returns>
         public static async Task ShowDialogAsync(DialogHost dialogHost, AlertDialogArguments args)
         {
-            AlertDialog dialog = InitDialog(
-                args.Title,
-                args.Message,
-                args.OkButtonLabel
-            );
+            AlertDialog dialog = InitDialog(args);
 
             await dialogHost.ShowDialog(dialog, args.OpenedHandler, args.ClosingHandler);
         }
 
-        private static AlertDialog InitDialog(string title, string message, string okButtonLabel)
+        private static AlertDialog InitDialog(AlertDialogArguments args)
         {
             AlertDialog dialog = new AlertDialog
             {
-                Title = title,
-                Message = message
+                Title = args.Title,
+                Message = args.Message,
+                CustomContent = args.CustomContent,
+                CustomContentTemplate = args.CustomContentTemplate
             };
 
-            if (!string.IsNullOrWhiteSpace(okButtonLabel))
+            if (!string.IsNullOrWhiteSpace(args.OkButtonLabel))
             {
-                dialog.OkButtonLabel = okButtonLabel;
+                dialog.OkButtonLabel = args.OkButtonLabel;
             }
 
             return dialog;

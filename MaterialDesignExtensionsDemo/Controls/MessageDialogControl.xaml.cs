@@ -12,7 +12,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading.Tasks;
 
+using MaterialDesignThemes;
+
 using MaterialDesignExtensions.Controls;
+using MaterialDesignThemes.Wpf;
 
 namespace MaterialDesignExtensionsDemo.Controls
 {
@@ -59,6 +62,32 @@ namespace MaterialDesignExtensionsDemo.Controls
             bool result = await ConfirmationDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
 
             System.Diagnostics.Debug.WriteLine($"{typeof(ConfirmationDialog)} result: {result}");
+        }
+
+        private async void ShowAlertDialogWithContentButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            AlertDialogArguments dialogArgs = new AlertDialogArguments
+            {
+                Title = "Sports",
+                Message = "Some great sports:",
+                OkButtonLabel = "OK",
+                CustomContent = FindResource("SportsStackPanel")
+            };
+
+            await AlertDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
+        }
+
+        private async void ShowConfirmationDialogWithContentButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            ConfirmationDialogArguments dialogArgs = new ConfirmationDialogArguments
+            {
+                Title = "Sports",
+                Message = "Which sports do you enjoy?",
+                OkButtonLabel = "OK",
+                CustomContent = FindResource("SimpleTextBox")
+            };
+
+            await ConfirmationDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
         }
     }
 }

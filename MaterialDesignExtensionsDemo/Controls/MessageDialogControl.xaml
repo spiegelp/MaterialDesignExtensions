@@ -3,14 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700" Background="{DynamicResource MaterialDesignBackground}">
+    <UserControl.Resources>
+        <DataTemplate x:Key="PackIconKindTemplate" DataType="{x:Type md:PackIconKind}">
+            <md:PackIcon Kind="{Binding}" Width="32" Height="32" Margin="24,16,24,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </DataTemplate>
+        <StackPanel x:Key="SportsStackPanel" Orientation="Horizontal" Margin="0,8,0,0" HorizontalAlignment="Center">
+            <StackPanel Orientation="Vertical" Margin="8,0">
+                <md:PackIcon Kind="Volleyball" Width="32" Height="32" HorizontalAlignment="Center" />
+                <TextBlock Text="Volleyball" Margin="0,8,0,0" HorizontalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="8,0">
+                <md:PackIcon Kind="Soccer" Width="32" Height="32" HorizontalAlignment="Center" />
+                <TextBlock Text="Football" Margin="0,8,0,0" HorizontalAlignment="Center" />
+            </StackPanel>
+        </StackPanel>
+        <TextBox x:Key="SimpleTextBox" HorizontalAlignment="Stretch" Margin="0,8,0,0" />
+    </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="8,16">
             <Button Content="SHOW ALERT DIALOG" HorizontalAlignment="Center" Click="ShowAlertDialogButtonClickHandler" />
             <Button Content="SHOW CONFIRMATION DIALOG" Margin="0,16,0,0" HorizontalAlignment="Center" Click="ShowConfirmationDialogButtonClickHandler" />
             <Button Content="SHOW CONFIRMATION DIALOG STACKED" Margin="0,16,0,0" HorizontalAlignment="Center" Click="ShowConfirmationDialogStackedButtonClickHandler" />
+
+            <Button Content="SHOW ALERT DIALOG WITH CONTENT" Margin="0,64,0,0" HorizontalAlignment="Center" Click="ShowAlertDialogWithContentButtonClickHandler" />
+            <Button Content="SHOW CONFIRMATION DIALOG WITH CONTENT" Margin="0,16,0,0" HorizontalAlignment="Center" Click="ShowConfirmationDialogWithContentButtonClickHandler" />
         </StackPanel>
     </Grid>
 </UserControl>

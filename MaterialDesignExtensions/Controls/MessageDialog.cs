@@ -19,6 +19,50 @@ namespace MaterialDesignExtensions.Controls
         private static readonly string OkButtonName = "okButton";
 
         /// <summary>
+        /// An optional custom content to show in the dialog.
+        /// </summary>
+        public static readonly DependencyProperty CustomContentProperty = DependencyProperty.Register(
+            nameof(CustomContent), typeof(object), typeof(MessageDialog));
+
+        /// <summary>
+        /// An optional custom content to show in the dialog.
+        /// </summary>
+        public object CustomContent
+        {
+            get
+            {
+                return GetValue(CustomContentProperty);
+            }
+
+            set
+            {
+                SetValue(CustomContentProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// An optional <see cref="DataTemplate" /> for <see cref="CustomContentTemplate" />.
+        /// </summary>
+        public static readonly DependencyProperty CustomContentTemplateProperty = DependencyProperty.Register(
+            nameof(CustomContentTemplate), typeof(DataTemplate), typeof(MessageDialog));
+
+        /// <summary>
+        /// An optional <see cref="DataTemplate" /> for <see cref="CustomContentTemplate" />.
+        /// </summary>
+        public DataTemplate CustomContentTemplate
+        {
+            get
+            {
+                return (DataTemplate)GetValue(CustomContentTemplateProperty);
+            }
+
+            set
+            {
+                SetValue(CustomContentTemplateProperty, value);
+            }
+        }
+
+        /// <summary>
         /// The message to display inside the dialog.
         /// </summary>
         public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(
@@ -41,13 +85,13 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// The label of the OC button.
+        /// The label of the OK button.
         /// </summary>
         public static readonly DependencyProperty OkButtonLabelProperty = DependencyProperty.Register(
             nameof(OkButtonLabel), typeof(string), typeof(MessageDialog));
 
         /// <summary>
-        /// The label of the OC button.
+        /// The label of the OK button.
         /// </summary>
         public string OkButtonLabel
         {
@@ -148,6 +192,16 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public class MessageDialogArguments
     {
+        /// <summary>
+        /// An optional custom content to show in the dialog.
+        /// </summary>
+        public object CustomContent { get; set; }
+
+        /// <summary>
+        /// An optional <see cref="DataTemplate" /> for <see cref="CustomContentTemplate" />.
+        /// </summary>
+        public DataTemplate CustomContentTemplate { get; set; }
+
         /// <summary>
         /// The message to display inside the dialog.
         /// </summary>

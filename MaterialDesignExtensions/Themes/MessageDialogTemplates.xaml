@@ -41,6 +41,9 @@
                             <TextBlock Text="{TemplateBinding Message}" FontSize="16" Foreground="{DynamicResource MaterialDesignBodyLight}"
                                        Margin="24,0,24,0"
                                        Visibility="{Binding Path=Message, Converter={StaticResource notNullToVisibileConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <ContentControl Content="{TemplateBinding CustomContent}" ContentTemplate="{TemplateBinding CustomContentTemplate}"
+                                            Visibility="{Binding Path=CustomContent, Converter={StaticResource notNullToVisibileConverter}, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Margin="24,0,24,0" HorizontalAlignment="Stretch" />
                             <Button x:Name="okButton" Style="{StaticResource MaterialDesignFlatButton}" Content="{TemplateBinding OkButtonLabel}" Margin="8,36,8,8" HorizontalAlignment="Right" />
                         </StackPanel>
                     </Border>
@@ -77,6 +80,9 @@
                             <TextBlock Text="{TemplateBinding Message}" FontSize="16" Foreground="{DynamicResource MaterialDesignBodyLight}"
                                        Margin="24,0,24,0"
                                        Visibility="{Binding Path=Message, Converter={StaticResource notNullToVisibileConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <ContentControl Content="{TemplateBinding CustomContent}" ContentTemplate="{TemplateBinding CustomContentTemplate}"
+                                            Visibility="{Binding Path=CustomContent, Converter={StaticResource notNullToVisibileConverter}, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Margin="24,0,24,0" HorizontalAlignment="Stretch" />
                             <Grid HorizontalAlignment="Right">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />

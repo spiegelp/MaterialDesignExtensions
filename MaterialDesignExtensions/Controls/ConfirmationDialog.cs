@@ -121,13 +121,7 @@ namespace MaterialDesignExtensions.Controls
         /// <returns></returns>
         public static async Task<bool> ShowDialogAsync(string dialogHostName, ConfirmationDialogArguments args)
         {
-            ConfirmationDialog dialog = InitDialog(
-                args.Title,
-                args.Message,
-                args.OkButtonLabel,
-                args.CancelButtonLabel,
-                args.StackedButtons
-            );
+            ConfirmationDialog dialog = InitDialog(args);
 
             object result = await DialogHost.Show(dialog, dialogHostName, args.OpenedHandler, args.ClosingHandler);
 
@@ -142,36 +136,32 @@ namespace MaterialDesignExtensions.Controls
         /// <returns></returns>
         public static async Task<bool> ShowDialogAsync(DialogHost dialogHost, ConfirmationDialogArguments args)
         {
-            ConfirmationDialog dialog = InitDialog(
-                args.Title,
-                args.Message,
-                args.OkButtonLabel,
-                args.CancelButtonLabel,
-                args.StackedButtons
-            );
+            ConfirmationDialog dialog = InitDialog(args);
 
             object result = await dialogHost.ShowDialog(dialog, args.OpenedHandler, args.ClosingHandler);
 
             return (bool)result;
         }
 
-        private static ConfirmationDialog InitDialog(string title, string message, string okButtonLabel, string cancelButtonLabel, bool stackedButtons)
+        private static ConfirmationDialog InitDialog(ConfirmationDialogArguments args)
         {
             ConfirmationDialog dialog = new ConfirmationDialog
             {
-                Title = title,
-                Message = message,
-                StackedButtons = stackedButtons
+                Title = args.Title,
+                Message = args.Message,
+                StackedButtons = args.StackedButtons,
+                CustomContent = args.CustomContent,
+                CustomContentTemplate = args.CustomContentTemplate
             };
 
-            if (!string.IsNullOrWhiteSpace(okButtonLabel))
+            if (!string.IsNullOrWhiteSpace(args.OkButtonLabel))
             {
-                dialog.OkButtonLabel = okButtonLabel;
+                dialog.OkButtonLabel = args.OkButtonLabel;
             }
 
-            if (!string.IsNullOrWhiteSpace(cancelButtonLabel))
+            if (!string.IsNullOrWhiteSpace(args.CancelButtonLabel))
             {
-                dialog.CancelButtonLabel = cancelButtonLabel;
+                dialog.CancelButtonLabel = args.CancelButtonLabel;
             }
 
             return dialog;

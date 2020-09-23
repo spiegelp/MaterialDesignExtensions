@@ -181,5 +181,6 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Consider `ResizeMode` for the window caption buttons
 * `ResizeGrip` in `MaterialWindow`
 * New control `TransitionContentControl`
+* Optional custom content for dialogs
 ### Fixes
 * Fixed reflection code in `ResourceDictionaryExtensions`
