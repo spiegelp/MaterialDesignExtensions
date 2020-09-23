@@ -124,7 +124,7 @@
     <value>Zrušit</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Zavřit</value>
+    <value>Zavřít</value>
   </data>
   <data name="Created" xml:space="preserve">
     <value>Vytvořeno</value>
@@ -166,7 +166,7 @@
     <value>Hudba</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Otevřit</value>
+    <value>Otevřít</value>
   </data>
   <data name="OpenFile" xml:space="preserve">
     <value>Otevřít soubor</value>
