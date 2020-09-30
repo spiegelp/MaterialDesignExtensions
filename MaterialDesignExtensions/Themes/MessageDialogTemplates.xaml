@@ -135,5 +135,89 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="controls:InputDialog" BasedOn="{StaticResource dialogBaseStyle}">
+        <Setter Property="CancelButtonLabel" Value="{Binding Source={x:Static localization:Strings.Cancel}, Converter={StaticResource upperCaseConverter}}" />
+        <Setter Property="StackedButtons" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:InputDialog">
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="0,24,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                            MinWidth="{TemplateBinding MinWidth}" MaxWidth="{TemplateBinding MaxWidth}">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <TextBlock Text="{TemplateBinding Title}" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource MaterialDesignBody}"
+                                       Visibility="{Binding Path=Title, Converter={StaticResource notNullToVisibileConverter}, RelativeSource={RelativeSource TemplatedParent}}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Message, Converter={StaticResource notNullBooleanConverter}, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                                <Setter Property="Margin" Value="24,0,24,0" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Message, Converter={StaticResource notNullBooleanConverter}, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                <Setter Property="Margin" Value="24,0,24,12" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Text="{TemplateBinding Message}" FontSize="16" Foreground="{DynamicResource MaterialDesignBodyLight}"
+                                       Margin="24,0,24,0"
+                                       Visibility="{Binding Path=Message, Converter={StaticResource notNullToVisibileConverter}, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <ContentControl Content="{TemplateBinding CustomContent}" ContentTemplate="{TemplateBinding CustomContentTemplate}"
+                                            Visibility="{Binding Path=CustomContent, Converter={StaticResource notNullToVisibileConverter}, RelativeSource={RelativeSource TemplatedParent}}"
+                                            Margin="24,0,24,0" HorizontalAlignment="Stretch" />
+                            <Grid HorizontalAlignment="Right">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button x:Name="cancelButton" Content="{TemplateBinding CancelButtonLabel}">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=StackedButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                                    <Setter Property="Grid.Column" Value="0" />
+                                                    <Setter Property="Grid.Row" Value="0" />
+                                                    <Setter Property="Margin" Value="8,36,8,8" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=StackedButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                    <Setter Property="Grid.Column" Value="1" />
+                                                    <Setter Property="Grid.Row" Value="1" />
+                                                    <Setter Property="Margin" Value="8,4,8,8" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                <Button x:Name="okButton" Content="{TemplateBinding OkButtonLabel}">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=StackedButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                                    <Setter Property="Grid.Column" Value="1" />
+                                                    <Setter Property="Grid.Row" Value="0" />
+                                                    <Setter Property="Margin" Value="0,36,8,8" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=StackedButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                    <Setter Property="Grid.Column" Value="1" />
+                                                    <Setter Property="Grid.Row" Value="0" />
+                                                    <Setter Property="Margin" Value="8,36,8,8" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     
 </ResourceDictionary>

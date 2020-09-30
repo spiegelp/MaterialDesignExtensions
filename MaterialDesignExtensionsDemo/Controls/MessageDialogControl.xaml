@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
+             xmlns:viewModel="clr-namespace:MaterialDesignExtensionsDemo.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700" Background="{DynamicResource MaterialDesignBackground}">
     <UserControl.Resources>
@@ -22,6 +23,42 @@
             </StackPanel>
         </StackPanel>
         <TextBox x:Key="SimpleTextBox" HorizontalAlignment="Stretch" Margin="0,8,0,0" />
+        <DataTemplate x:Key="SportsSelectionViewModelTemplate" DataType="{x:Type viewModel:SportsSelectionViewModel}">
+            <StackPanel Margin="16,8,16,0" Orientation="Vertical">
+                <TextBlock Text="Please select a least one item!" Foreground="Red" HorizontalAlignment="Center" Margin="0,0,0,8">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsValid}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=IsValid}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <ItemsControl ItemsSource="{Binding Path=SportsItems, Mode=OneTime}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel IsItemsHost="True" Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Height="48">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                    <CheckBox IsChecked="{Binding Path=IsSelected, Mode=TwoWay}" HorizontalAlignment="Center" />
+                                    <md:PackIcon Kind="{Binding Path=Icon, Mode=OneTime}" Width="24" Height="24" Margin="16,0" HorizontalAlignment="Center" />
+                                    <TextBlock Text="{Binding Path=Label, Mode=OneTime}" FontSize="14" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="8,16">
@@ -31,6 +68,9 @@
 
             <Button Content="SHOW ALERT DIALOG WITH CONTENT" Margin="0,64,0,0" HorizontalAlignment="Center" Click="ShowAlertDialogWithContentButtonClickHandler" />
             <Button Content="SHOW CONFIRMATION DIALOG WITH CONTENT" Margin="0,16,0,0" HorizontalAlignment="Center" Click="ShowConfirmationDialogWithContentButtonClickHandler" />
+
+            <Button Content="SHOW INPUT DIALOG" Margin="0,64,0,0" HorizontalAlignment="Center" Click="ShowInputDialogButtonClickHandler" />
+            <TextBlock x:Name="m_sportsSelectionTextBlock" Margin="0,8,0,0" HorizontalAlignment="Center" />
         </StackPanel>
     </Grid>
 </UserControl>

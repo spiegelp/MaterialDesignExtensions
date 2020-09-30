@@ -16,6 +16,8 @@ using MaterialDesignThemes;
 
 using MaterialDesignExtensions.Controls;
 using MaterialDesignThemes.Wpf;
+using MaterialDesignExtensionsDemo.ViewModel;
+using System.Linq;
 
 namespace MaterialDesignExtensionsDemo.Controls
 {
@@ -84,10 +86,45 @@ namespace MaterialDesignExtensionsDemo.Controls
                 Title = "Sports",
                 Message = "Which sports do you enjoy?",
                 OkButtonLabel = "OK",
+                CancelButtonLabel = "CANCEL",
                 CustomContent = FindResource("SimpleTextBox")
             };
 
             await ConfirmationDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
+        }
+
+        private async void ShowInputDialogButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            m_sportsSelectionTextBlock.Text = null;
+
+            SportsSelectionViewModel viewModel = new SportsSelectionViewModel();
+
+            InputDialogArguments dialogArgs = new InputDialogArguments
+            {
+                Title = "Sports",
+                Message = "Which sports do you enjoy?",
+                OkButtonLabel = "THAT'S IT",
+                CancelButtonLabel = "CANCEL",
+                CustomContent = viewModel,
+                CustomContentTemplate = FindResource("SportsSelectionViewModelTemplate") as DataTemplate,
+                ValidationHandler = viewModel.ValidationHandler
+            };
+
+            bool result = await InputDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
+
+            if (result)
+            {
+                List<string> sportsItems = viewModel.SportsItems
+                    .Where(sportsItem => sportsItem.IsSelected)
+                    .Select(sportsItem => sportsItem.Label)
+                    .ToList();
+
+                m_sportsSelectionTextBlock.Text = $"Selected sports: {string.Join(", ", sportsItems)}";
+            }
+            else
+            {
+                m_sportsSelectionTextBlock.Text = "Sports selection cancelled";
+            }
         }
     }
 }
