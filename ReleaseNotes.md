@@ -184,5 +184,6 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * New dialog features
   * Optional custom content for dialogs
   * Control for simple input dialogs
+* Strong named assembly
 ### Fixes
 * Fixed reflection code in `ResourceDictionaryExtensions`

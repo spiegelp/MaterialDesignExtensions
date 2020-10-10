@@ -20,6 +20,8 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
     <RepositoryUrl>https://github.com/spiegelp/MaterialDesignExtensions</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window NavigationRail</PackageTags>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
