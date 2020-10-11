@@ -21,11 +21,14 @@
             <TextBlock Text="Show system directories and files" VerticalAlignment="Center" Margin="4,0,0,0" />
             <CheckBox IsChecked="{Binding Path=CreateNewDirectoryEnabled, Mode=TwoWay}" VerticalAlignment="Center" Margin="16,0,0,0" />
             <TextBlock Text="Show create directory" VerticalAlignment="Center" Margin="4,0,0,0" />
+            <CheckBox IsChecked="{Binding Path=SwitchPathPartsAsButtonsEnabled, Mode=TwoWay}" VerticalAlignment="Center" Margin="16,0,0,0" />
+            <TextBlock Text="Switch path parts" VerticalAlignment="Center" Margin="4,0,0,0" />
         </StackPanel>
         <mde:SaveFileControl Grid.Row="2" Margin="16"
                              ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, Mode=TwoWay}"
                              ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, Mode=TwoWay}"
                              CreateNewDirectoryEnabled="{Binding Path=CreateNewDirectoryEnabled, Mode=TwoWay}"
+                             SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, Mode=TwoWay}"
                              Filters="All files|*.*|C# files|*.cs|XAML files|*.xaml"
                              FileSelected="SaveFileControl_FileSelected" Cancel="SaveFileControl_Cancel" />
     </Grid>

@@ -15,7 +15,9 @@
                                                    CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                    CreateNewDirectoryEnabled="{Binding Path=CreateNewDirectoryEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                    ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                   ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                                   ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   PathPartsAsButtons="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -36,7 +38,9 @@
                                               Filters="{Binding Path=Filters, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               FilterIndex="{Binding Path=FilterIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                              ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                              ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              PathPartsAsButtons="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -59,6 +63,8 @@
                                               CreateNewDirectoryEnabled="{Binding Path=CreateNewDirectoryEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              PathPartsAsButtons="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               ForceFileExtensionOfFileFilter="{Binding Path=ForceFileExtensionOfFileFilter, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 </ControlTemplate>
             </Setter.Value>
@@ -77,7 +83,9 @@
                                                              CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                              CreateNewDirectoryEnabled="{Binding Path=CreateNewDirectoryEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                              ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                             ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                                             ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             PathPartsAsButtons="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -96,7 +104,9 @@
                                                        Filters="{Binding Path=Filters, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        FilterIndex="{Binding Path=FilterIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                        ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                       ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                                       ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                       SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                       PathPartsAsButtons="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

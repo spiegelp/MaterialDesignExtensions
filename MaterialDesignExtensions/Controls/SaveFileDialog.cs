@@ -111,6 +111,8 @@ namespace MaterialDesignExtensions.Controls
                 args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
                 args.ShowSystemFilesAndDirectories,
+                args.SwitchPathPartsAsButtonsEnabled,
+                args.PathPartsAsButtons,
                 args.ForceFileExtensionOfFileFilter
             );
 
@@ -135,6 +137,8 @@ namespace MaterialDesignExtensions.Controls
                 args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
                 args.ShowSystemFilesAndDirectories,
+                args.SwitchPathPartsAsButtonsEnabled,
+                args.PathPartsAsButtons,
                 args.ForceFileExtensionOfFileFilter
             );
 
@@ -146,10 +150,11 @@ namespace MaterialDesignExtensions.Controls
             string filters, int filterIndex,
             bool createNewDirectoryEnabled,
             bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories,
+            bool switchPathPartsAsButtonsEnabled, bool pathPartsAsButtons,
             bool forceFileExtensionOfFileFilter)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, createNewDirectoryEnabled);
+            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, createNewDirectoryEnabled, switchPathPartsAsButtonsEnabled, pathPartsAsButtons);
             dialog.Filename = filename;
             dialog.ForceFileExtensionOfFileFilter = forceFileExtensionOfFileFilter;
             dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<IFileFilter>;

@@ -84,5 +84,10 @@ namespace MaterialDesignExtensions.Commands.Internal
         /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
         /// </summary>
         public static readonly RoutedCommand ShowInfoCommand = new RoutedCommand();
+
+        /// <summary>
+        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// </summary>
+        public static readonly RoutedCommand SwitchPathPartsAsButtonsCommand = new RoutedCommand();
     }
 }

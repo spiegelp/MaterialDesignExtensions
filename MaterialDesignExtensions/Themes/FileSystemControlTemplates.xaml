@@ -29,6 +29,7 @@
     <converters:ObjectToTypeStringConverter x:Key="objectToTypeStringConverter" />
     <converters:ObjectHasTypeConverter x:Key="objectHasTypeConverter" />
     <converters:BoolToVisibilityConverter x:Key="trueToVisibleConverter" FalseValue="Collapsed" TrueValue="Visible" />
+    <converters:BoolToVisibilityConverter x:Key="falseToVisibleConverter" FalseValue="Visible" TrueValue="Collapsed" />
 
     <templateSelectors:FileSystemEntryInfoTemplateSelector x:Key="fileSystemEntryInfoTemplateSelector" />
     <templateSelectors:FileSystemEntryItemTemplateSelector x:Key="fileSystemEntryItemTemplateSelector" ForMultipleSelection="False" />
@@ -997,18 +998,39 @@
                                 </Grid.RowDefinitions>
                                 <DockPanel Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                                            Height="64">
-                                    <Button DockPanel.Dock="Right" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
-                                            Command="{x:Static internalCommands:FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand}">
-                                        <md:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                     Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                                    </Button>
+                                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                        <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
+                                                Visibility="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource trueToVisibleConverter}}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.SwitchPathPartsAsButtonsCommand}">
+                                            <md:PackIcon Kind="FormTextbox" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                                        </Button>
+                                        <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand}">
+                                            <md:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                                        </Button>
+                                    </StackPanel>
                                     <TextBlock FontSize="20" Margin="72,0,16,0"
                                                Text="{x:Static localization:Strings.SelectDirectory}" VerticalAlignment="Center" />
                                 </DockPanel>
-                                <Border Grid.Row="1" MinHeight="64" MaxHeight="128"
-                                        Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                                <Grid Grid.Row="1" Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                                    <Setter Property="Height" Value="64" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                    <Setter Property="MinHeight" Value="64" />
+                                                    <Setter Property="MaxHeight" Value="128" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
                                     <ScrollViewer x:Name="pathPartsScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                                                  Visibility="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource trueToVisibleConverter}}">
                                         <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -1017,7 +1039,12 @@
                                             </ItemsControl.ItemsPanel>
                                         </ItemsControl>
                                     </ScrollViewer>
-                                </Border>
+                                    <Border Background="{DynamicResource MaterialDesignBackground}"
+                                            Margin="16,0" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                            Visibility="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource falseToVisibleConverter}}">
+                                        <TextBox x:Name="currentDirectoryTextBox" Foreground="{DynamicResource MaterialDesignBody}" FontSize="14" Margin="8" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                                    </Border>
+                                </Grid>
                                 <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
                                               ItemTemplate="{StaticResource directoryInfoItemTemplate}" />
                                 <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Style="{StaticResource emptyHintTextBlockStyle}" Text="{x:Static localization:Strings.EmptyDirectory}" />
@@ -1072,18 +1099,40 @@
                                 </Grid.RowDefinitions>
                                 <DockPanel Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                                            Height="64">
-                                    <Button DockPanel.Dock="Right" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
-                                            Command="{x:Static internalCommands:FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand}">
-                                        <md:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                     Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                                    </Button>
+                                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                        <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
+                                                Visibility="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource trueToVisibleConverter}}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.SwitchPathPartsAsButtonsCommand}">
+                                            <md:PackIcon Kind="FormTextbox" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                                        </Button>
+                                        <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand}">
+                                            <md:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                                        </Button>
+                                    </StackPanel>
                                     <TextBlock FontSize="20" Margin="72,0,16,0"
                                                Text="{x:Static localization:Strings.OpenFile}" VerticalAlignment="Center" />
                                 </DockPanel>
-                                <Border Grid.Row="1" MinHeight="64" MaxHeight="128"
+                                <Grid Grid.Row="1" MinHeight="64" MaxHeight="128"
                                         Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                                    <Setter Property="Height" Value="64" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                    <Setter Property="MinHeight" Value="64" />
+                                                    <Setter Property="MaxHeight" Value="128" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
                                     <ScrollViewer x:Name="pathPartsScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                                                  Visibility="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource trueToVisibleConverter}}">
                                         <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -1092,7 +1141,12 @@
                                             </ItemsControl.ItemsPanel>
                                         </ItemsControl>
                                     </ScrollViewer>
-                                </Border>
+                                    <Border Background="{DynamicResource MaterialDesignBackground}"
+                                            Margin="16,0" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                            Visibility="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource falseToVisibleConverter}}">
+                                        <TextBox x:Name="currentDirectoryTextBox" Foreground="{DynamicResource MaterialDesignBody}" FontSize="14" Margin="8" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                                    </Border>
+                                </Grid>
                                 <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
                                               ItemTemplateSelector="{StaticResource fileSystemEntryItemTemplateSelector}" />
                                 <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Style="{StaticResource emptyHintTextBlockStyle}" Text="{x:Static localization:Strings.EmptyDirectory}" />
@@ -1165,18 +1219,40 @@
                                 </Grid.RowDefinitions>
                                 <DockPanel Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"
                                            Height="64">
-                                    <Button DockPanel.Dock="Right" Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
-                                            Command="{x:Static internalCommands:FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand}">
-                                        <md:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                     Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                                    </Button>
+                                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                        <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
+                                                Visibility="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource trueToVisibleConverter}}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.SwitchPathPartsAsButtonsCommand}">
+                                            <md:PackIcon Kind="FormTextbox" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                                        </Button>
+                                        <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand}">
+                                            <md:PackIcon Kind="DotsVertical" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                                        </Button>
+                                    </StackPanel>
                                     <TextBlock FontSize="20" Margin="72,0,16,0"
                                                Text="{x:Static localization:Strings.SaveFile}" VerticalAlignment="Center" />
                                 </DockPanel>
-                                <Border Grid.Row="1" MinHeight="64" MaxHeight="128"
+                                <Grid Grid.Row="1" MinHeight="64" MaxHeight="128"
                                         Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                                    <Setter Property="Height" Value="64" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                    <Setter Property="MinHeight" Value="64" />
+                                                    <Setter Property="MaxHeight" Value="128" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
                                     <ScrollViewer x:Name="pathPartsScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                                                  Visibility="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource trueToVisibleConverter}}">
                                         <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -1185,7 +1261,12 @@
                                             </ItemsControl.ItemsPanel>
                                         </ItemsControl>
                                     </ScrollViewer>
-                                </Border>
+                                    <Border Background="{DynamicResource MaterialDesignBackground}"
+                                            Margin="16,0" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                            Visibility="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource falseToVisibleConverter}}">
+                                        <TextBox x:Name="currentDirectoryTextBox" Foreground="{DynamicResource MaterialDesignBody}" FontSize="14" Margin="8" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                                    </Border>
+                                </Grid>
                                 <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
                                               ItemTemplateSelector="{StaticResource fileSystemEntryItemTemplateSelector}" />
                                 <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Style="{StaticResource emptyHintTextBlockStyle}" Text="{x:Static localization:Strings.EmptyDirectory}" />
@@ -1276,6 +1357,12 @@
                                            Height="64">
                                     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                                         <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
+                                                Visibility="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource trueToVisibleConverter}}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.SwitchPathPartsAsButtonsCommand}">
+                                            <md:PackIcon Kind="FormTextbox" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                                        </Button>
+                                        <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
                                                 ToolTip="{x:Static localization:Strings.Selection}"
                                                 Command="{x:Static internalCommands:FileSystemControlCommands.OpenSelectionDrawerCommand}">
                                             <md:PackIcon Kind="FormatListBulletedSquare" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -1290,10 +1377,24 @@
                                     <TextBlock FontSize="20" Margin="72,0,16,0"
                                                Text="{x:Static localization:Strings.SelectDirectory}" VerticalAlignment="Center" />
                                 </DockPanel>
-                                <Border Grid.Row="1" MinHeight="64" MaxHeight="128"
+                                <Grid Grid.Row="1" MinHeight="64" MaxHeight="128"
                                         Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                                    <Setter Property="Height" Value="64" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                    <Setter Property="MinHeight" Value="64" />
+                                                    <Setter Property="MaxHeight" Value="128" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
                                     <ScrollViewer x:Name="pathPartsScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                                                  Visibility="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource trueToVisibleConverter}}">
                                         <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -1302,7 +1403,12 @@
                                             </ItemsControl.ItemsPanel>
                                         </ItemsControl>
                                     </ScrollViewer>
-                                </Border>
+                                    <Border Background="{DynamicResource MaterialDesignBackground}"
+                                            Margin="16,0" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                            Visibility="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource falseToVisibleConverter}}">
+                                        <TextBox x:Name="currentDirectoryTextBox" Foreground="{DynamicResource MaterialDesignBody}" FontSize="14" Margin="8" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                                    </Border>
+                                </Grid>
                                 <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
                                               ItemTemplate="{StaticResource directoryInfoItemMultipleTemplate}" />
                                 <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Style="{StaticResource emptyHintTextBlockStyle}" Text="{x:Static localization:Strings.EmptyDirectory}" />
@@ -1372,6 +1478,12 @@
                                            Height="64">
                                     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
                                         <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
+                                                Visibility="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource trueToVisibleConverter}}"
+                                                Command="{x:Static internalCommands:FileSystemControlCommands.SwitchPathPartsAsButtonsCommand}">
+                                            <md:PackIcon Kind="FormTextbox" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                                        </Button>
+                                        <Button Style="{DynamicResource MaterialDesignToolForegroundButton}" Margin="0,0,8,0"
                                                 ToolTip="{x:Static localization:Strings.Selection}"
                                                 Command="{x:Static internalCommands:FileSystemControlCommands.OpenSelectionDrawerCommand}">
                                             <md:PackIcon Kind="FormatListBulletedSquare" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -1386,10 +1498,24 @@
                                     <TextBlock FontSize="20" Margin="72,0,16,0"
                                                Text="{x:Static localization:Strings.OpenFile}" VerticalAlignment="Center" />
                                 </DockPanel>
-                                <Border Grid.Row="1" MinHeight="64" MaxHeight="128"
+                                <Grid Grid.Row="1" MinHeight="64" MaxHeight="128"
                                         Background="{DynamicResource PrimaryHueMidBrush}" TextBlock.Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                                                    <Setter Property="Height" Value="64" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                    <Setter Property="MinHeight" Value="64" />
+                                                    <Setter Property="MaxHeight" Value="128" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
                                     <ScrollViewer x:Name="pathPartsScrollViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                                  HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+                                                  Visibility="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource trueToVisibleConverter}}">
                                         <ItemsControl x:Name="pathPartsItemsControl" Margin="68,0,0,0" VerticalAlignment="Center" ItemTemplate="{StaticResource pathPartItemTemplate}">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -1398,7 +1524,12 @@
                                             </ItemsControl.ItemsPanel>
                                         </ItemsControl>
                                     </ScrollViewer>
-                                </Border>
+                                    <Border Background="{DynamicResource MaterialDesignBackground}"
+                                            Margin="16,0" CornerRadius="4" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                            Visibility="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource falseToVisibleConverter}}">
+                                        <TextBox x:Name="currentDirectoryTextBox" Foreground="{DynamicResource MaterialDesignBody}" FontSize="14" Margin="8" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                                    </Border>
+                                </Grid>
                                 <ItemsControl x:Name="fileSystemEntryItemsControl" Grid.Row="2" Style="{StaticResource fileSystemEntriesItemsControlStyle}"
                                               ItemTemplateSelector="{StaticResource fileSystemEntryItemMultipleTemplateSelector}" />
                                 <TextBlock x:Name="emptyDirectoryTextBlock" Grid.Row="2" Style="{StaticResource emptyHintTextBlockStyle}" Text="{x:Static localization:Strings.EmptyDirectory}" />

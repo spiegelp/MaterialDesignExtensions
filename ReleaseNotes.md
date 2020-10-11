@@ -185,5 +185,6 @@ Please change your configuration according to [App.xaml](https://github.com/spie
   * Optional custom content for dialogs
   * Control for simple input dialogs
 * Strong named assembly
-### Fixes
+* Current directory path optionally as text box in file system controls
+#### Fixes
 * Fixed reflection code in `ResourceDictionaryExtensions`

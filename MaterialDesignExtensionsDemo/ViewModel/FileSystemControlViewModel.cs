@@ -12,6 +12,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         private bool m_showHiddenFilesAndDirectories;
         private bool m_showSystemFilesAndDirectories;
         private bool m_createNewDirectoryEnabled;
+        private bool m_switchPathPartsAsButtonsEnabled;
 
         public override string DocumentationUrl
         {
@@ -81,6 +82,21 @@ namespace MaterialDesignExtensionsDemo.ViewModel
             }
         }
 
+        public bool SwitchPathPartsAsButtonsEnabled
+        {
+            get
+            {
+                return m_switchPathPartsAsButtonsEnabled;
+            }
+
+            set
+            {
+                m_switchPathPartsAsButtonsEnabled = value;
+
+                OnPropertyChanged(nameof(SwitchPathPartsAsButtonsEnabled));
+            }
+        }
+
         public FileSystemControlViewModel()
             : base()
         {
@@ -88,6 +104,7 @@ namespace MaterialDesignExtensionsDemo.ViewModel
             m_showHiddenFilesAndDirectories = false;
             m_showSystemFilesAndDirectories = false;
             m_createNewDirectoryEnabled = false;
+            m_switchPathPartsAsButtonsEnabled = false;
         }
     }
 }

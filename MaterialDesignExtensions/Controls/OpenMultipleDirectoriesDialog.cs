@@ -90,7 +90,9 @@ namespace MaterialDesignExtensions.Controls
                 args.CurrentDirectory,
                 args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
-                args.ShowSystemFilesAndDirectories
+                args.ShowSystemFilesAndDirectories,
+                args.SwitchPathPartsAsButtonsEnabled,
+                args.PathPartsAsButtons
             );
 
             return await DialogHost.Show(dialog, dialogHostName, args.OpenedHandler, args.ClosingHandler) as OpenMultipleDirectoriesDialogResult;
@@ -110,7 +112,9 @@ namespace MaterialDesignExtensions.Controls
                 args.CurrentDirectory,
                 args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
-                args.ShowSystemFilesAndDirectories
+                args.ShowSystemFilesAndDirectories,
+                args.SwitchPathPartsAsButtonsEnabled,
+                args.PathPartsAsButtons
             );
 
             return await dialogHost.ShowDialog(dialog, args.OpenedHandler, args.ClosingHandler) as OpenMultipleDirectoriesDialogResult;
@@ -119,10 +123,11 @@ namespace MaterialDesignExtensions.Controls
         private static OpenMultipleDirectoriesDialog InitDialog(double? width, double? height,
             string currentDirectory,
             bool createNewDirectoryEnabled,
-            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
+            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories,
+            bool switchPathPartsAsButtonsEnabled, bool pathPartsAsButtons)
         {
             OpenMultipleDirectoriesDialog dialog = new OpenMultipleDirectoriesDialog();
-            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, createNewDirectoryEnabled);
+            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, createNewDirectoryEnabled, switchPathPartsAsButtonsEnabled, pathPartsAsButtons);
 
             return dialog;
         }

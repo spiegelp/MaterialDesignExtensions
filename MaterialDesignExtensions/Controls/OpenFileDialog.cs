@@ -58,7 +58,9 @@ namespace MaterialDesignExtensions.Controls
                 args.Filters,
                 args.FilterIndex,
                 args.ShowHiddenFilesAndDirectories,
-                args.ShowSystemFilesAndDirectories
+                args.ShowSystemFilesAndDirectories,
+                args.SwitchPathPartsAsButtonsEnabled,
+                args.PathPartsAsButtons
             );
 
             return await DialogHost.Show(dialog, dialogHostName, args.OpenedHandler, args.ClosingHandler) as OpenFileDialogResult;
@@ -79,7 +81,9 @@ namespace MaterialDesignExtensions.Controls
                 args.Filters,
                 args.FilterIndex,
                 args.ShowHiddenFilesAndDirectories,
-                args.ShowSystemFilesAndDirectories
+                args.ShowSystemFilesAndDirectories,
+                args.SwitchPathPartsAsButtonsEnabled,
+                args.PathPartsAsButtons
             );
 
             return await dialogHost.ShowDialog(dialog, args.OpenedHandler, args.ClosingHandler) as OpenFileDialogResult;
@@ -88,10 +92,11 @@ namespace MaterialDesignExtensions.Controls
         private static OpenFileDialog InitDialog(double? width, double? height,
             string currentDirectory,
             string filters, int filterIndex,
-            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
+            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories,
+            bool switchPathPartsAsButtonsEnabled, bool pathPartsAsButtons)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, switchPathPartsAsButtonsEnabled, pathPartsAsButtons);
             dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<IFileFilter>;
             dialog.FilterIndex = filterIndex;
 

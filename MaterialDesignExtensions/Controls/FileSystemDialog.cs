@@ -67,6 +67,31 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// Show the current directory path with a short cut button for each part in the path, instead of a text box.
+        /// </summary>
+        public static readonly DependencyProperty PathPartsAsButtonsProperty = DependencyProperty.Register(
+            nameof(PathPartsAsButtons),
+            typeof(bool),
+            typeof(FileSystemDialog),
+            new PropertyMetadata(true));
+
+        /// <summary>
+        /// Show the current directory path with a short cut button for each part in the path, instead of a text box.
+        /// </summary>
+        public bool PathPartsAsButtons
+        {
+            get
+            {
+                return (bool)GetValue(PathPartsAsButtonsProperty);
+            }
+
+            set
+            {
+                SetValue(PathPartsAsButtonsProperty, value);
+            }
+        }
+
+        /// <summary>
         /// Shows or hides hidden directories and files.
         /// </summary>
         public static readonly DependencyProperty ShowHiddenFilesAndDirectoriesProperty = DependencyProperty.Register(
@@ -116,6 +141,31 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Enable switching between a text box and the buttons for each sub directory of the current directory's path.
+        /// </summary>
+        public static readonly DependencyProperty SwitchPathPartsAsButtonsEnabledProperty = DependencyProperty.Register(
+            nameof(SwitchPathPartsAsButtonsEnabled),
+            typeof(bool),
+            typeof(FileSystemDialog),
+            new PropertyMetadata(false));
+
+        /// <summary>
+        /// Enable switching between a text box and the buttons for each sub directory of the current directory's path.
+        /// </summary>
+        public bool SwitchPathPartsAsButtonsEnabled
+        {
+            get
+            {
+                return (bool)GetValue(SwitchPathPartsAsButtonsEnabledProperty);
+            }
+
+            set
+            {
+                SetValue(SwitchPathPartsAsButtonsEnabledProperty, value);
+            }
+        }
+
         static FileSystemDialog()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FileSystemDialog), new FrameworkPropertyMetadata(typeof(FileSystemDialog)));
@@ -141,7 +191,8 @@ namespace MaterialDesignExtensions.Controls
         protected static void InitDialog(FileSystemDialog dialog, double? width, double? height,
             string currentDirectory,
             bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories,
-            bool createNewDirectoryEnabled = false)
+            bool createNewDirectoryEnabled = false,
+            bool switchPathPartsAsButtonsEnabled = false, bool pathPartsAsButtons = true)
         {
             if (width != null)
             {
@@ -161,6 +212,8 @@ namespace MaterialDesignExtensions.Controls
             dialog.CreateNewDirectoryEnabled = createNewDirectoryEnabled;
             dialog.ShowHiddenFilesAndDirectories = showHiddenFilesAndDirectories;
             dialog.ShowSystemFilesAndDirectories = showSystemFilesAndDirectories;
+            dialog.SwitchPathPartsAsButtonsEnabled = switchPathPartsAsButtonsEnabled;
+            dialog.PathPartsAsButtons = pathPartsAsButtons;
         }
     }
 
@@ -190,6 +243,11 @@ namespace MaterialDesignExtensions.Controls
         public bool CreateNewDirectoryEnabled { get; set; }
 
         /// <summary>
+        /// Show the current directory path with a short cut button for each part in the path, instead of a text box.
+        /// </summary>
+        public bool PathPartsAsButtons { get; set; }
+
+        /// <summary>
         /// Shows or hides hidden directories and files.
         /// </summary>
         public bool ShowHiddenFilesAndDirectories { get; set; }
@@ -198,6 +256,11 @@ namespace MaterialDesignExtensions.Controls
         /// Shows or hides protected directories and files of the system.
         /// </summary>
         public bool ShowSystemFilesAndDirectories { get; set; }
+
+        /// <summary>
+        /// Enable switching between a text box and the buttons for each sub directory of the current directory's path.
+        /// </summary>
+        public bool SwitchPathPartsAsButtonsEnabled { get; set; }
 
         /// <summary>
         /// Callback after openening the dialog.
@@ -220,6 +283,8 @@ namespace MaterialDesignExtensions.Controls
             CreateNewDirectoryEnabled = false;
             ShowHiddenFilesAndDirectories = false;
             ShowSystemFilesAndDirectories = false;
+            SwitchPathPartsAsButtonsEnabled = false;
+            PathPartsAsButtons = true;
             OpenedHandler = null;
             ClosingHandler = null;
         }

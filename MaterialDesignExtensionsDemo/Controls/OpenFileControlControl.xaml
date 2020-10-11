@@ -19,10 +19,13 @@
             <TextBlock Text="Show hidden directories" VerticalAlignment="Center" Margin="4,0,0,0" />
             <CheckBox IsChecked="{Binding Path=ShowSystemFilesAndDirectories, Mode=TwoWay}" VerticalAlignment="Center" Margin="16,0,0,0" />
             <TextBlock Text="Show system directories" VerticalAlignment="Center" Margin="4,0,0,0" />
+            <CheckBox IsChecked="{Binding Path=SwitchPathPartsAsButtonsEnabled, Mode=TwoWay}" VerticalAlignment="Center" Margin="16,0,0,0" />
+            <TextBlock Text="Switch path parts" VerticalAlignment="Center" Margin="4,0,0,0" />
         </StackPanel>
         <mde:OpenFileControl Grid.Row="2" Margin="16"
                              ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, Mode=TwoWay}"
                              ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, Mode=TwoWay}"
+                             SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, Mode=TwoWay}"
                              Filters="All files|*.*|C# files|*.cs|XAML files|*.xaml"
                              FileSelected="OpenFileControl_FileSelected" Cancel="OpenFileControl_Cancel" />
     </Grid>
