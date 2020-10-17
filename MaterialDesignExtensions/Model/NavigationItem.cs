@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MaterialDesignExtensions.Model
 {
@@ -12,6 +13,7 @@ namespace MaterialDesignExtensions.Model
     public class NavigationItem : BaseNavigationItem
     {
         private object m_icon;
+        private DataTemplate m_iconTemplate;
         private string m_label;
 
         /// <summary>
@@ -29,6 +31,24 @@ namespace MaterialDesignExtensions.Model
                 m_icon = value;
 
                 OnPropertyChanged(nameof(Icon));
+            }
+        }
+
+        /// <summary>
+        /// An optional template for the icon.
+        /// </summary>
+        public DataTemplate IconTemplate
+        {
+            get
+            {
+                return m_iconTemplate;
+            }
+
+            set
+            {
+                m_iconTemplate = value;
+
+                OnPropertyChanged(nameof(IconTemplate));
             }
         }
 

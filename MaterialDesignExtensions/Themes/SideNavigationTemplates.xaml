@@ -37,7 +37,7 @@
                         <ColumnDefinition Width="24" />
                         <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Content="{Binding Path=Icon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
+                    <ContentControl Content="{Binding Path=Icon}" ContentTemplate="{Binding Path=IconTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
                         <ContentControl.Resources>
                             <DataTemplate DataType="{x:Type BitmapImage}">
                                 <Image HorizontalAlignment="Stretch" Source="{Binding}" SnapsToDevicePixels="True" VerticalAlignment="Stretch" />
@@ -88,7 +88,7 @@
                         <ColumnDefinition Width="24" />
                         <ColumnDefinition Width="100*" />
                     </Grid.ColumnDefinitions>
-                    <ContentControl Content="{Binding Path=Icon}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
+                    <ContentControl Content="{Binding Path=Icon}" ContentTemplate="{Binding Path=IconTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
                         <ContentControl.Resources>
                             <DataTemplate DataType="{x:Type BitmapImage}">
                                 <Image HorizontalAlignment="Stretch" Source="{Binding}" SnapsToDevicePixels="True" VerticalAlignment="Stretch" />
@@ -242,7 +242,7 @@
                                         <Border Style="{StaticResource navigationItemBackgroundBorderStyle}" />
                                         <Border HorizontalAlignment="Center" VerticalAlignment="Center">
                                             <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                                                <ContentControl Content="{Binding Path=Icon}" HorizontalAlignment="Center" VerticalAlignment="Stretch" Focusable="False">
+                                                <ContentControl Content="{Binding Path=Icon}" ContentTemplate="{Binding Path=IconTemplate}" HorizontalAlignment="Center" VerticalAlignment="Stretch" Focusable="False">
                                                     <ContentControl.Resources>
                                                         <DataTemplate DataType="{x:Type BitmapImage}">
                                                             <Image HorizontalAlignment="Stretch" Source="{Binding}" SnapsToDevicePixels="True" VerticalAlignment="Stretch" />
