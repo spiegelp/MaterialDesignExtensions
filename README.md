@@ -40,14 +40,15 @@ Material Design Extensions features the following controls:
 | [Save file](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/filesystemcontrols) | Custom `SaveFileControl` and `SaveFileDialog` control | Done |
 | [Open multiple directories](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/filesystemcontrols) | Custom `OpenMultipleDirectoriesControl` and `OpenMultipleDirectoriesDialog` control | Done |
 | [Open multiple files](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/filesystemcontrols) | Custom `OpenMultipleFilesControl` and `OpenMultipleFilesDialog` control | Done |
-| [Text box with file path](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/filesystemcontrols) | Custom `TextBoxOpenDirectory`, `TextBoxOpenFile` and `TextBoxSaveFile` control | In development |
+| [Text box with file path](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/filesystemcontrols) | Custom `TextBoxOpenDirectory`, `TextBoxOpenFile` and `TextBoxSaveFile` control | Done |
 | [App bar](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/appbar) | Custom `AppBar` control ([specification](https://material.io/design/components/app-bars-top.html#usage)) | Done |
 | [Persistent search](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/search) | Custom `PersistentSearch` control ([specification](https://material.io/design/navigation/search.html)) | Done |
 | [Side navigation](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/navigation) | Custom `SideNavigation` control ([specification](https://material.io/design/components/navigation-drawer.html#usage)) | Done |
-| [Navigation rail](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/navigation) | Custom `NavigationRail` control ([specification](https://material.io/components/navigation-rail/)) | In development |
+| [Navigation rail](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/navigation) | Custom `NavigationRail` control ([specification](https://material.io/components/navigation-rail/)) | Done |
 | [Autocomplete](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/autocomplete) | Custom `Autocomplete` control | Done |
 | [Text box suggestions](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/textboxsuggestions) | Custom `TextBoxSuggestions` control | Done |
 | [Tabs](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/tabs) | Templates for `TabControl` ([specification](https://material.io/design/components/tabs.html)) | Done |
+| [Busy overlay](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/busyoverlay) | Custom `BusyOverlay` control | Done |
 | [Material window](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/materialwindow) | Custom `MaterialWindow` control | Done |
 
 ## Screenshots

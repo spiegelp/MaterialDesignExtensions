@@ -22,7 +22,7 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
 Important notice: The configuration of Material Design Extensions changed in order to enable changing the theme at runtime. Please change your configuration according to App.xaml of the demo.</releaseNotes>
     <!--<readme>Readme.md</readme>-->
     <copyright>Copyright (c) 2017-2020 Spiegel Philipp</copyright>
-    <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window NavigationRail</tags>
+    <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window NavigationRail BusyOverlay</tags>
     <dependencies>
       <dependency id="MaterialDesignColors" version="1.2.7" />
       <dependency id="MaterialDesignThemes" version="3.2.0" />
