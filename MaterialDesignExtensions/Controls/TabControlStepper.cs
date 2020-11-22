@@ -323,6 +323,9 @@ namespace MaterialDesignExtensions.Controls
         static TabControlStepper()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TabControlStepper), new FrameworkPropertyMetadata(typeof(TabControlStepper)));
+
+            object selectedIndexDefaultValue = SelectedIndexProperty.GetMetadata(typeof(TabControl)).DefaultValue;
+            SelectedIndexProperty.OverrideMetadata(typeof(TabControlStepper), new FrameworkPropertyMetadata(selectedIndexDefaultValue, SelectedIndexChangedHandler));
         }
 
         /// <summary>
@@ -373,6 +376,23 @@ namespace MaterialDesignExtensions.Controls
             base.OnItemsChanged(args);
 
             InitSteps();
+        }
+
+        private static void SelectedIndexChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            int newValue = (int)args.NewValue;
+            int oldValue = (int)args.OldValue;
+
+            if (newValue != oldValue)
+            {
+                if (obj is TabControlStepper stepper)
+                {
+                    if (stepper.Controller.Steps != null && newValue >= 0 && newValue < stepper.Controller.Steps.Length && newValue != stepper.Controller.GetActiveStepIndex())
+                    {
+                        stepper.StepSelectedHandler(stepper.Controller.InternalSteps[newValue]);
+                    }
+                }
+            }
         }
 
         private void BackHandler(object sender, ExecutedRoutedEventArgs args)
@@ -430,9 +450,14 @@ namespace MaterialDesignExtensions.Controls
 
         private void StepSelectedHandler(object sender, ExecutedRoutedEventArgs args)
         {
+            StepSelectedHandler((StepperStepViewModel)args.Parameter);
+        }
+
+        private void StepSelectedHandler(StepperStepViewModel stepperStepViewModel)
+        {
             if (!IsLinear)
             {
-                StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(StepNavigationEvent, this, Controller.ActiveStep, ((StepperStepViewModel)args.Parameter).Step, false);
+                StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(StepNavigationEvent, this, Controller.ActiveStep, stepperStepViewModel.Step, false);
                 RaiseEvent(navigationArgs);
 
                 if (StepNavigationCommand != null && StepNavigationCommand.CanExecute(navigationArgs))
@@ -442,7 +467,7 @@ namespace MaterialDesignExtensions.Controls
 
                 if (!navigationArgs.Cancel)
                 {
-                    Controller.GotoStep((StepperStepViewModel)args.Parameter);
+                    Controller.GotoStep(stepperStepViewModel);
                 }
             }
         }
@@ -455,6 +480,10 @@ namespace MaterialDesignExtensions.Controls
                 // there is no event raised if the Content of a ContentControl changes
                 //     therefore trigger the animation in code
                 PlayHorizontalContentAnimation();
+            }
+            else if (sender == Controller && args.PropertyName == nameof(Controller.ActiveStep))
+            {
+                SelectedIndex = Controller.GetActiveStepIndex();
             }
         }
 

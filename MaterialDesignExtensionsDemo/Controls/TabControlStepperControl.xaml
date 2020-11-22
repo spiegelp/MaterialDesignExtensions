@@ -20,7 +20,7 @@
                 <CheckBox Margin="48,0,0,0" IsChecked="{Binding Path=ContentAnimationsEnabled, Mode=TwoWay}" VerticalAlignment="Center">Animations enabled</CheckBox>
             </WrapPanel>
             <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
-                <mde:TabControlStepper IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}"
+                <mde:TabControlStepper x:Name="m_stepper" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}"
                                        ContentAnimationsEnabled="{Binding Path=ContentAnimationsEnabled}"
                                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                        DoneIconTemplate="{DynamicResource MaterialDesignStepDoneIconTemplate}"

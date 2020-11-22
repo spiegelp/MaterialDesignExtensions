@@ -187,5 +187,6 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Strong named assembly
 * Current directory path optionally as text box in file system controls
 * `IconTemplate` property for `NavigationItem`
+* Handle setting of `TabControlStepper.SelectedIndex`
 #### Fixes
 * Fixed reflection code in `ResourceDictionaryExtensions`
