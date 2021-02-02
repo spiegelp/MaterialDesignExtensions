@@ -16,7 +16,7 @@ function AppViewModel(contentDivId, drawer) {
     self.documentationItems = [
         new DocumentationItem('appbar', 'App bar', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/MaterialWindow.png', 'snippets/documentation/appbar.html'),
         new DocumentationItem('autocomplete', 'Autocomplete', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/Autocomplete.png', 'snippets/documentation/autocomplete.html'),
-        new DocumentationItem('busyoverlay', 'Busy overlay', null, 'snippets/documentation/busyoverlay.html'),
+        new DocumentationItem('busyoverlay', 'Busy overlay', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/BusyOverlay.png', 'snippets/documentation/busyoverlay.html'),
         new DocumentationItem('filesystemcontrols', 'File system controls', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/OpenFileControl1.png', 'snippets/documentation/filesystemcontrols.html'),
         new DocumentationItem('gridlist', 'Grid list', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/GridList.png', 'snippets/documentation/gridlist.html'),
         new DocumentationItem('materialwindow', 'Material window', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/MaterialWindow.png', 'snippets/documentation/materialwindow.html'),
