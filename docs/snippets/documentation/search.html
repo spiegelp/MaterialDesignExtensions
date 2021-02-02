@@ -58,6 +58,24 @@ public class OperatingSystemsSearchSuggestionsSource : ISearchSuggestionsSource
 }
     </code></pre>
 
+    <h2>Custom icons</h2>
+
+    <p>Make sure to include this namespace</p>
+    <pre class="language-markup"><code class="language-markup">
+xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    </code></pre>
+
+    <p>Set your desired icons like this</p>
+    <pre class="language-markup"><code class="language-markup">
+&lt;mde:PersistentSearch
+    Margin="8"
+    VerticalAlignment="Top"
+    SearchSuggestionsSource="{Binding SearchSuggestionsSource}" 
+    SearchIcon="{x:Static md:PackIconKind.PrinterSearch}" 
+    CancelIcon="{x:Static md:PackIconKind.BellCancel}" 
+    ClearIcon="{x:Static md:PackIconKind.CircleArrows}" />
+    </code></pre>
+
     <script type="text/javascript">
         appViewModel.prepareCodeSnippets();
     </script>
