@@ -14,70 +14,70 @@
     
     <p>Item template</p>
     <pre class="language-markup"><code class="language-markup">
-        &lt;DataTemplate x:Key="itemTemplate">
-            &lt;DockPanel>
-                &lt;md:PackIcon DockPanel.Dock="Left" Kind="{Binding Path=Icon}" Width="24" Height="24" VerticalAlignment="Center" SnapsToDevicePixels="True" />
-                &lt;TextBlock FontSize="14" Text="{Binding Path=Name}" VerticalAlignment="Center" Margin="24,0,0,0" />
-            &lt;/DockPanel>
-        &lt;/DataTemplate>
+&lt;DataTemplate x:Key="itemTemplate">
+    &lt;DockPanel>
+        &lt;md:PackIcon DockPanel.Dock="Left" Kind="{Binding Path=Icon}" Width="24" Height="24" VerticalAlignment="Center" SnapsToDevicePixels="True" />
+        &lt;TextBlock FontSize="14" Text="{Binding Path=Name}" VerticalAlignment="Center" Margin="24,0,0,0" />
+    &lt;/DockPanel>
+&lt;/DataTemplate>
     </code></pre>
 
     <p>Autocomplete control</p>
     <pre class="language-markup"><code class="language-markup">
-        &lt;mde:Autocomplete Style="{StaticResource MaterialDesignAutocomplete}" 
-            AutocompleteSource="{Binding Path=AutocompleteSource}" 
-            Hint="Which OS?"                               
-            Margin="0,16,0,0"
-            ItemTemplate="{StaticResource itemTemplate}" />
+&lt;mde:Autocomplete Style="{StaticResource MaterialDesignAutocomplete}" 
+    AutocompleteSource="{Binding Path=AutocompleteSource}" 
+    Hint="Which OS?"                               
+    Margin="0,16,0,0"
+    ItemTemplate="{StaticResource itemTemplate}" />
     </code></pre>
 
     <p>Autocomplete data source</p>
     <pre class="language-markup"><code class="language-markup">
-        public class AutocompleteViewModel : ViewModel
+public class AutocompleteViewModel : ViewModel
+{
+    private IAutocompleteSource _autocompleteSource;
+
+    public IAutocompleteSource AutocompleteSource
+    {
+        get => _autocompleteSource;
+    }
+
+    public AutocompleteViewModel() : base()
+    {
+        _autocompleteSource = new OperatingSystemAutocompleteSource();
+    }
+}
+
+public class OperatingSystemItem
+{
+    public PackIconKind Icon { get; set; }
+    public string Name { get; set; }
+    public OperatingSystemItem() { }
+}
+
+public class OperatingSystemAutocompleteSource : IAutocompleteSource
+{
+    private List<OperatingSystemItem> _operatingSystemItems;
+
+    public OperatingSystemAutocompleteSource()
+    {
+        _operatingSystemItems = new List<OperatingSystemItem>()
         {
-            private IAutocompleteSource _autocompleteSource;
+            new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 7" },
+            new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 8" },
+            new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 8.1" },
+            new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 10" }
+        };
+    }
 
-            public IAutocompleteSource AutocompleteSource
-            {
-                get => _autocompleteSource;
-            }
+    public IEnumerable Search(string searchTerm)
+    {
+        searchTerm = searchTerm ?? string.Empty;
+        searchTerm = searchTerm.ToLower();
 
-            public AutocompleteViewModel() : base()
-            {
-                _autocompleteSource = new OperatingSystemAutocompleteSource();
-            }
-        }
-
-        public class OperatingSystemItem
-        {
-            public PackIconKind Icon { get; set; }
-            public string Name { get; set; }
-            public OperatingSystemItem() { }
-        }
-
-        public class OperatingSystemAutocompleteSource : IAutocompleteSource
-        {
-            private List<OperatingSystemItem> _operatingSystemItems;
-
-            public OperatingSystemAutocompleteSource()
-            {
-                _operatingSystemItems = new List<OperatingSystemItem>()
-                {
-                    new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 7" },
-                    new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 8" },
-                    new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 8.1" },
-                    new OperatingSystemItem() { Icon = PackIconKind.MicrosoftWindows, Name = "Windows 10" }
-                };
-            }
-
-            public IEnumerable Search(string searchTerm)
-            {
-                searchTerm = searchTerm ?? string.Empty;
-                searchTerm = searchTerm.ToLower();
-
-                return _operatingSystemItems.Where(item => item.Name.ToLower().Contains(searchTerm));
-            }
-        }
+        return _operatingSystemItems.Where(item => item.Name.ToLower().Contains(searchTerm));
+    }
+}
     </code></pre>
     <script type="text/javascript">
         appViewModel.prepareCodeSnippets();
