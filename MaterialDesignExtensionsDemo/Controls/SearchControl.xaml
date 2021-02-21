@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="MaterialDesignExtensionsDemo.Controls.SearchControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
@@ -18,10 +19,18 @@
                         <TextBlock x:Name="searchResultTextBlock1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,128,0,0" />
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="Black" Height="200" Background="{DynamicResource MaterialDesignPaper}" SnapsToDevicePixels="True" Margin="0,24,0,0">
+                <TextBlock Text="Dense style" Margin="0,16,0,0"/>
+                <Border BorderThickness="1" BorderBrush="Black" Height="200" Background="{DynamicResource MaterialDesignPaper}" SnapsToDevicePixels="True" Margin="0,8,0,0">
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <mde:PersistentSearch Style="{StaticResource MaterialDesignPersistentSearchDense}" VerticalAlignment="Top" Margin="8" SearchSuggestionsSource="{Binding Path=SearchSuggestionsSource}" Search="SearchHandler1" />
+                        <mde:PersistentSearch Style="{StaticResource MaterialDesignPersistentSearchDense}" VerticalAlignment="Top" Margin="8" SearchSuggestionsSource="{Binding Path=SearchSuggestionsSource}" Search="SearchHandler2" />
                         <TextBlock x:Name="searchResultTextBlock2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,128,0,0" />
+                    </Grid>
+                </Border>
+                <TextBlock Text="Custom icons" Margin="0,16,0,0"/>
+                <Border BorderThickness="1" BorderBrush="Black" Height="200" Background="{DynamicResource MaterialDesignPaper}" SnapsToDevicePixels="True" Margin="0,8,0,0">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <mde:PersistentSearch Style="{StaticResource MaterialDesignPersistentSearchDense}" VerticalAlignment="Top" Margin="8" SearchSuggestionsSource="{Binding Path=SearchSuggestionsSource}" Search="SearchHandler3" SearchIcon="{x:Static md:PackIconKind.PrinterSearch}" CancelIcon="{x:Static md:PackIconKind.BellCancel}" ClearIcon="{x:Static md:PackIconKind.CircleArrows}" />
+                        <TextBlock x:Name="searchResultTextBlock3" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,128,0,0" />
                     </Grid>
                 </Border>
             </StackPanel>

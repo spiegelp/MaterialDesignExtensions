@@ -16,7 +16,7 @@ function AppViewModel(contentDivId, drawer) {
     self.documentationItems = [
         new DocumentationItem('appbar', 'App bar', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/MaterialWindow.png', 'snippets/documentation/appbar.html'),
         new DocumentationItem('autocomplete', 'Autocomplete', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/Autocomplete.png', 'snippets/documentation/autocomplete.html'),
-        new DocumentationItem('busyoverlay', 'Busy overlay', null, 'snippets/documentation/busyoverlay.html'),
+        new DocumentationItem('busyoverlay', 'Busy overlay', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/BusyOverlay.png', 'snippets/documentation/busyoverlay.html'),
         new DocumentationItem('filesystemcontrols', 'File system controls', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/OpenFileControl1.png', 'snippets/documentation/filesystemcontrols.html'),
         new DocumentationItem('gridlist', 'Grid list', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/GridList.png', 'snippets/documentation/gridlist.html'),
         new DocumentationItem('materialwindow', 'Material window', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/MaterialWindow.png', 'snippets/documentation/materialwindow.html'),
@@ -25,7 +25,7 @@ function AppViewModel(contentDivId, drawer) {
         new DocumentationItem('search', 'Search', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/PersistentSearch.png', 'snippets/documentation/search.html'),
         new DocumentationItem('stepper', 'Stepper', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/HorizontalStepper.png', 'snippets/documentation/stepper.html'),
         new DocumentationItem('tabs', 'Tabs', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/TabControl1.png', 'snippets/documentation/tabs.html'),
-        new DocumentationItem('textboxsuggestions', 'Text box suggestions', null, 'snippets/documentation/textboxsuggestions.html')
+        new DocumentationItem('textboxsuggestions', 'Text box suggestions', 'https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/TextBoxSuggestions.png', 'snippets/documentation/textboxsuggestions.html')
     ];
 
     self.goToNavigationItem = function (navigationItem) {

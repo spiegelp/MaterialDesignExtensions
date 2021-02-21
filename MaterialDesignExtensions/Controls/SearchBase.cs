@@ -116,6 +116,50 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// The icon on the left side of the search text box that appears when the text is not empty and replaced the search icon.
+        /// </summary>
+        public static readonly DependencyProperty CancelIconProperty = DependencyProperty.Register(
+            nameof(CancelIcon), typeof(object), typeof(SearchBase), new PropertyMetadata(PackIconKind.ArrowLeft, null));
+
+        /// <summary>
+        /// The icon on the left side of the search text box that appears when the text is not empty and replaced the search icon.
+        /// </summary>
+        public object CancelIcon
+        {
+            get
+            {
+                return GetValue(CancelIconProperty);
+            }
+
+            set
+            {
+                SetValue(CancelIconProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The icon on the right side of the search text box that appears when the text is not empty.
+        /// </summary>
+        public static readonly DependencyProperty ClearIconProperty = DependencyProperty.Register(
+            nameof(ClearIcon), typeof(object), typeof(SearchBase), new PropertyMetadata(PackIconKind.Close, null));
+
+        /// <summary>
+        /// The icon on the right side of the search text box that appears when the text is not empty.
+        /// </summary>
+        public object ClearIcon
+        {
+            get
+            {
+                return GetValue(ClearIconProperty);
+            }
+
+            set
+            {
+                SetValue(ClearIconProperty, value);
+            }
+        }
+
+        /// <summary>
         /// A source for providing suggestions to search for.
         /// </summary>
         public static readonly DependencyProperty SearchSuggestionsSourceProperty = DependencyProperty.Register(
