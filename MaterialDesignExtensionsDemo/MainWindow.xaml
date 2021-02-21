@@ -137,7 +137,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <mde:AppBar x:Name="appBar" Grid.ColumnSpan="2" Title="Material Design Extensions" ShowNavigationDrawerButton="True">
+                    <mde:AppBar x:Name="appBar" Grid.ColumnSpan="2" Panel.ZIndex="1024" Title="Material Design Extensions" ShowNavigationDrawerButton="True">
                         <!-- demo for app bar icon -->
                         <!--<mde:AppBar.AppIcon>
                             <md:PackIcon Kind="Volleyball" Foreground="White" Width="24" Height="24" />
