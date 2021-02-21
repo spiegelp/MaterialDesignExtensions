@@ -82,7 +82,7 @@
                                             <Binding Path="SearchTerm" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource notNullBooleanConverter}" />
                                         </MultiBinding>
                                     </Button.Visibility>
-                                    <md:PackIcon Kind="ArrowLeft" Width="{TemplateBinding IconSize}" Height="{TemplateBinding IconSize}" />
+                                    <md:PackIcon Kind="{TemplateBinding CancelIcon}" Width="{TemplateBinding IconSize}" Height="{TemplateBinding IconSize}" />
                                 </Button>
                                 <TextBox x:Name="searchTextBox" Grid.Column="1" md:HintAssist.Hint="{TemplateBinding SearchHint}"
                                          Text="{Binding Path=SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}}"
@@ -96,7 +96,7 @@
                                             <Binding Path="SearchTerm" RelativeSource="{RelativeSource TemplatedParent}" Converter="{StaticResource notNullBooleanConverter}" />
                                         </MultiBinding>
                                     </Button.Visibility>
-                                    <md:PackIcon Kind="Close" Width="{TemplateBinding IconSize}" Height="{TemplateBinding IconSize}" />
+                                    <md:PackIcon Kind="{TemplateBinding ClearIcon}" Width="{TemplateBinding IconSize}" Height="{TemplateBinding IconSize}" />
                                 </Button>
                                 <controls:AutocompletePopup x:Name="searchSuggestionsPopup"
                                                             PlacementTarget="{Binding ElementName=rootBorder}"
