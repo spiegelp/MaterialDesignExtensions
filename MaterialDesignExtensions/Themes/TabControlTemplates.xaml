@@ -75,8 +75,10 @@
                                                 </Border.RenderTransform>
                                             </Border>
                                             <ContentPresenter x:Name="headerContent" ContentSource="Header" RecognizesAccessKey="True"
-                                                              Margin="24,12,24,12" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                              TextBlock.FontSize="14" TextBlock.FontWeight="Medium"
+                                                              HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                              Margin="{Binding Path=(controls:TabControlAssist.TabHeaderMargin), RelativeSource={RelativeSource TemplatedParent}}" 
+                                                              TextBlock.FontSize="{Binding Path=(controls:TabControlAssist.TabHeaderFontSize), RelativeSource={RelativeSource TemplatedParent}}" 
+                                                              TextBlock.FontWeight="{Binding Path=(controls:TabControlAssist.TabHeaderFontWeight), RelativeSource={RelativeSource TemplatedParent}}"
                                                               TextBlock.Foreground="{Binding Path=(controls:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource TemplatedParent}}">
                                                 <ContentPresenter.Style>
                                                     <Style TargetType="ContentPresenter">
