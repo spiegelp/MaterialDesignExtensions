@@ -192,5 +192,96 @@ namespace MaterialDesignExtensions.Controls
         {
             element.SetValue(TabHeaderForegroundProperty, value);
         }
+
+        /// <summary>
+        /// The current font size of the tab item header. Intended to be read-only.
+        /// </summary>
+        public static readonly DependencyProperty TabHeaderFontSizeProperty = DependencyProperty.RegisterAttached(
+            "TabHeaderFontSize",
+            typeof(double),
+            typeof(TabControlAssist),
+            new FrameworkPropertyMetadata(14.0, FrameworkPropertyMetadataOptions.Inherits, null)
+        );
+
+        /// <summary>
+        /// Gets the current font size of the tab item header.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static double GetTabHeaderFontSize(DependencyObject element)
+        {
+            return (double)element.GetValue(TabHeaderFontSizeProperty);
+        }
+
+        /// <summary>
+        /// Sets the current font size of the tab item header.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="value"></param>
+        public static void SetTabHeaderFontSize(DependencyObject element, double value)
+        {
+            element.SetValue(TabHeaderFontSizeProperty, value);
+        }
+
+        /// <summary>
+        /// The current font weight of the tab item header. Intended to be read-only.
+        /// </summary>
+        public static readonly DependencyProperty TabHeaderFontWeightProperty = DependencyProperty.RegisterAttached(
+            "TabHeaderFontWeight",
+            typeof(FontWeight),
+            typeof(TabControlAssist),
+            new FrameworkPropertyMetadata(FontWeights.Medium, FrameworkPropertyMetadataOptions.Inherits, null)
+        );
+
+        /// <summary>
+        /// Gets the current font weight of the tab item header.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static FontWeight GetTabHeaderFontWeight(DependencyObject element)
+        {
+            return (FontWeight)element.GetValue(TabHeaderFontWeightProperty);
+        }
+
+        /// <summary>
+        /// Sets the current font weight of the tab item header.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="value"></param>
+        public static void SetTabHeaderFontWeight(DependencyObject element, FontWeight value)
+        {
+            element.SetValue(TabHeaderFontWeightProperty, value);
+        }
+
+
+        /// <summary>
+        /// The current margin of the tab item header's content. Intended to be read-only.
+        /// </summary>
+        public static readonly DependencyProperty TabHeaderMarginProperty = DependencyProperty.RegisterAttached(
+            "TabHeaderMargin",
+            typeof(Thickness),
+            typeof(TabControlAssist),
+            new FrameworkPropertyMetadata(new Thickness(24,12,24,12), FrameworkPropertyMetadataOptions.Inherits, null)
+        );
+
+        /// <summary>
+        /// Gets the current margin of the tab item header's content.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
+        public static Thickness GetTabHeaderMargin(DependencyObject element)
+        {
+            return (Thickness)element.GetValue(TabHeaderMarginProperty);
+        }
+
+        /// <summary>
+        /// Sets the current margin of the tab item header's content.
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="value"></param>
+        public static void SetTabHeaderMargin(DependencyObject element, Thickness value)
+        {
+            element.SetValue(TabHeaderMarginProperty, value);
+        }
     }
 }
