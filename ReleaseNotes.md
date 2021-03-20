@@ -188,6 +188,10 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Current directory path optionally as text box in file system controls
 * `IconTemplate` property for `NavigationItem`
 * Handle setting of `TabControlStepper.SelectedIndex`
+* New properties to control tab control item headers
+  * `TabHeaderFontSize`
+  * `TabHeaderFontWeight`
+  * `TabHeaderMargin`
 * Layout improvements for `MaterialWindow`
 * New `SearchBase.CancelIcon` and `SearchBase.ClearIcon` properties
 #### Fixes
