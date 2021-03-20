@@ -196,3 +196,4 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * New `SearchBase.CancelIcon` and `SearchBase.ClearIcon` properties
 #### Fixes
 * Fixed reflection code in `ResourceDictionaryExtensions`
+* Fixed usage of `SecondaryHueMidBrush` and `SecondaryHueMidForegroundBrush` resources

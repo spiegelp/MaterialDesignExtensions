@@ -57,8 +57,8 @@ namespace MaterialDesignExtensions.Themes
             SetSolidColorBrush(resourceDictionary, "SecondaryHueDarkForegroundBrush", theme.SecondaryDark.ForegroundColor ?? theme.SecondaryDark.Color.ContrastingForegroundColor());
 
             // these are here for backwards compatibility, and will be removed in a future version.
-            SetSolidColorBrush(resourceDictionary, "SecondaryAccentBrush", theme.SecondaryMid.Color);
-            SetSolidColorBrush(resourceDictionary, "SecondaryAccentForegroundBrush", theme.SecondaryMid.ForegroundColor ?? theme.SecondaryMid.Color.ContrastingForegroundColor());
+            SetSolidColorBrush(resourceDictionary, "SecondaryHueMidBrush", theme.SecondaryMid.Color);
+            SetSolidColorBrush(resourceDictionary, "SecondaryHueMidForegroundBrush", theme.SecondaryMid.ForegroundColor ?? theme.SecondaryMid.Color.ContrastingForegroundColor());
 
             SetSolidColorBrush(resourceDictionary, "ValidationErrorBrush", theme.ValidationError);
             resourceDictionary["ValidationErrorColor"] = theme.ValidationError;
@@ -89,8 +89,8 @@ namespace MaterialDesignExtensions.Themes
                 return theme;
             }
 
-            Color secondaryMid = GetColor(resourceDictionary, "SecondaryHueMidBrush", "SecondaryAccentBrush");
-            Color secondaryMidForeground = GetColor(resourceDictionary, "SecondaryHueMidForegroundBrush", "SecondaryAccentForegroundBrush");
+            Color secondaryMid = GetColor(resourceDictionary, "SecondaryHueMidBrush", "SecondaryHueMidBrush");
+            Color secondaryMidForeground = GetColor(resourceDictionary, "SecondaryHueMidForegroundBrush", "SecondaryHueMidForegroundBrush");
 
             if (!TryGetColor(resourceDictionary, "SecondaryHueLightBrush", out Color secondaryLight))
             {

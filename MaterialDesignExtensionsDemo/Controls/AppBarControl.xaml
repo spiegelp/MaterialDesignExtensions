@@ -18,9 +18,9 @@
                     <Canvas.RenderTransform>
                         <TranslateTransform X="0" Y="-161.53332"/>
                     </Canvas.RenderTransform>
-                    <Rectangle Canvas.Left="5.2916665" Canvas.Top="167.35416" Width="124.35417" Height="124.35418" StrokeThickness="5.08370417" Stroke="{DynamicResource SecondaryAccentBrush}" StrokeMiterLimit="4" Opacity="1"/>
-                    <Ellipse Canvas.Left="10" Width="114.9" Canvas.Top="172.1" Height="114.7" StrokeThickness="5.19894171" Stroke="{DynamicResource SecondaryAccentBrush}" StrokeMiterLimit="4" Opacity="1"/>
-                    <Path StrokeThickness="5.0270834" Stroke="{DynamicResource SecondaryAccentBrush}" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
+                    <Rectangle Canvas.Left="5.2916665" Canvas.Top="167.35416" Width="124.35417" Height="124.35418" StrokeThickness="5.08370417" Stroke="{DynamicResource SecondaryHueMidBrush}" StrokeMiterLimit="4" Opacity="1"/>
+                    <Ellipse Canvas.Left="10" Width="114.9" Canvas.Top="172.1" Height="114.7" StrokeThickness="5.19894171" Stroke="{DynamicResource SecondaryHueMidBrush}" StrokeMiterLimit="4" Opacity="1"/>
+                    <Path StrokeThickness="5.0270834" Stroke="{DynamicResource SecondaryHueMidBrush}" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
                         <Path.Data>
                             <PathGeometry Figures="M 23.8125 257.31249 H 111.125 L 67.733333 178.20207 Z" FillRule="NonZero"/>
                         </Path.Data>

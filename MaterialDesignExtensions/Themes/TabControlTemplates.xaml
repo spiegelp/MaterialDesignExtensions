@@ -233,8 +233,8 @@
     </Style>
 
     <Style x:Key="MaterialDesignAppBarAccentTabControl" TargetType="{x:Type TabControl}" BasedOn="{StaticResource MaterialDesignTabControl}">
-        <Setter Property="controls:TabControlAssist.TabHeaderHighlightBrush" Value="{DynamicResource SecondaryAccentBrush}" />
-        <Setter Property="controls:TabControlAssist.TabHeaderInactiveBrush" Value="{DynamicResource SecondaryAccentBrush}" />
+        <Setter Property="controls:TabControlAssist.TabHeaderHighlightBrush" Value="{DynamicResource SecondaryHueMidBrush}" />
+        <Setter Property="controls:TabControlAssist.TabHeaderInactiveBrush" Value="{DynamicResource SecondaryHueMidBrush}" />
         <Setter Property="controls:TabControlAssist.TabHeaderInactiveOpacity" Value="0.8" />
         <Setter Property="Background" Value="{DynamicResource PrimaryHueMidBrush}" />
     </Style>
