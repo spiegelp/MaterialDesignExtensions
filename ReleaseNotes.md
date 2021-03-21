@@ -197,3 +197,4 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 #### Fixes
 * Fixed reflection code in `ResourceDictionaryExtensions`
 * Fixed usage of `SecondaryHueMidBrush` and `SecondaryHueMidForegroundBrush` resources
+* Fixed `NullReferenceException` in `FileSystemControl`

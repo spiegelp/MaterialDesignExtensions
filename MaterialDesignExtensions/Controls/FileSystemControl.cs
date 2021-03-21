@@ -399,7 +399,11 @@ namespace MaterialDesignExtensions.Controls
         protected virtual void LoadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged += ControllerPropertyChangedHandler;
-            m_currentDirectoryTextBox.KeyDown += CurrentDirectoryTextBoxKeyDownHandler;
+
+            if (m_currentDirectoryTextBox != null)
+            {
+                m_currentDirectoryTextBox.KeyDown += CurrentDirectoryTextBoxKeyDownHandler;
+            }
 
             // not sure if the control should get keyboard focus on loading
             //Keyboard.Focus(this);
@@ -408,7 +412,11 @@ namespace MaterialDesignExtensions.Controls
         protected virtual void UnloadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged -= ControllerPropertyChangedHandler;
-            m_currentDirectoryTextBox.KeyDown -= CurrentDirectoryTextBoxKeyDownHandler;
+
+            if (m_currentDirectoryTextBox != null)
+            {
+                m_currentDirectoryTextBox.KeyDown -= CurrentDirectoryTextBoxKeyDownHandler;
+            }
         }
 
         protected void OpenSpecialDirectoriesDrawerCommandHandler(object sender, ExecutedRoutedEventArgs args)
@@ -424,7 +432,7 @@ namespace MaterialDesignExtensions.Controls
 
         private void CurrentDirectoryTextBoxKeyDownHandler(object sender, KeyEventArgs args)
         {
-            if (args.Key == Key.Enter)
+            if (sender == m_currentDirectoryTextBox && args.Key == Key.Enter)
             {
                 string directory = m_currentDirectoryTextBox.Text
                     .Replace("\n", string.Empty)
@@ -541,7 +549,11 @@ namespace MaterialDesignExtensions.Controls
             try
             {
                 m_controller.SelectDirectory(newCurrentDirectory);
-                m_currentDirectoryTextBox.Text = newCurrentDirectory;
+
+                if (m_currentDirectoryTextBox != null)
+                {
+                    m_currentDirectoryTextBox.Text = newCurrentDirectory;
+                }
             }
             catch (PathTooLongException)
             {
