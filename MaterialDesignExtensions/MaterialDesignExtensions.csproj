@@ -12,10 +12,10 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
     <Authors>Philipp Spiegel</Authors>
     <Company>Philipp Spiegel</Company>
     <Product>Material Design Extensions</Product>
-    <Copyright>Copyright © 2017-2020</Copyright>
+    <Copyright>Copyright © 2017-2021</Copyright>
     <AssemblyVersion>3.3.0.0</AssemblyVersion>
     <FileVersion>3.3.0.0</FileVersion>
-    <Version>3.3.0-a01</Version>
+    <Version>3.3.0</Version>
     <PackageProjectUrl>https://spiegelp.github.io/MaterialDesignExtensions/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/spiegelp/MaterialDesignExtensions</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
