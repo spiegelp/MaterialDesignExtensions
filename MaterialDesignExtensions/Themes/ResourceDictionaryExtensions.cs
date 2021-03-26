@@ -18,15 +18,38 @@ namespace MaterialDesignExtensions.Themes
     {
         private static readonly string MaterialDesignPrefix = "MaterialDesign";
 
-        private static readonly Guid CurrentThemeKey = Guid.NewGuid();
-        private static readonly Guid ThemeManagerKey = Guid.NewGuid();
+        // Changed to object so it can support both 4.0.0 and 3.2.0 versions of
+        // MaterialDesignThemes.Wpf.ResourceDictionaryExtensions class
+        private static readonly object CurrentThemeKey;
+        private static readonly object ThemeManagerKey;
 
         static ResourceDictionaryExtensions()
         {
-            Type type = typeof(MaterialDesignThemes.Wpf.ResourceDictionaryExtensions);
+            CurrentThemeKey = ReadKey(nameof(CurrentThemeKey));
+            ThemeManagerKey = ReadKey(nameof(ThemeManagerKey));
+        }
 
-            CurrentThemeKey = (Guid)type.GetProperty(nameof(CurrentThemeKey), BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
-            ThemeManagerKey = (Guid)type.GetProperty(nameof(ThemeManagerKey), BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+        private static object ReadKey(string keyName)
+        {
+            var type = typeof(MaterialDesignThemes.Wpf.ResourceDictionaryExtensions);
+            
+            // Read as constant field for 4.0.0
+            var fieldInfo = type.GetField(keyName, BindingFlags.Static | BindingFlags.NonPublic);
+            if (fieldInfo != null)
+            {
+                return fieldInfo.GetValue(null);
+            }
+            
+            // If not fallback to 3.2.0 and read as property
+            var propertyInfo = type.GetProperty(keyName, BindingFlags.Static | BindingFlags.NonPublic);
+            if (propertyInfo != null)
+            {
+                return propertyInfo.GetValue(null);
+            }
+
+            // Throws a meaningful exception instead of NullReferenceException
+            throw new InvalidOperationException(
+                $"{nameof(MaterialDesignThemes.Wpf.ResourceDictionaryExtensions)} incompatibility detected. Cannot find a Field or Property named {keyName} to read from.");
         }
 
         /// <summary>
