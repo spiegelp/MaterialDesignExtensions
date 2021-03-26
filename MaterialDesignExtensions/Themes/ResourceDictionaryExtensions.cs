@@ -31,8 +31,6 @@ namespace MaterialDesignExtensions.Themes
 
         private static object ReadKey(string keyName)
         {
-            var type = typeof(MaterialDesignThemes.Wpf.ResourceDictionaryExtensions);
-            
             // Read as constant field for 4.0.0
             var fieldInfo = type.GetField(keyName, BindingFlags.Static | BindingFlags.NonPublic);
             if (fieldInfo != null)
