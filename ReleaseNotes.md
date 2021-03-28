@@ -198,3 +198,7 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Fixed reflection code in `ResourceDictionaryExtensions`
 * Fixed usage of `SecondaryHueMidBrush` and `SecondaryHueMidForegroundBrush` resources
 * Fixed `NullReferenceException` in `FileSystemControl`
+### v4.0.0 (upcoming release)
+#### Features
+* New `SideNavigation.LabelFontSize` property
+* Layout improvements for `NavigationRail`

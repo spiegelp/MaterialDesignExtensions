@@ -90,6 +90,28 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// The font size of the item labels.
+        /// </summary>
+        public static readonly DependencyProperty LabelFontSizeProperty = DependencyProperty.Register(
+            nameof(LabelFontSize), typeof(double), typeof(SideNavigation), new PropertyMetadata(14.0, null));
+
+        /// <summary>
+        /// The font size of the item labels.
+        /// </summary>
+        public double LabelFontSize
+        {
+            get
+            {
+                return (double)GetValue(LabelFontSizeProperty);
+            }
+
+            set
+            {
+                SetValue(LabelFontSizeProperty, value);
+            }
+        }
+
+        /// <summary>
         /// The foreground color of the label of not selected items.
         /// </summary>
         public static readonly DependencyProperty LabelForegroundProperty = DependencyProperty.Register(
