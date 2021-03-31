@@ -80,8 +80,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="80" />
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="100*" />
                                 </Grid.ColumnDefinitions>
 
                                 <!-- toggle button for the navigation drawer -->
@@ -106,6 +105,7 @@
                                 <!-- back button -->
                                 <Button x:Name="backButton" Grid.Column="0" Style="{DynamicResource MaterialDesignToolForegroundButton}"
                                         Foreground="{TemplateBinding Foreground}" Cursor="Hand"
+                                        md:RippleAssist.Feedback="{TemplateBinding Foreground}"
                                         Margin="18,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
                                         Visibility="{TemplateBinding ShowBackButton, Converter={StaticResource boolToVisibilityConverter}}">
                                     <md:PackIcon Kind="ArrowLeft" Height="24" Width="24" />
@@ -133,21 +133,14 @@
                                     </ContentControl.Style>
                                 </ContentControl>
 
-                                <!-- toolbar buttons -->
-                                <ItemsControl Grid.Column="3" x:Name="PartHostActionButtons" Focusable="False"
-                                              Margin="0,0,12,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"
-                                              ItemsSource="{TemplateBinding Children}"
-                                              Visibility="{TemplateBinding Children, Converter={StaticResource objectCollectionToVisibilityConverter}}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal" IsItemsHost="True" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
+                                <!-- content area -->
+                                <ContentControl Grid.Column="2" Content="{Binding Path=ContentAreaContent, RelativeSource={RelativeSource TemplatedParent}}"
+                                                ContentTemplate="{Binding Path=ContentAreaContentTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                             </Grid>
                         </Border>
                         <Border Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
-                            <ContentControl Grid.Column="1" Content="{TemplateBinding Title}"
+                            <ContentControl Grid.Column="1" Grid.ColumnSpan="2" Content="{TemplateBinding Title}"
                                             Margin="80,0,16,0" HorizontalAlignment="Left" VerticalAlignment="Center"
                                             TextBlock.FontSize="20" Focusable="False">
                                 <ContentControl.Resources>

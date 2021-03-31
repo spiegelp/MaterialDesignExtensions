@@ -202,3 +202,8 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 #### Features
 * New `SideNavigation.LabelFontSize` property
 * Layout improvements for `NavigationRail`
+* More customizable content area for `AppBar`
+#### Breaking API
+* `AppBar.Children` replaced by `AppBar.ContentAreaContent`
+  * `ContentAreaContent` is `object` instead of `IList`
+  * Additional `ContentAreaContentTemplate`

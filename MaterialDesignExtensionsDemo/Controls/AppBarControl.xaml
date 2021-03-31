@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500" Background="{DynamicResource MaterialDesignBackground}">
@@ -59,6 +60,39 @@
                             Back="BackButtonClickHandler" />
                 <TextBlock Text="Default transparent app bar" Margin="0,32,0,8" />
                 <mde:AppBar Type="Default" OpaqueMode="Transparent" Title="Material Design Extensions" ShowBackButton="True" Foreground="{DynamicResource MaterialDesignBody}" />
+                <TextBlock Text="Default app bar with custom content area" Margin="0,32,0,8" />
+                <mde:AppBar Type="Default" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}">
+                    <Grid Margin="16,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.0001*" />
+                            <ColumnDefinition Width="*" MaxWidth="512" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="1" Background="{DynamicResource PrimaryHueMidForegroundBrush}" CornerRadius="4"
+                                Padding="8,4" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox FontSize="16" Foreground="{DynamicResource MaterialDesignBody}" Margin="0,0,8,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                                <md:PackIcon Grid.Column="1" Kind="Magnify" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignBody}" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </mde:AppBar>
+                <mde:AppBar Type="Default" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" Margin="0,16">
+                    <StackPanel Orientation="Horizontal" Margin="16,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button Style="{StaticResource MaterialDesignToolForegroundButton}" md:RippleAssist.Feedback="{DynamicResource PrimaryHueMidForegroundBrush}" Margin="8,0">
+                            <md:PackIcon Kind="Like" Height="24" Width="24" />
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignToolForegroundButton}" md:RippleAssist.Feedback="{DynamicResource PrimaryHueMidForegroundBrush}" Margin="8,0">
+                            <md:PackIcon Kind="Share" Height="24" Width="24" />
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignToolForegroundButton}" md:RippleAssist.Feedback="{DynamicResource PrimaryHueMidForegroundBrush}" Margin="8,0">
+                            <md:PackIcon Kind="DotsVertical" Height="24" Width="24" />
+                        </Button>
+                    </StackPanel>
+                </mde:AppBar>
             </StackPanel>
         </ScrollViewer>
     </Grid>

@@ -142,12 +142,16 @@
                         <!--<mde:AppBar.AppIcon>
                             <md:PackIcon Kind="Volleyball" Foreground="White" Width="24" Height="24" />
                         </mde:AppBar.AppIcon>-->
-                        <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="8,0" ToolTip="Material Design Exentions on GitHub" Click="GoToGitHubButtonClickHandler">
-                            <md:PackIcon Kind="Github" Height="24" Width="24" />
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Margin="8,0" ToolTip="Documentation" Click="GoToDocumentation">
-                            <md:PackIcon Kind="HelpCircle" Height="24" Width="24" />
-                        </Button>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}" md:RippleAssist.Feedback="{DynamicResource PrimaryHueMidForegroundBrush}" Margin="8,0"
+                                    ToolTip="Material Design Extensions on GitHub" Click="GoToGitHubButtonClickHandler">
+                                <md:PackIcon Kind="Github" Height="24" Width="24" />
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}" md:RippleAssist.Feedback="{DynamicResource PrimaryHueMidForegroundBrush}" Margin="8,0"
+                                    ToolTip="Documentation" Click="GoToDocumentation">
+                                <md:PackIcon Kind="HelpCircle" Height="24" Width="24" />
+                            </Button>
+                        </StackPanel>
                     </mde:AppBar>
                     <Border Grid.Row="1" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource MaterialDesignDivider}">
                         <mde:SideNavigation x:Name="sideNav" Items="{Binding Path=NavigationItems, Mode=OneTime}"
