@@ -34,6 +34,10 @@
                     <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="{StaticResource Accent400}" />
                     <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="{StaticResource Accent400Foreground}" />
                 </ResourceDictionary>
+
+                <!--<ResourceDictionary>
+                    <SolidColorBrush x:Key="MaterialDesignBackground" Color="{Binding Color, Source={StaticResource MaterialDesignPaper}}" />
+                </ResourceDictionary>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

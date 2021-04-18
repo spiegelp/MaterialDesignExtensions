@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource MaterialDesignBackground}">
     <Grid>
-        <TabControl Style="{StaticResource MaterialDesignTabControl}">
+        <TabControl x:Name="m_tabControl" Style="{StaticResource MaterialDesignTabControl}">
             <TabItem Header="ANIMALS">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="16">
                     <Grid TextElement.Foreground="{DynamicResource MaterialDesignBody}">
@@ -196,6 +196,10 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
+            <!--<TabItem Header="TEST">
+                <Button Content="REMOVE TABS" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Click="RemoveTabsButtonClickHandler" />
+            </TabItem>-->
         </TabControl>
     </Grid>
 </UserControl>

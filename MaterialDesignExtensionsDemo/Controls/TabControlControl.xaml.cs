@@ -21,5 +21,15 @@ namespace MaterialDesignExtensionsDemo.Controls
         {
             InitializeComponent();
         }
+
+        private void RemoveTabsButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            foreach (object item in m_tabControl.Items)
+            {
+                ((TabItem)item).Template = null;
+            }
+
+            m_tabControl.Items.Clear();
+        }
     }
 }
