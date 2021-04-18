@@ -78,6 +78,11 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
       <AutoGen>True</AutoGen>
       <DependentUpon>Strings.ar-DZ.resx</DependentUpon>
     </Compile>
+    <Compile Update="Localization\Strings.ja-JP.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.ja-JP.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -104,6 +109,18 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
     <EmbeddedResource Update="Localization\Strings.pt-BR.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.pt-BR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.fr-FR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.ar-DZ.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.ar-DZ.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.ja-JP.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.ja-JP.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   

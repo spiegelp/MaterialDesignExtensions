@@ -41,6 +41,8 @@ Important notice: The configuration of Material Design Extensions changed in ord
     <file src="bin\Release\net45\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\net45\fr" />
     <file src="bin\Release\net45\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\net45\fr-FR" />
     <file src="bin\Release\net45\ar-DZ\MaterialDesignExtensions.resources.dll" target="lib\net45\ar-DZ" />
+    <file src="bin\Release\net45\ja-JP\MaterialDesignExtensions.resources.dll" target="lib\net45\ja" />
+    <file src="bin\Release\net45\ja-JP\MaterialDesignExtensions.resources.dll" target="lib\net45\ja-JP" />
     <file src="bin\Release\net45\MaterialDesignExtensions.xml" target="lib\net45" />
     <file src="bin\Release\netcoreapp3.1\MaterialDesignExtensions.dll" target="lib\netcoreapp3.1" />
     <file src="bin\Release\netcoreapp3.1\de\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\de" />
@@ -54,6 +56,8 @@ Important notice: The configuration of Material Design Extensions changed in ord
     <file src="bin\Release\netcoreapp3.1\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\fr" />
     <file src="bin\Release\netcoreapp3.1\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\fr-FR" />
     <file src="bin\Release\netcoreapp3.1\ar-DZ\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\ar-DZ" />
+    <file src="bin\Release\netcoreapp3.1\ja-JP\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\ja" />
+    <file src="bin\Release\netcoreapp3.1\ja-JP\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\ja-JP" />
     <file src="bin\Release\netcoreapp3.1\MaterialDesignExtensions.xml" target="lib\netcoreapp3.1" />
     <file src="..\additionalPackageFiles\License.txt" />
     <file src="..\additionalPackageFiles\Notice.txt" />

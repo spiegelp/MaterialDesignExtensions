@@ -21,6 +21,7 @@
                     <Button Style="{StaticResource LanguageButtonStyle}" Content="Czech" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="cs-cz" />
                     <Button Style="{StaticResource LanguageButtonStyle}" Content="French" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="fr-FR" />
                     <Button Style="{StaticResource LanguageButtonStyle}" Content="German" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="de" />
+                    <Button Style="{StaticResource LanguageButtonStyle}" Content="Japanese" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="ja-JP" />
                     <Button Style="{StaticResource LanguageButtonStyle}" Content="Portuguese" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="pt-br" />
                     <Button Style="{StaticResource LanguageButtonStyle}" Content="Russian" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="ru-ru" />
                     <Button Style="{StaticResource LanguageButtonStyle}" Content="Uzbek" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="uz-Latn-UZ" />
