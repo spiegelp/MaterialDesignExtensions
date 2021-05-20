@@ -17,7 +17,7 @@
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
-        <Setter Property="Foreground" Value="{Binding Path=BorderForegroundBrush, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" />
+        <Setter Property="Foreground" Value="{Binding Path=BorderForegroundBrush, RelativeSource={RelativeSource AncestorType=Window}}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
@@ -59,19 +59,19 @@
 
     <Style x:Key="WindowMinimizeButtonStyle" BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type Button}">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="NoResize">
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType=Window}}" Value="NoResize">
                 <Setter Property="Visibility" Value="Collapsed" />
                 <Setter Property="IsEnabled" Value="False" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanMinimize">
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType=Window}}" Value="CanMinimize">
                 <Setter Property="Visibility" Value="Visible" />
                 <Setter Property="IsEnabled" Value="True" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanResize">
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType=Window}}" Value="CanResize">
                 <Setter Property="Visibility" Value="Visible" />
                 <Setter Property="IsEnabled" Value="True" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanResizeWithGrip">
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType=Window}}" Value="CanResizeWithGrip">
                 <Setter Property="Visibility" Value="Visible" />
                 <Setter Property="IsEnabled" Value="True" />
             </DataTrigger>
@@ -80,19 +80,19 @@
 
     <Style x:Key="WindowMaximizeRestoreButtonStyle" BasedOn="{StaticResource WindowButtonStyle}" TargetType="{x:Type Button}">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="NoResize">
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType=Window}}" Value="NoResize">
                 <Setter Property="Visibility" Value="Collapsed" />
                 <Setter Property="IsEnabled" Value="False" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanMinimize">
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType=Window}}" Value="CanMinimize">
                 <Setter Property="Visibility" Value="Visible" />
                 <Setter Property="IsEnabled" Value="False" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanResize">
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType=Window}}" Value="CanResize">
                 <Setter Property="Visibility" Value="Visible" />
                 <Setter Property="IsEnabled" Value="True" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" Value="CanResizeWithGrip">
+            <DataTrigger Binding="{Binding Path=ResizeMode, RelativeSource={RelativeSource AncestorType=Window}}" Value="CanResizeWithGrip">
                 <Setter Property="Visibility" Value="Visible" />
                 <Setter Property="IsEnabled" Value="True" />
             </DataTrigger>
@@ -118,7 +118,7 @@
 
     <Style x:Key="WindowTitleTextBlockStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="Foreground" Value="{Binding Path=BorderForegroundBrush, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialWindow}}}" />
+        <Setter Property="Foreground" Value="{Binding Path=BorderForegroundBrush, RelativeSource={RelativeSource AncestorType=Window}}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
@@ -141,7 +141,7 @@
                                 <Setter Property="Width" Value="2" />
                                 <Setter Property="HorizontalAlignment" Value="Left" />
                                 <Setter Property="VerticalAlignment" Value="Top" />
-                                <Setter Property="Fill" Value="{Binding BorderBackgroundBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MaterialWindow}}" />
+                                <Setter Property="Fill" Value="{Binding BorderBackgroundBrush, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
                                 <Setter Property="SnapsToDevicePixels" Value="True" />
                             </Style>
                         </Grid.Resources>
@@ -376,7 +376,284 @@
                                 </Border>
 
                                 <!-- resize grip -->
-                                <ResizeGrip x:Name="resizeGrip" Grid.Column="2" Grid.Row="1" Style="{StaticResource ResizeGripStyle}" />
+                                <ResizeGrip x:Name="resizeGrip" Grid.Column="2" Grid.Row="1" Panel.ZIndex="2048" Style="{StaticResource ResizeGripStyle}" />
+                            </Grid>
+                        </Border>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="WindowState" Value="Normal">
+                <Setter Property="WindowChrome.WindowChrome">
+                    <Setter.Value>
+                        <WindowChrome ResizeBorderThickness="4" UseAeroCaptionButtons="False" CaptionHeight="28" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="WindowState" Value="Maximized">
+                <Setter Property="WindowChrome.WindowChrome">
+                    <Setter.Value>
+                        <WindowChrome ResizeBorderThickness="0" UseAeroCaptionButtons="False" CaptionHeight="40" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="WindowChrome.WindowChrome">
+                    <Setter.Value>
+                        <WindowChrome ResizeBorderThickness="4,4,18,18" UseAeroCaptionButtons="False" CaptionHeight="28" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type controls:MaterialNavigationWindow}">
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
+        <Setter Property="BorderBackgroundBrush" Value="{DynamicResource PrimaryHueDarkBrush}" />
+        <Setter Property="BorderForegroundBrush" Value="{DynamicResource PrimaryHueDarkForegroundBrush}" />
+        <Setter Property="FontFamily" Value="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" />
+        <Setter Property="FadeContentIfInactive" Value="True" />
+        <Setter Property="MinWidth" Value="128" />
+        <Setter Property="MinHeight" Value="128" />
+        <Setter Property="TitleBarIcon" Value="{Binding Path=Icon, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="TitleTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Style="{StaticResource WindowTitleTextBlockStyle}" Text="{Binding Path=Title, RelativeSource={RelativeSource AncestorType={x:Type controls:MaterialNavigationWindow}}}"
+                               Margin="8,0,0,0" HorizontalAlignment="Center" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:MaterialNavigationWindow}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="OpacityInStoryboard">
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.75" To="1" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <SineEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                        <Storyboard x:Key="OpacityOutStoryboard">
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.75" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <SineEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Border>
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Normal">
+                                        <Setter Property="Padding" Value="0" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Maximized">
+                                        <Setter Property="Padding" Value="8" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Border Grid.Column="1" Grid.Row="1" BorderBrush="{TemplateBinding BorderBackgroundBrush}" Background="{TemplateBinding BorderBackgroundBrush}"
+                                ClipToBounds="True"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Normal">
+                                            <Setter Property="BorderThickness" Value="1" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Maximized">
+                                            <Setter Property="BorderThickness" Value="0" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="100*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="100*" />
+                                </Grid.RowDefinitions>
+
+                                <!-- navigation and window icon -->
+                                <StackPanel Panel.ZIndex="2048" Orientation="Horizontal" Margin="8,0,0,0" VerticalAlignment="Stretch">
+                                    <Image Source="{TemplateBinding TitleBarIcon}" Width="24" Height="24" VerticalAlignment="Center">
+                                        <Image.Visibility>
+                                            <MultiBinding Converter="{StaticResource windowTitleBarIconVisibilityConverter}">
+                                                <Binding Path="TitleBarIcon" RelativeSource="{RelativeSource TemplatedParent}" />
+                                                <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Image.Visibility>
+                                    </Image>
+                                    <Border Background="{Binding Path=BorderForegroundBrush, RelativeSource={RelativeSource AncestorType=Window}}"
+                                            Width="1" Margin="8,4" VerticalAlignment="Stretch"
+                                            SnapsToDevicePixels="True">
+                                        <Border.Visibility>
+                                            <MultiBinding Converter="{StaticResource windowTitleBarIconVisibilityConverter}">
+                                                <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Border.Visibility>
+                                    </Border>
+                                    <Button Style="{StaticResource WindowButtonStyle}" Command="NavigationCommands.BrowseBack">
+                                        <!--  ToolTip="{x:Static localization:Strings.Minimize}" -->
+                                        <!--<Button.Visibility>
+                                            <MultiBinding Converter="{StaticResource windowCaptionButtonVisibilityConverter}">
+                                                <Binding Path="MinimizeButtonName" Source="{StaticResource windowCaptionButtonVisibilityConverter}" Mode="OneTime" />
+                                                <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                                <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Button.Visibility>
+                                        <Button.IsEnabled>
+                                            <MultiBinding Converter="{StaticResource windowCaptionButtonEnabledConverter}">
+                                                <Binding Path="MinimizeButtonName" Source="{StaticResource windowCaptionButtonEnabledConverter}" Mode="OneTime" />
+                                                <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Button.IsEnabled>-->
+                                        <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="ArrowLeft" />
+                                    </Button>
+                                    <Button Style="{StaticResource WindowButtonStyle}" Command="NavigationCommands.BrowseForward">
+                                        <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="ArrowRight" />
+                                    </Button>
+                                    <Button Style="{StaticResource WindowButtonStyle}" Command="NavigationCommands.NavigateJournal" Margin="0,0,0,8">
+                                        <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="ChevronDown" />
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- window title -->
+                                <Border Grid.Column="1" Panel.ZIndex="2048" Height="32" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Border.Visibility>
+                                        <MultiBinding Converter="{StaticResource windowTitleVisibilityConverter}">
+                                            <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </Border.Visibility>
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Path=FadeContentIfInactive, RelativeSource={RelativeSource TemplatedParent}}" Value="True" />
+                                                        <Condition Binding="{Binding Path=IsActive, RelativeSource={RelativeSource TemplatedParent}}" Value="True" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <MultiDataTrigger.EnterActions>
+                                                        <BeginStoryboard Storyboard="{StaticResource OpacityInStoryboard}" />
+                                                    </MultiDataTrigger.EnterActions>
+                                                    <MultiDataTrigger.ExitActions>
+                                                        <BeginStoryboard Storyboard="{StaticResource OpacityOutStoryboard}" />
+                                                    </MultiDataTrigger.ExitActions>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <ContentControl ContentTemplate="{TemplateBinding TitleTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                </Border>
+
+                                <!-- caption buttons -->
+                                <StackPanel Grid.Column="2" Panel.ZIndex="2048" Orientation="Horizontal" Height="32" VerticalAlignment="Stretch">
+                                    <StackPanel.Visibility>
+                                        <MultiBinding Converter="{StaticResource windowTitleVisibilityConverter}">
+                                            <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                        </MultiBinding>
+                                    </StackPanel.Visibility>
+                                    <Button x:Name="minimizeButton" Style="{StaticResource WindowMinimizeButtonStyle}" ToolTip="{x:Static localization:Strings.Minimize}">
+                                        <Button.Visibility>
+                                            <MultiBinding Converter="{StaticResource windowCaptionButtonVisibilityConverter}">
+                                                <Binding Path="MinimizeButtonName" Source="{StaticResource windowCaptionButtonVisibilityConverter}" Mode="OneTime" />
+                                                <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                                <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Button.Visibility>
+                                        <Button.IsEnabled>
+                                            <MultiBinding Converter="{StaticResource windowCaptionButtonEnabledConverter}">
+                                                <Binding Path="MinimizeButtonName" Source="{StaticResource windowCaptionButtonEnabledConverter}" Mode="OneTime" />
+                                                <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Button.IsEnabled>
+                                        <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="WindowMinimize" />
+                                    </Button>
+                                    <Button x:Name="maximizeRestoreButton" Style="{StaticResource WindowMaximizeRestoreButtonStyle}">
+                                        <Button.Visibility>
+                                            <MultiBinding Converter="{StaticResource windowCaptionButtonVisibilityConverter}">
+                                                <Binding Path="MaximizeRestoreButtonName" Source="{StaticResource windowCaptionButtonVisibilityConverter}" Mode="OneTime" />
+                                                <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                                <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Button.Visibility>
+                                        <Button.IsEnabled>
+                                            <MultiBinding Converter="{StaticResource windowCaptionButtonEnabledConverter}">
+                                                <Binding Path="MaximizeRestoreButtonName" Source="{StaticResource windowCaptionButtonEnabledConverter}" Mode="OneTime" />
+                                                <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Button.IsEnabled>
+                                        <md:PackIcon>
+                                            <md:PackIcon.Style>
+                                                <Style BasedOn="{StaticResource WindowButtonIconStyle}" TargetType="{x:Type md:PackIcon}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Normal">
+                                                            <Setter Property="Kind" Value="WindowMaximize" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Maximized">
+                                                            <Setter Property="Kind" Value="WindowRestore" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </md:PackIcon.Style>
+                                        </md:PackIcon>
+                                    </Button>
+                                    <Button x:Name="closeButton" Style="{StaticResource WindowCloseButtonStyle}" ToolTip="{x:Static localization:Strings.Close}">
+                                        <Button.Visibility>
+                                            <MultiBinding Converter="{StaticResource windowCaptionButtonVisibilityConverter}">
+                                                <Binding Path="CloseButtonName" Source="{StaticResource windowCaptionButtonVisibilityConverter}" Mode="OneTime" />
+                                                <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
+                                                <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Button.Visibility>
+                                        <Button.IsEnabled>
+                                            <MultiBinding Converter="{StaticResource windowCaptionButtonEnabledConverter}">
+                                                <Binding Path="CloseButtonName" Source="{StaticResource windowCaptionButtonEnabledConverter}" Mode="OneTime" />
+                                                <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
+                                            </MultiBinding>
+                                        </Button.IsEnabled>
+                                        <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="WindowClose" />
+                                    </Button>
+                                </StackPanel>
+
+                                <!-- window content -->
+                                <Border Grid.ColumnSpan="3" Grid.Row="1" Panel.ZIndex="2047" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <AdornerDecorator>
+                                        <ContentPresenter x:Name="PART_NavWinCP">
+                                            <ContentPresenter.Style>
+                                                <Style TargetType="ContentPresenter">
+                                                    <Style.Triggers>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding Path=FadeContentIfInactive, RelativeSource={RelativeSource TemplatedParent}}" Value="True" />
+                                                                <Condition Binding="{Binding Path=IsActive, RelativeSource={RelativeSource TemplatedParent}}" Value="True" />
+                                                            </MultiDataTrigger.Conditions>
+                                                            <MultiDataTrigger.EnterActions>
+                                                                <BeginStoryboard Storyboard="{StaticResource OpacityInStoryboard}" />
+                                                            </MultiDataTrigger.EnterActions>
+                                                            <MultiDataTrigger.ExitActions>
+                                                                <BeginStoryboard Storyboard="{StaticResource OpacityOutStoryboard}" />
+                                                            </MultiDataTrigger.ExitActions>
+                                                        </MultiDataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentPresenter.Style>
+                                        </ContentPresenter>
+                                    </AdornerDecorator>
+                                </Border>
+
+                                <!-- resize grip -->
+                                <ResizeGrip x:Name="resizeGrip" Grid.Column="2" Grid.Row="1" Panel.ZIndex="2048" Style="{StaticResource ResizeGripStyle}" />
                             </Grid>
                         </Border>
                     </Border>

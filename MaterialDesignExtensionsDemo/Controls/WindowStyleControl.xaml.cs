@@ -27,5 +27,11 @@ namespace MaterialDesignExtensionsDemo.Controls
             DemoWindow window = new DemoWindow { WindowStyle = ((WindowStyleViewModel)DataContext).SelectedWindowStyle };
             window.ShowDialog();
         }
+
+        private void ShowNavigationWindowButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            DemoNavigationWindow window = new DemoNavigationWindow { WindowStyle = ((WindowStyleViewModel)DataContext).SelectedWindowStyle };
+            window.ShowDialog();
+        }
     }
 }
