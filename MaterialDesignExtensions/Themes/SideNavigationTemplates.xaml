@@ -15,7 +15,7 @@
     <Style x:Key="navigationItemBackgroundBorderStyle" TargetType="{x:Type Border}">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
-        <Setter Property="Opacity" Value="0.12" />
+        <Setter Property="Opacity" Value="{Binding Path=SelectionBackgroundOpacity, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
         <Setter Property="CornerRadius" Value="{Binding Path=SelectionCornerRadius, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
         <Setter Property="Margin" Value="{Binding Path=SelectionMargin, RelativeSource={RelativeSource AncestorType={x:Type controls:SideNavigation}}}" />
         <Style.Triggers>
@@ -193,6 +193,7 @@
         <Setter Property="LabelForeground" Value="{DynamicResource MaterialDesignNavigationItemText}" />
         <Setter Property="SelectionForeground" Value="{DynamicResource PrimaryHueMidBrush}" />
         <Setter Property="SelectionBackground" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="SelectionBackgroundOpacity" Value="0.12" />
         <Setter Property="SelectionCornerRadius" Value="4" />
         <Setter Property="SelectionMargin" Value="8,4" />
         <Setter Property="NavigationItemFeedback" Value="{DynamicResource PrimaryHueMidBrush}" />
