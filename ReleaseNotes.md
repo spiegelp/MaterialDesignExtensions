@@ -204,6 +204,8 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Layout improvements for `NavigationRail`
 * More customizable content area for `AppBar`
 * Localization for Japanese
+#### Fixes
+* Avoid unnecessary searches in `TextBoxSuggestions`
 #### Breaking API
 * `AppBar.Children` replaced by `AppBar.ContentAreaContent`
   * `ContentAreaContent` is `object` instead of `IList`

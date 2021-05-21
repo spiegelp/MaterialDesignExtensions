@@ -21,6 +21,22 @@
                     <TextBlock Text="Your text:" Margin="0,0,8,0" />
                     <TextBlock Text="{Binding Path=Text}" />
                 </StackPanel>
+                <!--<ItemsControl x:Name="itemsControl" ItemsSource="{Binding Path=Devices, Mode=OneTime}" Margin="0,32" HorizontalAlignment="Stretch" VerticalAlignment="Top" IsEnabled="False">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="16,4">
+                                <mde:TextBoxSuggestions TextBoxSuggestionsSource="{Binding Path=DataContext.TextBoxSuggestionsSource, ElementName=itemsControl}">
+                                    <TextBox Text="{Binding Path=OperatingSystem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </mde:TextBoxSuggestions>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>-->
             </StackPanel>
         </ScrollViewer>
     </Grid>
