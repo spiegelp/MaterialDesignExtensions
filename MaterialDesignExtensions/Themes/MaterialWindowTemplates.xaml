@@ -210,7 +210,7 @@
                                         <Setter Property="Padding" Value="0" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource TemplatedParent}}" Value="Maximized">
-                                        <Setter Property="Padding" Value="8" />
+                                        <Setter Property="Padding" Value="6" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
