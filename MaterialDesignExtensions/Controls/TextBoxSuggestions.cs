@@ -197,7 +197,7 @@ namespace MaterialDesignExtensions.Controls
 
         private void TextBoxTextChangedHandler(object sender, TextChangedEventArgs args)
         {
-            if (sender == TextBox)
+            if (sender == TextBox && IsEnabled && IsLoaded && TextBox.IsLoaded && TextBox.IsFocused)
             {
                 m_autocompleteController?.Search(TextBox.Text);
             }

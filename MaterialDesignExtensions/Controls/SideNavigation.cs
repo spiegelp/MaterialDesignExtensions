@@ -156,13 +156,13 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// The background color of the selected item. It will get an opacity of 15%.
+        /// The background color of the selected item.
         /// </summary>
         public static readonly DependencyProperty SelectionBackgroundProperty = DependencyProperty.Register(
             nameof(SelectionBackground), typeof(Brush), typeof(SideNavigation), new PropertyMetadata(null, null));
 
         /// <summary>
-        /// The background color of the selected item. It will get an opacity of 15%.
+        /// The background color of the selected item.
         /// </summary>
         public Brush SelectionBackground
         {
@@ -174,6 +174,28 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(SelectionBackgroundProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The background color opacity of the selected item.
+        /// </summary>
+        public static readonly DependencyProperty SelectionBackgroundOpacityProperty = DependencyProperty.Register(
+            nameof(SelectionBackgroundOpacity), typeof(double), typeof(SideNavigation), new PropertyMetadata(0.12, null));
+
+        /// <summary>
+        /// The background color opacity of the selected item.
+        /// </summary>
+        public double SelectionBackgroundOpacity
+        {
+            get
+            {
+                return (double)GetValue(SelectionBackgroundOpacityProperty);
+            }
+
+            set
+            {
+                SetValue(SelectionBackgroundOpacityProperty, value);
             }
         }
 

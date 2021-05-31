@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MaterialDesignExtensions</id>
-    <version>3.3.0</version>
+    <version>4.0.0-a01</version>
     <title>Material Design Extensions</title>
     <authors>Philipp Spiegel</authors>
     <owners>Philipp Spiegel</owners>
@@ -14,12 +14,8 @@
     <!--<icon>icon.png</icon>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Material Design Extensions is based on Material Design in XAML Toolkit to provide additional controls and features for WPF apps. The controls might not be specified in the Material Design specification or would crash the scope of Material Design in XAML Toolkit.</summary>
-    <description>Material Design Extensions is based on Material Design in XAML Toolkit to provide additional controls and features for WPF apps. The controls might not be specified in the Material Design specification or would crash the scope of Material Design in XAML Toolkit.
-
-Important notice: The configuration for version 2.6.0 changed. See the release notes of this version for details.</description>
-    <releaseNotes>https://spiegelp.github.io/MaterialDesignExtensions/#releasenotes
-
-Important notice: The configuration of Material Design Extensions changed in order to enable changing the theme at runtime. Please change your configuration according to App.xaml of the demo.</releaseNotes>
+    <description>Material Design Extensions is based on Material Design in XAML Toolkit to provide additional controls and features for WPF apps. The controls might not be specified in the Material Design specification or would crash the scope of Material Design in XAML Toolkit.</description>
+    <releaseNotes>https://spiegelp.github.io/MaterialDesignExtensions/#releasenotes</releaseNotes>
     <!--<readme>Readme.md</readme>-->
     <copyright>Copyright (c) 2017-2021 Spiegel Philipp</copyright>
     <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window NavigationRail BusyOverlay</tags>
