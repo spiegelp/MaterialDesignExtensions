@@ -444,6 +444,7 @@
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
                         </Storyboard>
+                        <JournalEntryUnifiedViewConverter x:Key="JournalEntryUnifiedViewConverter" />
                     </ControlTemplate.Resources>
                     <Border>
                         <Border.Style>
@@ -504,28 +505,116 @@
                                         </Border.Visibility>
                                     </Border>
                                     <Button Style="{StaticResource WindowButtonStyle}" Command="NavigationCommands.BrowseBack">
-                                        <!--  ToolTip="{x:Static localization:Strings.Minimize}" -->
-                                        <!--<Button.Visibility>
-                                            <MultiBinding Converter="{StaticResource windowCaptionButtonVisibilityConverter}">
-                                                <Binding Path="MinimizeButtonName" Source="{StaticResource windowCaptionButtonVisibilityConverter}" Mode="OneTime" />
-                                                <Binding Path="WindowStyle" RelativeSource="{RelativeSource TemplatedParent}" />
-                                                <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
-                                            </MultiBinding>
-                                        </Button.Visibility>
-                                        <Button.IsEnabled>
-                                            <MultiBinding Converter="{StaticResource windowCaptionButtonEnabledConverter}">
-                                                <Binding Path="MinimizeButtonName" Source="{StaticResource windowCaptionButtonEnabledConverter}" Mode="OneTime" />
-                                                <Binding Path="ResizeMode" RelativeSource="{RelativeSource TemplatedParent}" />
-                                            </MultiBinding>
-                                        </Button.IsEnabled>-->
                                         <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="ArrowLeft" />
                                     </Button>
                                     <Button Style="{StaticResource WindowButtonStyle}" Command="NavigationCommands.BrowseForward">
                                         <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="ArrowRight" />
                                     </Button>
-                                    <Button Style="{StaticResource WindowButtonStyle}" Command="NavigationCommands.NavigateJournal" Margin="0,0,0,8">
-                                        <md:PackIcon Style="{StaticResource WindowButtonIconStyle}" Kind="ChevronDown" />
-                                    </Button>
+                                    <md:PopupBox Foreground="{Binding Path=BorderForegroundBrush, RelativeSource={RelativeSource AncestorType=Window}}" Background="Transparent"
+                                                 Padding="0" VerticalAlignment="Stretch"
+                                                 WindowChrome.IsHitTestVisibleInChrome="True">
+                                        <md:PopupBox.ToggleContent>
+                                            <md:PackIcon Kind="ChevronDown" Width="24" Height="24" Foreground="{Binding Path=BorderForegroundBrush, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                        </md:PopupBox.ToggleContent>
+                                        <Border Padding="0" Width="256" MaxHeight="512">
+                                            <ItemsControl Margin="0,8"
+                                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                          VirtualizingStackPanel.IsVirtualizing="True"
+                                                          ScrollViewer.CanContentScroll="True"
+                                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                          VirtualizingStackPanel.ScrollUnit="Pixel">
+                                                <ItemsControl.ItemsSource>
+                                                    <MultiBinding Converter="{StaticResource JournalEntryUnifiedViewConverter}">
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="BackStack" />
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="ForwardStack" />
+                                                    </MultiBinding>
+                                                </ItemsControl.ItemsSource>
+                                                <ItemsControl.Template>
+                                                    <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                                        <Border SnapsToDevicePixels="True">
+                                                            <ScrollViewer Focusable="False">
+                                                                <ItemsPresenter SnapsToDevicePixels="True" />
+                                                            </ScrollViewer>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </ItemsControl.Template>
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <VirtualizingStackPanel IsItemsHost="True" Orientation="Vertical" />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid x:Name="baseGrid" Background="Transparent" HorizontalAlignment="Stretch" Height="56">
+                                                            <Button x:Name="itemButton" Content="{Binding}"
+                                                                    Padding="0,8"
+                                                                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center"
+                                                                    Command="NavigationCommands.NavigateJournal"
+                                                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                                                                <Button.ContentTemplate>
+                                                                    <DataTemplate>
+                                                                        <Grid Background="Transparent" SnapsToDevicePixels="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="Auto" />
+                                                                                <ColumnDefinition Width="100*" />
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <md:PackIcon>
+                                                                                <md:PackIcon.Style>
+                                                                                    <Style TargetType="md:PackIcon">
+                                                                                        <Setter Property="JournalEntryUnifiedViewConverter.JournalEntryPosition" Value="{Binding (JournalEntryUnifiedViewConverter.JournalEntryPosition)}" />
+                                                                                        <Setter Property="Height" Value="24" />
+                                                                                        <Setter Property="Width" Value="24" />
+                                                                                        <Setter Property="Margin" Value="0,0,16,0" />
+                                                                                        <Setter Property="HorizontalAlignment" Value="Left" />
+                                                                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                                                                        <Setter Property="IsTabStop" Value="False" />
+                                                                                        <Setter Property="FlowDirection" Value="LeftToRight" />
+                                                                                        <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBodyLight}" />
+                                                                                        <Setter Property="Background" Value="Transparent" />
+                                                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                                                        <Setter Property="Template">
+                                                                                            <Setter.Value>
+                                                                                                <ControlTemplate TargetType="md:PackIcon">
+                                                                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                                                                        <Viewbox FlowDirection="{TemplateBinding FlowDirection}">
+                                                                                                            <Canvas Width="24" Height="24">
+                                                                                                                <Path Data="{Binding Data, RelativeSource={RelativeSource TemplatedParent}}" Fill="{TemplateBinding Foreground}" />
+                                                                                                            </Canvas>
+                                                                                                        </Viewbox>
+                                                                                                    </Border>
+                                                                                                </ControlTemplate>
+                                                                                            </Setter.Value>
+                                                                                        </Setter>
+                                                                                        <Style.Triggers>
+                                                                                            <Trigger Property="JournalEntryUnifiedViewConverter.JournalEntryPosition" Value="Current">
+                                                                                                <Setter Property="Kind" Value="Check" />
+                                                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                                            </Trigger>
+                                                                                            <Trigger Property="JournalEntryUnifiedViewConverter.JournalEntryPosition" Value="Forward">
+                                                                                                <Setter Property="Kind" Value="ChevronRight" />
+                                                                                            </Trigger>
+                                                                                            <Trigger Property="JournalEntryUnifiedViewConverter.JournalEntryPosition" Value="Back">
+                                                                                                <Setter Property="Kind" Value="ChevronLeft" />
+                                                                                            </Trigger>
+                                                                                            <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=baseGrid}" Value="True">
+                                                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </md:PackIcon.Style>
+                                                                            </md:PackIcon>
+                                                                            <TextBlock Grid.Column="1" Text="{Binding (JournalEntry.Name)}" FontSize="15" Margin="0" VerticalAlignment="Center" />
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </Button.ContentTemplate>
+                                                            </Button>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Border>
+                                    </md:PopupBox>
                                 </StackPanel>
 
                                 <!-- window title -->

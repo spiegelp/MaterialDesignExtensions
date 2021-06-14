@@ -205,6 +205,7 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * More customizable content area for `AppBar`
 * Localization for Japanese
 * Added `SideNavigation.SelectionBackgroundOpacity` property
+* New window class `MaterialNavigationWindow` for a Material Design like styled navigation window
 #### Fixes
 * Avoid unnecessary searches in `TextBoxSuggestions`
 #### Breaking API
