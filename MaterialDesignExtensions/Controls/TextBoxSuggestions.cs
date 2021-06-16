@@ -172,6 +172,10 @@ namespace MaterialDesignExtensions.Controls
                     Keyboard.Focus(TextBox);
                     TextBox.CaretIndex = TextBox.Text.Length;
                 }
+                else
+                {
+                    Keyboard.Focus(null);
+                }
             }
         }
 

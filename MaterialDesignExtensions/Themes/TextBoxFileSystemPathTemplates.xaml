@@ -25,6 +25,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Margin" Value="0,0,0,4" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -62,7 +63,7 @@
                             <ColumnDefinition Width="100*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBox Grid.ColumnSpan="2" Style="{TemplateBinding TextBoxStyle}" Padding="0,0,12,0" VerticalAlignment="Center"
+                        <TextBox Grid.ColumnSpan="2" Style="{TemplateBinding TextBoxStyle}" Padding="0,0,24,0" VerticalAlignment="Center"
                                  Text="{Binding Path=Directory, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type controls:TextBoxOpenDirectory}}}"
                                  IsEnabled="{TemplateBinding IsEnabled}" />
                         <Button Grid.Column="1" x:Name="showButtonDialog" Style="{StaticResource showButtonDialogStyle}" IsEnabled="{TemplateBinding IsEnabled}">
@@ -83,7 +84,7 @@
                             <ColumnDefinition Width="100*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBox Grid.ColumnSpan="2" Style="{TemplateBinding TextBoxStyle}" Padding="0,0,12,0" VerticalAlignment="Center"
+                        <TextBox Grid.ColumnSpan="2" Style="{TemplateBinding TextBoxStyle}" Padding="0,0,24,0" VerticalAlignment="Center"
                                  Text="{Binding Path=File, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type controls:TextBoxOpenFile}}}"
                                  IsEnabled="{TemplateBinding IsEnabled}" />
                         <Button Grid.Column="1" x:Name="showButtonDialog" Style="{StaticResource showButtonDialogStyle}" IsEnabled="{TemplateBinding IsEnabled}">
@@ -104,7 +105,7 @@
                             <ColumnDefinition Width="100*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBox Grid.ColumnSpan="2" Style="{TemplateBinding TextBoxStyle}" Padding="0,0,12,0" VerticalAlignment="Center"
+                        <TextBox Grid.ColumnSpan="2" Style="{TemplateBinding TextBoxStyle}" Padding="0,0,24,0" VerticalAlignment="Center"
                                  Text="{Binding Path=File, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type controls:TextBoxSaveFile}}}"
                                  IsEnabled="{TemplateBinding IsEnabled}" />
                         <Button Grid.Column="1" x:Name="showButtonDialog" Style="{StaticResource showButtonDialogStyle}" IsEnabled="{TemplateBinding IsEnabled}">
