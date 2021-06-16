@@ -206,9 +206,11 @@ Please change your configuration according to [App.xaml](https://github.com/spie
 * Localization for Japanese
 * Added `SideNavigation.SelectionBackgroundOpacity` property
 * New window class `MaterialNavigationWindow` for a Material Design like styled navigation window
+* Updated dependency to MaterialDesignThemes version 4.1.0
 #### Fixes
 * Avoid unnecessary searches in `TextBoxSuggestions`
 #### Breaking API
 * `AppBar.Children` replaced by `AppBar.ContentAreaContent`
   * `ContentAreaContent` is `object` instead of `IList`
   * Additional `ContentAreaContentTemplate`
+* Minimum version for .NET Framework raised to 4.5.2

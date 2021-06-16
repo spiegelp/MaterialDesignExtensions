@@ -61,7 +61,7 @@ namespace MaterialDesignExtensions.Themes
             SetSolidColorBrush(resourceDictionary, "SecondaryHueMidForegroundBrush", theme.SecondaryMid.ForegroundColor ?? theme.SecondaryMid.Color.ContrastingForegroundColor());
 
             SetSolidColorBrush(resourceDictionary, "ValidationErrorBrush", theme.ValidationError);
-            resourceDictionary["ValidationErrorColor"] = theme.ValidationError;
+            resourceDictionary["MaterialDesignValidationErrorColor"] = theme.ValidationError;
 
             GetColorProperties(theme.GetType(), true, false)
                 .ForEach(property => SetSolidColorBrush(resourceDictionary, GetKey(property), (Color)property.GetValue(theme)));

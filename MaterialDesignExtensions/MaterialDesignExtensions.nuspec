@@ -20,26 +20,26 @@
     <copyright>Copyright (c) 2017-2021 Spiegel Philipp</copyright>
     <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window NavigationRail BusyOverlay</tags>
     <dependencies>
-      <dependency id="MaterialDesignColors" version="1.2.7" />
-      <dependency id="MaterialDesignThemes" version="3.2.0" />
+      <dependency id="MaterialDesignColors" version="2.0.1" />
+      <dependency id="MaterialDesignThemes" version="4.1.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\net45\MaterialDesignExtensions.dll" target="lib\net45" />
-    <file src="bin\Release\net45\de\MaterialDesignExtensions.resources.dll" target="lib\net45\de" />
-    <file src="bin\Release\net45\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net45\Ru" />
-    <file src="bin\Release\net45\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net45\ru-ru" />
-    <file src="bin\Release\net45\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\net45\uz-Latn-UZ" />
-    <file src="bin\Release\net45\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\net45\cs" />
-    <file src="bin\Release\net45\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\net45\cs-CZ" />
-    <file src="bin\Release\net45\pt-BR\MaterialDesignExtensions.resources.dll" target="lib\net45\pt" />
-    <file src="bin\Release\net45\pt-BR\MaterialDesignExtensions.resources.dll" target="lib\net45\pt-BR" />
-    <file src="bin\Release\net45\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\net45\fr" />
-    <file src="bin\Release\net45\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\net45\fr-FR" />
-    <file src="bin\Release\net45\ar-DZ\MaterialDesignExtensions.resources.dll" target="lib\net45\ar-DZ" />
-    <file src="bin\Release\net45\ja-JP\MaterialDesignExtensions.resources.dll" target="lib\net45\ja" />
-    <file src="bin\Release\net45\ja-JP\MaterialDesignExtensions.resources.dll" target="lib\net45\ja-JP" />
-    <file src="bin\Release\net45\MaterialDesignExtensions.xml" target="lib\net45" />
+    <file src="bin\Release\net452\MaterialDesignExtensions.dll" target="lib\net452" />
+    <file src="bin\Release\net452\de\MaterialDesignExtensions.resources.dll" target="lib\net452\de" />
+    <file src="bin\Release\net452\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net452\Ru" />
+    <file src="bin\Release\net452\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net452\ru-ru" />
+    <file src="bin\Release\net452\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\net452\uz-Latn-UZ" />
+    <file src="bin\Release\net452\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\net452\cs" />
+    <file src="bin\Release\net452\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\net452\cs-CZ" />
+    <file src="bin\Release\net452\pt-BR\MaterialDesignExtensions.resources.dll" target="lib\net452\pt" />
+    <file src="bin\Release\net452\pt-BR\MaterialDesignExtensions.resources.dll" target="lib\net452\pt-BR" />
+    <file src="bin\Release\net452\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\net452\fr" />
+    <file src="bin\Release\net452\fr-FR\MaterialDesignExtensions.resources.dll" target="lib\net452\fr-FR" />
+    <file src="bin\Release\net452\ar-DZ\MaterialDesignExtensions.resources.dll" target="lib\net452\ar-DZ" />
+    <file src="bin\Release\net452\ja-JP\MaterialDesignExtensions.resources.dll" target="lib\net452\ja" />
+    <file src="bin\Release\net452\ja-JP\MaterialDesignExtensions.resources.dll" target="lib\net452\ja-JP" />
+    <file src="bin\Release\net452\MaterialDesignExtensions.xml" target="lib\net452" />
     <file src="bin\Release\netcoreapp3.1\MaterialDesignExtensions.dll" target="lib\netcoreapp3.1" />
     <file src="bin\Release\netcoreapp3.1\de\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\de" />
     <file src="bin\Release\netcoreapp3.1\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\Ru" />
