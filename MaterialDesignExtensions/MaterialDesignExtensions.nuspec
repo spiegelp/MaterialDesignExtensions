@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MaterialDesignExtensions</id>
-    <version>4.0.0-a01</version>
+    <version>4.0.0-a02</version>
     <title>Material Design Extensions</title>
     <authors>Philipp Spiegel</authors>
     <owners>Philipp Spiegel</owners>
@@ -18,7 +18,7 @@
     <releaseNotes>https://spiegelp.github.io/MaterialDesignExtensions/#releasenotes</releaseNotes>
     <!--<readme>Readme.md</readme>-->
     <copyright>Copyright (c) 2017-2021 Spiegel Philipp</copyright>
-    <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window NavigationRail BusyOverlay</tags>
+    <tags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow MaterialNavigationWindow Window NavigationRail BusyOverlay</tags>
     <dependencies>
       <dependency id="MaterialDesignColors" version="2.0.1" />
       <dependency id="MaterialDesignThemes" version="4.1.0" />

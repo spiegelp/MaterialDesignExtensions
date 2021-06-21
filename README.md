@@ -14,7 +14,7 @@ Material Design Extensions is based on <a href="https://github.com/MaterialDesig
 
 Install NuGet package. `PM> Install-Package MaterialDesignExtensions`
 
-Assemblies are compiled for .NET Core 3.1 and .NET Framework 4.5
+Assemblies are compiled for .NET Core 3.1 and .NET Framework 4.5.2
 
 ## Getting started
 1. Create a WPF desktop application
@@ -50,6 +50,7 @@ Material Design Extensions features the following controls:
 | [Tabs](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/tabs) | Templates for `TabControl` ([specification](https://material.io/design/components/tabs.html)) | Done |
 | [Busy overlay](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/busyoverlay) | Custom `BusyOverlay` control | Done |
 | [Material window](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/materialwindow) | Custom `MaterialWindow` control | Done |
+| [Material navigation window](https://spiegelp.github.io/MaterialDesignExtensions/#documentation/materialwindow) | Custom `MaterialNavigationWindow` control | In development |
 
 ## Screenshots
 ### Horizontal stepper
