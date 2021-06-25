@@ -11,21 +11,17 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
-    /// A control to be used as side navigation or inside a navigation drawer.
+    /// A navigation control to be used as side navigation or inside a navigation drawer.
     /// </summary>
     public class SideNavigation : Control
     {
         private const string NavigationItemsControlName = "navigationItemsControl";
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectNavigationItemCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by selecting an item.
@@ -72,6 +68,72 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// The foreground color of the icon of not selected items.
+        /// </summary>
+        public static readonly DependencyProperty IconForegroundProperty = DependencyProperty.Register(
+            nameof(IconForeground), typeof(Brush), typeof(SideNavigation), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// The foreground color of the icon of not selected items.
+        /// </summary>
+        public Brush IconForeground
+        {
+            get
+            {
+                return (Brush)GetValue(IconForegroundProperty);
+            }
+
+            set
+            {
+                SetValue(IconForegroundProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The font size of the item labels.
+        /// </summary>
+        public static readonly DependencyProperty LabelFontSizeProperty = DependencyProperty.Register(
+            nameof(LabelFontSize), typeof(double), typeof(SideNavigation), new PropertyMetadata(14.0, null));
+
+        /// <summary>
+        /// The font size of the item labels.
+        /// </summary>
+        public double LabelFontSize
+        {
+            get
+            {
+                return (double)GetValue(LabelFontSizeProperty);
+            }
+
+            set
+            {
+                SetValue(LabelFontSizeProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The foreground color of the label of not selected items.
+        /// </summary>
+        public static readonly DependencyProperty LabelForegroundProperty = DependencyProperty.Register(
+            nameof(LabelForeground), typeof(Brush), typeof(SideNavigation), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// The foreground color of the label of not selected items.
+        /// </summary>
+        public Brush LabelForeground
+        {
+            get
+            {
+                return (Brush)GetValue(LabelForegroundProperty);
+            }
+
+            set
+            {
+                SetValue(LabelForegroundProperty, value);
+            }
+        }
+
+        /// <summary>
         /// The color of the click ripple by selecting an item.
         /// </summary>
         public static readonly DependencyProperty NavigationItemFeedbackProperty = DependencyProperty.Register(
@@ -94,13 +156,13 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// The background color of the selected item. It will get an opacity of 15%.
+        /// The background color of the selected item.
         /// </summary>
         public static readonly DependencyProperty SelectionBackgroundProperty = DependencyProperty.Register(
             nameof(SelectionBackground), typeof(Brush), typeof(SideNavigation), new PropertyMetadata(null, null));
 
         /// <summary>
-        /// The background color of the selected item. It will get an opacity of 15%.
+        /// The background color of the selected item.
         /// </summary>
         public Brush SelectionBackground
         {
@@ -112,6 +174,28 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(SelectionBackgroundProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The background color opacity of the selected item.
+        /// </summary>
+        public static readonly DependencyProperty SelectionBackgroundOpacityProperty = DependencyProperty.Register(
+            nameof(SelectionBackgroundOpacity), typeof(double), typeof(SideNavigation), new PropertyMetadata(0.12, null));
+
+        /// <summary>
+        /// The background color opacity of the selected item.
+        /// </summary>
+        public double SelectionBackgroundOpacity
+        {
+            get
+            {
+                return (double)GetValue(SelectionBackgroundOpacityProperty);
+            }
+
+            set
+            {
+                SetValue(SelectionBackgroundOpacityProperty, value);
             }
         }
 
@@ -280,7 +364,7 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private ItemsControl m_navigationItemsControl;
+        protected ItemsControl m_navigationItemsControl;
 
         static SideNavigation()
         {
@@ -296,7 +380,7 @@ namespace MaterialDesignExtensions.Controls
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
 
-            CommandBindings.Add(new CommandBinding(SelectNavigationItemCommand, SelectNavigationItemCommandHandlerAsync));
+            CommandBindings.Add(new CommandBinding(SideNavigationCommands.SelectNavigationItemCommand, SelectNavigationItemCommandHandlerAsync));
         }
 
         public override void OnApplyTemplate()
@@ -392,26 +476,38 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        private void InitItems(IList values)
+        protected virtual void InitItems(IList values)
         {
-            IList<INavigationItem> navigationItems = new List<INavigationItem>();
-
-            if (values != null)
+            if (m_navigationItemsControl != null)
             {
-                foreach (object item in values)
+                IList<INavigationItem> navigationItems = new List<INavigationItem>();
+
+                if (values != null)
                 {
-                    if (item is INavigationItem navigationItem)
+                    foreach (object item in values)
                     {
-                        navigationItems.Add(navigationItem);
+                        if (item is INavigationItem navigationItem)
+                        {
+                            navigationItems.Add(navigationItem);
+                        }
                     }
                 }
-            }
 
-            m_navigationItemsControl.ItemsSource = navigationItems;
+                m_navigationItemsControl.ItemsSource = navigationItems;
 
-            if (SelectedItem != null && !navigationItems.Contains(SelectedItem))
-            {
-                SelectedItem = null;
+                INavigationItem selectedItem = navigationItems.FirstOrDefault(item => item.IsSelected);
+
+                if (selectedItem != null)
+                {
+                    if (SelectedItem != selectedItem)
+                    {
+                        SelectedItem = selectedItem;
+                    }
+                }
+                else
+                {
+                    SelectedItem = null;
+                }
             }
         }
     }

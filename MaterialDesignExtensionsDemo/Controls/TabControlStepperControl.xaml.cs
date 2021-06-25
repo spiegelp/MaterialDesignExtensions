@@ -20,6 +20,14 @@ namespace MaterialDesignExtensionsDemo.Controls
         public TabControlStepperControl()
         {
             InitializeComponent();
+
+            Loaded += LoadedHandler;
+        }
+
+        private void LoadedHandler(object sender, RoutedEventArgs args)
+        {
+            // demo for setting a step via SelectedIndex property
+            //m_stepper.SelectedIndex = 1;
         }
     }
 }

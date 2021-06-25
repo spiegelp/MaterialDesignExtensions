@@ -8,8 +8,14 @@ using System.Windows.Data;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Converter for displaying a past <see cref="DateTime" />.
+    /// </summary>
     public class DateTimeAgoConverter : IValueConverter
     {
+        /// <summary>
+        /// Creates a new <see cref="DateTimeAgoConverter" />.
+        /// </summary>
         public DateTimeAgoConverter() { }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -19,7 +25,7 @@ namespace MaterialDesignExtensions.Converters
                 DateTime now = DateTime.Now;
                 TimeSpan timeSpan = now - dateTime;
 
-                if (timeSpan.TotalHours < 24)
+                if (now.Date == dateTime.Date && timeSpan.TotalHours < 24)
                 {
                     return dateTime.ToShortTimeString();
                 }

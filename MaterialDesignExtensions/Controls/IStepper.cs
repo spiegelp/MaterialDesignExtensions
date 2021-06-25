@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
+using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controls
@@ -57,6 +58,16 @@ namespace MaterialDesignExtensions.Controls
         ICommand ContinueNavigationCommand { get; set; }
 
         /// <summary>
+        /// Gets the controller for this <see cref="Stepper" />.
+        /// </summary>
+        StepperController Controller { get; }
+
+        /// <summary>
+        /// An alternative icon template done steps.
+        /// </summary>
+        DataTemplate DoneIconTemplate { get; set; }
+
+        /// <summary>
         /// Enables the linear mode by disabling the buttons of the header.
         /// The navigation must be accomplished by using the navigation commands.
         /// </summary>
@@ -71,5 +82,10 @@ namespace MaterialDesignExtensions.Controls
         /// A command called by navigating to an arbitrary <see cref="IStep" /> in a non-linear stepper.
         /// </summary>
         ICommand StepNavigationCommand { get; set; }
+
+        /// <summary>
+        /// An alternative icon template to indicate validation errors.
+        /// </summary>
+        DataTemplate ValidationErrorIconTemplate { get; set; }
     }
 }

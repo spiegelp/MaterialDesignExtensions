@@ -1,4 +1,68 @@
 ﻿<div>
     <h1>Text box suggestions</h1>
-    Documentation under construction
+
+    <h2>Screenshots</h2>
+    <img src="https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/TextBoxSuggestions.png" alt="Text box suggestions" />
+
+    <h2>Code example</h2>
+   
+    <p>Text box suggestions control</p>
+    <pre class="language-markup"><code class="language-markup">
+&lt;mde:TextBoxSuggestions TextBoxSuggestionsSource="{Binding Path=TextBoxSuggestionsSource}">
+    &lt;TextBox Text="{Binding Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+&lt;/mde:TextBoxSuggestions>
+    </code></pre>
+
+    <p>Text box suggestions data source</p>
+    <pre class="language-markup"><code class="language-markup">
+public class TextBoxSuggestionsViewModel : ViewModel
+{
+    private string _text;
+    public string Text
+    {
+        get => _text;
+        set
+        {
+            _text = value;
+            OnPropertyChanged(nameof(Text));
+        }
+    }
+
+    private ITextBoxSuggestionsSource _textBoxSuggestionsSource;
+    public ITextBoxSuggestionsSource TextBoxSuggestionsSource
+    {
+        get => _textBoxSuggestionsSource;
+    }
+
+    public TextBoxSuggestionsViewModel() : base()
+    {
+        _textBoxSuggestionsSource = new OperatingSystemTextBoxSuggestionsSource();
+        _text = null;
+    }
+}
+
+public class OperatingSystemTextBoxSuggestionsSource : TextBoxSuggestionsSource
+{
+    private List<string> m_operatingSystemItems;
+
+    public OperatingSystemTextBoxSuggestionsSource()
+    {
+        m_operatingSystemItems = new List<string>()
+        {
+            "Windows 7",
+            "Windows 8",
+            "Windows 8.1",
+            "Windows 10"
+        };
+    }
+
+    public override IEnumerable<string> Search(string searchTerm)
+    {
+        searchTerm = searchTerm ?? string.Empty;
+        searchTerm = searchTerm.ToLower();
+
+        return m_operatingSystemItems.Where(item => item.ToLower().Contains(searchTerm));
+    }
+}
+    </code></pre>
 </div>

@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 
 using MaterialDesignExtensions.Controllers;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
+#if LONG_PATH
+using FileInfo = Pri.LongPath.FileInfo;
+#endif
+
 namespace MaterialDesignExtensions.Model
 {
     /// <summary>

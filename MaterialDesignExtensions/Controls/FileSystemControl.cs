@@ -13,8 +13,15 @@ using System.Windows.Media;
 
 using MaterialDesignThemes.Wpf;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
+
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
+#if LONG_PATH
+using FileSystemInfo = Pri.LongPath.FileSystemInfo;
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+#endif
 
 namespace MaterialDesignExtensions.Controls
 {
@@ -26,33 +33,9 @@ namespace MaterialDesignExtensions.Controls
         protected const string DrawerHostName = "drawerHost";
         protected const string PathPartsScrollViewerName = "pathPartsScrollViewer";
         protected const string PathPartsItemsControlName = "pathPartsItemsControl";
+        protected const string CurrentDirectoryTextBoxName = "currentDirectoryTextBox";
         protected const string FileSystemEntryItemsControlName = "fileSystemEntryItemsControl";
         protected const string EmptyDirectoryTextBlockName = "emptyDirectoryTextBlock";
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand OpenSpecialDirectoriesDrawerCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectDirectoryItemCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectFileSystemEntryCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand ShowInfoCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand CancelCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by canceling the operation.
@@ -84,6 +67,31 @@ namespace MaterialDesignExtensions.Controls
             get
             {
                 return m_controller;
+            }
+        }
+
+        /// <summary>
+        /// Enables the feature to create new directories.
+        /// </summary>
+        public static readonly DependencyProperty CreateNewDirectoryEnabledProperty = DependencyProperty.Register(
+            nameof(CreateNewDirectoryEnabled),
+            typeof(bool),
+            typeof(FileSystemControl),
+            new PropertyMetadata(false));
+
+        /// <summary>
+        /// Enables the feature to create new directories. Notice: It does not have any effects for <see cref="OpenFileControl" />.
+        /// </summary>
+        public bool CreateNewDirectoryEnabled
+        {
+            get
+            {
+                return (bool)GetValue(CreateNewDirectoryEnabledProperty);
+            }
+
+            set
+            {
+                SetValue(CreateNewDirectoryEnabledProperty, value);
             }
         }
 
@@ -171,6 +179,56 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// The name for the new directory.
+        /// </summary>
+        public static readonly DependencyProperty NewDirectoryNameProperty = DependencyProperty.Register(
+                nameof(NewDirectoryName),
+                typeof(string),
+                typeof(FileSystemControl),
+                new PropertyMetadata(null));
+
+        /// <summary>
+        /// The name for the new directory.
+        /// </summary>
+        public string NewDirectoryName
+        {
+            get
+            {
+                return (string)GetValue(NewDirectoryNameProperty);
+            }
+
+            set
+            {
+                SetValue(NewDirectoryNameProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Show the current directory path with a short cut button for each part in the path, instead of a text box.
+        /// </summary>
+        public static readonly DependencyProperty PathPartsAsButtonsProperty = DependencyProperty.Register(
+            nameof(PathPartsAsButtons),
+            typeof(bool),
+            typeof(FileSystemControl),
+            new PropertyMetadata(true));
+
+        /// <summary>
+        /// Show the current directory path with a short cut button for each part in the path, instead of a text box.
+        /// </summary>
+        public bool PathPartsAsButtons
+        {
+            get
+            {
+                return (bool)GetValue(PathPartsAsButtonsProperty);
+            }
+
+            set
+            {
+                SetValue(PathPartsAsButtonsProperty, value);
+            }
+        }
+
+        /// <summary>
         /// Shows or hides hidden directories and files.
         /// </summary>
         public static readonly DependencyProperty ShowHiddenFilesAndDirectoriesProperty = DependencyProperty.Register(
@@ -245,12 +303,38 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Enable switching between a text box and the buttons for each sub directory of the current directory's path.
+        /// </summary>
+        public static readonly DependencyProperty SwitchPathPartsAsButtonsEnabledProperty = DependencyProperty.Register(
+            nameof(SwitchPathPartsAsButtonsEnabled),
+            typeof(bool),
+            typeof(FileSystemControl),
+            new PropertyMetadata(false));
+
+        /// <summary>
+        /// Enable switching between a text box and the buttons for each sub directory of the current directory's path.
+        /// </summary>
+        public bool SwitchPathPartsAsButtonsEnabled
+        {
+            get
+            {
+                return (bool)GetValue(SwitchPathPartsAsButtonsEnabledProperty);
+            }
+
+            set
+            {
+                SetValue(SwitchPathPartsAsButtonsEnabledProperty, value);
+            }
+        }
+
         protected FileSystemController m_controller;
 
         protected ScrollViewer m_pathPartsScrollViewer;
         protected ItemsControl m_pathPartsItemsControl;
+        protected TextBox m_currentDirectoryTextBox;
         // use an ItemsControl instead of a ListBox, because the ListBox raises several selection changed events without an explicit user input
-        // another advantage; non selectable items such as headers can be added
+        // another advantage: non selectable items such as headers can be added
         protected ItemsControl m_fileSystemEntryItemsControl;
         // private to force the usage of the lazy getter, because it only works after applying the template
         private ScrollViewer m_fileSystemEntryItemsScrollViewer;
@@ -261,20 +345,30 @@ namespace MaterialDesignExtensions.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FileSystemControl), new FrameworkPropertyMetadata(typeof(FileSystemControl)));
         }
 
+        /// <summary>
+        /// Creates a new <see cref="FileSystemControl" />.
+        /// </summary>
         public FileSystemControl()
             : base()
         {
             m_controller = new FileSystemController();
             m_controller.SelectDirectory(CurrentDirectory);
 
-            CommandBindings.Add(new CommandBinding(OpenSpecialDirectoriesDrawerCommand, OpenSpecialDirectoriesDrawerCommandHandler));
-            CommandBindings.Add(new CommandBinding(SelectDirectoryItemCommand, SelectDirectoryItemCommandHandler));
-            CommandBindings.Add(new CommandBinding(SelectFileSystemEntryCommand, SelectFileSystemEntryCommandHandler));
-            CommandBindings.Add(new CommandBinding(ShowInfoCommand, ShowInfoCommandHandler));
-            CommandBindings.Add(new CommandBinding(CancelCommand, CancelCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand, OpenSpecialDirectoriesDrawerCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SwitchPathPartsAsButtonsCommand, SwitchPathPartsAsButtonsHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectDirectoryItemCommand, SelectDirectoryItemCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectFileSystemEntryCommand, SelectFileSystemEntryCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.ShowInfoCommand, ShowInfoCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.CancelCommand, CancelCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.ShowCreateNewDirectoryCommand, ShowCreateNewDirectoryCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.CancelNewDirectoryCommand, CancelNewDirectoryCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.CreateNewDirectoryCommand, CreateNewDirectoryCommandHandler));
+
+            InputBindings.Add(new KeyBinding(FileSystemControlCommands.CancelCommand, new KeyGesture(Key.Escape)));
 
             m_pathPartsScrollViewer = null;
             m_pathPartsItemsControl = null;
+            m_currentDirectoryTextBox = null;
             m_fileSystemEntryItemsScrollViewer = null;
             m_fileSystemEntryItemsControl = null;
 
@@ -291,6 +385,9 @@ namespace MaterialDesignExtensions.Controls
             m_pathPartsItemsControl = Template.FindName(PathPartsItemsControlName, this) as ItemsControl;
             m_pathPartsItemsControl.ItemsSource = m_controller.CurrentDirectoryPathParts;
 
+            m_currentDirectoryTextBox = Template.FindName(CurrentDirectoryTextBoxName, this) as TextBox;
+            m_currentDirectoryTextBox.Text = CurrentDirectory;
+
             m_fileSystemEntryItemsControl = Template.FindName(FileSystemEntryItemsControlName, this) as ItemsControl;
             m_fileSystemEntryItemsControl.ItemsSource = GetFileSystemEntryItems();
 
@@ -302,17 +399,52 @@ namespace MaterialDesignExtensions.Controls
         protected virtual void LoadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged += ControllerPropertyChangedHandler;
+
+            if (m_currentDirectoryTextBox != null)
+            {
+                m_currentDirectoryTextBox.KeyDown += CurrentDirectoryTextBoxKeyDownHandler;
+            }
+
+            // not sure if the control should get keyboard focus on loading
+            //Keyboard.Focus(this);
         }
 
         protected virtual void UnloadedHandler(object sender, RoutedEventArgs args)
         {
             m_controller.PropertyChanged -= ControllerPropertyChangedHandler;
+
+            if (m_currentDirectoryTextBox != null)
+            {
+                m_currentDirectoryTextBox.KeyDown -= CurrentDirectoryTextBoxKeyDownHandler;
+            }
         }
 
         protected void OpenSpecialDirectoriesDrawerCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
             DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
             drawerHost.IsTopDrawerOpen = true;
+        }
+
+        protected void SwitchPathPartsAsButtonsHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            PathPartsAsButtons = !PathPartsAsButtons;
+        }
+
+        private void CurrentDirectoryTextBoxKeyDownHandler(object sender, KeyEventArgs args)
+        {
+            if (sender == m_currentDirectoryTextBox && args.Key == Key.Enter)
+            {
+                string directory = m_currentDirectoryTextBox.Text
+                    .Replace("\n", string.Empty)
+                    .Replace("\r", string.Empty)
+                    .Replace("\r", string.Empty)
+                    .Trim();
+
+                if (!string.IsNullOrWhiteSpace(directory))
+                {
+                    CurrentDirectory = directory;
+                }
+            }
         }
 
         protected void SelectDirectoryItemCommandHandler(object sender, ExecutedRoutedEventArgs args)
@@ -339,6 +471,8 @@ namespace MaterialDesignExtensions.Controls
                     drawerHost.IsTopDrawerOpen = false;
                 }
             }
+
+            Keyboard.Focus(this);
         }
 
         protected virtual void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
@@ -350,6 +484,8 @@ namespace MaterialDesignExtensions.Controls
                     CurrentDirectory = directoryInfo.FullName;
                 }
             }
+
+            Keyboard.Focus(this);
         }
 
         protected void ShowInfoCommandHandler(object sender, ExecutedRoutedEventArgs args)
@@ -366,6 +502,43 @@ namespace MaterialDesignExtensions.Controls
             RaiseEvent(eventArgs);
         }
 
+        protected void ShowCreateNewDirectoryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            NewDirectoryName = null;
+
+            DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
+            drawerHost.IsBottomDrawerOpen = true;
+        }
+
+        protected void CancelNewDirectoryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
+
+            if (drawerHost.IsBottomDrawerOpen)
+            {
+                drawerHost.IsBottomDrawerOpen = false;
+            }
+        }
+
+        protected void CreateNewDirectoryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            try
+            {
+                m_controller.CreateNewDirectory(NewDirectoryName);
+
+                DrawerHost drawerHost = ((DrawerHost)Template.FindName(DrawerHostName, this));
+
+                if (drawerHost.IsBottomDrawerOpen)
+                {
+                    drawerHost.IsBottomDrawerOpen = false;
+                }
+            }
+            catch (Exception exc)
+            {
+                SnackbarMessageQueue.Enqueue(exc.Message);
+            }
+        }
+
         protected static void CurrentDirectoryChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             (obj as FileSystemControl)?.CurrentDirectoryChangedHandler(args.NewValue as string);
@@ -376,6 +549,11 @@ namespace MaterialDesignExtensions.Controls
             try
             {
                 m_controller.SelectDirectory(newCurrentDirectory);
+
+                if (m_currentDirectoryTextBox != null)
+                {
+                    m_currentDirectoryTextBox.Text = newCurrentDirectory;
+                }
             }
             catch (PathTooLongException)
             {
@@ -425,7 +603,7 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        protected void UpdateSelection()
+        protected virtual void UpdateSelection()
         {
             IEnumerable items = m_fileSystemEntryItemsControl?.ItemsSource;
 

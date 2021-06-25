@@ -1,4 +1,82 @@
-﻿<div>
-    <h1>Search</h1>
-    Documentation under construction
+<div>
+    <h1>Persistent search</h1>
+    <p>
+        The following predefined styles are available:
+        <ul>
+            <li><code>MaterialDesignPersistentSearch</code></li>
+            <li><code>MaterialDesignPersistentSearchDense</code></li>
+        </ul>
+    </p>
+
+    <h2>Screenshots</h2>
+    <img src="https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/PersistentSearch.png" alt="Persistent search" />
+
+    <h2>Code example</h2>
+   
+    <p>Persistent search control</p>
+    <pre class="language-markup"><code class="language-markup">
+&lt;mde:PersistentSearch
+    Margin="8"
+    VerticalAlignment="Top"
+    SearchSuggestionsSource="{Binding SearchSuggestionsSource}" />
+    </code></pre>
+
+    <p>Persistent search data source</p>
+    <pre class="language-markup"><code class="language-markup">
+public class SearchViewModel : ViewModel
+{
+    public ISearchSuggestionsSource SearchSuggestionsSource
+    {
+        get => new OperatingSystemsSearchSuggestionsSource();
+    }
+}
+
+public class OperatingSystemsSearchSuggestionsSource : ISearchSuggestionsSource
+{
+    private List<string> _operatingSystems;
+
+    public OperatingSystemsSearchSuggestionsSource()
+    {
+        _operatingSystems = new List<string>
+        {
+            "Windows 7",
+            "Windows 8",
+            "Windows 8.1",
+            "Windows 10"
+        };
+    }
+
+    public IList<string> GetAutoCompletion(string searchTerm)
+    {
+        return _operatingSystems.Where(os => os.ToLower().Contains(searchTerm.ToLower())).ToList();
+    }
+
+    public IList<string> GetSearchSuggestions()
+    {
+        return new List<string> { "Windows 10", "Windows 8.1" };
+    }
+}
+    </code></pre>
+
+    <h2>Custom icons</h2>
+
+    <p>Make sure to include this namespace</p>
+    <pre class="language-markup"><code class="language-markup">
+xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    </code></pre>
+
+    <p>Set your desired icons like this</p>
+    <pre class="language-markup"><code class="language-markup">
+&lt;mde:PersistentSearch
+    Margin="8"
+    VerticalAlignment="Top"
+    SearchSuggestionsSource="{Binding SearchSuggestionsSource}" 
+    SearchIcon="{x:Static md:PackIconKind.PrinterSearch}" 
+    CancelIcon="{x:Static md:PackIconKind.BellCancel}" 
+    ClearIcon="{x:Static md:PackIconKind.CircleArrows}" />
+    </code></pre>
+
+    <script type="text/javascript">
+        appViewModel.prepareCodeSnippets();
+    </script>
 </div>

@@ -7,7 +7,8 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
         
         <!-- own themes -->
-        <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/Generic.xaml" />
+        <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/Generic.xaml" />-->
+        <!-- do not include this resource here, because switching the theme at runtime will break the controls by kicking their resources temporarily -->
         
         <!-- additional resources -->
         <ResourceDictionary>

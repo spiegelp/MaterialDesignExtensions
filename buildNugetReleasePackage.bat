@@ -1,0 +1,1 @@
+"MaterialDesignExtensionsBuildUtility\bin\Debug\netcoreapp3.1\MaterialDesignExtensionsBuildUtility.exe" -buildConfiguration Release

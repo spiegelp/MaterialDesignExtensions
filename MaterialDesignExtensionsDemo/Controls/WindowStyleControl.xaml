@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="MaterialDesignExtensionsDemo.Controls.WindowStyleControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="750" Background="{DynamicResource MaterialDesignBackground}">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="16" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBlock Text="MaterialWindow" FontSize="16" HorizontalAlignment="Center" />
+            <ListBox ItemsSource="{Binding WindowStyles, Mode=OneTime}" SelectedItem="{Binding Path=SelectedWindowStyle, Mode=TwoWay}" SelectionMode="Single">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <Border Padding="4">
+                                        <ContentPresenter />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton IsChecked="{Binding Path=IsSelected, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                                     GroupName="windowStyleRadioButtons">
+                            <TextBlock Text="{Binding}" />
+                        </RadioButton>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Content="SHOW WINDOW" Margin="0,16,0,0" HorizontalAlignment="Center" Click="ShowWindowButtonClickHandler" />
+            <TextBlock Margin="0,32,0,0" Text="MaterialNavigationWindow" FontSize="16" HorizontalAlignment="Center" />
+            <Button Content="SHOW NAVIGATIONWINDOW" Margin="0,16,0,0" HorizontalAlignment="Center" Click="ShowNavigationWindowButtonClickHandler" />
+        </StackPanel>
+    </Grid>
+</UserControl>

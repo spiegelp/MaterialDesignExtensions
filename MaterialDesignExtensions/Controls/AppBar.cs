@@ -16,7 +16,7 @@ namespace MaterialDesignExtensions.Controls
     /// A custom control implementing the concept of the app bar (https://material.io/design/components/app-bars-top.html#usage).
     /// It provides an optional toggle button for a navigation drawer, an icon, a title and a content area (to add toolbar buttons for example).
     /// </summary>
-    [ContentProperty(nameof(Children))]
+    [ContentProperty(nameof(ContentAreaContent))]
     public class AppBar : Control
     {
         private const string BackButtonName = "backButton";
@@ -133,24 +133,46 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// The items for the content area (toolbar buttons for example).
+        /// The content for the content area (toolbar buttons for example).
         /// </summary>
-        public static readonly DependencyPropertyKey ChildrenProperty = DependencyProperty.RegisterReadOnly(
-            nameof(Children), typeof(IList), typeof(AppBar), new UIPropertyMetadata(null, null));
+        public static readonly DependencyProperty ContentAreaContentProperty = DependencyProperty.Register(
+            nameof(ContentAreaContent), typeof(object), typeof(AppBar), new UIPropertyMetadata(null, null));
 
         /// <summary>
-        /// The items for the content area (toolbar buttons for example).
+        /// The content for the content area (toolbar buttons for example).
         /// </summary>
-        public IList Children
+        public object ContentAreaContent
         {
             get
             {
-                return (IList)GetValue(ChildrenProperty.DependencyProperty);
+                return GetValue(ContentAreaContentProperty);
             }
 
             set
             {
-                SetValue(ChildrenProperty, value);
+                SetValue(ContentAreaContentProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The data template for the content area.
+        /// </summary>
+        public static readonly DependencyProperty ContentAreaContentTemplateProperty = DependencyProperty.Register(
+            nameof(ContentAreaContentTemplate), typeof(DataTemplate), typeof(AppBar), new UIPropertyMetadata(null, null));
+
+        /// <summary>
+        /// The data template for the content area.
+        /// </summary>
+        public object ContentAreaContentTemplate
+        {
+            get
+            {
+                return GetValue(ContentAreaContentTemplateProperty);
+            }
+
+            set
+            {
+                SetValue(ContentAreaContentTemplateProperty, value);
             }
         }
 
@@ -344,8 +366,6 @@ namespace MaterialDesignExtensions.Controls
             : base()
         {
             m_backButton = null;
-
-            Children = new ObservableCollection<object>();
         }
 
         public override void OnApplyTemplate()

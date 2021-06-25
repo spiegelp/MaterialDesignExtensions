@@ -11,6 +11,11 @@ using MaterialDesignThemes.Wpf;
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
+#if LONG_PATH
+using FileInfo = Pri.LongPath.FileInfo;
+#endif
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
@@ -43,6 +48,31 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public static readonly DependencyProperty ForceFileExtensionOfFileFilterProperty = DependencyProperty.Register(
+            nameof(ForceFileExtensionOfFileFilter),
+            typeof(bool),
+            typeof(SaveFileDialog),
+            new PropertyMetadata(false));
+
+        /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public bool ForceFileExtensionOfFileFilter
+        {
+            get
+            {
+                return (bool)GetValue(ForceFileExtensionOfFileFilterProperty);
+            }
+
+            set
+            {
+                SetValue(ForceFileExtensionOfFileFilterProperty, value);
+            }
+        }
+
         static SaveFileDialog()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SaveFileDialog), new FrameworkPropertyMetadata(typeof(SaveFileDialog)));
@@ -67,30 +97,6 @@ namespace MaterialDesignExtensions.Controls
         /// Shows a new <see cref="SaveFileDialog" />.
         /// </summary>
         /// <param name="dialogHostName">The name of the <see cref="DialogHost" /></param>
-        /// <param name="width">The width of the dialog (optional)</param>
-        /// <param name="height">The heigth of the dialog (optional)</param>
-        /// <param name="currentDirectory">The current directory to show (optional)</param>
-        /// <param name="filename">The name of the file without the full path (optional)</param>
-        /// <param name="showHiddenFilesAndDirectories">Show or hide hidden files in the dialog (optional)</param>
-        /// <param name="showSystemFilesAndDirectories">Show or hide system files in the dialog (optional)</param>
-        /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
-        /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
-        /// <returns></returns>
-        [Obsolete("Use the overloaded method with SaveFileDialogArguments instead")]
-        public static async Task<SaveFileDialogResult> ShowDialogAsync(string dialogHostName, double? width = null, double? height = null,
-            string currentDirectory = null, string filename = null,
-            bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
-            DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
-        {
-            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
-
-            return await DialogHost.Show(dialog, dialogHostName, openedHandler, closingHandler) as SaveFileDialogResult;
-        }
-
-        /// <summary>
-        /// Shows a new <see cref="SaveFileDialog" />.
-        /// </summary>
-        /// <param name="dialogHostName">The name of the <see cref="DialogHost" /></param>
         /// <param name="args">The arguments for the dialog initialization</param>
         /// <returns></returns>
         public static async Task<SaveFileDialogResult> ShowDialogAsync(string dialogHostName, SaveFileDialogArguments args)
@@ -102,35 +108,15 @@ namespace MaterialDesignExtensions.Controls
                 args.Filename,
                 args.Filters,
                 args.FilterIndex,
+                args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
-                args.ShowSystemFilesAndDirectories
+                args.ShowSystemFilesAndDirectories,
+                args.SwitchPathPartsAsButtonsEnabled,
+                args.PathPartsAsButtons,
+                args.ForceFileExtensionOfFileFilter
             );
 
             return await DialogHost.Show(dialog, dialogHostName, args.OpenedHandler, args.ClosingHandler) as SaveFileDialogResult;
-        }
-
-        /// <summary>
-        /// Shows a new <see cref="SaveFileDialog" />.
-        /// </summary>
-        /// <param name="dialogHost">The <see cref="DialogHost" /></param>
-        /// <param name="width">The width of the dialog (optional)</param>
-        /// <param name="height">The heigth of the dialog (optional)</param>
-        /// <param name="currentDirectory">The current directory to show (optional)</param>
-        /// <param name="filename">The name of the file without the full path (optional)</param>
-        /// <param name="showHiddenFilesAndDirectories">Show or hide hidden files in the dialog (optional)</param>
-        /// <param name="showSystemFilesAndDirectories">Show or hide system files in the dialog (optional)</param>
-        /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
-        /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
-        /// <returns></returns>
-        [Obsolete("Use the overloaded method with SaveFileDialogArguments instead")]
-        public static async Task<SaveFileDialogResult> ShowDialogAsync(DialogHost dialogHost, double? width = null, double? height = null,
-            string currentDirectory = null, string filename = null,
-            bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
-            DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
-        {
-            SaveFileDialog dialog = InitDialog(width, height, currentDirectory, filename, null, -1, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
-
-            return await dialogHost.ShowDialog(dialog, openedHandler, closingHandler) as SaveFileDialogResult;
         }
 
         /// <summary>
@@ -148,8 +134,12 @@ namespace MaterialDesignExtensions.Controls
                 args.Filename,
                 args.Filters,
                 args.FilterIndex,
+                args.CreateNewDirectoryEnabled,
                 args.ShowHiddenFilesAndDirectories,
-                args.ShowSystemFilesAndDirectories
+                args.ShowSystemFilesAndDirectories,
+                args.SwitchPathPartsAsButtonsEnabled,
+                args.PathPartsAsButtons,
+                args.ForceFileExtensionOfFileFilter
             );
 
             return await dialogHost.ShowDialog(dialog, args.OpenedHandler, args.ClosingHandler) as SaveFileDialogResult;
@@ -158,11 +148,15 @@ namespace MaterialDesignExtensions.Controls
         private static SaveFileDialog InitDialog(double? width, double? height,
             string currentDirectory, string filename,
             string filters, int filterIndex,
-            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
+            bool createNewDirectoryEnabled,
+            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories,
+            bool switchPathPartsAsButtonsEnabled, bool pathPartsAsButtons,
+            bool forceFileExtensionOfFileFilter)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, createNewDirectoryEnabled, switchPathPartsAsButtonsEnabled, pathPartsAsButtons);
             dialog.Filename = filename;
+            dialog.ForceFileExtensionOfFileFilter = forceFileExtensionOfFileFilter;
             dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<IFileFilter>;
             dialog.FilterIndex = filterIndex;
 
@@ -181,9 +175,21 @@ namespace MaterialDesignExtensions.Controls
         public string Filename { get; set; }
 
         /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public bool ForceFileExtensionOfFileFilter { get; set; }
+
+        /// <summary>
         /// Creates a new <see cref="SaveFileDialogArguments" />.
         /// </summary>
         public SaveFileDialogArguments() : base() { }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="args"></param>
+        public SaveFileDialogArguments(SaveFileDialogArguments args)
+            : base(args) { }
     }
 
     /// <summary>

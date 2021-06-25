@@ -11,8 +11,14 @@ using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Converter for mappings between <see cref="IFileFilter" /> and <see cref="string" />.
+    /// </summary>
     public class FileFiltersTypeConverter : TypeConverter
     {
+        /// <summary>
+        /// Creates a new <see cref="FileFiltersTypeConverter" />.
+        /// </summary>
         public FileFiltersTypeConverter() { }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)

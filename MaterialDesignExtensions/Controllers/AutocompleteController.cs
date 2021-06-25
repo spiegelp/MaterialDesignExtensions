@@ -9,6 +9,9 @@ using MaterialDesignExtensions.Model;
 
 namespace MaterialDesignExtensions.Controllers
 {
+    /// <summary>
+    /// The controller with the technical logic for autocomplete controls.
+    /// </summary>
     public class AutocompleteController
     {
         private readonly object m_lockObject = new object();
@@ -77,44 +80,45 @@ namespace MaterialDesignExtensions.Controllers
         }
 
         /// <summary>
-        /// Starts a new task for the autocomplete and propagates the result via the <see cref="AutocompleteChanged" /> event.
+        /// Starts a new task for the autocomplete and propagates the result via the <see cref="AutocompleteItemsChanged" /> event.
         /// This method does some technical stuff and delegates the actual search to the <see cref="IAutocompleteSource" />.
         /// </summary>
         /// <param name="searchTerm">The term to search for</param>
         public void Search(string searchTerm)
         {
-            string id = Guid.NewGuid().ToString();
-
-            IAutocompleteSource autocompleteSource = null;
-
-            lock (m_lockObject)
+            Task.Run(async () =>
             {
-                autocompleteSource = m_autocompleteSource;
+                string id = Guid.NewGuid().ToString();
 
-                // no source, no search
-                if (autocompleteSource == null)
+                IAutocompleteSource autocompleteSource = null;
+
+                lock (m_lockObject)
                 {
-                    return;
+                    autocompleteSource = m_autocompleteSource;
+
+                    // no source, no search
+                    if (autocompleteSource == null)
+                    {
+                        return;
+                    }
+
+                    LastId = id;
                 }
 
-                LastId = id;
-            }
+                await Task.Delay(SearchDelay).ConfigureAwait(false);
 
-            Task.Delay(SearchDelay)
-                .ContinueWith((prevTask) =>
+                // search only if there was no other request during the delay
+                if (DoSearchWithId(id))
                 {
-                    // search only if there was no other request during the delay
+                    IEnumerable items = autocompleteSource.Search(searchTerm);
+
+                    // a final check if this result will not be replaced by another active search
                     if (DoSearchWithId(id))
                     {
-                        IEnumerable items = autocompleteSource.Search(searchTerm);
-
-                        // a final check if this result will not be replaced by another active search
-                        if (DoSearchWithId(id))
-                        {
-                            AutocompleteItemsChanged?.Invoke(this, new AutocompleteItemsChangedEventArgs(items));
-                        }
+                        AutocompleteItemsChanged?.Invoke(this, new AutocompleteItemsChangedEventArgs(items));
                     }
-                });
+                }
+            });
         }
 
         private bool DoSearchWithId(string id)

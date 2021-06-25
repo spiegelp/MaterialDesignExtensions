@@ -8,8 +8,14 @@ using System.Windows.Data;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Converts an object to its fully qualified type name.
+    /// </summary>
     public class ObjectToTypeStringConverter : IValueConverter
     {
+        /// <summary>
+        /// Creates a new <see cref="ObjectToTypeStringConverter" />.
+        /// </summary>
         public ObjectToTypeStringConverter() { }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

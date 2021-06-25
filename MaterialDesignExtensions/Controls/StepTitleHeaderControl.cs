@@ -8,6 +8,9 @@ using System.Windows.Controls;
 
 namespace MaterialDesignExtensions.Controls
 {
+    /// <summary>
+    /// Control for a header of a stepper step to enable data bindings.
+    /// </summary>
     public class StepTitleHeaderControl : Control
     {
         /// <summary>

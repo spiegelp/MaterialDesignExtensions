@@ -4,11 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MaterialDesignExtensions.Model
 {
     /// <summary>
-    /// Represents a step inside a <see cref="Stepper"/>.
+    /// Represents a step inside a <see cref="Controls.Stepper"/>.
     /// </summary>
     public interface IStep : INotifyPropertyChanged
     {
@@ -28,6 +29,11 @@ namespace MaterialDesignExtensions.Model
         object Header { get; set; }
 
         /// <summary>
+        /// An optional template for icon of the step header.
+        /// </summary>
+        DataTemplate IconTemplate { get; set; }
+
+        /// <summary>
         /// Validates this step.
         /// Inherited classes may implement this method.
         /// </summary>
@@ -43,6 +49,7 @@ namespace MaterialDesignExtensions.Model
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected object _header;
+        protected DataTemplate _iconTemplate;
         protected object _content;
         protected bool _hasValidationErrors;
 
@@ -100,9 +107,28 @@ namespace MaterialDesignExtensions.Model
             }
         }
 
+        /// <summary>
+        /// An optional template for icon of the step header.
+        /// </summary>
+        public virtual DataTemplate IconTemplate
+        {
+            get
+            {
+                return _iconTemplate;
+            }
+
+            set
+            {
+                _iconTemplate = value;
+
+                OnPropertyChanged(nameof(IconTemplate));
+            }
+        }
+
         public Step()
         {
             _header = null;
+            _iconTemplate = null;
             _content = null;
             _hasValidationErrors = false;
         }

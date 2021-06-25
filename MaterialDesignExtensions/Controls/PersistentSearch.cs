@@ -13,6 +13,28 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public class PersistentSearch : SearchBase
     {
+        /// <summary>
+        /// The size of the displayed icons.
+        /// </summary>
+        public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(
+            nameof(IconSize), typeof(int), typeof(PersistentSearch), new PropertyMetadata(24));
+
+        /// <summary>
+        /// The size of the displayed icons.
+        /// </summary>
+        public string IconSize
+        {
+            get
+            {
+                return (string)GetValue(IconSizeProperty);
+            }
+
+            set
+            {
+                SetValue(IconSizeProperty, value);
+            }
+        }
+
         static PersistentSearch()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PersistentSearch), new FrameworkPropertyMetadata(typeof(PersistentSearch)));

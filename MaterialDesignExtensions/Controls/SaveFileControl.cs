@@ -11,6 +11,13 @@ using System.Windows.Input;
 
 using MaterialDesignExtensions.Controllers;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
+#if LONG_PATH
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+using FileInfo = Pri.LongPath.FileInfo;
+using FileSystemInfo = Pri.LongPath.FileSystemInfo;
+#endif
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
@@ -18,6 +25,8 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public class SaveFileControl : BaseFileControl
     {
+        private const string FilenameTextBoxName = "filenameTextBox";
+
         /// <summary>
         /// The name of the file itself without the full path.
         /// </summary>
@@ -43,6 +52,33 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public static readonly DependencyProperty ForceFileExtensionOfFileFilterProperty = DependencyProperty.Register(
+            nameof(ForceFileExtensionOfFileFilter),
+            typeof(bool),
+            typeof(SaveFileControl),
+            new PropertyMetadata(false, ForceFileExtensionOfFileFilterChangedHandler));
+
+        /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public bool ForceFileExtensionOfFileFilter
+        {
+            get
+            {
+                return (bool)GetValue(ForceFileExtensionOfFileFilterProperty);
+            }
+
+            set
+            {
+                SetValue(ForceFileExtensionOfFileFilterProperty, value);
+            }
+        }
+
+        private TextBox m_filenameTextBox;
+
         static SaveFileControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SaveFileControl), new FrameworkPropertyMetadata(typeof(SaveFileControl)));
@@ -51,7 +87,46 @@ namespace MaterialDesignExtensions.Controls
         /// <summary>
         /// Creates a new <see cref="SaveFileControl" />.
         /// </summary>
-        public SaveFileControl() : base() { }
+        public SaveFileControl()
+            : base()
+        {
+            m_filenameTextBox = null;
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (m_filenameTextBox != null)
+            {
+                m_filenameTextBox.KeyUp -= FilenameTextBoxKeyUpHandler;
+            }
+
+            m_filenameTextBox = Template.FindName(FilenameTextBoxName, this) as TextBox;
+        }
+
+        protected override void LoadedHandler(object sender, RoutedEventArgs args)
+        {
+            base.LoadedHandler(sender, args);
+
+            m_filenameTextBox.KeyUp -= FilenameTextBoxKeyUpHandler;
+            m_filenameTextBox.KeyUp += FilenameTextBoxKeyUpHandler;
+        }
+
+        protected override void UnloadedHandler(object sender, RoutedEventArgs args)
+        {
+            m_filenameTextBox.KeyUp -= FilenameTextBoxKeyUpHandler;
+
+            base.UnloadedHandler(sender, args);
+        }
+
+        private void FilenameTextBoxKeyUpHandler(object sender, KeyEventArgs args)
+        {
+            if (args.Key == Key.Enter && !string.IsNullOrWhiteSpace(CurrentFile))
+            {
+                SelectFile();
+            }
+        }
 
         protected override void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
@@ -82,7 +157,7 @@ namespace MaterialDesignExtensions.Controls
         {
             try
             {
-                m_controller.SelectFile(BuildFullFilename(newFilename));
+                m_controller.SelectFile(m_controller.BuildFullFileNameForInCurrentDirectory(newFilename));
             }
             catch (PathTooLongException)
             {
@@ -122,47 +197,36 @@ namespace MaterialDesignExtensions.Controls
             base.ControllerPropertyChangedHandler(sender, args);
         }
 
-        protected override void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        protected override void SelectFileSystemEntry(FileSystemInfo fileSystemInfo)
         {
-            if (args.Parameter != null)
+            if (fileSystemInfo != null)
             {
-                if (args.Parameter is DirectoryInfo directoryInfo)
+                if (fileSystemInfo is DirectoryInfo directoryInfo)
                 {
                     CurrentDirectory = directoryInfo.FullName;
 
                     if (Filename != null && CurrentDirectory != null)
                     {
-                        CurrentFile = BuildFullFilename(Filename);
+                        CurrentFile = m_controller.BuildFullFileNameForInCurrentDirectory(Filename);
                     }
                     else
                     {
                         CurrentFile = null;
                     }
                 }
-                else if (args.Parameter is FileInfo fileInfo)
+                else if (fileSystemInfo is FileInfo fileInfo)
                 {
                     CurrentFile = fileInfo.FullName;
                 }
             }
         }
 
-        private string BuildFullFilename(string newFilename)
+        protected static void ForceFileExtensionOfFileFilterChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            string filename = null;
-
-            if (!string.IsNullOrWhiteSpace(newFilename))
+            if (obj is SaveFileControl saveFileControl)
             {
-                string directory = CurrentDirectory;
-
-                if (CurrentDirectory != null && !directory.EndsWith(@"\") && !directory.EndsWith("/"))
-                {
-                    directory = directory + @"\";
-                }
-
-                filename = directory + newFilename.Trim();
+                saveFileControl.m_controller.ForceFileExtensionOfFileFilter = (bool)args.NewValue;
             }
-
-            return filename;
         }
     }
 }

@@ -1,14 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
-                    xmlns:convertersLib="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+                    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
-                    xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters">
+                    xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters"
+                    xmlns:internalCommands="clr-namespace:MaterialDesignExtensions.Commands.Internal">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
         <ResourceDictionary>
-            <convertersLib:BrushRoundConverter x:Key="brushRoundConverter"/>
+            <md:BrushRoundConverter x:Key="brushRoundConverter"/>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
 
@@ -23,7 +25,7 @@
         <Setter Property="Padding" Value="16,8,8,8" />
         <Setter Property="ClearIconSize" Value="24" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
-        <Setter Property="wpfLib:ShadowAssist.ShadowDepth" Value="Depth1" />
+        <Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth1" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
@@ -70,7 +72,7 @@
                                     <ColumnDefinition Width="100*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="searchTextBox" wpfLib:HintAssist.Hint="{TemplateBinding Hint}"
+                                <TextBox x:Name="searchTextBox" md:HintAssist.Hint="{TemplateBinding Hint}"
                                          Text="{Binding Path=SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource TemplatedParent}}"
                                          FontSize="{TemplateBinding FontSize}" BorderBrush="Transparent"
                                          Margin="0,0,8,0" HorizontalAlignment="Stretch" VerticalAlignment="Center"
@@ -86,8 +88,8 @@
                                             <Setter Property="Background" Value="Transparent" />
                                             <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
                                             <Setter Property="BorderThickness" Value="0" />
-                                            <Setter Property="wpfLib:RippleAssist.Feedback" Value="{DynamicResource MaterialDesignFlatButtonRipple}" />
-                                            <Setter Property="wpfLib:RippleAssist.ClipToBounds" Value="True" />
+                                            <Setter Property="md:RippleAssist.Feedback" Value="{DynamicResource MaterialDesignFlatButtonRipple}" />
+                                            <Setter Property="md:RippleAssist.ClipToBounds" Value="True" />
                                             <Setter Property="HorizontalAlignment" Value="Stretch" />
                                             <Setter Property="VerticalAlignment" Value="Stretch" />
                                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -96,7 +98,7 @@
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="Button">
-                                                        <wpfLib:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                        <md:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
                                                                        Focusable="False"
                                                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -107,7 +109,7 @@
                                             </Setter>
                                         </Style>
                                     </Button.Style>
-                                    <wpfLib:PackIcon Kind="Close" Width="{TemplateBinding ClearIconSize}" Height="{TemplateBinding ClearIconSize}"
+                                    <md:PackIcon Kind="Close" Width="{TemplateBinding ClearIconSize}" Height="{TemplateBinding ClearIconSize}"
                                                      HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Button>
                                 <controls:AutocompletePopup x:Name="autocompleteItemsPopup"
@@ -130,7 +132,7 @@
                                         </Style>
                                     </controls:AutocompletePopup.Style>
                                     <Border HorizontalAlignment="Stretch">
-                                        <!-- Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpfLib:ShadowAssist.ShadowDepth), Converter={x:Static convertersLib:ShadowConverter.Instance}}" -->
+                                        <!-- Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(md:ShadowAssist.ShadowDepth), Converter={x:Static md:ShadowConverter.Instance}}" -->
                                         <Border Background="{TemplateBinding Background}" BorderBrush="{Binding Path=BorderBrush, ElementName=rootBorder}"
                                                 BorderThickness="1,0,1,1" CornerRadius="0,0,2,2" SnapsToDevicePixels="True"
                                                 HorizontalAlignment="Stretch">
@@ -187,15 +189,15 @@
                                                             <Button x:Name="itemButton" Content="{Binding}"
                                                                     ContentTemplate="{Binding Path=ItemTemplate, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Autocomplete}}}"
                                                                     Padding="16,8,16,8"
-                                                                    Command="{x:Static controls:Autocomplete.SelectAutocompleteItemCommand}" CommandParameter="{Binding}">
+                                                                    Command="{x:Static internalCommands:AutocompleteCommands.SelectAutocompleteItemCommand}" CommandParameter="{Binding}">
                                                                 <Button.Style>
                                                                     <Style TargetType="{x:Type Button}">
                                                                         <Setter Property="Background" Value="Transparent" />
                                                                         <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
                                                                         <Setter Property="BorderThickness" Value="0" />
                                                                         <Setter Property="Padding" Value="8" />
-                                                                        <Setter Property="wpfLib:RippleAssist.Feedback" Value="{DynamicResource MaterialDesignFlatButtonRipple}" />
-                                                                        <Setter Property="wpfLib:RippleAssist.ClipToBounds" Value="True" />
+                                                                        <Setter Property="md:RippleAssist.Feedback" Value="{DynamicResource MaterialDesignFlatButtonRipple}" />
+                                                                        <Setter Property="md:RippleAssist.ClipToBounds" Value="True" />
                                                                         <Setter Property="HorizontalAlignment" Value="Stretch" />
                                                                         <Setter Property="VerticalAlignment" Value="Stretch" />
                                                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -204,7 +206,7 @@
                                                                         <Setter Property="Template">
                                                                             <Setter.Value>
                                                                                 <ControlTemplate TargetType="Button">
-                                                                                    <wpfLib:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                                    <md:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
                                                                                                    Focusable="False"
                                                                                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                                                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MaterialDesignExtensions.Model
 {
+    /// <summary>
+    /// Base class for an item in a <see cref="Controls.SideNavigation" />.
+    /// </summary>
     public abstract class BaseNavigationItem : INavigationItem
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -15,6 +18,9 @@ namespace MaterialDesignExtensions.Model
         protected bool m_isSelected;
         protected NavigationItemSelectedCallback m_callback;
 
+        /// <summary>
+        /// True, if the user can select this navigation item.
+        /// </summary>
         public virtual bool IsSelectable
         {
             get
@@ -28,6 +34,9 @@ namespace MaterialDesignExtensions.Model
             }
         }
 
+        /// <summary>
+        /// True, if the navigation item is selected.
+        /// </summary>
         public virtual bool IsSelected
         {
             get
@@ -43,6 +52,10 @@ namespace MaterialDesignExtensions.Model
             }
         }
 
+        /// <summary>
+        /// An optional callback method raised, when this navigation item will be selected.
+        /// This API is necessary because events are not async.
+        /// </summary>
         public virtual NavigationItemSelectedCallback NavigationItemSelectedCallback
         {
             get
@@ -58,6 +71,9 @@ namespace MaterialDesignExtensions.Model
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="BaseNavigationItem" />.
+        /// </summary>
         public BaseNavigationItem()
         {
             m_isSelectable = true;

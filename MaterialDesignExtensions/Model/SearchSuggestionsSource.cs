@@ -47,7 +47,6 @@ namespace MaterialDesignExtensions.Model
         /// <summary>
         /// Returns suggestions based on auto-completion.
         /// </summary>
-        /// <param name="searchTerm"></param>
         /// <returns></returns>
         public IList<string> GetSearchSuggestions()
         {

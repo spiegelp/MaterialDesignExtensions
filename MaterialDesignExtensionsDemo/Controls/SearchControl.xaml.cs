@@ -28,5 +28,15 @@ namespace MaterialDesignExtensionsDemo.Controls
         {
             searchResultTextBlock1.Text = "Your are looking for '" + args.SearchTerm + "'.";
         }
+
+        private void SearchHandler2(object sender, SearchEventArgs args)
+        {
+            searchResultTextBlock2.Text = "Your are looking for '" + args.SearchTerm + "'.";
+        }
+
+        private void SearchHandler3(object sender, SearchEventArgs args)
+        {
+            searchResultTextBlock3.Text = "Your are looking for '" + args.SearchTerm + "'.";
+        }
     }
 }

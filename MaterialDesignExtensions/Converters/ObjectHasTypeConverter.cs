@@ -8,23 +8,20 @@ using System.Windows.Data;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Checks the type of the argument if it is of a specified type.
+    /// </summary>
     public class ObjectHasTypeConverter : IMultiValueConverter
     {
+        /// <summary>
+        /// The fully qualified name of the type.
+        /// </summary>
         public string FullTypeName { get; set; }
 
+        /// <summary>
+        /// Creates a new <see cref="ObjectHasTypeConverter" />.
+        /// </summary>
         public ObjectHasTypeConverter() { }
-
-        /*public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            string valueType = value != null ? value.GetType().FullName : "null";
-
-            return valueType == FullTypeName;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return Binding.DoNothing;
-        }*/
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

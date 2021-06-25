@@ -10,6 +10,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
+#if LONG_PATH
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+using FileInfo = Pri.LongPath.FileInfo;
+using FileSystemInfo = Pri.LongPath.FileSystemInfo;
+#endif
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
@@ -39,16 +46,16 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
-        protected override void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        protected override void SelectFileSystemEntry(FileSystemInfo fileSystemInfo)
         {
-            if (args.Parameter != null)
+            if (fileSystemInfo != null)
             {
-                if (args.Parameter is DirectoryInfo directoryInfo)
+                if (fileSystemInfo is DirectoryInfo directoryInfo)
                 {
                     CurrentDirectory = directoryInfo.FullName;
                     CurrentFile = null;
                 }
-                else if (args.Parameter is FileInfo fileInfo)
+                else if (fileSystemInfo is FileInfo fileInfo)
                 {
                     CurrentFile = fileInfo.FullName;
                 }

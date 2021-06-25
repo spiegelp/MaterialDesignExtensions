@@ -11,6 +11,11 @@ using MaterialDesignThemes.Wpf;
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
+#if LONG_PATH
+using FileInfo = Pri.LongPath.FileInfo;
+#endif
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
@@ -42,29 +47,6 @@ namespace MaterialDesignExtensions.Controls
         /// Shows a new <see cref="OpenFileDialog" />.
         /// </summary>
         /// <param name="dialogHostName">The name of the <see cref="DialogHost" /></param>
-        /// <param name="width">The width of the dialog (optional)</param>
-        /// <param name="height">The heigth of the dialog (optional)</param>
-        /// <param name="currentDirectory">The current directory to show (optional)</param>
-        /// <param name="showHiddenFilesAndDirectories">Show or hide hidden files in the dialog (optional)</param>
-        /// <param name="showSystemFilesAndDirectories">Show or hide system files in the dialog (optional)</param>
-        /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
-        /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
-        /// <returns></returns>
-        [Obsolete("Use the overloaded method with OpenFileDialogArguments instead")]
-        public static async Task<OpenFileDialogResult> ShowDialogAsync(string dialogHostName, double? width = null, double? height = null,
-            string currentDirectory = null,
-            bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
-            DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
-        {
-            OpenFileDialog dialog = InitDialog(width, height, currentDirectory, null, -1, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
-
-            return await DialogHost.Show(dialog, dialogHostName, openedHandler, closingHandler) as OpenFileDialogResult;
-        }
-
-        /// <summary>
-        /// Shows a new <see cref="OpenFileDialog" />.
-        /// </summary>
-        /// <param name="dialogHostName">The name of the <see cref="DialogHost" /></param>
         /// <param name="args">The arguments for the dialog initialization</param>
         /// <returns></returns>
         public static async Task<OpenFileDialogResult> ShowDialogAsync(string dialogHostName, OpenFileDialogArguments args)
@@ -76,33 +58,12 @@ namespace MaterialDesignExtensions.Controls
                 args.Filters,
                 args.FilterIndex,
                 args.ShowHiddenFilesAndDirectories,
-                args.ShowSystemFilesAndDirectories
+                args.ShowSystemFilesAndDirectories,
+                args.SwitchPathPartsAsButtonsEnabled,
+                args.PathPartsAsButtons
             );
 
             return await DialogHost.Show(dialog, dialogHostName, args.OpenedHandler, args.ClosingHandler) as OpenFileDialogResult;
-        }
-
-        /// <summary>
-        /// Shows a new <see cref="OpenFileDialog" />.
-        /// </summary>
-        /// <param name="dialogHost">The <see cref="DialogHost" /></param>
-        /// <param name="width">The width of the dialog (optional)</param>
-        /// <param name="height">The heigth of the dialog (optional)</param>
-        /// <param name="currentDirectory">The current directory to show (optional)</param>
-        /// <param name="showHiddenFilesAndDirectories">Show or hide hidden files in the dialog (optional)</param>
-        /// <param name="showSystemFilesAndDirectories">Show or hide system files in the dialog (optional)</param>
-        /// <param name="openedHandler">Callback after openening the dialog (optional)</param>
-        /// <param name="closingHandler">Callback after closing the dialog (optional)</param>
-        /// <returns></returns>
-        [Obsolete("Use the overloaded method with OpenFileDialogArguments instead")]
-        public static async Task<OpenFileDialogResult> ShowDialogAsync(DialogHost dialogHost, double? width = null, double? height = null,
-            string currentDirectory = null,
-            bool showHiddenFilesAndDirectories = false, bool showSystemFilesAndDirectories = false,
-            DialogOpenedEventHandler openedHandler = null, DialogClosingEventHandler closingHandler = null)
-        {
-            OpenFileDialog dialog = InitDialog(width, height, currentDirectory, null, -1, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
-
-            return await dialogHost.ShowDialog(dialog, openedHandler, closingHandler) as OpenFileDialogResult;
         }
 
         /// <summary>
@@ -120,7 +81,9 @@ namespace MaterialDesignExtensions.Controls
                 args.Filters,
                 args.FilterIndex,
                 args.ShowHiddenFilesAndDirectories,
-                args.ShowSystemFilesAndDirectories
+                args.ShowSystemFilesAndDirectories,
+                args.SwitchPathPartsAsButtonsEnabled,
+                args.PathPartsAsButtons
             );
 
             return await dialogHost.ShowDialog(dialog, args.OpenedHandler, args.ClosingHandler) as OpenFileDialogResult;
@@ -129,10 +92,11 @@ namespace MaterialDesignExtensions.Controls
         private static OpenFileDialog InitDialog(double? width, double? height,
             string currentDirectory,
             string filters, int filterIndex,
-            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
+            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories,
+            bool switchPathPartsAsButtonsEnabled, bool pathPartsAsButtons)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories);
+            InitDialog(dialog, width, height, currentDirectory, showHiddenFilesAndDirectories, showSystemFilesAndDirectories, switchPathPartsAsButtonsEnabled, pathPartsAsButtons);
             dialog.Filters = new FileFiltersTypeConverter().ConvertFrom(null, null, filters) as IList<IFileFilter>;
             dialog.FilterIndex = filterIndex;
 
@@ -149,6 +113,13 @@ namespace MaterialDesignExtensions.Controls
         /// Creates a new <see cref="OpenFileDialogArguments" />.
         /// </summary>
         public OpenFileDialogArguments() : base() { }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="args"></param>
+        public OpenFileDialogArguments(OpenFileDialogArguments args)
+            : base(args) { }
     }
 
     /// <summary>

@@ -21,5 +21,10 @@ namespace MaterialDesignExtensionsDemo.Controls
         {
             InitializeComponent();
         }
+
+        private void ClearSelectionButtonClickHandler(object sender, RoutedEventArgs args)
+        {
+            autocomplete.ClearSelection();
+        }
     }
 }

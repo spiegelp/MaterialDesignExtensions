@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MaterialDesignExtensions.Model
 {
+    /// <summary>
+    /// An item out of the suggestions of a search control.
+    /// </summary>
     public class SearchSuggestionItem : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -14,6 +17,9 @@ namespace MaterialDesignExtensions.Model
         private bool m_isFromHistory;
         private string m_suggestion;
 
+        /// <summary>
+        /// True, if this item is from an older search query.
+        /// </summary>
         public bool IsFromHistory
         {
             get
@@ -29,6 +35,9 @@ namespace MaterialDesignExtensions.Model
             }
         }
 
+        /// <summary>
+        /// The label of this suggestion.
+        /// </summary>
         public string Suggestion
         {
             get
@@ -44,6 +53,9 @@ namespace MaterialDesignExtensions.Model
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="SearchSuggestionItem" />.
+        /// </summary>
         public SearchSuggestionItem()
         {
             m_isFromHistory = false;

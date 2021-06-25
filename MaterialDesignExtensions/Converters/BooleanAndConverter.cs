@@ -8,8 +8,14 @@ using System.Windows.Data;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Converter to apply boolean "and" operation.
+    /// </summary>
     public class BooleanAndConverter : IMultiValueConverter
     {
+        /// <summary>
+        /// Creates a new <see cref="BooleanAndConverter" />.
+        /// </summary>
         public BooleanAndConverter() { }
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

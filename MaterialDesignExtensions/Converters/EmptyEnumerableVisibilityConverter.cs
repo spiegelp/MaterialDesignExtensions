@@ -10,12 +10,24 @@ using System.Windows.Data;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Maps a null or empty <see cref="IEnumerable" /> to a <see cref="Visibility" />.
+    /// </summary>
     public class EmptyEnumerableVisibilityConverter : IValueConverter
     {
+        /// <summary>
+        /// The visibility value of an empty or null <see cref="IEnumerable" />.
+        /// </summary>
         public Visibility EmptyVisibility { get; set; }
 
+        /// <summary>
+        /// The visibility value of a non empty <see cref="IEnumerable" />.
+        /// </summary>
         public Visibility NotEmptyVisibility { get; set; }
 
+        /// <summary>
+        /// Creates a new <see cref="EmptyEnumerableVisibilityConverter" />.
+        /// </summary>
         public EmptyEnumerableVisibilityConverter()
         {
             EmptyVisibility = Visibility.Collapsed;

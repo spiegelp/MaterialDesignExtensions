@@ -11,6 +11,13 @@ using MaterialDesignThemes.Wpf;
 
 using MaterialDesignExtensions.Model;
 
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
+#if LONG_PATH
+using FileSystemInfo = Pri.LongPath.FileSystemInfo;
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+using FileInfo = Pri.LongPath.FileInfo;
+#endif
+
 namespace MaterialDesignExtensions.Controllers
 {
     /// <summary>
@@ -33,6 +40,10 @@ namespace MaterialDesignExtensions.Controllers
         private bool m_showSystemFilesAndDirectories;
         private IList<IFileFilter> m_fileFilters;
         private IFileFilter m_fileFilterToApply;
+        private bool m_forceFileExtensionOfFileFilter;
+
+        private HashSet<DirectoryInfo> m_selectedDirectories;
+        private HashSet<FileInfo> m_selectedFiles;
 
         /// <summary>
         /// The current directory shown in the control.
@@ -179,7 +190,7 @@ namespace MaterialDesignExtensions.Controllers
 
                         if (driveInfo.DriveType == DriveType.CDRom)
                         {
-                            icon = PackIconKind.Disk;
+                            icon = PackIconKind.Disc;
                         }
                         else if (driveInfo.DriveType == DriveType.Removable)
                         {
@@ -197,7 +208,16 @@ namespace MaterialDesignExtensions.Controllers
                             label = label.Substring(0, label.Length - 1);
                         }
 
-                        string volumeLabel = driveInfo.IsReady ? driveInfo.VolumeLabel : null;
+                        string volumeLabel = null;
+
+                        try
+                        {
+                            volumeLabel = driveInfo.IsReady ? driveInfo.VolumeLabel : null;
+                        }
+                        catch (Exception)
+                        {
+                            return new SpecialDrive { Info = driveInfo, Icon = icon };
+                        }
 
                         if (string.IsNullOrWhiteSpace(volumeLabel) && driveInfo.DriveType == DriveType.Fixed)
                         {
@@ -279,6 +299,49 @@ namespace MaterialDesignExtensions.Controllers
         }
 
         /// <summary>
+        /// Forces the possible file extension of the selected file filter for new filenames.
+        /// </summary>
+        public bool ForceFileExtensionOfFileFilter
+        {
+            get
+            {
+                return m_forceFileExtensionOfFileFilter;
+            }
+
+            set
+            {
+                if (m_forceFileExtensionOfFileFilter != value)
+                {
+                    m_forceFileExtensionOfFileFilter = value;
+
+                    OnPropertyChanged(nameof(ForceFileExtensionOfFileFilter));
+                }
+            }
+        }
+
+        /// <summary>
+        /// The selected directories for multiple selection controls.
+        /// </summary>
+        public HashSet<DirectoryInfo> SelectedDirectories
+        {
+            get
+            {
+                return m_selectedDirectories;
+            }
+        }
+
+        /// <summary>
+        /// The selected files for multiple selection controls.
+        /// </summary>
+        public HashSet<FileInfo> SelectedFiles
+        {
+            get
+            {
+                return m_selectedFiles;
+            }
+        }
+
+        /// <summary>
         /// The special directories (e.g. music directory) of the user.
         /// </summary>
         public List<SpecialDirectory> SpecialDirectories
@@ -315,7 +378,7 @@ namespace MaterialDesignExtensions.Controllers
 
             set
             {
-                if (!m_showHiddenFilesAndDirectories != value)
+                if (m_showHiddenFilesAndDirectories != value)
                 {
                     m_showHiddenFilesAndDirectories = value;
 
@@ -360,6 +423,10 @@ namespace MaterialDesignExtensions.Controllers
             m_showSystemFilesAndDirectories = false;
             m_fileFilters = null;
             m_fileFilterToApply = null;
+            m_forceFileExtensionOfFileFilter = false;
+
+            m_selectedDirectories = new HashSet<DirectoryInfo>();
+            m_selectedFiles = new HashSet<FileInfo>();
         }
 
         /// <summary>
@@ -438,6 +505,74 @@ namespace MaterialDesignExtensions.Controllers
         }
 
         /// <summary>
+        /// Selects (not yetselected) or removes (already selected so remove it) a directory for the multiple selection feature.
+        /// </summary>
+        /// <param name="directory"></param>
+        public void SelectOrRemoveDirectoryForMultipleSelection(string directory)
+        {
+            SelectOrRemoveDirectoryForMultipleSelection(new DirectoryInfo(directory));
+        }
+
+        /// <summary>
+        /// Selects (not yetselected) or removes (already selected so remove it) a directory for the multiple selection feature.
+        /// </summary>
+        /// <param name="directory"></param>
+        public void SelectOrRemoveDirectoryForMultipleSelection(DirectoryInfo directory)
+        {
+            IEnumerable<DirectoryInfo> sameDirectories = m_selectedDirectories
+                .Where(directoryInfo => directoryInfo.FullName.ToLower() == directory.FullName.ToLower())
+                .ToList();
+
+            if (sameDirectories.Any())
+            {
+                foreach (DirectoryInfo sameDirectory in sameDirectories)
+                {
+                    m_selectedDirectories.Remove(sameDirectory);
+                }
+            }
+            else
+            {
+                m_selectedDirectories.Add(directory);
+            }
+
+            OnPropertyChanged(nameof(SelectedDirectories));
+        }
+
+        /// <summary>
+        /// Selects (not yet selected) or removes (already selected so remove it) a file for the multiple selection feature.
+        /// </summary>
+        /// <param name="file"></param>
+        public void SelectOrRemoveFileForMultipleSelection(string file)
+        {
+            SelectOrRemoveFileForMultipleSelection(new FileInfo(file));
+        }
+
+        /// <summary>
+        /// Selects (not yet selected) or removes (already selected so remove it) a file for the multiple selection feature.
+        /// </summary>
+        /// <param name="file"></param>
+        public void SelectOrRemoveFileForMultipleSelection(FileInfo file)
+        {
+            IEnumerable<FileInfo> sameFiles = m_selectedFiles
+                .Where(fileInfo => fileInfo.FullName.ToLower() == file.FullName.ToLower())
+                .ToList();
+
+            if (sameFiles.Any())
+            {
+                foreach (FileInfo sameFile in sameFiles)
+                {
+                    m_selectedFiles.Remove(sameFile);
+                }
+            }
+            else
+            {
+                m_selectedFiles.Add(file);
+            }
+
+            OnPropertyChanged(nameof(SelectedFiles));
+        }
+
+        /// <summary>
         /// Selects a file.
         /// </summary>
         /// <param name="file"></param>
@@ -484,7 +619,7 @@ namespace MaterialDesignExtensions.Controllers
                     currentDirectoryPathParts.Add(directoryInfo);
                     directoryInfo = directoryInfo.Parent;
                 }
-                
+
                 currentDirectoryPathParts.Sort((directoryInfo1, directoryInfo2) => directoryInfo1.FullName.CompareTo(directoryInfo2.FullName));
             }
 
@@ -544,6 +679,85 @@ namespace MaterialDesignExtensions.Controllers
 
                 SelectDirectory(m_currentDirectory);
             }
+        }
+
+        /// <summary>
+        /// Creates a new directory with the specified name.
+        /// </summary>
+        /// <param name="newDirectoryName">The name of the new directory</param>
+        public void CreateNewDirectory(string newDirectoryName)
+        {
+            if (string.IsNullOrWhiteSpace(newDirectoryName))
+            {
+                throw new ArgumentException(Localization.Strings.TheDirectoryNameMustNotBeEmpty);
+            }
+
+            if (!FileNameHelper.CheckFileName(newDirectoryName))
+            {
+                throw new ArgumentException(Localization.Strings.TheDirectoryNameIsInvalid);
+            }
+
+            string fullDirectoryName = CurrentDirectory.FullName + @"\" + newDirectoryName;
+            DirectoryInfo newDirectory = new DirectoryInfo(fullDirectoryName);
+
+            if (newDirectory.Exists)
+            {
+                throw new ArgumentException(string.Format(Localization.Strings.TheDirectoryXAlreadyExists, newDirectoryName));
+            }
+
+            // create directory and select it
+            newDirectory.Create();
+
+            // important: create a new DirectoryInfo instance, because the Exists property will not be updated by the Create() method
+            SelectDirectory(new DirectoryInfo(fullDirectoryName));
+        }
+
+        /// <summary>
+        /// Builds a full filename for the specified filename inside the current directory.
+        /// </summary>
+        /// <param name="newFilename">The filename to append to the current directory</param>
+        /// <returns></returns>
+        public string BuildFullFileNameForInCurrentDirectory(string newFilename)
+        {
+            string filename = null;
+
+            if (!string.IsNullOrWhiteSpace(newFilename) && m_currentDirectory != null)
+            {
+                string directory = m_currentDirectory.FullName;
+
+                if (directory != null && !directory.EndsWith(@"\") && !directory.EndsWith("/"))
+                {
+                    directory = $@"{directory}\";
+                }
+
+                filename = directory + newFilename.Trim();
+
+                // ensure that the full filename has a file extension out of the selected file filter
+                if (m_forceFileExtensionOfFileFilter && m_fileFilterToApply != null && !m_fileFilterToApply.IsMatch(filename))
+                {
+                    IEnumerable<string> fileExtensions = FileFilterHelper.GetFileExtensionsFromFilter(m_fileFilterToApply);
+
+                    if (fileExtensions != null && fileExtensions.Any())
+                    {
+                        fileExtensions = fileExtensions.Select(fileExtension => fileExtension.ToLower());
+                        string lowerCaseFilename = filename.ToLower();
+
+                        bool hasWrongFileExtension = !fileExtensions.Any(fileExtension => lowerCaseFilename.EndsWith($".{fileExtension}"));
+
+                        if (hasWrongFileExtension)
+                        {
+                            if (!filename.EndsWith("."))
+                            {
+                                filename = $"{filename}.";
+                            }
+
+                            filename = filename + fileExtensions.First();
+                        }
+                    }
+                }
+            }
+
+            return filename;
         }
 
         private bool AreObjectsEqual(object o1, object o2)

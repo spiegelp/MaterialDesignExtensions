@@ -1,20 +1,23 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls">
 
     <Style TargetType="{x:Type controls:OpenDirectoryDialog}">
         <Setter Property="MinHeight" Value="350" />
-        <Setter Property="MaxHeight" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DialogHost}}}" />
+        <Setter Property="MaxHeight" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type md:DialogHost}}}" />
         <Setter Property="MinWidth" Value="350" />
-        <Setter Property="MaxWidth" Value="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DialogHost}}}" />
+        <Setter Property="MaxWidth" Value="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type md:DialogHost}}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:OpenDirectoryDialog}">
-                    <controls:OpenDirectoryControl x:Name="openDirectoryControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    <controls:OpenDirectoryControl x:Name="openDirectoryControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignCardBackground}"
                                                    CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   CreateNewDirectoryEnabled="{Binding Path=CreateNewDirectoryEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                                    ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                                   ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                                   ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                   PathPartsAsButtons="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -22,19 +25,22 @@
 
     <Style TargetType="{x:Type controls:OpenFileDialog}">
         <Setter Property="MinHeight" Value="350" />
-        <Setter Property="MaxHeight" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DialogHost}}}" />
+        <Setter Property="MaxHeight" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type md:DialogHost}}}" />
         <Setter Property="MinWidth" Value="350" />
-        <Setter Property="MaxWidth" Value="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DialogHost}}}" />
+        <Setter Property="MaxWidth" Value="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type md:DialogHost}}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:OpenFileDialog}">
-                    <controls:OpenFileControl x:Name="fileControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    <!-- opening a file does not require the feature to create a new directory -->
+                    <controls:OpenFileControl x:Name="fileControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignCardBackground}"
                                               CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               CurrentFile="{Binding Path=CurrentFile, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               Filters="{Binding Path=Filters, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               FilterIndex="{Binding Path=FilterIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                              ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                              ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              PathPartsAsButtons="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -42,20 +48,65 @@
 
     <Style TargetType="{x:Type controls:SaveFileDialog}">
         <Setter Property="MinHeight" Value="350" />
-        <Setter Property="MaxHeight" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DialogHost}}}" />
+        <Setter Property="MaxHeight" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type md:DialogHost}}}" />
         <Setter Property="MinWidth" Value="350" />
-        <Setter Property="MaxWidth" Value="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type wpfLib:DialogHost}}}" />
+        <Setter Property="MaxWidth" Value="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type md:DialogHost}}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:SaveFileDialog}">
-                    <controls:SaveFileControl x:Name="fileControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    <controls:SaveFileControl x:Name="fileControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignCardBackground}"
                                               CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               CurrentFile="{Binding Path=CurrentFile, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               Filename="{Binding Path=Filename, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               Filters="{Binding Path=Filters, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               FilterIndex="{Binding Path=FilterIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              CreateNewDirectoryEnabled="{Binding Path=CreateNewDirectoryEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                               ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                              ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                                              ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              PathPartsAsButtons="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              ForceFileExtensionOfFileFilter="{Binding Path=ForceFileExtensionOfFileFilter, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:OpenMultipleDirectoriesDialog}">
+        <Setter Property="MinHeight" Value="350" />
+        <Setter Property="MaxHeight" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type md:DialogHost}}}" />
+        <Setter Property="MinWidth" Value="350" />
+        <Setter Property="MaxWidth" Value="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type md:DialogHost}}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:OpenMultipleDirectoriesDialog}">
+                    <controls:OpenMultipleDirectoriesControl x:Name="openMultipleDirectoriesControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignCardBackground}"
+                                                             CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             CreateNewDirectoryEnabled="{Binding Path=CreateNewDirectoryEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                             PathPartsAsButtons="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:OpenMultipleFilesDialog}">
+        <Setter Property="MinHeight" Value="350" />
+        <Setter Property="MaxHeight" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type md:DialogHost}}}" />
+        <Setter Property="MinWidth" Value="350" />
+        <Setter Property="MaxWidth" Value="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type md:DialogHost}}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:OpenMultipleFilesDialog}">
+                    <controls:OpenMultipleFilesControl x:Name="openMultipleFilesControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{DynamicResource MaterialDesignCardBackground}"
+                                                       CurrentDirectory="{Binding Path=CurrentDirectory, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                       Filters="{Binding Path=Filters, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                       FilterIndex="{Binding Path=FilterIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                       ShowHiddenFilesAndDirectories="{Binding Path=ShowHiddenFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                       ShowSystemFilesAndDirectories="{Binding Path=ShowSystemFilesAndDirectories, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                       SwitchPathPartsAsButtonsEnabled="{Binding Path=SwitchPathPartsAsButtonsEnabled, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                                       PathPartsAsButtons="{Binding Path=PathPartsAsButtons, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

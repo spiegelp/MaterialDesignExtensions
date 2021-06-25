@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,12 +47,20 @@ namespace MaterialDesignExtensionsDemo.ViewModel
             }
         }
 
+        public List<Device> Devices { get; private set; } = new List<Device>();
+
         public TextBoxSuggestionsViewModel()
             : base()
         {
             m_textBoxSuggestionsSource = new OperatingSystemTextBoxSuggestionsSource();
 
             m_text = null;
+            m_text = "Windows 10";
+
+            /*for (int i = 0; i < 200; i++)
+            {
+                Devices.Add(new Device { OperatingSystem = "Windows 10" });
+            }*/
         }
     }
 
@@ -90,6 +99,38 @@ namespace MaterialDesignExtensionsDemo.ViewModel
             searchTerm = searchTerm.ToLower();
 
             return m_operatingSystemItems.Where(item => item.ToLower().Contains(searchTerm));
+        }
+    }
+
+    public class Device : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string m_operatingSystem;
+
+        public string OperatingSystem
+        {
+            get
+            {
+                return m_operatingSystem;
+            }
+
+            set
+            {
+                m_operatingSystem = value;
+
+                OnPropertyChanged(nameof(OperatingSystem));
+            }
+        }
+
+        public Device() { }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null && !string.IsNullOrWhiteSpace(propertyName))
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

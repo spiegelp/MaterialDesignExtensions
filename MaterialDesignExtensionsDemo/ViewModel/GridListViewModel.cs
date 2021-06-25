@@ -34,16 +34,16 @@ namespace MaterialDesignExtensionsDemo.ViewModel
             m_items = new List<GridListItem>()
             {
                 new GridListItem() { Kind = PackIconKind.Android, Label = "Android" },
-                new GridListItem() { Kind = PackIconKind.Windows, Label = "Windows" },
+                new GridListItem() { Kind = PackIconKind.MicrosoftWindows, Label = "Windows" },
                 new GridListItem() { Kind = PackIconKind.AppleIos, Label = "iOS" },
                 new GridListItem() { Kind = PackIconKind.Android, Label = "Android" },
-                new GridListItem() { Kind = PackIconKind.Windows, Label = "Windows" },
+                new GridListItem() { Kind = PackIconKind.MicrosoftWindows, Label = "Windows" },
                 new GridListItem() { Kind = PackIconKind.AppleIos, Label = "iOS" },
                 new GridListItem() { Kind = PackIconKind.Android, Label = "Android" },
-                new GridListItem() { Kind = PackIconKind.Windows, Label = "Windows" },
+                new GridListItem() { Kind = PackIconKind.MicrosoftWindows, Label = "Windows" },
                 new GridListItem() { Kind = PackIconKind.AppleIos, Label = "iOS" },
                 new GridListItem() { Kind = PackIconKind.Android, Label = "Android" },
-                new GridListItem() { Kind = PackIconKind.Windows, Label = "Windows" },
+                new GridListItem() { Kind = PackIconKind.MicrosoftWindows, Label = "Windows" },
                 new GridListItem() { Kind = PackIconKind.AppleIos, Label = "iOS" }
             };
         }
