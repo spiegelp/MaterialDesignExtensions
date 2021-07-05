@@ -352,7 +352,6 @@ namespace MaterialDesignExtensions.Controls
             : base()
         {
             m_controller = new FileSystemController();
-            m_controller.SelectDirectory(CurrentDirectory);
 
             CommandBindings.Add(new CommandBinding(FileSystemControlCommands.OpenSpecialDirectoriesDrawerCommand, OpenSpecialDirectoriesDrawerCommandHandler));
             CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SwitchPathPartsAsButtonsCommand, SwitchPathPartsAsButtonsHandler));
@@ -380,6 +379,7 @@ namespace MaterialDesignExtensions.Controls
         {
             base.OnApplyTemplate();
 
+            m_controller.SelectDirectory(CurrentDirectory);
             m_pathPartsScrollViewer = Template.FindName(PathPartsScrollViewerName, this) as ScrollViewer;
 
             m_pathPartsItemsControl = Template.FindName(PathPartsItemsControlName, this) as ItemsControl;

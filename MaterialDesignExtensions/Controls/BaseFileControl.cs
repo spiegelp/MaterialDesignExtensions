@@ -30,6 +30,11 @@ namespace MaterialDesignExtensions.Controls
     public abstract class BaseFileControl : FileSystemControl
     {
         /// <summary>
+        /// An event-handler for the FileSelected event.
+        /// </summary>
+        public delegate void FileSelectedRoutedEventHandler(object sender, FileSelectedEventArgs fileSelectedEventArgs);
+
+        /// <summary>
         /// The name of the combo box inside the template.
         /// </summary>
         protected const string FileFiltersComboBoxName = "fileFiltersComboBox";
@@ -38,22 +43,15 @@ namespace MaterialDesignExtensions.Controls
         /// An event raised by selecting a file.
         /// </summary>
         public static readonly RoutedEvent FileSelectedEvent = EventManager.RegisterRoutedEvent(
-            nameof(FileSelected), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(BaseFileControl));
+            nameof(FileSelected), RoutingStrategy.Bubble, typeof(FileSelectedRoutedEventHandler), typeof(BaseFileControl));
 
         /// <summary>
         /// An event raised by selecting a file.
         /// </summary>
-        public event RoutedEventHandler FileSelected
+        public event FileSelectedRoutedEventHandler FileSelected
         {
-            add
-            {
-                AddHandler(FileSelectedEvent, value);
-            }
-
-            remove
-            {
-                RemoveHandler(FileSelectedEvent, value);
-            }
+            add => AddHandler(FileSelectedEvent, value);
+            remove => RemoveHandler(FileSelectedEvent, value);
         }
 
         /// <summary>
