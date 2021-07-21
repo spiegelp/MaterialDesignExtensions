@@ -142,20 +142,26 @@ namespace MaterialDesignExtensions.Controls
 
         private void LoadedHandler(object sender, RoutedEventArgs args)
         {
-            m_valueTextBox.LostFocus += LostFocusHandler;
-            m_valueTextBox.KeyUp += KeyUpHandler;
+            if (m_valueTextBox != null)
+            {
+                m_valueTextBox.LostFocus += LostFocusHandler;
+                m_valueTextBox.KeyUp += KeyUpHandler;
+            }
         }
 
         private void UnloadedHandler(object sender, RoutedEventArgs args)
         {
-            m_valueTextBox.LostFocus -= LostFocusHandler;
-            m_valueTextBox.KeyUp -= KeyUpHandler;
+            if (m_valueTextBox != null)
+            {
+                m_valueTextBox.LostFocus -= LostFocusHandler;
+                m_valueTextBox.KeyUp -= KeyUpHandler;
+            }
         }
 
         private void EditValueCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
             IsEditing = true;
-            
+
             try
             {
                 m_valueTextBox.Focus();
