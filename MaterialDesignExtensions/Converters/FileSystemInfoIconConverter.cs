@@ -24,8 +24,8 @@ namespace MaterialDesignExtensions.Converters
     /// </summary>
     public class FileSystemInfoIconConverter : IValueConverter
     {
-        private ISet<string> m_imageFileExtensions;
-        private IDictionary<string, object> m_contentForFileExtension;
+        private readonly ISet<string> m_imageFileExtensions;
+        private readonly IDictionary<string, object> m_contentForFileExtension;
 
         /// <summary>
         /// The content mode to control the type of icons or thumbnails for image file types.
@@ -131,7 +131,6 @@ namespace MaterialDesignExtensions.Converters
                 ["wmv"] = PackIconKind.FileVideo,
                 ["flv"] = PackIconKind.FileVideo,
                 ["avi"] = PackIconKind.FileVideo,
-                ["flv"] = PackIconKind.FileVideo,
                 ["mov"] = PackIconKind.FileVideo,
                 ["webm"] = PackIconKind.FileVideo,
                 ["mkv"] = PackIconKind.FileVideo,
@@ -163,7 +162,7 @@ namespace MaterialDesignExtensions.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is DirectoryInfo directory)
+            if (value is DirectoryInfo _)
             {
                 return PackIconKind.Folder;
             }

@@ -16,7 +16,7 @@ namespace MaterialDesignExtensions.Converters
     /// </summary>
     public class FileSystemInfoPackIconColorConverter : IValueConverter
     {
-        private IDictionary<PackIconKind, Brush> m_brushesForPackIcon;
+        private readonly IDictionary<PackIconKind, Brush> m_brushesForPackIcon;
 
         /// <summary>
         /// Creates a new <see cref="FileSystemInfoPackIconColorConverter" />.
