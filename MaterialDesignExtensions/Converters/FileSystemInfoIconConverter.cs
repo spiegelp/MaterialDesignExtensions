@@ -150,7 +150,7 @@ namespace MaterialDesignExtensions.Converters
                 ["pptx"] = PackIconKind.FilePowerpoint,
                 ["ppt"] = PackIconKind.FilePowerpoint,
                 ["pps"] = PackIconKind.FilePowerpoint,
-                ["pdf"] = PackIconKind.FilePdf,
+                ["pdf"] = PackIconKind.FilePdfBox,
                 ["txt"] = PackIconKind.FileDocument,
                 ["rtf"] = PackIconKind.FileDocument
             };
