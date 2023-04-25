@@ -27,8 +27,8 @@
   <files>
     <file src="bin\Release\net452\MaterialDesignExtensions.dll" target="lib\net452" />
     <file src="bin\Release\net452\de\MaterialDesignExtensions.resources.dll" target="lib\net452\de" />
-    <file src="bin\Release\net452\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net452\Ru" />
-    <file src="bin\Release\net452\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net452\ru-ru" />
+    <file src="bin\Release\net452\ru-RU\MaterialDesignExtensions.resources.dll" target="lib\net452\Ru" />
+    <file src="bin\Release\net452\ru-RU\MaterialDesignExtensions.resources.dll" target="lib\net452\ru-RU" />
     <file src="bin\Release\net452\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\net452\uz-Latn-UZ" />
     <file src="bin\Release\net452\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\net452\cs" />
     <file src="bin\Release\net452\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\net452\cs-CZ" />
@@ -42,8 +42,8 @@
     <file src="bin\Release\net452\MaterialDesignExtensions.xml" target="lib\net452" />
     <file src="bin\Release\netcoreapp3.1\MaterialDesignExtensions.dll" target="lib\netcoreapp3.1" />
     <file src="bin\Release\netcoreapp3.1\de\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\de" />
-    <file src="bin\Release\netcoreapp3.1\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\Ru" />
-    <file src="bin\Release\netcoreapp3.1\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\ru-ru" />
+    <file src="bin\Release\netcoreapp3.1\ru-RU\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\Ru" />
+    <file src="bin\Release\netcoreapp3.1\ru-RU\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\ru-RU" />
     <file src="bin\Release\netcoreapp3.1\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\uz-Latn-UZ" />
     <file src="bin\Release\netcoreapp3.1\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\cs" />
     <file src="bin\Release\netcoreapp3.1\cs-cz\MaterialDesignExtensions.resources.dll" target="lib\netcoreapp3.1\cs-CZ" />

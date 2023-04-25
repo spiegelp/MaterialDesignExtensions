@@ -32,8 +32,8 @@ Important notice: The configuration of Material Design Extensions changed in ord
   <files>
     <file src="bin\ReleaseLongPath\MaterialDesignExtensions.dll" target="lib\net45" />
     <file src="bin\ReleaseLongPath\de\MaterialDesignExtensions.resources.dll" target="lib\net45\de" />
-    <file src="bin\ReleaseLongPath\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net45\Ru" />
-    <file src="bin\ReleaseLongPath\ru-ru\MaterialDesignExtensions.resources.dll" target="lib\net45\ru-ru" />
+    <file src="bin\ReleaseLongPath\ru-RU\MaterialDesignExtensions.resources.dll" target="lib\net45\Ru" />
+    <file src="bin\ReleaseLongPath\ru-RU\MaterialDesignExtensions.resources.dll" target="lib\net45\ru-RU" />
     <file src="bin\ReleaseLongPath\uz-Latn-UZ\MaterialDesignExtensions.resources.dll" target="lib\net45\uz-Latn-UZ" />
     <file src="bin\ReleaseLongPath\MaterialDesignExtensions.xml" target="lib\net45" />
     <file src="..\additionalPackageFiles\License.txt" />
