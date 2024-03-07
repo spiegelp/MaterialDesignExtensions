@@ -18,6 +18,7 @@
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                     <Button Style="{StaticResource LanguageButtonStyle}" Content="English (default)" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="en-us" />
                     <Button Style="{StaticResource LanguageButtonStyle}" Content="Arabic" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="ar-DZ" />
+                    <Button Style="{StaticResource LanguageButtonStyle}" Content="Chinese" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="zh-CN" />
                     <Button Style="{StaticResource LanguageButtonStyle}" Content="Czech" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="cs-cz" />
                     <Button Style="{StaticResource LanguageButtonStyle}" Content="French" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="fr-FR" />
                     <Button Style="{StaticResource LanguageButtonStyle}" Content="German" Command="{Binding Path=SelectLanguageCommand}" CommandParameter="de" />
