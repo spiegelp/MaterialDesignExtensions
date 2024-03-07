@@ -5,21 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
              xmlns:viewModel="clr-namespace:MaterialDesignExtensionsDemo.ViewModel"
-             xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
-             xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters;assembly=MaterialDesignExtensions"
-             xmlns:model="clr-namespace:MaterialDesignExtensions.Model;assembly=MaterialDesignExtensions"
+             xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
+             d:DesignHeight="300" d:DesignWidth="500" Background="{DynamicResource MaterialDesignBackground}">
     <UserControl.Resources>
         <!-- hide the seperator of the horizontal Stepper by setting the resource to "Transparent" -->
         <!--<SolidColorBrush x:Key="MaterialDesignStepperSeparator" Color="Transparent" />-->
         
-        <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" FalseValue="Collapsed" />
+        <mde:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" FalseValue="Collapsed" />
         
         <DataTemplate DataType="{x:Type viewModel:StepperTutorialOneViewModel}">
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Steppers are handy to break a big task into smaller parts. These are so called steps. It displays the progress of the full task as a numbered sequence of steps." TextWrapping="WrapWithOverflow" />
-                <controls:StepButtonBar Continue="CONTINUE" Cancel="CANCEL" />
+                <mde:StepButtonBar Continue="CONTINUE" Cancel="CANCEL" />
             </StackPanel>
         </DataTemplate>
         
@@ -28,7 +26,7 @@
                 <TextBlock Text="There a two layouts for a Stepper, namely horizontal and vertical. It can be set by using the Layout property." TextWrapping="WrapWithOverflow" />
                 <TextBlock Margin="0,16,0,0" Text="Additionally the Stepper will be in linear mode by setting the IsLinear property to true. This means that the user can only edit the steps in their fixed order. A non-linear Stepper allows the user to edit the steps in any order." TextWrapping="WrapWithOverflow" />
                 <TextBlock Margin="0,16,0,0" Text="The basic navigation inside a stepper will be accomplished by using simple back and continue buttons. They allow the user to browse through the steps in their order. Just use the StepButtonBar like this tutorial to avoid the nasty reimplementation on your own. The user may also switch the steps of a non-linear Stepper by clicking on the headers. " TextWrapping="WrapWithOverflow" />
-                <controls:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
+                <mde:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
             </StackPanel>
         </DataTemplate>
         
@@ -57,11 +55,11 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Border VerticalAlignment="Top" Height="400">
-                        <controls:OpenFileControl />
+                        <mde:OpenFileControl />
                     </Border>
                     <Button Grid.Column="2" Margin="0,0,8,0" VerticalAlignment="Top" Content="SHOW DIALOG" Click="OpenFileDialogButtonClickHandler" />
                 </Grid>
-                <controls:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
+                <mde:StepButtonBar Back="BACK" Continue="CONTINUE" Cancel="CANCEL" />
             </StackPanel>
         </DataTemplate>
         
@@ -73,8 +71,15 @@
                 <TextBlock Margin="0,4,0,0" Foreground="Red" Text="You must accept the license terms."
                            Visibility="{Binding Path=ActiveStep.HasValidationErrors, Converter={StaticResource boolToVisibilityConverter}, ElementName=stepper}" />
                 <CheckBox Margin="0,4,0,0" IsChecked="{Binding Path=AgreedToLicense, Mode=TwoWay}">Accept the licence terms</CheckBox>
-                <controls:StepButtonBar Back="BACK" Continue="FINISH" Cancel="CANCEL" />
+                <mde:StepButtonBar Back="BACK" Continue="FINISH" Cancel="CANCEL" />
             </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CustomStepIconTemplate">
+            <Grid Width="24" Height=" 24">
+                <Rectangle Fill="Lime" Width="24" Height="24" SnapsToDevicePixels="True" />
+                <TextBlock Text="{Binding Path=Number}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
         </DataTemplate>
     </UserControl.Resources>
     <Grid Margin="16">
@@ -93,47 +98,58 @@
             <TextBlock Text="{Binding Path=ActiveStep.Header.FirstLevelTitle, ElementName=stepper}" VerticalAlignment="Center" />
         </WrapPanel>
         <ScrollViewer Grid.Row="1" HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
-            <controls:Stepper x:Name="stepper" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}"
-                              BlockNavigationOnValidationErrors="{Binding Path=BlockNavigationOnValidationErrors}"
-                              ContentAnimationsEnabled="{Binding Path=ContentAnimationsEnabled}"
-                              Steps="{Binding Path=Steps, Mode=OneTime}"
-                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <mde:Stepper x:Name="stepper" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}"
+                         BlockNavigationOnValidationErrors="{Binding Path=BlockNavigationOnValidationErrors}"
+                         ContentAnimationsEnabled="{Binding Path=ContentAnimationsEnabled}"
+                         Steps="{Binding Path=Steps, Mode=OneTime}"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                         DoneIconTemplate="{DynamicResource MaterialDesignStepDoneIconTemplate}"
+                         ValidationErrorIconTemplate="{DynamicResource MaterialDesignStepValidationErrorIconTemplate}">
+                <!-- example for using different colors than the default application theme -->
+                <!--<mde:Stepper.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignDarkTheme.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </mde:Stepper.Resources>-->
+            </mde:Stepper>
             <!-- example for defining the Stepper in XAML -->
-            <!--<controls:Stepper x:Name="stepper" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <model:Step>
-                    <model:Step.Header>
-                        <controls:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step1FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type controls:Stepper}}}" />
-                    </model:Step.Header>
-                    <model:Step.Content>
+            <!--<mde:Stepper x:Name="stepper" IsLinear="{Binding Path=IsLinear}" Layout="{Binding Path=Layout}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <mde:Step>
+                    <mde:Step.Header>
+                        <mde:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step1FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type mde:Stepper}}}" />
+                    </mde:Step.Header>
+                    <mde:Step.Content>
                         <viewModel:StepperTutorialOneViewModel />
-                    </model:Step.Content>
-                </model:Step>
-                <model:Step>
-                    <model:Step.Header>
-                        <controls:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step2FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type controls:Stepper}}}" />
-                    </model:Step.Header>
-                    <model:Step.Content>
+                    </mde:Step.Content>
+                </mde:Step>
+                <mde:Step>
+                    <mde:Step.Header>
+                        <mde:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step2FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type mde:Stepper}}}" />
+                    </mde:Step.Header>
+                    <mde:Step.Content>
                         <viewModel:StepperTutorialTwoViewModel />
-                    </model:Step.Content>
-                </model:Step>
-                <model:Step>
-                    <model:Step.Header>
-                        <controls:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step3FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type controls:Stepper}}}"
-                                                         SecondLevelTitle="{Binding Path=DataContext.Step3SecondLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type controls:Stepper}}}" />
-                    </model:Step.Header>
-                    <model:Step.Content>
+                    </mde:Step.Content>
+                </mde:Step>
+                <mde:Step>
+                    <mde:Step.Header>
+                        <mde:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step3FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type mde:Stepper}}}"
+                                                    SecondLevelTitle="{Binding Path=DataContext.Step3SecondLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type mde:Stepper}}}" />
+                    </mde:Step.Header>
+                    <mde:Step.Content>
                         <viewModel:StepperTutorialThreeViewModel />
-                    </model:Step.Content>
-                </model:Step>
-                <model:Step>
-                    <model:Step.Header>
-                        <controls:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step4FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type controls:Stepper}}}" />
-                    </model:Step.Header>
-                    <model:Step.Content>
+                    </mde:Step.Content>
+                </mde:Step>
+                <mde:Step>
+                    <mde:Step.Header>
+                        <mde:StepTitleHeaderControl FirstLevelTitle="{Binding Path=DataContext.Step4FirstLevelTitle, Mode=OneTime, RelativeSource={RelativeSource AncestorType={x:Type mde:Stepper}}}" />
+                    </mde:Step.Header>
+                    <mde:Step.Content>
                         <viewModel:StepperTutorialFourViewModel />
-                    </model:Step.Content>
-                </model:Step>
-            </controls:Stepper>-->
+                    </mde:Step.Content>
+                </mde:Step>
+            </mde:Stepper>-->
         </ScrollViewer>
     </Grid>
 </UserControl>

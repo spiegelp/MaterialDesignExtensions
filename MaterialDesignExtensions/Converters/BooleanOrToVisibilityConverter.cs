@@ -9,11 +9,17 @@ using System.Windows.Data;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Converter to apply boolean "and" operation and map to a <see cref="Visibility" />.
+    /// </summary>
     public class BooleanOrToVisibilityConverter : IMultiValueConverter
     {
         private BooleanOrConverter m_booleanOrConverter;
         private BoolToVisibilityConverter m_boolToVisibilityConverter;
 
+        /// <summary>
+        /// The visibility value if the argument is false.
+        /// </summary>
         public Visibility FalseValue
         {
             get
@@ -27,6 +33,9 @@ namespace MaterialDesignExtensions.Converters
             }
         }
 
+        /// <summary>
+        /// The visibility value if the argument is true.
+        /// </summary>
         public Visibility TrueValue
         {
             get
@@ -40,6 +49,9 @@ namespace MaterialDesignExtensions.Converters
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="BooleanOrToVisibilityConverter" />.
+        /// </summary>
         public BooleanOrToVisibilityConverter()
         {
             m_booleanOrConverter = new BooleanOrConverter();

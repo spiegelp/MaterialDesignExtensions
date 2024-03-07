@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
-             xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500" Background="Transparent">
+             d:DesignHeight="300" d:DesignWidth="500" Background="{DynamicResource MaterialDesignBackground}">
     <UserControl.Resources>
         <Viewbox x:Key="materialDesignExtensionsIcon" Stretch="Uniform" x:Shared="False">
             <Canvas Width="135.46666" Height="135.46667">
@@ -18,9 +19,9 @@
                     <Canvas.RenderTransform>
                         <TranslateTransform X="0" Y="-161.53332"/>
                     </Canvas.RenderTransform>
-                    <Rectangle Canvas.Left="5.2916665" Canvas.Top="167.35416" Width="124.35417" Height="124.35418" StrokeThickness="5.08370417" Stroke="{DynamicResource SecondaryAccentBrush}" StrokeMiterLimit="4" Opacity="1"/>
-                    <Ellipse Canvas.Left="10" Width="114.9" Canvas.Top="172.1" Height="114.7" StrokeThickness="5.19894171" Stroke="{DynamicResource SecondaryAccentBrush}" StrokeMiterLimit="4" Opacity="1"/>
-                    <Path StrokeThickness="5.0270834" Stroke="{DynamicResource SecondaryAccentBrush}" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
+                    <Rectangle Canvas.Left="5.2916665" Canvas.Top="167.35416" Width="124.35417" Height="124.35418" StrokeThickness="5.08370417" Stroke="{DynamicResource SecondaryHueMidBrush}" StrokeMiterLimit="4" Opacity="1"/>
+                    <Ellipse Canvas.Left="10" Width="114.9" Canvas.Top="172.1" Height="114.7" StrokeThickness="5.19894171" Stroke="{DynamicResource SecondaryHueMidBrush}" StrokeMiterLimit="4" Opacity="1"/>
+                    <Path StrokeThickness="5.0270834" Stroke="{DynamicResource SecondaryHueMidBrush}" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
                         <Path.Data>
                             <PathGeometry Figures="M 23.8125 257.31249 H 111.125 L 67.733333 178.20207 Z" FillRule="NonZero"/>
                         </Path.Data>
@@ -33,32 +34,65 @@
         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="16" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical" MinWidth="250" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                 <TextBlock Text="Default app bar" Margin="0,0,0,8" />
-                <controls:AppBar Type="Default" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" />
+                <mde:AppBar Type="Default" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" />
                 <TextBlock Text="Prominent app bar" Margin="0,32,0,8" />
-                <controls:AppBar Type="Prominent" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <mde:AppBar Type="Prominent" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
                 <TextBlock Text="Prominent app bar with title in prominent area" Margin="0,32,0,8" />
-                <controls:AppBar Type="Prominent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <mde:AppBar Type="Prominent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
                 <TextBlock Text="Extra prominent app bar with title in prominent area" Margin="0,32,0,8" />
-                <controls:AppBar Type="ExtraProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <mde:AppBar Type="ExtraProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
                 <TextBlock Text="Dense app bar" Margin="0,32,0,8" />
-                <controls:AppBar Type="Dense" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" />
+                <mde:AppBar Type="Dense" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" />
                 <TextBlock Text="Dense prominent app bar" Margin="0,32,0,8" />
-                <controls:AppBar Type="DenseProminent" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <mde:AppBar Type="DenseProminent" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
                 <TextBlock Text="Dense prominent app bar with title in prominent area" Margin="0,32,0,8" />
-                <controls:AppBar Type="DenseProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <mde:AppBar Type="DenseProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
                 <TextBlock Text="Dense extra prominent app bar with title in prominent area" Margin="0,32,0,8" />
-                <controls:AppBar Type="DenseExtraProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <mde:AppBar Type="DenseExtraProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
                 <TextBlock Text="Medium app bar" Margin="0,32,0,8" />
-                <controls:AppBar Type="Medium" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" />
+                <mde:AppBar Type="Medium" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" />
                 <TextBlock Text="Medium prominent app bar" Margin="0,32,0,8" />
-                <controls:AppBar Type="MediumProminent" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <mde:AppBar Type="MediumProminent" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
                 <TextBlock Text="Medium prominent app bar with title in prominent area" Margin="0,32,0,8" />
-                <controls:AppBar Type="MediumProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
+                <mde:AppBar Type="MediumProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowNavigationDrawerButton="True" />
                 <TextBlock Text="Medium extra prominent app bar with title in prominent area" Margin="0,32,0,8" />
-                <controls:AppBar Type="MediumExtraProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowBackButton="True"
-                                 Back="BackButtonClickHandler" />
+                <mde:AppBar Type="MediumExtraProminent" ShowTitleInProminentArea="True" Title="Material Design Extensions" ShowBackButton="True"
+                            Back="BackButtonClickHandler" />
                 <TextBlock Text="Default transparent app bar" Margin="0,32,0,8" />
-                <controls:AppBar Type="Default" OpaqueMode="Transparent" Title="Material Design Extensions" ShowBackButton="True" Foreground="{DynamicResource MaterialDesignBody}" />
+                <mde:AppBar Type="Default" OpaqueMode="Transparent" Title="Material Design Extensions" ShowBackButton="True" Foreground="{DynamicResource MaterialDesignBody}" />
+                <TextBlock Text="Default app bar with custom content area" Margin="0,32,0,8" />
+                <mde:AppBar Type="Default" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}">
+                    <Grid Margin="16,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.0001*" />
+                            <ColumnDefinition Width="*" MaxWidth="512" />
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="1" Background="{DynamicResource PrimaryHueMidForegroundBrush}" CornerRadius="4"
+                                Padding="8,4" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox FontSize="16" Foreground="{DynamicResource MaterialDesignBody}" Margin="0,0,8,0" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                                <md:PackIcon Grid.Column="1" Kind="Magnify" Width="24" Height="24" Foreground="{DynamicResource MaterialDesignBody}" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </mde:AppBar>
+                <mde:AppBar Type="Default" Title="Material Design Extensions" AppIcon="{DynamicResource materialDesignExtensionsIcon}" Margin="0,16">
+                    <StackPanel Orientation="Horizontal" Margin="16,0,4,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button Style="{StaticResource MaterialDesignToolForegroundButton}" md:RippleAssist.Feedback="{DynamicResource PrimaryHueMidForegroundBrush}" Margin="8,0">
+                            <md:PackIcon Kind="Like" Height="24" Width="24" />
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignToolForegroundButton}" md:RippleAssist.Feedback="{DynamicResource PrimaryHueMidForegroundBrush}" Margin="8,0">
+                            <md:PackIcon Kind="Share" Height="24" Width="24" />
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignToolForegroundButton}" md:RippleAssist.Feedback="{DynamicResource PrimaryHueMidForegroundBrush}" Margin="8,0">
+                            <md:PackIcon Kind="DotsVertical" Height="24" Width="24" />
+                        </Button>
+                    </StackPanel>
+                </mde:AppBar>
             </StackPanel>
         </ScrollViewer>
     </Grid>

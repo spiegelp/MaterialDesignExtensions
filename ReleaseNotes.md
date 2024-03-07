@@ -87,6 +87,130 @@
 * New interface `IAutocompleteSourceChangingItems` to propagate source changes to `Autocomplete`
 #### Fixes
 * Handle `PathTooLongException`
-### vX.X.X (upcoming release)
+### v2.5.0
 #### Features
 * New control `StepTitleHeaderControl` to use bindings in a XAML defined step
+* `TabControl` styles to render it in [Material Design](https://material.io/design/components/tabs.html)
+* New icons for file system controls
+#### Fixes
+* Handle broken image files in `BitmapImageHelper`
+* Updated dependency to MaterialDesignThemes version 2.5.1 to bypass a bug in version 2.5.0.1205
+* Use `Dispatcher` in `Autocomplete.AutocompleteSourceItemsChangedHandler()`
+### v2.6.0
+#### Features
+* Localization for Uzbekistan
+* Create new directories inside `OpenDirectoryControl` and `SaveFileControl`
+* Helper `PaletteHelper` for changing the theme at runtime
+#### Fixes
+* List used resources explicitly in the XAML files containing the templates
+* Prevent `NullReferenceException` in `SideNavigation` before the template will be applied
+#### Important notice
+The configuration of Material Design Extensions changed in order to enable changing the theme at runtime.
+Please change your configuration according to [App.xaml](https://github.com/spiegelp/MaterialDesignExtensions/blob/master/MaterialDesignExtensionsDemo/App.xaml) of the demo.
+### v2.7.0
+#### Features
+* New package `MaterialDesignExtensions.LongPath` for supporting long file system paths on older Windows and .NET versions
+* Improvements for file system controls
+  * Improved loading of preview images
+  * Smoother scrolling in directories and files list
+* New `SaveFileControl.ForceFileExtensionOfFileFilter` property to enforce a file extension of the selected filter
+* Better support of dark theme in file system dialogs
+* Localization for Russian
+* Updated dependency to MaterialDesignThemes version 2.6.0
+#### Fixes
+* Fixed `DateTime` conversion inside `DateTimeAgoConverter`
+### v2.8.0
+#### Features
+* New window class `MaterialWindow` for a Material Design like styled window
+* Support of `TabStripPlacement` in `TabControl` styles
+* `OpenMultipleDirectoriesControl` and `OpenMultipleDirectoriesDialog` to select multiple directories
+* `OpenMultipleFilesControl` and `OpenMultipleFilesDialog` to select multiple files
+#### Fixes
+* Fixed content layout of horizontal steppers
+#### Obsolete
+* Attached property `TabControlAssist.TabHeaderAlignment` will be replaced by `TabControlAssist.TabHeaderHorizontalAlignment`
+### v3.0.0
+#### Features
+* Support for .NET Core 3
+* Select file with double click in `OpenFileDialog` and `SaveFileDialog`
+* Improved keyboard navigation for file system controls
+* Dense style for `PersistentSearch`
+* Optional icon templates for steps inside a stepper
+* Improved stepper navigation
+* Added `MaterialWindow.TitleBarIcon` property
+#### Breaking API
+* Removed obsolete members
+  * `TabControlAssist.TabHeaderAlignment` attached property
+  * `OpenDirectoryDialog.ShowDialogAsync` methods
+  * `OpenFileDialog.ShowDialogAsync` methods
+  * `SaveFileDialog.ShowDialogAsync` methods
+* Extendend `IStepper` interface to implement new features for steppers
+* Extendend `IStep` interface to implement new features for steppers
+### v3.1.0
+#### Features
+* Update to .NET Core 3.1
+* Controls for simple alert and confirmation dialogs
+* New `TextBoxSuggestions.KeepFocusOnSelection` property to control the focus after selecting a suggestion
+* New controls combining a `TextBox` and a `FileSystemDialog`
+  * `TextBoxOpenDirectory`
+  * `TextBoxOpenFile`
+  * `TextBoxSaveFile`
+* Improvements for `MaterialWindow`
+  * New `MaterialWindow.TitleTemplate` property to customize the window title bar
+  * Different looks according to `Window.WindowStyle` property
+* New control `NavigationRail`
+#### Fixes
+* Catch exception if network drive is not accessible
+### v3.2.0
+#### Features
+* New control `BusyOverlay`
+* New `TextBoxFileSystemPath.TextBoxStyle` property to enable custom styles for the embedded `TextBox`
+* New localizations
+  * Arabic
+  * Czech
+  * French
+  * Portuguese
+* Save file in `SaveFileControl` and `SaveFileDialog` by hitting enter
+* New `ClearSelection` method for `Autocomplete`
+* `TabControl` style supports `FlowDirection = RightToLeft`
+#### Fixes
+* Fixed exception in `Stepper` events
+### v3.3.0
+#### Features
+* Added `XmlnsDefinition` `https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml`
+* Consider `ResizeMode` for the window caption buttons
+* `ResizeGrip` in `MaterialWindow`
+* New control `TransitionContentControl`
+* New dialog features
+  * Optional custom content for dialogs
+  * Control for simple input dialogs
+* Strong named assembly
+* Current directory path optionally as text box in file system controls
+* `IconTemplate` property for `NavigationItem`
+* Handle setting of `TabControlStepper.SelectedIndex`
+* New properties to control tab control item headers
+  * `TabHeaderFontSize`
+  * `TabHeaderFontWeight`
+  * `TabHeaderMargin`
+* Layout improvements for `MaterialWindow`
+* New `SearchBase.CancelIcon` and `SearchBase.ClearIcon` properties
+#### Fixes
+* Fixed reflection code in `ResourceDictionaryExtensions`
+* Fixed usage of `SecondaryHueMidBrush` and `SecondaryHueMidForegroundBrush` resources
+* Fixed `NullReferenceException` in `FileSystemControl`
+### v4.0.0 (upcoming release)
+#### Features
+* New `SideNavigation.LabelFontSize` property
+* Layout improvements for `NavigationRail`
+* More customizable content area for `AppBar`
+* Localization for Japanese
+* Added `SideNavigation.SelectionBackgroundOpacity` property
+* New window class `MaterialNavigationWindow` for a Material Design like styled navigation window
+* Updated dependency to MaterialDesignThemes version 4.1.0
+#### Fixes
+* Avoid unnecessary searches in `TextBoxSuggestions`
+#### Breaking API
+* `AppBar.Children` replaced by `AppBar.ContentAreaContent`
+  * `ContentAreaContent` is `object` instead of `IList`
+  * Additional `ContentAreaContentTemplate`
+* Minimum version for .NET Framework raised to 4.5.2

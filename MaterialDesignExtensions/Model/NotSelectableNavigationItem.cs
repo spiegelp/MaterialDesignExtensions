@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace MaterialDesignExtensions.Model
 {
+    /// <summary>
+    /// The base class for not selectable items (headers, dividers) in a <see cref="Controls.SideNavigation" />.
+    /// </summary>
     public abstract class NotSelectableNavigationItem : BaseNavigationItem
     {
+        /// <summary>
+        /// True, if the user can select this navigation item.
+        /// </summary>
         public override bool IsSelectable
         {
             get
@@ -18,6 +24,9 @@ namespace MaterialDesignExtensions.Model
             set { }
         }
 
+        /// <summary>
+        /// True, if the navigation item is selected.
+        /// </summary>
         public override bool IsSelected
         {
             get
@@ -28,6 +37,10 @@ namespace MaterialDesignExtensions.Model
             set { }
         }
 
+        /// <summary>
+        /// The delegate for a <see cref="INavigationItem.NavigationItemSelectedCallback"/> method.
+        /// </summary>
+        /// <returns></returns>
         public override NavigationItemSelectedCallback NavigationItemSelectedCallback
         {
             get
@@ -38,6 +51,9 @@ namespace MaterialDesignExtensions.Model
             set { }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="NotSelectableNavigationItem" />.
+        /// </summary>
         public NotSelectableNavigationItem() : base() { }
     }
 }

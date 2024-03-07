@@ -7,10 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-using MaterialDesignThemes.Wpf;
-
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
+
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
+#if LONG_PATH
+using FileInfo = Pri.LongPath.FileInfo;
+#endif
 
 namespace MaterialDesignExtensions.Controls
 {
@@ -175,6 +178,17 @@ namespace MaterialDesignExtensions.Controls
         {
             Filters = null;
             FilterIndex = 0;
+        }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="args"></param>
+        public FileDialogArguments(FileDialogArguments args)
+            : base(args)
+        {
+            Filters = args.Filters;
+            FilterIndex = args.FilterIndex;
         }
     }
 

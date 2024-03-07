@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
 
 using MaterialDesignExtensions.Controls;
+using MaterialDesignExtensions.Model;
 
 using MaterialDesignExtensionsDemo.ViewModel;
 
@@ -28,6 +29,17 @@ namespace MaterialDesignExtensionsDemo.Controls
             InitializeComponent();
 
             stepper.NavigationCanceledByValidation += Stepper_NavigationCanceledByValidation;
+
+            // demo for custom icon template
+            //Loaded += StepperControl_Loaded;
+        }
+
+        private void StepperControl_Loaded(object sender, RoutedEventArgs args)
+        {
+            if (FindResource("CustomStepIconTemplate") is DataTemplate iconTemplate)
+            {
+                ((IStep)stepper.Steps[1]).IconTemplate = iconTemplate;
+            }
         }
 
         private void Stepper_NavigationCanceledByValidation(object sender, NavigationCanceledByValidationEventArgs args)

@@ -9,12 +9,24 @@ using System.Windows.Data;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Converter to map a boolean to a <see cref="Visibility" />.
+    /// </summary>
     public class BoolToVisibilityConverter : IValueConverter
     {
+        /// <summary>
+        /// The visibility value if the argument is false.
+        /// </summary>
         public Visibility FalseValue { get; set; }
 
+        /// <summary>
+        /// The visibility value if the argument is true.
+        /// </summary>
         public Visibility TrueValue { get; set; }
 
+        /// <summary>
+        /// Creates a new <see cref="BoolToVisibilityConverter" />.
+        /// </summary>
         public BoolToVisibilityConverter()
         {
             FalseValue = Visibility.Collapsed;

@@ -11,12 +11,29 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         private string m_selectedAction;
         private bool m_showHiddenFilesAndDirectories;
         private bool m_showSystemFilesAndDirectories;
+        private bool m_createNewDirectoryEnabled;
+        private bool m_switchPathPartsAsButtonsEnabled;
 
         public override string DocumentationUrl
         {
             get
             {
                 return "https://spiegelp.github.io/MaterialDesignExtensions/#documentation/filesystemcontrols";
+            }
+        }
+
+        public bool CreateNewDirectoryEnabled
+        {
+            get
+            {
+                return m_createNewDirectoryEnabled;
+            }
+
+            set
+            {
+                m_createNewDirectoryEnabled = value;
+
+                OnPropertyChanged(nameof(CreateNewDirectoryEnabled));
             }
         }
 
@@ -65,12 +82,29 @@ namespace MaterialDesignExtensionsDemo.ViewModel
             }
         }
 
+        public bool SwitchPathPartsAsButtonsEnabled
+        {
+            get
+            {
+                return m_switchPathPartsAsButtonsEnabled;
+            }
+
+            set
+            {
+                m_switchPathPartsAsButtonsEnabled = value;
+
+                OnPropertyChanged(nameof(SwitchPathPartsAsButtonsEnabled));
+            }
+        }
+
         public FileSystemControlViewModel()
             : base()
         {
             m_selectedAction = null;
             m_showHiddenFilesAndDirectories = false;
             m_showSystemFilesAndDirectories = false;
+            m_createNewDirectoryEnabled = false;
+            m_switchPathPartsAsButtonsEnabled = false;
         }
     }
 }

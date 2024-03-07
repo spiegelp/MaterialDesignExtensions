@@ -17,6 +17,31 @@ namespace MaterialDesignExtensions.Controls
     public abstract class FileSystemDialog : Control
     {
         /// <summary>
+        /// Enables the feature to create new directories.
+        /// </summary>
+        public static readonly DependencyProperty CreateNewDirectoryEnabledProperty = DependencyProperty.Register(
+            nameof(CreateNewDirectoryEnabled),
+            typeof(bool),
+            typeof(FileSystemDialog),
+            new PropertyMetadata(false));
+
+        /// <summary>
+        /// Enables the feature to create new directories. Notice: It does not have any effects for <see cref="OpenFileDialog" />.
+        /// </summary>
+        public bool CreateNewDirectoryEnabled
+        {
+            get
+            {
+                return (bool)GetValue(CreateNewDirectoryEnabledProperty);
+            }
+
+            set
+            {
+                SetValue(CreateNewDirectoryEnabledProperty, value);
+            }
+        }
+
+        /// <summary>
         /// The current directory of the dialog.
         /// </summary>
         public static readonly DependencyProperty CurrentDirectoryProperty = DependencyProperty.Register(
@@ -38,6 +63,31 @@ namespace MaterialDesignExtensions.Controls
             set
             {
                 SetValue(CurrentDirectoryProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Show the current directory path with a short cut button for each part in the path, instead of a text box.
+        /// </summary>
+        public static readonly DependencyProperty PathPartsAsButtonsProperty = DependencyProperty.Register(
+            nameof(PathPartsAsButtons),
+            typeof(bool),
+            typeof(FileSystemDialog),
+            new PropertyMetadata(true));
+
+        /// <summary>
+        /// Show the current directory path with a short cut button for each part in the path, instead of a text box.
+        /// </summary>
+        public bool PathPartsAsButtons
+        {
+            get
+            {
+                return (bool)GetValue(PathPartsAsButtonsProperty);
+            }
+
+            set
+            {
+                SetValue(PathPartsAsButtonsProperty, value);
             }
         }
 
@@ -91,6 +141,31 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// Enable switching between a text box and the buttons for each sub directory of the current directory's path.
+        /// </summary>
+        public static readonly DependencyProperty SwitchPathPartsAsButtonsEnabledProperty = DependencyProperty.Register(
+            nameof(SwitchPathPartsAsButtonsEnabled),
+            typeof(bool),
+            typeof(FileSystemDialog),
+            new PropertyMetadata(false));
+
+        /// <summary>
+        /// Enable switching between a text box and the buttons for each sub directory of the current directory's path.
+        /// </summary>
+        public bool SwitchPathPartsAsButtonsEnabled
+        {
+            get
+            {
+                return (bool)GetValue(SwitchPathPartsAsButtonsEnabledProperty);
+            }
+
+            set
+            {
+                SetValue(SwitchPathPartsAsButtonsEnabledProperty, value);
+            }
+        }
+
         static FileSystemDialog()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FileSystemDialog), new FrameworkPropertyMetadata(typeof(FileSystemDialog)));
@@ -115,7 +190,9 @@ namespace MaterialDesignExtensions.Controls
 
         protected static void InitDialog(FileSystemDialog dialog, double? width, double? height,
             string currentDirectory,
-            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories)
+            bool showHiddenFilesAndDirectories, bool showSystemFilesAndDirectories,
+            bool createNewDirectoryEnabled = false,
+            bool switchPathPartsAsButtonsEnabled = false, bool pathPartsAsButtons = true)
         {
             if (width != null)
             {
@@ -132,8 +209,11 @@ namespace MaterialDesignExtensions.Controls
                 dialog.CurrentDirectory = currentDirectory;
             }
 
+            dialog.CreateNewDirectoryEnabled = createNewDirectoryEnabled;
             dialog.ShowHiddenFilesAndDirectories = showHiddenFilesAndDirectories;
             dialog.ShowSystemFilesAndDirectories = showSystemFilesAndDirectories;
+            dialog.SwitchPathPartsAsButtonsEnabled = switchPathPartsAsButtonsEnabled;
+            dialog.PathPartsAsButtons = pathPartsAsButtons;
         }
     }
 
@@ -148,7 +228,7 @@ namespace MaterialDesignExtensions.Controls
         public double? Width { get; set; }
 
         /// <summary>
-        /// The fixed heigth of the dialog (nullable).
+        /// The fixed height of the dialog (nullable).
         /// </summary>
         public double? Height { get; set; }
 
@@ -156,6 +236,16 @@ namespace MaterialDesignExtensions.Controls
         /// The current directory of the dialog.
         /// </summary>
         public string CurrentDirectory { get; set; }
+
+        /// <summary>
+        /// Enables the feature to create new directories. Notice: It does not have any effects for <see cref="OpenFileDialog" />.
+        /// </summary>
+        public bool CreateNewDirectoryEnabled { get; set; }
+
+        /// <summary>
+        /// Show the current directory path with a short cut button for each part in the path, instead of a text box.
+        /// </summary>
+        public bool PathPartsAsButtons { get; set; }
 
         /// <summary>
         /// Shows or hides hidden directories and files.
@@ -166,6 +256,11 @@ namespace MaterialDesignExtensions.Controls
         /// Shows or hides protected directories and files of the system.
         /// </summary>
         public bool ShowSystemFilesAndDirectories { get; set; }
+
+        /// <summary>
+        /// Enable switching between a text box and the buttons for each sub directory of the current directory's path.
+        /// </summary>
+        public bool SwitchPathPartsAsButtonsEnabled { get; set; }
 
         /// <summary>
         /// Callback after openening the dialog.
@@ -185,10 +280,29 @@ namespace MaterialDesignExtensions.Controls
             Width = null;
             Height = null;
             CurrentDirectory = null;
+            CreateNewDirectoryEnabled = false;
             ShowHiddenFilesAndDirectories = false;
             ShowSystemFilesAndDirectories = false;
+            SwitchPathPartsAsButtonsEnabled = false;
+            PathPartsAsButtons = true;
             OpenedHandler = null;
             ClosingHandler = null;
+        }
+
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="args"></param>
+        public FileSystemDialogArguments(FileSystemDialogArguments args)
+        {
+            Width = args.Width;
+            Height = args.Height;
+            CurrentDirectory = args.CurrentDirectory;
+            CreateNewDirectoryEnabled = args.CreateNewDirectoryEnabled;
+            ShowHiddenFilesAndDirectories = args.ShowHiddenFilesAndDirectories;
+            ShowSystemFilesAndDirectories = args.ShowSystemFilesAndDirectories;
+            OpenedHandler = args.OpenedHandler;
+            ClosingHandler = args.ClosingHandler;
         }
     }
 
@@ -201,6 +315,17 @@ namespace MaterialDesignExtensions.Controls
         /// true, if the dialog was canceled
         /// </summary>
         public bool Canceled { get; protected set; }
+
+        /// <summary>
+        /// true, if the dialog was confirmed
+        /// </summary>
+        public bool Confirmed
+        {
+            get
+            {
+                return !Canceled;
+            }
+        }
 
         /// <summary>
         /// Creates a new <see cref="FileSystemDialogResult" />.

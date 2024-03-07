@@ -8,8 +8,14 @@ using System.Windows.Data;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Converts a file size of bytes into a user friendly string.
+    /// </summary>
     public class FileSizeConverter : IValueConverter
     {
+        /// <summary>
+        /// Creates a new <see cref="FileSizeConverter" />.
+        /// </summary>
         public FileSizeConverter() { }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -50,6 +50,11 @@ code[class*="language-"], pre[class*="language-"] {
     min-width: 200px;
 }
 
+.screenshot-image--small {
+    max-width: 1024px;
+    min-width: 16px;
+}
+
 .mdc-card__documentation_overview {
     display: inline-block;
     margin: 8px;

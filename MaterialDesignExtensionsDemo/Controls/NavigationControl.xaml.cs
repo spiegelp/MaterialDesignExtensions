@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 
 using MaterialDesignExtensions.Model;
 
+using MaterialDesignExtensionsDemo.ViewModel;
+
 namespace MaterialDesignExtensionsDemo.Controls
 {
     public partial class NavigationControl : UserControl
@@ -32,6 +34,16 @@ namespace MaterialDesignExtensionsDemo.Controls
             navigation1.WillSelectNavigationItemCallbackAsync = WillSelectNavigationItemCallbackAsync;
             navigation2.WillSelectNavigationItemCallbackAsync = WillSelectNavigationItemCallbackAsync;
             navigation3.WillSelectNavigationItemCallbackAsync = WillSelectNavigationItemCallbackAsync;
+
+            // just a demo for showing how to override the default template of a navigation item's icon
+            /*if (DataContext is NavigationViewModel viewModel)
+            {
+                viewModel.NavigationItems
+                    .Where(navigationItem => navigationItem is FirstLevelNavigationItem && ((FirstLevelNavigationItem)navigationItem).Icon != null)
+                    .Select(navigationItem => (FirstLevelNavigationItem)navigationItem)
+                    .ToList()
+                    .ForEach(navigationItem => navigationItem.IconTemplate = TryFindResource("itemIconTemplate") as DataTemplate);
+            }*/
         }
 
         private void NavigationControl_Unloaded(object sender, RoutedEventArgs args)

@@ -198,4 +198,43 @@
   <data name="LongPathsAreNotSupported" xml:space="preserve">
     <value>Lange Pfade werden nicht unterstützt</value>
   </data>
+  <data name="TheDirectoryNameIsInvalid" xml:space="preserve">
+    <value>Der Ordnername ist ungültig</value>
+  </data>
+  <data name="TheDirectoryNameMustNotBeEmpty" xml:space="preserve">
+    <value>Der Ordername darf nicht leer sein</value>
+  </data>
+  <data name="TheDirectoryXAlreadyExists" xml:space="preserve">
+    <value>Der Ordner "{0}" existiert bereits</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Erstellen</value>
+  </data>
+  <data name="NewDirectoryName" xml:space="preserve">
+    <value>Neuer Ordnername</value>
+  </data>
+  <data name="Maximize" xml:space="preserve">
+    <value>Maximieren</value>
+  </data>
+  <data name="Minimize" xml:space="preserve">
+    <value>Minimieren</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Verkleinern</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Auswahl</value>
+  </data>
+  <data name="NoSelectedDirectories" xml:space="preserve">
+    <value>Keine ausgewählten Ordner</value>
+  </data>
+  <data name="NoSelectedFiles" xml:space="preserve">
+    <value>Keine ausgewählten Dateien</value>
+  </data>
 </root>

@@ -10,6 +10,7 @@ using System.Windows.Input;
 
 using MaterialDesignThemes.Wpf;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
@@ -25,11 +26,6 @@ namespace MaterialDesignExtensions.Controls
         protected const string SearchTextBoxName = "searchTextBox";
         protected const string SearchSuggestionsPopupName = "searchSuggestionsPopup";
         protected const string SearchSuggestionsItemsControlName = "searchSuggestionsItemsControl";
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand SelectSearchSuggestionCommand = new RoutedCommand();
 
         /// <summary>
         /// An event raised by triggering a search (select a suggestion or hit enter).
@@ -120,6 +116,50 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// The icon on the left side of the search text box that appears when the text is not empty and replaced the search icon.
+        /// </summary>
+        public static readonly DependencyProperty CancelIconProperty = DependencyProperty.Register(
+            nameof(CancelIcon), typeof(object), typeof(SearchBase), new PropertyMetadata(PackIconKind.ArrowLeft, null));
+
+        /// <summary>
+        /// The icon on the left side of the search text box that appears when the text is not empty and replaced the search icon.
+        /// </summary>
+        public object CancelIcon
+        {
+            get
+            {
+                return GetValue(CancelIconProperty);
+            }
+
+            set
+            {
+                SetValue(CancelIconProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The icon on the right side of the search text box that appears when the text is not empty.
+        /// </summary>
+        public static readonly DependencyProperty ClearIconProperty = DependencyProperty.Register(
+            nameof(ClearIcon), typeof(object), typeof(SearchBase), new PropertyMetadata(PackIconKind.Close, null));
+
+        /// <summary>
+        /// The icon on the right side of the search text box that appears when the text is not empty.
+        /// </summary>
+        public object ClearIcon
+        {
+            get
+            {
+                return GetValue(ClearIconProperty);
+            }
+
+            set
+            {
+                SetValue(ClearIconProperty, value);
+            }
+        }
+
+        /// <summary>
         /// A source for providing suggestions to search for.
         /// </summary>
         public static readonly DependencyProperty SearchSuggestionsSourceProperty = DependencyProperty.Register(
@@ -170,6 +210,9 @@ namespace MaterialDesignExtensions.Controls
 
         private SearchSuggestionsController m_searchSuggestionsController;
 
+        /// <summary>
+        /// Creates a new <see cref="SearchBase" />.
+        /// </summary>
         public SearchBase()
             : base()
         {
@@ -179,7 +222,7 @@ namespace MaterialDesignExtensions.Controls
 
             m_searchSuggestionsController = new SearchSuggestionsController() { SearchSuggestionsSource = SearchSuggestionsSource };
 
-            CommandBindings.Add(new CommandBinding(SelectSearchSuggestionCommand, SelectSearchSuggestionCommandHandler));
+            CommandBindings.Add(new CommandBinding(SearchControlCommands.SelectSearchSuggestionCommand, SelectSearchSuggestionCommandHandler));
 
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;

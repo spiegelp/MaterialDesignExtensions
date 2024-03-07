@@ -196,7 +196,7 @@ namespace MaterialDesignExtensions.Controllers
             }
         }
 
-        private int GetActiveStepIndex()
+        internal int GetActiveStepIndex()
         {
             if (m_stepViewModels != null)
             {

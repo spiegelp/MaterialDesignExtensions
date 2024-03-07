@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Markup;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
@@ -25,9 +25,26 @@ namespace MaterialDesignExtensions.Controls
         private static readonly string SuggestionItemsPopupName = "suggestionItemsPopup";
 
         /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// True to keep the focus on the text box after selecting a suggestion.
         /// </summary>
-        public static readonly RoutedCommand SelectSuggestionItemCommand = new RoutedCommand();
+        public static readonly DependencyProperty KeepFocusOnSelectionProperty = DependencyProperty.Register(
+            nameof(KeepFocusOnSelection), typeof(bool), typeof(TextBoxSuggestions), new PropertyMetadata(false));
+
+        /// <summary>
+        /// True to keep the focus on the text box after selecting a suggestion.
+        /// </summary>
+        public bool KeepFocusOnSelection
+        {
+            get
+            {
+                return (bool)GetValue(KeepFocusOnSelectionProperty);
+            }
+
+            set
+            {
+                SetValue(KeepFocusOnSelectionProperty, value);
+            }
+        }
 
         /// <summary>
         /// The TextBox to decorate.
@@ -92,7 +109,7 @@ namespace MaterialDesignExtensions.Controls
 
             m_autocompleteController = new AutocompleteController() { AutocompleteSource = TextBoxSuggestionsSource };
 
-            CommandBindings.Add(new CommandBinding(SelectSuggestionItemCommand, SelectSuggestionItemCommandHandler));
+            CommandBindings.Add(new CommandBinding(TextBoxSuggestionsCommands.SelectSuggestionItemCommand, SelectSuggestionItemCommandHandler));
 
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
@@ -148,7 +165,17 @@ namespace MaterialDesignExtensions.Controls
         {
             if (TextBox != null)
             {
-                TextBox.Text = args.Parameter as string;
+                TextBox.Text = args.Parameter as string ?? string.Empty;
+
+                if (KeepFocusOnSelection)
+                {
+                    Keyboard.Focus(TextBox);
+                    TextBox.CaretIndex = TextBox.Text.Length;
+                }
+                else
+                {
+                    Keyboard.Focus(null);
+                }
             }
         }
 
@@ -174,7 +201,7 @@ namespace MaterialDesignExtensions.Controls
 
         private void TextBoxTextChangedHandler(object sender, TextChangedEventArgs args)
         {
-            if (sender == TextBox)
+            if (sender == TextBox && IsEnabled && IsLoaded && TextBox.IsLoaded && TextBox.IsFocused)
             {
                 m_autocompleteController?.Search(TextBox.Text);
             }

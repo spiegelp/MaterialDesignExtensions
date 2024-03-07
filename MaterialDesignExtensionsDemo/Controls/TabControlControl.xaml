@@ -1,0 +1,205 @@
+﻿<UserControl x:Class="MaterialDesignExtensionsDemo.Controls.TabControlControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaterialDesignExtensionsDemo.Controls"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource MaterialDesignBackground}">
+    <Grid>
+        <TabControl x:Name="m_tabControl" Style="{StaticResource MaterialDesignTabControl}">
+            <TabItem Header="ANIMALS">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="16">
+                    <Grid TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="48" />
+                            <RowDefinition Height="48" />
+                            <RowDefinition Height="48" />
+                            <RowDefinition Height="48" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.ColumnSpan="2" FontSize="24" Text="Some lovely animals" Margin="0,0,0,16" />
+                        <md:PackIcon Grid.Row="1" Kind="Linux" Height="24" Width="24" VerticalAlignment="Center" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" FontSize="14" FontWeight="Medium" Text="Penguin" VerticalAlignment="Center" />
+                        <md:PackIcon Grid.Row="2" Kind="Cat" Height="24" Width="24" VerticalAlignment="Center" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" FontSize="14" FontWeight="Medium" Text="Cat" VerticalAlignment="Center" />
+                        <md:PackIcon Grid.Row="3" Kind="Owl" Height="24" Width="24" VerticalAlignment="Center" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" FontSize="14" FontWeight="Medium" Text="Owl" VerticalAlignment="Center" />
+                        <md:PackIcon Grid.Row="4" Kind="Panda" Height="24" Width="24" VerticalAlignment="Center" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="4" Grid.Column="1" FontSize="14" FontWeight="Medium" Text="Panda" VerticalAlignment="Center" />
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="VEHICLES">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="16">
+                    <Grid TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="48" />
+                            <RowDefinition Height="48" />
+                            <RowDefinition Height="48" />
+                            <RowDefinition Height="48" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.ColumnSpan="2" FontSize="24" Text="Some vehicles" Margin="0,0,0,16" />
+                        <md:PackIcon Grid.Row="1" Kind="Car" Height="24" Width="24" VerticalAlignment="Center" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" FontSize="14" FontWeight="Medium" Text="Car" VerticalAlignment="Center" />
+                        <md:PackIcon Grid.Row="2" Kind="Caravan" Height="24" Width="24" VerticalAlignment="Center" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" FontSize="14" FontWeight="Medium" Text="Caravan" VerticalAlignment="Center" />
+                        <md:PackIcon Grid.Row="3" Kind="Truck" Height="24" Width="24" VerticalAlignment="Center" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" FontSize="14" FontWeight="Medium" Text="Truck" VerticalAlignment="Center" />
+                        <md:PackIcon Grid.Row="4" Kind="Airballoon" Height="24" Width="24" VerticalAlignment="Center" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="4" Grid.Column="1" FontSize="14" FontWeight="Medium" Text="Airballoon" VerticalAlignment="Center" />
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="TABCONTROL STYLES">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="16">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+                        <TextBlock Text="Default" Margin="0,0,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}">
+                                <TabItem Header="ANIMALS"></TabItem>
+                                <TabItem Header="PLANTS"></TabItem>
+                                <TabItem Header="VEHICLES"></TabItem>
+                            </TabControl>
+                        </Border>
+                        <TextBlock Text="Right aligned" Margin="0,32,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderHorizontalAlignment="Right">
+                                <TabItem Header="ANIMALS"></TabItem>
+                                <TabItem Header="PLANTS"></TabItem>
+                                <TabItem Header="VEHICLES"></TabItem>
+                            </TabControl>
+                        </Border>
+                        <TextBlock Text="Centered" Margin="0,32,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderHorizontalAlignment="Center">
+                                <TabItem Header="ANIMALS"></TabItem>
+                                <TabItem Header="PLANTS"></TabItem>
+                                <TabItem Header="VEHICLES"></TabItem>
+                            </TabControl>
+                        </Border>
+                        <TextBlock Text="Right to left" Margin="0,32,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" FlowDirection="RightToLeft">
+                                <TabItem Header="ANIMALS"></TabItem>
+                                <TabItem Header="PLANTS"></TabItem>
+                                <TabItem Header="VEHICLES"></TabItem>
+                            </TabControl>
+                        </Border>
+                        <TextBlock Text="Stretched" Margin="0,32,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderHorizontalAlignment="Stretch">
+                                <TabItem Header="ANIMALS"></TabItem>
+                                <TabItem Header="PLANTS"></TabItem>
+                                <TabItem Header="VEHICLES"></TabItem>
+                            </TabControl>
+                        </Border>
+                        <TextBlock Text="Integrated into an app bar" Margin="0,32,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignAppBarTabControl}" mde:TabControlAssist.TabHeaderHorizontalAlignment="Stretch">
+                                <TabItem Header="ANIMALS"></TabItem>
+                                <TabItem Header="PLANTS"></TabItem>
+                                <TabItem Header="VEHICLES"></TabItem>
+                            </TabControl>
+                        </Border>
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True" Margin="0,16,0,0">
+                            <TabControl Style="{StaticResource MaterialDesignAppBarAccentTabControl}" mde:TabControlAssist.TabHeaderHorizontalAlignment="Stretch">
+                                <TabItem Header="ANIMALS"></TabItem>
+                                <TabItem Header="PLANTS"></TabItem>
+                                <TabItem Header="VEHICLES"></TabItem>
+                            </TabControl>
+                        </Border>
+                        <TextBlock Text="More complex headers" Margin="0,32,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderHorizontalAlignment="Center">
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <md:PackIcon Kind="Owl" Width="24" Height="24" HorizontalAlignment="Center"
+                                                         Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                            <TextBlock FontSize="14" FontWeight="Medium" Text="ANIMALS" Margin="0,8,0,0" HorizontalAlignment="Center"
+                                                       Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                        </StackPanel>
+                                    </TabItem.Header>
+                                </TabItem>
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <md:PackIcon Kind="Tree" Width="24" Height="24" HorizontalAlignment="Center"
+                                                         Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                            <TextBlock FontSize="14" FontWeight="Medium" Text="PLANTS" Margin="0,8,0,0" HorizontalAlignment="Center"
+                                                       Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                        </StackPanel>
+                                    </TabItem.Header>
+                                </TabItem>
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <md:PackIcon Kind="Car" Width="24" Height="24" HorizontalAlignment="Center"
+                                                         Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                            <TextBlock FontSize="14" FontWeight="Medium" Text="VEHICLES" Margin="0,8,0,0" HorizontalAlignment="Center"
+                                                       Foreground="{Binding Path=(mde:TabControlAssist.TabHeaderForeground), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabItem}}}" />
+                                        </StackPanel>
+                                    </TabItem.Header>
+                                </TabItem>
+                            </TabControl>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="HEADER PLACEMENT">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Padding="16">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+                        <TextBlock Text="Default (top)" Margin="0,0,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderHorizontalAlignment="Stretch" TabStripPlacement="Top">
+                                <TabItem Header="ANIMALS">Animals</TabItem>
+                                <TabItem Header="PLANTS">Plants</TabItem>
+                                <TabItem Header="VEHICLES">Vehicles</TabItem>
+                            </TabControl>
+                        </Border>
+                        <TextBlock Text="Bottom" Margin="0,32,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderHorizontalAlignment="Stretch" TabStripPlacement="Bottom">
+                                <TabItem Header="ANIMALS">Animals</TabItem>
+                                <TabItem Header="PLANTS">Plants</TabItem>
+                                <TabItem Header="VEHICLES">Vehicles</TabItem>
+                            </TabControl>
+                        </Border>
+                        <TextBlock Text="Left" Margin="0,32,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderHorizontalAlignment="Stretch" TabStripPlacement="Left">
+                                <TabItem Header="ANIMALS">Animals</TabItem>
+                                <TabItem Header="PLANTS">Plants</TabItem>
+                                <TabItem Header="VEHICLES">Vehicles</TabItem>
+                            </TabControl>
+                        </Border>
+                        <TextBlock Text="Right" Margin="0,32,0,8" />
+                        <Border Width="500" BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignBodyLight}" SnapsToDevicePixels="True">
+                            <TabControl Style="{StaticResource MaterialDesignTabControl}" mde:TabControlAssist.TabHeaderHorizontalAlignment="Stretch" TabStripPlacement="Right">
+                                <TabItem Header="ANIMALS">Animals</TabItem>
+                                <TabItem Header="PLANTS">Plants</TabItem>
+                                <TabItem Header="VEHICLES">Vehicles</TabItem>
+                            </TabControl>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <!--<TabItem Header="TEST">
+                <Button Content="REMOVE TABS" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Click="RemoveTabsButtonClickHandler" />
+            </TabItem>-->
+        </TabControl>
+    </Grid>
+</UserControl>

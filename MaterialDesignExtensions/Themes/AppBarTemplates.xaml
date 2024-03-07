@@ -1,11 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
-                    xmlns:wpfLib="http://materialdesigninxaml.net/winfx/xaml/themes"
-                    xmlns:convertersLib="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+                    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls"
                     xmlns:converters="clr-namespace:MaterialDesignExtensions.Converters">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" FalseValue="Collapsed" />
     <converters:NotNullToVisibilityConverter x:Key="notNullToVisibilityConverter" NullValue="Collapsed" />
     <converters:ObjectCollectionToVisibilityConverter x:Key="objectCollectionToVisibilityConverter" EmptyValue="Collapsed" />
@@ -31,7 +34,7 @@
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=OpaqueMode, RelativeSource={RelativeSource TemplatedParent}}" Value="Opaque">
                                         <Setter Property="Background" Value="{Binding Path=Background, RelativeSource={RelativeSource TemplatedParent}}" />
-                                        <Setter Property="Effect" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpfLib:ShadowAssist.ShadowDepth), Converter={x:Static convertersLib:ShadowConverter.Instance}}" />
+                                        <Setter Property="Effect" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(md:ShadowAssist.ShadowDepth), Converter={x:Static md:ShadowConverter.Instance}}" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=OpaqueMode, RelativeSource={RelativeSource TemplatedParent}}" Value="Transparent">
                                         <Setter Property="Background" Value="Transparent" />
@@ -77,8 +80,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="80" />
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="100*" />
                                 </Grid.ColumnDefinitions>
 
                                 <!-- toggle button for the navigation drawer -->
@@ -103,9 +105,10 @@
                                 <!-- back button -->
                                 <Button x:Name="backButton" Grid.Column="0" Style="{DynamicResource MaterialDesignToolForegroundButton}"
                                         Foreground="{TemplateBinding Foreground}" Cursor="Hand"
+                                        md:RippleAssist.Feedback="{TemplateBinding Foreground}"
                                         Margin="18,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
                                         Visibility="{TemplateBinding ShowBackButton, Converter={StaticResource boolToVisibilityConverter}}">
-                                    <wpfLib:PackIcon Kind="ArrowLeft" Height="24" Width="24" />
+                                    <md:PackIcon Kind="ArrowLeft" Height="24" Width="24" />
                                 </Button>
 
                                 <!-- title -->
@@ -130,21 +133,14 @@
                                     </ContentControl.Style>
                                 </ContentControl>
 
-                                <!-- toolbar buttons -->
-                                <ItemsControl Grid.Column="3" x:Name="PartHostActionButtons" Focusable="False"
-                                              Margin="0,0,12,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"
-                                              ItemsSource="{TemplateBinding Children}"
-                                              Visibility="{TemplateBinding Children, Converter={StaticResource objectCollectionToVisibilityConverter}}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Horizontal" IsItemsHost="True" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
+                                <!-- content area -->
+                                <ContentControl Grid.Column="2" Content="{Binding Path=ContentAreaContent, RelativeSource={RelativeSource TemplatedParent}}"
+                                                ContentTemplate="{Binding Path=ContentAreaContentTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                             </Grid>
                         </Border>
                         <Border Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
-                            <ContentControl Grid.Column="1" Content="{TemplateBinding Title}"
+                            <ContentControl Grid.Column="1" Grid.ColumnSpan="2" Content="{TemplateBinding Title}"
                                             Margin="80,0,16,0" HorizontalAlignment="Left" VerticalAlignment="Center"
                                             TextBlock.FontSize="20" Focusable="False">
                                 <ContentControl.Resources>
@@ -172,7 +168,7 @@
         </Setter>
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=ShowShadow, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="wpfLib:ShadowAssist.ShadowDepth" Value="Depth2" />
+                <Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth2" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="Default">
                 <Setter Property="Height" Value="{x:Static controls:AppBar.DefaultHeight}" />

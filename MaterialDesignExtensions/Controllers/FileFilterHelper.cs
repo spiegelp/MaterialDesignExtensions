@@ -150,5 +150,26 @@ namespace MaterialDesignExtensions.Controllers
 
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Extracts the file extensions out of the file filter.
+        /// </summary>
+        /// <param name="fileFilter"></param>
+        /// <returns></returns>
+        public static IEnumerable<string> GetFileExtensionsFromFilter(IFileFilter fileFilter)
+        {
+            if (fileFilter == null)
+            {
+                return null;
+            }
+
+            string[] split = fileFilter.Filters.Split(';');
+
+            return fileFilter.Filters.Split(';')
+                .Select(filterStr => filterStr.Trim())
+                .Where(filterStr => filterStr.Length > 1 && filterStr.Contains(".") && !filterStr.EndsWith("."))
+                .Select(filterStr => filterStr.Substring(filterStr.LastIndexOf(".") + 1).Replace("*", string.Empty))
+                .Where(fileExtension => !string.IsNullOrWhiteSpace(fileExtension));
+        }
     }
 }

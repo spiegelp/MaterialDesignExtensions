@@ -19,7 +19,7 @@ namespace MaterialDesignExtensions.Controls
         protected AutocompletePopup m_popup;
 
         /// <summary>
-        /// Creates a new <code>ControlWithPopup</code>.
+        /// Creates a new <see cref="ControlWithAutocompletePopup" />.
         /// </summary>
         public ControlWithAutocompletePopup()
             : base()

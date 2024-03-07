@@ -1,4 +1,439 @@
 ﻿<div>
     <h1>File system controls</h1>
-    Documentation under construction
+    <p>
+        The file system controls provide the selection features for opening a directory or file, and saving a file. They can be used instead
+        of the default Windows dialogs to get a consistent look and feel in Material Design.
+    </p>
+    <p>
+        Each control has a dialog counterpart for wrapping the control into a modal Material Design dialog:
+        <ul>
+            <li>
+                Open a directory
+                <ul>
+                    <li>
+                        <code>OpenDirectoryControl</code>
+                    </li>
+                    <li>
+                        <code>OpenDirectoryDialog</code>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Open a file
+                <ul>
+                    <li>
+                        <code>OpenFileControl</code>
+                    </li>
+                    <li>
+                        <code>OpenFileDialog</code>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Save a file
+                <ul>
+                    <li>
+                        <code>SaveFileControl</code>
+                    </li>
+                    <li>
+                        <code>SaveFileDialog</code>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </p>
+    <h2>Screenshots</h2>
+    <p>
+        <img src="https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/OpenDirectoryControl1.png" alt="Open directory" />
+    </p>
+    <p>
+        <img src="https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/OpenFileControl1.png" alt="Open file" />
+    </p>
+    <p>
+        <img src="https://raw.githubusercontent.com/spiegelp/MaterialDesignExtensions/master/screenshots/SaveFileControl1.png" alt="Save file" />
+    </p>
+    <h2>API</h2>
+    <h3>FileSystemControl</h3>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>CreateNewDirectoryEnabled</code>
+                    </td>
+                    <td>
+                        Enables the feature to create new directories. Notice: It does not have any effects for <code>OpenFileControl</code>.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>CurrentDirectory</code>
+                    </td>
+                    <td>
+                        The current directory of the control.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>FileSystemInfoToShow</code>
+                    </td>
+                    <td>
+                        The currently selected directory or file to display additional information about it.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>NewDirectoryName</code>
+                    </td>
+                    <td>
+                        The name for the new directory.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>ShowHiddenFilesAndDirectories</code>
+                    </td>
+                    <td>
+                        Shows or hides hidden directories and files.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>ShowSystemFilesAndDirectories</code>
+                    </td>
+                    <td>
+                        Shows or hides protected directories and files of the system.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>Cancel</code>
+                    </td>
+                    <td>
+                        An event raised by canceling the operation.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <h3>OpenDirectoryControl (extends FileSystemControl)</h3>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>DirectorySelected</code>
+                    </td>
+                    <td>
+                        An event raised by selecting a directory to open.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>DirectorySelectedCommand</code>
+                    </td>
+                    <td>
+                        An command called by by selecting a directory to open.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <h3>BaseFileControl (extends FileSystemControl)</h3>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>ClearCacheOnUnload</code>
+                    </td>
+                    <td>
+                        True, to clear the cache during unloading the control.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>CurrentFile</code>
+                    </td>
+                    <td>
+                        The current file of the control.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>Filters</code>
+                    </td>
+                    <td>
+                        The possible file filters to select from for applying to the files inside the current directory.
+                        <br />
+                        Strings according to the original .NET API will be converted automatically
+                        (see <a href="https://docs.microsoft.com/de-de/dotnet/api/microsoft.win32.filedialog.filter?view=netframework-4.7.1#Microsoft_Win32_FileDialog_Filter">original .NET API</a>).
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>FilterIndex</code>
+                    </td>
+                    <td>
+                        The index of the file filter to apply to the files inside the current directory.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>GroupFoldersAndFiles</code>
+                    </td>
+                    <td>
+                        Shows folders and files as a group with a header.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>FileSelected</code>
+                    </td>
+                    <td>
+                        An event raised by selecting a file.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>FileSelectedCommand</code>
+                    </td>
+                    <td>
+                        An command called by by selecting a file.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <h3>OpenFileControl (extends BaseFileControl)</h3>
+    <p>
+        <code>OpenFileControl</code> does not have any further properties, events or commands.
+    </p>
+    <h3>SaveFileControl (extends BaseFileControl)</h3>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>Filename</code>
+                    </td>
+                    <td>
+                        The name of the file itself without the full path.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>ForceFileExtensionOfFileFilter</code>
+                    </td>
+                    <td>
+                        Forces the possible file extension of the selected file filter for new filenames.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <h3>DirectorySelectedEventArgs</h3>
+    <p>
+        The arguments for the <code>OpenDirectoryControl.DirectorySelected</code> event.
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>Directory</code>
+                    </td>
+                    <td>
+                        The selected directory as full filename string.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>DirectoryInfo</code>
+                    </td>
+                    <td>
+                        The selected directory as <code>DirectoryInfo</code>.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <h3>FileSelectedEventArgs</h3>
+    <p>
+        The arguments for the <code>BaseFileControl.FileSelected</code> event.
+    </p>
+    <p>
+        <table class="documentation">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>File</code>
+                    </td>
+                    <td>
+                        The selected file as full filename string.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>FileInfo</code>
+                    </td>
+                    <td>
+                        The selected file as <code>FileInfo</code>.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+    <h2>Code example</h2>
+    <h3>Controls</h3>
+    <p>
+        Add the control versions to any container control.
+    </p>
+    <pre class="language-markup"><code class="language-markup">&lt;!-- import namespaces -->
+xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+
+&lt;!-- open directory -->
+&lt;mde:OpenDirectoryControl ShowHiddenFilesAndDirectories="False"
+                          ShowSystemFilesAndDirectories="False"
+                          CreateNewDirectoryEnabled="True"
+                          DirectorySelected="OpenDirectoryControl_DirectorySelected"
+                          Cancel="OpenDirectoryControl_Cancel" />
+
+&lt;!-- open file -->
+&lt;mde:OpenFileControl ShowHiddenFilesAndDirectories="False"
+                     ShowSystemFilesAndDirectories="False"
+                     Filters="All files|*.*|C# files|*.cs|XAML files|*.xaml"
+                     FileSelected="OpenFileControl_FileSelected"
+                     Cancel="OpenFileControl_Cancel" />
+
+&lt;!-- save file -->
+&lt;mde:SaveFileControl ShowHiddenFilesAndDirectories="False"
+                     ShowSystemFilesAndDirectories="False"
+                     CreateNewDirectoryEnabled="True"
+                     Filters="All files|*.*|C# files|*.cs|XAML files|*.xaml"
+                     FileSelected="SaveFileControl_FileSelected"
+                     Cancel="SaveFileControl_Cancel" /></code></pre>
+    <h3>Dialogs</h3>
+    <p>
+        To open a dialog, use the according helper method as shown below.
+    </p>
+    <pre class="language-csharp"><code class="language-csharp">using MaterialDesignExtensions.Controls;
+
+// open directory
+OpenDirectoryDialogArguments dialogArgs = new OpenDirectoryDialogArguments()
+{
+    Width = 600,
+    Height = 400,
+    CreateNewDirectoryEnabled = true
+};
+
+OpenDirectoryDialogResult result = await OpenDirectoryDialog.ShowDialogAsync("DialogHostName", dialogArgs);
+
+// open file
+OpenFileDialogArguments dialogArgs = new OpenFileDialogArguments()
+{
+    Width = 600,
+    Height = 400,
+    Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml"
+};
+
+OpenFileDialogResult result = await OpenFileDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);
+
+// save file
+SaveFileDialogArguments dialogArgs = new SaveFileDialogArguments()
+{
+    Width = 600,
+    Height = 400,
+    Filters = "All files|*.*|C# files|*.cs|XAML files|*.xaml",
+    CreateNewDirectoryEnabled = true
+};
+
+SaveFileDialogResult result = await SaveFileDialog.ShowDialogAsync(MainWindow.DialogHostName, dialogArgs);</code></pre>
+    <script type="text/javascript">
+        appViewModel.prepareCodeSnippets();
+    </script>
 </div>

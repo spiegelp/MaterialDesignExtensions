@@ -10,9 +10,17 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Converters;
 using MaterialDesignExtensions.Model;
+
+// use Pri.LongPath classes instead of System.IO for the MaterialDesignExtensions.LongPath build to support long file system paths on older Windows and .NET versions
+#if LONG_PATH
+using FileSystemInfo = Pri.LongPath.FileSystemInfo;
+using DirectoryInfo = Pri.LongPath.DirectoryInfo;
+using FileInfo = Pri.LongPath.FileInfo;
+#endif
 
 namespace MaterialDesignExtensions.Controls
 {
@@ -21,12 +29,10 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public abstract class BaseFileControl : FileSystemControl
     {
-        protected const string FileFiltersComboBoxName = "fileFiltersComboBox";
-
         /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// The name of the combo box inside the template.
         /// </summary>
-        public static readonly RoutedCommand SelectFileCommand = new RoutedCommand();
+        protected const string FileFiltersComboBoxName = "fileFiltersComboBox";
 
         /// <summary>
         /// An event raised by selecting a file.
@@ -56,7 +62,7 @@ namespace MaterialDesignExtensions.Controls
         public static readonly DependencyProperty ClearCacheOnUnloadProperty = DependencyProperty.Register(
                 nameof(ClearCacheOnUnload),
                 typeof(bool),
-                typeof(FileSystemControl),
+                typeof(BaseFileControl),
                 new PropertyMetadata(true));
 
         /// <summary>
@@ -101,13 +107,13 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// An command called by by selecting a file.
+        /// An command called by selecting a file.
         /// </summary>
         public static readonly DependencyProperty FileSelectedCommandProperty = DependencyProperty.Register(
             nameof(FileSelectedCommand), typeof(ICommand), typeof(BaseFileControl), new PropertyMetadata(null, null));
 
         /// <summary>
-        /// An command called by by selecting a file.
+        /// An command called by selecting a file.
         /// </summary>
         public ICommand FileSelectedCommand
         {
@@ -204,12 +210,16 @@ namespace MaterialDesignExtensions.Controls
 
         protected ComboBox m_fileFiltersComboBox;
 
+        /// <summary>
+        /// Creates a new <see cref="BaseFileControl" />.
+        /// </summary>
         public BaseFileControl()
             : base()
         {
             m_fileFiltersComboBox = null;
 
-            CommandBindings.Add(new CommandBinding(SelectFileCommand, SelectFileCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.SelectFileCommand, SelectFileCommandHandler));
+            CommandBindings.Add(new CommandBinding(FileSystemControlCommands.FileSystemEntryDoubleClickCommand, FileDoubleClickCommandHandler));
         }
 
         public override void OnApplyTemplate()
@@ -224,12 +234,29 @@ namespace MaterialDesignExtensions.Controls
 
         protected override void UnloadedHandler(object sender, RoutedEventArgs args)
         {
-            BitmapImageHelper.ClearCache();
+            if (ClearCacheOnUnload)
+            {
+                BitmapImageHelper.ClearCache();
+            }
 
             base.UnloadedHandler(sender, args);
         }
 
+        protected override void SelectFileSystemEntryCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            SelectFileSystemEntry(args.Parameter as FileSystemInfo);
+
+            Keyboard.Focus(this);
+        }
+
+        protected abstract void SelectFileSystemEntry(FileSystemInfo fileSystemInfo);
+
         protected virtual void SelectFileCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            SelectFile();
+        }
+
+        protected virtual void SelectFile()
         {
             try
             {
@@ -239,6 +266,22 @@ namespace MaterialDesignExtensions.Controls
                 if (FileSelectedCommand != null && FileSelectedCommand.CanExecute(m_controller.CurrentFileFullName))
                 {
                     FileSelectedCommand.Execute(m_controller.CurrentFileFullName);
+                }
+            }
+            catch (PathTooLongException)
+            {
+                SnackbarMessageQueue.Enqueue(Localization.Strings.LongPathsAreNotSupported);
+            }
+        }
+
+        protected virtual void FileDoubleClickCommandHandler(object sender, ExecutedRoutedEventArgs args)
+        {
+            try
+            {
+                if (args.Parameter is FileInfo fileInfo)
+                {
+                    SelectFileSystemEntry(fileInfo);
+                    SelectFile();
                 }
             }
             catch (PathTooLongException)
@@ -353,70 +396,17 @@ namespace MaterialDesignExtensions.Controls
 
         protected IEnumerable GetFileSystemEntryItems(List<FileSystemInfo> directoriesAndFiles)
         {
-            if (directoriesAndFiles == null || !directoriesAndFiles.Any())
-            {
-                return new ArrayList(0);
-            }
-
-            int numberOfItems = directoriesAndFiles.Count;
-
-            if (GroupFoldersAndFiles)
-            {
-                numberOfItems = numberOfItems + 2;
-            }
-
-            ArrayList items = new ArrayList(numberOfItems);
-
-            for (int i = 0; i < directoriesAndFiles.Count; i++)
-            {
-                FileSystemInfo item = directoriesAndFiles[i];
-
-                if (item is DirectoryInfo directoryInfo)
-                {
-                    if (GroupFoldersAndFiles && i == 0)
-                    {
-                        items.Add(new FileSystemEntriesGroupHeader() { Header = Localization.Strings.Folders, ShowSeparator = false });
-                    }
-
-                    bool isSelected = directoryInfo.FullName == m_controller.CurrentDirectory?.FullName;
-
-                    items.Add(new DirectoryInfoItem() { IsSelected = isSelected, Value = directoryInfo });
-                }
-                else if (item is FileInfo fileInfo)
-                {
-                    if (GroupFoldersAndFiles)
-                    {
-                        if (i == 0)
-                        {
-                            items.Add(new FileSystemEntriesGroupHeader() { Header = Localization.Strings.Files, ShowSeparator = false });
-                        }
-                        else if (directoriesAndFiles[i - 1] is DirectoryInfo)
-                        {
-                            items.Add(new FileSystemEntriesGroupHeader() { Header = Localization.Strings.Files, ShowSeparator = true });
-                        }
-                    }
-
-                    bool isSelected = fileInfo.FullName == m_controller.CurrentFileFullName;
-
-                    items.Add(new FileInfoItem() { IsSelected = isSelected, Value = fileInfo });
-                }
-            }
-
-            return items;
+            return FileControlHelper.GetFileSystemEntryItems(
+                directoriesAndFiles,
+                m_controller,
+                GroupFoldersAndFiles,
+                fileInfo => fileInfo.FullName == m_controller.CurrentFileFullName
+            );
         }
 
         protected void UpdateFileFiltersVisibility()
         {
-            if (m_fileFiltersComboBox != null
-                && m_fileFiltersComboBox.ItemsSource != null
-                && m_fileFiltersComboBox.ItemsSource.GetEnumerator().MoveNext())
-            {
-                m_fileFiltersComboBox.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                m_fileFiltersComboBox.Visibility = Visibility.Collapsed;
-            }
+            FileControlHelper.UpdateFileFiltersVisibility(m_fileFiltersComboBox);
         }
     }
 
@@ -426,7 +416,7 @@ namespace MaterialDesignExtensions.Controls
     public class FileSelectedEventArgs : RoutedEventArgs
     {
         /// <summary>
-        /// The selected file as <see cref="FileInfo" />
+        /// The selected file as <see cref="FileInfo" />.
         /// </summary>
         public FileInfo FileInfo { get; private set; }
 

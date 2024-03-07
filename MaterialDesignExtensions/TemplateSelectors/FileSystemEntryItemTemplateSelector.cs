@@ -12,7 +12,13 @@ namespace MaterialDesignExtensions.TemplateSelectors
 {
     internal class FileSystemEntryItemTemplateSelector : DataTemplateSelector
     {
-        public FileSystemEntryItemTemplateSelector() : base() { }
+        public bool ForMultipleSelection { get; set; }
+
+        public FileSystemEntryItemTemplateSelector()
+            : base()
+        {
+            ForMultipleSelection = false;
+        }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -24,7 +30,14 @@ namespace MaterialDesignExtensions.TemplateSelectors
                 }
                 else if (item is FileInfoItem)
                 {
-                    return element.FindResource("fileInfoItemTemplate") as DataTemplate;
+                    if (ForMultipleSelection)
+                    {
+                        return element.FindResource("fileInfoItemMultipleTemplate") as DataTemplate;
+                    }
+                    else
+                    {
+                        return element.FindResource("fileInfoItemTemplate") as DataTemplate;
+                    }
                 }
                 else if (item is FileSystemEntriesGroupHeader)
                 {

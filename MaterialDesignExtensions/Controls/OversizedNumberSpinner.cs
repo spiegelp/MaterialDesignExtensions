@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+using MaterialDesignExtensions.Commands.Internal;
+
 namespace MaterialDesignExtensions.Controls
 {
     /// <summary>
@@ -17,23 +19,14 @@ namespace MaterialDesignExtensions.Controls
         private const string ValueTextBoxName = "ValueTextBox";
 
         /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
+        /// True, if the editing mode with the textbox is active.
         /// </summary>
-        public static readonly RoutedCommand EditValueCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand MinusCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand PlusCommand = new RoutedCommand();
-
         public static readonly DependencyProperty IsEditingProperty = DependencyProperty.Register(
             nameof(IsEditing), typeof(bool), typeof(OversizedNumberSpinner), new PropertyMetadata(false));
 
+        /// <summary>
+        /// True, if the editing mode with the textbox is active.
+        /// </summary>
         private bool IsEditing
         {
             get
@@ -47,9 +40,15 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The minimum value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public static readonly DependencyProperty MinProperty = DependencyProperty.Register(
             nameof(Min), typeof(int), typeof(OversizedNumberSpinner), new PropertyMetadata(0));
 
+        /// <summary>
+        /// The minimum value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public int Min
         {
             get
@@ -63,9 +62,15 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The maximum value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public static readonly DependencyProperty MaxProperty = DependencyProperty.Register(
             nameof(Max), typeof(int), typeof(OversizedNumberSpinner), new PropertyMetadata(5));
 
+        /// <summary>
+        /// The maximum value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public int Max
         {
             get
@@ -79,9 +84,15 @@ namespace MaterialDesignExtensions.Controls
             }
         }
 
+        /// <summary>
+        /// The current value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
             nameof(Value), typeof(int), typeof(OversizedNumberSpinner), new PropertyMetadata(1, ValuePropertyChangedCallback));
 
+        /// <summary>
+        /// The current value of the <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public int Value
         {
             get
@@ -102,12 +113,15 @@ namespace MaterialDesignExtensions.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(OversizedNumberSpinner), new FrameworkPropertyMetadata(typeof(OversizedNumberSpinner)));
         }
 
+        /// <summary>
+        /// Creates a new <see cref="OversizedNumberSpinner" />.
+        /// </summary>
         public OversizedNumberSpinner()
             : base()
         {
-            CommandBindings.Add(new CommandBinding(EditValueCommand, EditValueCommandHandler));
-            CommandBindings.Add(new CommandBinding(MinusCommand, MinusCommandHandler));
-            CommandBindings.Add(new CommandBinding(PlusCommand, PlusCommandHandler));
+            CommandBindings.Add(new CommandBinding(OversizedNumberSpinnerCommands.EditValueCommand, EditValueCommandHandler));
+            CommandBindings.Add(new CommandBinding(OversizedNumberSpinnerCommands.MinusCommand, MinusCommandHandler));
+            CommandBindings.Add(new CommandBinding(OversizedNumberSpinnerCommands.PlusCommand, PlusCommandHandler));
 
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
@@ -128,20 +142,35 @@ namespace MaterialDesignExtensions.Controls
 
         private void LoadedHandler(object sender, RoutedEventArgs args)
         {
-            m_valueTextBox.LostFocus += LostFocusHandler;
-            m_valueTextBox.KeyUp += KeyUpHandler;
+            if (m_valueTextBox != null)
+            {
+                m_valueTextBox.LostFocus += LostFocusHandler;
+                m_valueTextBox.KeyUp += KeyUpHandler;
+            }
         }
 
         private void UnloadedHandler(object sender, RoutedEventArgs args)
         {
-            m_valueTextBox.LostFocus -= LostFocusHandler;
-            m_valueTextBox.KeyUp -= KeyUpHandler;
+            if (m_valueTextBox != null)
+            {
+                m_valueTextBox.LostFocus -= LostFocusHandler;
+                m_valueTextBox.KeyUp -= KeyUpHandler;
+            }
         }
 
         private void EditValueCommandHandler(object sender, ExecutedRoutedEventArgs args)
         {
             IsEditing = true;
-            m_valueTextBox.Focus();
+
+            try
+            {
+                m_valueTextBox.Focus();
+            }
+            catch (InvalidOperationException)
+            {
+                // This is a hack. The above call of Focus() will cause an exception inside MaterialDesignThemes version 2.5.0.1205.
+                // Older or newer versions of MaterialDesignThemes work as expected.
+            }
         }
 
         private void MinusCommandHandler(object sender, ExecutedRoutedEventArgs args)

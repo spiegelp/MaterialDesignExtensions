@@ -50,50 +50,71 @@ namespace MaterialDesignExtensions.Controllers
 
             try
             {
-                using (BufferedStream fileStream = new BufferedStream(new FileStream(imageFilename, FileMode.Open), BufferSize))
+                using (MemoryStream imageMemoryStream = new MemoryStream())
                 {
-                    BitmapDecoder bitmapDecoder = BitmapDecoder.Create(fileStream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.Default);
-                    int width = bitmapDecoder.Frames[0].PixelWidth;
-                    int height = bitmapDecoder.Frames[0].PixelHeight;
-
-                    fileStream.Position = 0;
-
-                    image = new BitmapImage();
-                    image.BeginInit();
-
-                    double targetRatio = ((double)targetWidth) / targetHeight;
-                    double ratio = ((double)width) / height;
-
-                    if (targetRatio > ratio)
+                    using (BufferedStream fileStream = new BufferedStream(new FileStream(imageFilename, FileMode.Open), BufferSize))
                     {
-                        image.DecodePixelWidth = targetWidth;
-                    }
-                    else
-                    {
-                        image.DecodePixelHeight = targetHeight;
+                        fileStream.CopyTo(imageMemoryStream);
                     }
 
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.StreamSource = fileStream;
-
-                    image.EndInit();
-                    image.StreamSource = null;
-                    image.Freeze();
-
-                    if (useCache)
-                    {
-                        lock (m_staticLockObject)
-                        {
-                            Cache[key] = image;
-                        }
-                    }
-
-                    return image;
+                    return GetAsBitmapImage(imageMemoryStream, targetWidth, targetHeight, useCache, key);
                 }
             }
             catch (Exception exc)
             {
-                if (exc is IOException || exc is UnauthorizedAccessException || exc is PathTooLongException)
+                if (exc is IOException || exc is UnauthorizedAccessException || exc is PathTooLongException || exc is NotSupportedException)
+                {
+                    return null;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Loads the image from the file with the specified width and height keeping its ratio.
+        /// </summary>
+        /// <param name="imageFilename"></param>
+        /// <param name="targetWidth"></param>
+        /// <param name="targetHeight"></param>
+        /// <param name="useCache"></param>
+        /// <returns></returns>
+        public static async Task<BitmapImage> LoadImageAsync(string imageFilename, int targetWidth = 40, int targetHeight = 40, bool useCache = false)
+        {
+            string key = GetKey(imageFilename, targetWidth, targetHeight);
+
+            BitmapImage image = null;
+
+            if (useCache)
+            {
+                lock (m_staticLockObject)
+                {
+                    Cache.TryGetValue(key, out image);
+                }
+
+                if (image != null)
+                {
+                    return image;
+                }
+            }
+
+            try
+            {
+                using (MemoryStream imageMemoryStream = new MemoryStream())
+                {
+                    using (BufferedStream fileStream = new BufferedStream(new FileStream(imageFilename, FileMode.Open), BufferSize))
+                    {
+                        await fileStream.CopyToAsync(imageMemoryStream).ConfigureAwait(false);
+                    }
+
+                    return GetAsBitmapImage(imageMemoryStream, targetWidth, targetHeight, useCache, key);
+                }
+            }
+            catch (Exception exc)
+            {
+                if (exc is IOException || exc is UnauthorizedAccessException || exc is PathTooLongException || exc is NotSupportedException)
                 {
                     return null;
                 }
@@ -109,6 +130,52 @@ namespace MaterialDesignExtensions.Controllers
             return string.Format("{0}_{1}_file://{2}", targetWidth, targetHeight, imageFilename);
         }
 
+        private static BitmapImage GetAsBitmapImage(MemoryStream imageMemoryStream, int targetWidth, int targetHeight, bool useCache, string key)
+        {
+            imageMemoryStream.Position = 0;
+
+            BitmapDecoder bitmapDecoder = BitmapDecoder.Create(imageMemoryStream, BitmapCreateOptions.DelayCreation, BitmapCacheOption.Default);
+            int width = bitmapDecoder.Frames[0].PixelWidth;
+            int height = bitmapDecoder.Frames[0].PixelHeight;
+
+            imageMemoryStream.Position = 0;
+
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+
+            double targetRatio = ((double)targetWidth) / targetHeight;
+            double ratio = ((double)width) / height;
+
+            if (targetRatio > ratio)
+            {
+                image.DecodePixelWidth = targetWidth;
+            }
+            else
+            {
+                image.DecodePixelHeight = targetHeight;
+            }
+
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.StreamSource = imageMemoryStream;
+
+            image.EndInit();
+            image.StreamSource = null;
+            image.Freeze();
+
+            if (useCache)
+            {
+                lock (m_staticLockObject)
+                {
+                    Cache[key] = image;
+                }
+            }
+
+            return image;
+        }
+
+        /// <summary>
+        /// Clears the cache of loaded images.
+        /// </summary>
         public static void ClearCache()
         {
             lock (m_staticLockObject)

@@ -1,0 +1,17 @@
+﻿<mde:MaterialNavigationWindow x:Class="MaterialDesignExtensionsDemo.DemoNavigationWindow"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                              xmlns:local="clr-namespace:MaterialDesignExtensionsDemo"
+                              xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml"
+                              mc:Ignorable="d"
+                              Title="Material Design Extensions - Demo"
+                              WindowStartupLocation="CenterScreen"
+                              Height="180" Width="600"
+                              Background="{DynamicResource MaterialDesignBackground}"
+                              Foreground="{DynamicResource MaterialDesignBody}"
+                              FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+                              Icon="pack://application:,,,/MaterialDesignExtensionsDemo;component/icon_on_background.ico"
+                              Source="Pages/Page1.xaml">
+</mde:MaterialNavigationWindow>

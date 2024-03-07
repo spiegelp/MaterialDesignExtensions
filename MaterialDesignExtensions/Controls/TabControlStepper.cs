@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media.Animation;
 
+using MaterialDesignExtensions.Commands.Internal;
 using MaterialDesignExtensions.Controllers;
 using MaterialDesignExtensions.Model;
 
@@ -23,26 +24,6 @@ namespace MaterialDesignExtensions.Controls
     /// </summary>
     public class TabControlStepper : TabControl, IStepper
     {
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand BackCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand CancelCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand ContinueCommand = new RoutedCommand();
-
-        /// <summary>
-        /// Internal command used by the XAML template (public to be available in the XAML template). Not intended for external usage.
-        /// </summary>
-        public static readonly RoutedCommand StepSelectedCommand = new RoutedCommand();
-
         /// <summary>
         /// An event raised by navigating to the previous <see cref="IStep" /> in a linear order.
         /// </summary>
@@ -222,6 +203,28 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
+        /// An alternative icon template done steps.
+        /// </summary>
+        public static readonly DependencyProperty DoneIconTemplateProperty = DependencyProperty.Register(
+            nameof(DoneIconTemplate), typeof(DataTemplate), typeof(TabControlStepper), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// An alternative icon template done steps.
+        /// </summary>
+        public DataTemplate DoneIconTemplate
+        {
+            get
+            {
+                return (DataTemplate)GetValue(DoneIconTemplateProperty);
+            }
+
+            set
+            {
+                SetValue(DoneIconTemplateProperty, value);
+            }
+        }
+
+        /// <summary>
         /// Enables the linear mode by disabling the buttons of the header.
         /// The navigation must be accomplished by using the navigation commands.
         /// </summary>
@@ -290,22 +293,39 @@ namespace MaterialDesignExtensions.Controls
         }
 
         /// <summary>
-        /// Gets the controller for this <see cref="TabControlStepper" />.
-        /// Must to be public for the bindings.
+        /// An alternative icon template to indicate validation errors.
         /// </summary>
-        public StepperController Controller
+        public static readonly DependencyProperty ValidationErrorIconTemplateProperty = DependencyProperty.Register(
+            nameof(ValidationErrorIconTemplate), typeof(DataTemplate), typeof(TabControlStepper), new PropertyMetadata(null, null));
+
+        /// <summary>
+        /// An alternative icon template to indicate validation errors.
+        /// </summary>
+        public DataTemplate ValidationErrorIconTemplate
         {
             get
             {
-                return m_controller;
+                return (DataTemplate)GetValue(ValidationErrorIconTemplateProperty);
+            }
+
+            set
+            {
+                SetValue(ValidationErrorIconTemplateProperty, value);
             }
         }
 
-        private StepperController m_controller;
+        /// <summary>
+        /// Gets the controller for this <see cref="TabControlStepper" />.
+        /// Must to be public for the bindings.
+        /// </summary>
+        public StepperController Controller { get; private set; }
 
         static TabControlStepper()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TabControlStepper), new FrameworkPropertyMetadata(typeof(TabControlStepper)));
+
+            object selectedIndexDefaultValue = SelectedIndexProperty.GetMetadata(typeof(TabControl)).DefaultValue;
+            SelectedIndexProperty.OverrideMetadata(typeof(TabControlStepper), new FrameworkPropertyMetadata(selectedIndexDefaultValue, SelectedIndexChangedHandler));
         }
 
         /// <summary>
@@ -314,20 +334,20 @@ namespace MaterialDesignExtensions.Controls
         public TabControlStepper()
             : base()
         {
-            m_controller = new StepperController();
+            Controller = new StepperController();
 
             Loaded += LoadedHandler;
             Unloaded += UnloadedHandler;
 
-            CommandBindings.Add(new CommandBinding(BackCommand, BackHandler));
-            CommandBindings.Add(new CommandBinding(CancelCommand, CancelHandler));
-            CommandBindings.Add(new CommandBinding(ContinueCommand, ContinueHandler));
-            CommandBindings.Add(new CommandBinding(StepSelectedCommand, StepSelectedHandler, CanExecuteStepSelectedHandler));
+            CommandBindings.Add(new CommandBinding(StepperCommands.BackCommand, BackHandler));
+            CommandBindings.Add(new CommandBinding(StepperCommands.CancelCommand, CancelHandler));
+            CommandBindings.Add(new CommandBinding(StepperCommands.ContinueCommand, ContinueHandler));
+            CommandBindings.Add(new CommandBinding(StepperCommands.StepSelectedCommand, StepSelectedHandler, CanExecuteStepSelectedHandler));
         }
 
         private void LoadedHandler(object sender, RoutedEventArgs args)
         {
-            m_controller.PropertyChanged += PropertyChangedHandler;
+            Controller.PropertyChanged += PropertyChangedHandler;
 
             // there is no event raised if the Content of a ContentControl changes
             //     therefore trigger the animation in code
@@ -336,7 +356,7 @@ namespace MaterialDesignExtensions.Controls
 
         private void UnloadedHandler(object sender, RoutedEventArgs args)
         {
-            m_controller.PropertyChanged -= PropertyChangedHandler;
+            Controller.PropertyChanged -= PropertyChangedHandler;
         }
 
         private void InitSteps()
@@ -348,7 +368,7 @@ namespace MaterialDesignExtensions.Controls
                 steps.Add(new Step() { Header = tabItem.Header, Content = tabItem.Content });
             }
 
-            m_controller.InitSteps(steps);
+            Controller.InitSteps(steps);
         }
 
         protected override void OnItemsChanged(NotifyCollectionChangedEventArgs args)
@@ -358,9 +378,26 @@ namespace MaterialDesignExtensions.Controls
             InitSteps();
         }
 
+        private static void SelectedIndexChangedHandler(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            int newValue = (int)args.NewValue;
+            int oldValue = (int)args.OldValue;
+
+            if (newValue != oldValue)
+            {
+                if (obj is TabControlStepper stepper)
+                {
+                    if (stepper.Controller.Steps != null && newValue >= 0 && newValue < stepper.Controller.Steps.Length && newValue != stepper.Controller.GetActiveStepIndex())
+                    {
+                        stepper.StepSelectedHandler(stepper.Controller.InternalSteps[newValue]);
+                    }
+                }
+            }
+        }
+
         private void BackHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(BackNavigationEvent, this, m_controller.ActiveStep, m_controller.PreviousStep, false);
+            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(BackNavigationEvent, this, Controller.ActiveStep, Controller.PreviousStep, false);
             RaiseEvent(navigationArgs);
 
             if (BackNavigationCommand != null && BackNavigationCommand.CanExecute(navigationArgs))
@@ -370,7 +407,7 @@ namespace MaterialDesignExtensions.Controls
 
             if (!navigationArgs.Cancel)
             {
-                m_controller.Back();
+                Controller.Back();
             }
         }
 
@@ -381,7 +418,7 @@ namespace MaterialDesignExtensions.Controls
                 return;
             }
 
-            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(CancelNavigationEvent, this, m_controller.ActiveStep, null, false);
+            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(CancelNavigationEvent, this, Controller.ActiveStep, null, false);
             RaiseEvent(navigationArgs);
 
             if (CancelNavigationCommand != null && CancelNavigationCommand.CanExecute(navigationArgs))
@@ -392,7 +429,7 @@ namespace MaterialDesignExtensions.Controls
 
         private void ContinueHandler(object sender, ExecutedRoutedEventArgs args)
         {
-            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(ContinueNavigationEvent, this, m_controller.ActiveStep, m_controller.NextStep, false);
+            StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(ContinueNavigationEvent, this, Controller.ActiveStep, Controller.NextStep, false);
             RaiseEvent(navigationArgs);
 
             if (ContinueNavigationCommand != null && ContinueNavigationCommand.CanExecute(navigationArgs))
@@ -402,7 +439,7 @@ namespace MaterialDesignExtensions.Controls
 
             if (!navigationArgs.Cancel)
             {
-                m_controller.Continue();
+                Controller.Continue();
             }
         }
 
@@ -413,9 +450,14 @@ namespace MaterialDesignExtensions.Controls
 
         private void StepSelectedHandler(object sender, ExecutedRoutedEventArgs args)
         {
+            StepSelectedHandler((StepperStepViewModel)args.Parameter);
+        }
+
+        private void StepSelectedHandler(StepperStepViewModel stepperStepViewModel)
+        {
             if (!IsLinear)
             {
-                StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(StepNavigationEvent, this, m_controller.ActiveStep, ((StepperStepViewModel)args.Parameter).Step, false);
+                StepperNavigationEventArgs navigationArgs = new StepperNavigationEventArgs(StepNavigationEvent, this, Controller.ActiveStep, stepperStepViewModel.Step, false);
                 RaiseEvent(navigationArgs);
 
                 if (StepNavigationCommand != null && StepNavigationCommand.CanExecute(navigationArgs))
@@ -425,19 +467,23 @@ namespace MaterialDesignExtensions.Controls
 
                 if (!navigationArgs.Cancel)
                 {
-                    m_controller.GotoStep((StepperStepViewModel)args.Parameter);
+                    Controller.GotoStep(stepperStepViewModel);
                 }
             }
         }
 
         private void PropertyChangedHandler(object sender, PropertyChangedEventArgs args)
         {
-            if (sender == m_controller && args.PropertyName == nameof(m_controller.ActiveStepContent)
-                    && m_controller.ActiveStepContent != null && Layout == StepperLayout.Horizontal)
+            if (sender == Controller && args.PropertyName == nameof(Controller.ActiveStepContent)
+                    && Controller.ActiveStepContent != null && Layout == StepperLayout.Horizontal)
             {
                 // there is no event raised if the Content of a ContentControl changes
                 //     therefore trigger the animation in code
                 PlayHorizontalContentAnimation();
+            }
+            else if (sender == Controller && args.PropertyName == nameof(Controller.ActiveStep))
+            {
+                SelectedIndex = Controller.GetActiveStepIndex();
             }
         }
 

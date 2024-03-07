@@ -11,10 +11,19 @@ using System.Windows.Data;
 
 namespace MaterialDesignExtensions.Converters
 {
+    /// <summary>
+    /// Converts an empty collection to a <see cref="Visibility" />.
+    /// </summary>
     public class ObjectCollectionToVisibilityConverter : IValueConverter
     {
+        /// <summary>
+        /// The visibility value of an empty collection.
+        /// </summary>
         public Visibility EmptyValue { get; set; }
 
+        /// <summary>
+        /// Creates a new <see cref="ObjectCollectionToVisibilityConverter" />.
+        /// </summary>
         public ObjectCollectionToVisibilityConverter()
         {
             EmptyValue = Visibility.Collapsed;

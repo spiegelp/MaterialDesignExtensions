@@ -1,236 +1,136 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{809632DA-5EB8-4EE8-AD71-57239701550C}</ProjectGuid>
-    <OutputType>library</OutputType>
-    <RootNamespace>MaterialDesignExtensions</RootNamespace>
-    <AssemblyName>MaterialDesignExtensions</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <TargetFrameworkProfile />
+    <TargetFrameworks>net462;net7.0-windows</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <AssemblyTitle>Material Design Extensions</AssemblyTitle>
+    <Summary>Material Design Extensions is based on Material Design in XAML Toolkit to provide additional controls and features for WPF apps. The controls might not be specified in the Material Design specification or would crash the scope of Material Design in XAML Toolkit.</Summary>
+    <Description>Material Design Extensions is based on Material Design in XAML Toolkit to provide additional controls and features for WPF apps. The controls might not be specified in the Material Design specification or would crash the scope of Material Design in XAML Toolkit.
+
+Important notice: The configuration for version 2.6.0 changed. See the release notes of this version for details.</Description>
+    <Authors>Philipp Spiegel</Authors>
+    <Company>Philipp Spiegel</Company>
+    <Product>Material Design Extensions</Product>
+    <Copyright>Copyright © 2017-2021</Copyright>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <FileVersion>4.0.0.0</FileVersion>
+    <Version>4.0.0</Version>
+    <PackageProjectUrl>https://spiegelp.github.io/MaterialDesignExtensions/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/spiegelp/MaterialDesignExtensions</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Material Design UI WPF XAML MaterialDesign MD Stepper SideNavigation AppBar Autocomplete FileDialog DirectoryDialog Spinner MaterialWindow Window NavigationRail BusyOverlay</PackageTags>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net462|AnyCPU'">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\MaterialDesignExtensions.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\MaterialDesignExtensions.xml</DocumentationFile>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows|AnyCPU'">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\MaterialDesignExtensions.xml</DocumentationFile>
   </PropertyGroup>
+  
   <ItemGroup>
-    <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
-    </Reference>
-    <Reference Include="MaterialDesignThemes.Wpf, Version=2.4.0.1044, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignThemes.2.4.0.1044\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
   </ItemGroup>
+
   <ItemGroup>
-    <Page Include="Themes\AppBarTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\AutocompleteTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\FileSystemDialogTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\GridListTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\MaterialDesignDarkTheme.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\MaterialDesignLightTheme.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\FileSystemControlTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\OversizedNumberSpinnerTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\SearchTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\SideNavigationTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\StepperTemplates.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\TextBoxSuggestionsTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Controllers\AutocompleteController.cs" />
-    <Compile Include="Controllers\BitmapImageHelper.cs" />
-    <Compile Include="Controllers\FileSystemController.cs" />
-    <Compile Include="Controllers\FileFilterHelper.cs" />
-    <Compile Include="Controllers\SearchSuggestionsController.cs" />
-    <Compile Include="Controllers\StepperController.cs" />
-    <Compile Include="Controls\AppBar.cs" />
-    <Compile Include="Controls\Autocomplete.cs" />
-    <Compile Include="Controls\AutocompletePopup.cs" />
-    <Compile Include="Controls\BaseFileControl.cs" />
-    <Compile Include="Controls\BaseFileDialog.cs" />
-    <Compile Include="Controls\ControlWithAutocompletePopup.cs" />
-    <Compile Include="Controls\FileSystemControl.cs" />
-    <Compile Include="Controls\FileSystemDialog.cs" />
-    <Compile Include="Controls\IStepper.cs" />
-    <Compile Include="Controls\OpenDirectoryControl.cs" />
-    <Compile Include="Controls\OpenDirectoryDialog.cs" />
-    <Compile Include="Controls\OpenFileControl.cs" />
-    <Compile Include="Controls\OpenFileDialog.cs" />
-    <Compile Include="Controls\OversizedNumberSpinner.cs" />
-    <Compile Include="Controls\PersistentSearch.cs" />
-    <Compile Include="Controls\SaveFileControl.cs" />
-    <Compile Include="Controls\SaveFileDialog.cs" />
-    <Compile Include="Controls\SearchBase.cs" />
-    <Compile Include="Controls\SideNavigation.cs" />
-    <Compile Include="Controls\StepButtonBar.cs" />
-    <Compile Include="Controls\Stepper.cs" />
-    <Compile Include="Controls\StepTitleHeaderControl.cs" />
-    <Compile Include="Controls\TabControlStepper.cs" />
-    <Compile Include="Controls\TextBoxSuggestions.cs" />
-    <Compile Include="Converters\AsyncImageTask.cs" />
-    <Compile Include="Converters\BooleanAndConverter.cs" />
-    <Compile Include="Converters\BooleanAndToVisibilityConverter.cs" />
-    <Compile Include="Converters\BooleanOrConverter.cs" />
-    <Compile Include="Converters\BooleanOrToVisibilityConverter.cs" />
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converters\DateTimeAgoConverter.cs" />
-    <Compile Include="Converters\EmptyEnumerableToBoolConverter.cs" />
-    <Compile Include="Converters\EmptyEnumerableVisibilityConverter.cs" />
-    <Compile Include="Converters\FileFiltersTypeConverter.cs" />
-    <Compile Include="Converters\FileSizeConverter.cs" />
-    <Compile Include="Converters\FileSystemInfoIconConverter.cs" />
-    <Compile Include="Converters\FileSystemInfoPackIconColorConverter.cs" />
-    <Compile Include="Converters\NotNullBooleanConverter.cs" />
-    <Compile Include="Converters\NotNullToVisibilityConverter.cs" />
-    <Compile Include="Converters\NullToVisibilityConverter.cs" />
-    <Compile Include="Converters\ObjectCollectionToVisibilityConverter.cs" />
-    <Compile Include="Converters\ObjectHasTypeConverter.cs" />
-    <Compile Include="Converters\ObjectToTypeStringConverter.cs" />
-    <Compile Include="Converters\UpperCaseConverter.cs" />
-    <Compile Include="Localization\Strings.de.Designer.cs">
-      <AutoGen>True</AutoGen>
+    <Compile Update="Localization\Strings.Designer.cs">
       <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.de.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Localization\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Model\IAutocompleteSource.cs" />
-    <Compile Include="Model\BaseNavigationItem.cs" />
-    <Compile Include="Model\DirectoryInfoItem.cs" />
-    <Compile Include="Model\DividerNavigationItem.cs" />
-    <Compile Include="Model\FileInfoItem.cs" />
-    <Compile Include="Model\FileSystemEntriesGroupHeader.cs" />
-    <Compile Include="Model\FileSystemEntryItem.cs" />
-    <Compile Include="Model\FileFilter.cs" />
-    <Compile Include="Model\FirstLevelNavigationItem.cs" />
-    <Compile Include="Model\IAutocompleteSourceChangingItems.cs" />
-    <Compile Include="Model\INavigationItem.cs" />
-    <Compile Include="Model\ITextBoxSuggestionsSource.cs" />
-    <Compile Include="Model\NavigationItem.cs" />
-    <Compile Include="Model\NotSelectableNavigationItem.cs" />
-    <Compile Include="Model\SearchSuggestionItem.cs" />
-    <Compile Include="Model\SearchSuggestionsSource.cs" />
-    <Compile Include="Model\SecondLevelNavigationItem.cs" />
-    <Compile Include="Model\SpecialDirectory.cs" />
-    <Compile Include="Model\SpecialDrive.cs" />
-    <Compile Include="Model\Step.cs" />
-    <Compile Include="Model\StepperStepViewModel.cs" />
-    <Compile Include="Model\StepTitleHeader.cs" />
-    <Compile Include="Model\SubheaderNavigationItem.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
+    <Compile Update="Localization\Strings.de.Designer.cs">
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Strings.de.resx</DependentUpon>
     </Compile>
-    <Compile Include="TemplateSelectors\FileSystemEntryItemIconTemplateSelector.cs" />
-    <Compile Include="TemplateSelectors\FileSystemEntryItemTemplateSelector.cs" />
-    <Compile Include="TemplateSelectors\FileSystemEntryInfoTemplateSelector.cs" />
-    <Compile Include="TemplateSelectors\FileSystemInfoIconTemplateSelector.cs" />
-    <Compile Include="TemplateSelectors\HorizontalStepperHeaderTemplateSelector.cs" />
-    <Compile Include="TemplateSelectors\NavigationItemKindTemplateSelector.cs" />
-    <EmbeddedResource Include="Localization\Strings.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.de.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Strings.resx">
+    <Compile Update="Localization\Strings.ru-RU.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.ru-RU.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\Strings.uz-Latn-UZ.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.uz-Latn-UZ.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\Strings.cs-cz.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.cs-cz.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\Strings.pt-BR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.pt-BR.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\Strings.fr-FR.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\Strings.ar-DZ.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.ar-DZ.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\Strings.ja-JP.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.ja-JP.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\Strings.zh-CN.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.zh-CN.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Localization\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Localization\Strings.de.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings.de.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    <EmbeddedResource Update="Localization\Strings-ru-RU.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.ru-RU.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.uz-Latn-UZ.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.uz-Latn-UZ.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.cs-cz.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.cs-cz.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.pt-BR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.pt-BR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.fr-FR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.ar-DZ.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.ar-DZ.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.ja-JP.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.ja-JP.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.zh-CN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.zh-CN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  
 </Project>
