@@ -4,7 +4,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <!--<TargetFramework>net472</TargetFramework>-->
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
