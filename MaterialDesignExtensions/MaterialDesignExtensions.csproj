@@ -48,10 +48,10 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
       <AutoGen>True</AutoGen>
       <DependentUpon>Strings.de.resx</DependentUpon>
     </Compile>
-    <Compile Update="Localization\Strings.ru-ru.Designer.cs">
+    <Compile Update="Localization\Strings.ru-RU.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Strings.ru-ru.resx</DependentUpon>
+      <DependentUpon>Strings.ru-RU.resx</DependentUpon>
     </Compile>
     <Compile Update="Localization\Strings.uz-Latn-UZ.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -94,9 +94,9 @@ Important notice: The configuration for version 2.6.0 changed. See the release n
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.de.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Localization\Strings-ru-ru.resx">
+    <EmbeddedResource Update="Localization\Strings-ru-RU.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.ru-ru.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings.ru-RU.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Localization\Strings.uz-Latn-UZ.resx">
       <Generator>ResXFileCodeGenerator</Generator>
