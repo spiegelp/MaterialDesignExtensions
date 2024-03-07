@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-using MaterialDesignExtensions.Themes;
+//using MaterialDesignExtensions.Themes;
 
 namespace MaterialDesignExtensionsDemo.ViewModel
 {
     public class ThemesViewModel : ViewModel
     {
-        private PaletteHelper m_paletteHelper;
+        //private PaletteHelper m_paletteHelper;
 
         private bool m_isDarkTheme;
 
@@ -38,14 +38,14 @@ namespace MaterialDesignExtensionsDemo.ViewModel
         public ThemesViewModel()
             : base()
         {
-            m_paletteHelper = new PaletteHelper();
+            /*m_paletteHelper = new PaletteHelper();
 
-            m_isDarkTheme = m_paletteHelper.IsDarkTheme();
+            m_isDarkTheme = m_paletteHelper.IsDarkTheme();*/
         }
 
         private void SetTheme(bool isDarkTheme)
         {
-            m_paletteHelper.SetLightDark(m_isDarkTheme);
+            //m_paletteHelper.SetLightDark(m_isDarkTheme);
 
             ((MainWindow)Application.Current.MainWindow).DialogHost.DialogTheme = isDarkTheme ? MaterialDesignThemes.Wpf.BaseTheme.Dark : MaterialDesignThemes.Wpf.BaseTheme.Light;
         }

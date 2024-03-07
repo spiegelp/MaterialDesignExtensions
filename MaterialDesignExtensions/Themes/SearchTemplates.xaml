@@ -29,14 +29,14 @@
         <Setter Property="IconSize" Value="24" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth1" />
+        <!--<Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth1" />-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:PersistentSearch}">
                     <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
                         <Border Background="{TemplateBinding Background}"
-                                Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(md:ShadowAssist.ShadowDepth), Converter={x:Static md:ShadowConverter.Instance}}"
                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                            <!-- Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(md:ShadowAssist.ShadowDepth), Converter={x:Static md:ShadowConverter.Instance}}" -->
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Style.Triggers>

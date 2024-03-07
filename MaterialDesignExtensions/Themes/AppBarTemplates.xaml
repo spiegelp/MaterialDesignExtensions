@@ -34,7 +34,7 @@
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Path=OpaqueMode, RelativeSource={RelativeSource TemplatedParent}}" Value="Opaque">
                                         <Setter Property="Background" Value="{Binding Path=Background, RelativeSource={RelativeSource TemplatedParent}}" />
-                                        <Setter Property="Effect" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(md:ShadowAssist.ShadowDepth), Converter={x:Static md:ShadowConverter.Instance}}" />
+                                        <!--<Setter Property="Effect" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(md:ShadowAssist.ShadowDepth), Converter={x:Static md:ShadowConverter.Instance}}" />-->
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding Path=OpaqueMode, RelativeSource={RelativeSource TemplatedParent}}" Value="Transparent">
                                         <Setter Property="Background" Value="Transparent" />
@@ -168,7 +168,7 @@
         </Setter>
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=ShowShadow, RelativeSource={RelativeSource Self}}" Value="True">
-                <Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth2" />
+                <!--<Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth2" />-->
             </DataTrigger>
             <DataTrigger Binding="{Binding Path=Type, RelativeSource={RelativeSource Self}}" Value="Default">
                 <Setter Property="Height" Value="{x:Static controls:AppBar.DefaultHeight}" />

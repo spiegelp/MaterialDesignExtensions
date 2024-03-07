@@ -34,7 +34,7 @@ namespace MaterialDesignExtensions.Converters
                 [PackIconKind.FileWord] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2196F3")),
                 [PackIconKind.FileExcel] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#186C3F")),
                 [PackIconKind.FilePowerpoint] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF9800")),
-                [PackIconKind.FilePdf] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F44336"))
+                [PackIconKind.FilePdfBox] = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F44336"))
             };
         }
 

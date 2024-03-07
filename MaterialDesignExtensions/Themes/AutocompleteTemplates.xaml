@@ -25,7 +25,7 @@
         <Setter Property="Padding" Value="16,8,8,8" />
         <Setter Property="ClearIconSize" Value="24" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
-        <Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth1" />
+        <!--<Setter Property="md:ShadowAssist.ShadowDepth" Value="Depth1" />-->
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
